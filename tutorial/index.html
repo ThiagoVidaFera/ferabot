@@ -87,19 +87,6 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 .etapa-card h4 { font-size:15px; font-weight:700; margin-bottom:6px; }
 .etapa-card p { font-size:13px; color:var(--muted); line-height:1.5; }
 
-.prereq-list { display:flex; flex-direction:column; gap:14px; }
-.prereq-item { display:flex; align-items:flex-start; gap:16px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; transition:border-color 0.2s; }
-.prereq-item.done { border-color:rgba(34,197,94,0.3); background:rgba(34,197,94,0.04); }
-.prereq-check { width:24px; height:24px; border-radius:50%; border:2px solid var(--border2); background:var(--surface2); display:flex; align-items:center; justify-content:center; flex-shrink:0; cursor:pointer; margin-top:1px; transition:all 0.2s; }
-.prereq-item.done .prereq-check { background:var(--green); border-color:var(--green); }
-.prereq-check::after { content:''; display:none; }
-.prereq-item.done .prereq-check::after { display:block; content:'✓'; color:#fff; font-size:12px; font-weight:700; }
-.prereq-body h4 { font-size:15px; font-weight:700; margin-bottom:4px; }
-.prereq-body p { font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:8px; }
-.prereq-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; transition:opacity 0.15s; }
-.prereq-link:hover { opacity:0.8; }
-.prereq-link::after { content:'→'; }
-
 .steps { display:flex; flex-direction:column; gap:0; }
 .step { display:grid; grid-template-columns:48px 1fr; gap:0 24px; padding-bottom:48px; position:relative; }
 .step:not(:last-child)::before { content:''; position:absolute; left:23px; top:48px; bottom:0; width:2px; background:var(--border2); }
@@ -217,16 +204,15 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
     <div class="nav-label">Neste guia</div>
     <ul class="nav-list">
       <li class="nav-item"><a href="#o-que-e"><span class="nav-num">1</span> O que é</a></li>
-      <li class="nav-item"><a href="#claude-code"><span class="nav-num">2</span> Instalar Claude Code</a></li>
+      <li class="nav-item"><a href="#vscode"><span class="nav-num">2</span> VS Code + Claude</a></li>
       <li class="nav-item"><a href="#python"><span class="nav-num">3</span> Instalar Python</a></li>
       <li class="nav-item"><a href="#git"><span class="nav-num">4</span> Instalar Git</a></li>
       <li class="nav-item"><a href="#baixar"><span class="nav-num">5</span> Baixar o Ferabot</a></li>
       <li class="nav-item"><a href="#instalador"><span class="nav-num">6</span> Rodar o instalador</a></li>
       <li class="nav-item"><a href="#perfil"><span class="nav-num">7</span> Configurar perfil</a></li>
-      <li class="nav-item"><a href="#abrir"><span class="nav-num">8</span> Abrir o Ferabot</a></li>
-      <li class="nav-item"><a href="#primeiro-uso"><span class="nav-num">9</span> Primeiro carrossel</a></li>
-      <li class="nav-item"><a href="#referencia"><span class="nav-num">10</span> Referência rápida</a></li>
-      <li class="nav-item"><a href="#faq"><span class="nav-num">11</span> Dúvidas frequentes</a></li>
+      <li class="nav-item"><a href="#primeiro-uso"><span class="nav-num">8</span> Primeiro carrossel</a></li>
+      <li class="nav-item"><a href="#referencia"><span class="nav-num">9</span> Referência rápida</a></li>
+      <li class="nav-item"><a href="#faq"><span class="nav-num">10</span> Dúvidas frequentes</a></li>
     </ul>
 
     <div class="progress-info">
@@ -249,7 +235,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
         Esse guia cobre cada passo, cada clique e cada tela que vai aparecer. Siga na ordem e você vai criar seu primeiro carrossel ainda hoje.
       </p>
       <div class="hero-stats">
-        <div class="stat"><span class="stat-val">14</span><span class="stat-label">passos detalhados</span></div>
+        <div class="stat"><span class="stat-val">13</span><span class="stat-label">passos detalhados</span></div>
         <div class="stat"><span class="stat-val">9</span><span class="stat-label">etapas de marketing</span></div>
         <div class="stat"><span class="stat-val">30min</span><span class="stat-label">tempo estimado</span></div>
       </div>
@@ -260,7 +246,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
       <div class="section-header">
         <span class="section-tag">Visão geral</span>
         <h2>O que o Ferabot faz por você</h2>
-        <p class="section-intro">O Ferabot é um conjunto de 9 ferramentas instaladas dentro do Claude Code. Cada uma já sabe o seu nome, seu nicho, suas cores e seu produto. Você chama, aprova o conteúdo e recebe os arquivos prontos para publicar.</p>
+        <p class="section-intro">O Ferabot é um conjunto de 9 ferramentas instaladas dentro do VS Code. Cada uma já sabe o seu nome, seu nicho, suas cores e seu produto. Você chama, aprova o conteúdo e recebe os arquivos prontos para publicar.</p>
       </div>
 
       <div class="etapas-grid">
@@ -316,18 +302,18 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
       <div class="note info" style="margin-top:28px">
         <span class="note-icon">ℹ️</span>
-        <p><strong>Como funciona na prática:</strong> Você abre o Claude Code, digita um comando como <code class="ck">/squad-carrossel-fera</code>, responde algumas perguntas, aprova o texto e o Ferabot gera os arquivos automaticamente na sua pasta.</p>
+        <p><strong>Como funciona na prática:</strong> Você abre o VS Code com a pasta do Ferabot, clica na extensão do Claude na barra lateral, digita um comando como <code class="ck">/squad-carrossel-fera</code>, responde algumas perguntas, aprova o texto e o Ferabot gera os arquivos automaticamente na sua pasta.</p>
       </div>
     </section>
 
     <hr class="divider-section">
 
-    <!-- 2 — INSTALAR CLAUDE CODE -->
-    <section class="section" id="claude-code">
+    <!-- 2 — VS CODE + CLAUDE -->
+    <section class="section" id="vscode">
       <div class="section-header">
-        <span class="section-tag">Passo 1 de 4 — Programa obrigatório</span>
-        <h2>Instalar o Claude Code</h2>
-        <p class="section-intro">Claude Code é o aplicativo onde o Ferabot roda. É como um chat com IA, mas que também consegue criar arquivos no seu computador. Você precisa de uma conta na Anthropic para usar — o cadastro é gratuito.</p>
+        <span class="section-tag">Passo 1 de 4 — Programas obrigatórios</span>
+        <h2>Instalar o VS Code e a extensão Claude</h2>
+        <p class="section-intro">O VS Code é o editor de código mais popular do mundo — e é gratuito. Dentro dele, você vai instalar a extensão do Claude Code, que é onde o Ferabot roda. Pense no VS Code como a "casa" e no Claude como o "assistente" que mora dentro dela.</p>
       </div>
 
       <div class="steps">
@@ -335,29 +321,66 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
         <div class="step" id="step-1">
           <div class="step-num-col"><div class="step-num">1</div></div>
           <div class="step-body">
-            <h3>Baixar e instalar o Claude Code</h3>
-            <p>Acesse o site oficial, baixe o instalador para Windows e execute como qualquer outro programa.</p>
+            <h3>Baixar e instalar o VS Code</h3>
+            <p>O Visual Studio Code é gratuito e feito pela Microsoft. A instalação é simples — igual a qualquer outro programa.</p>
 
             <ul class="substeps">
-              <li data-n="a">Acesse <strong><a href="https://claude.ai/download" target="_blank" style="color:var(--accent)">claude.ai/download</a></strong> no seu navegador</li>
-              <li data-n="b">Clique no botão <strong>"Download for Windows"</strong> — vai baixar um arquivo <strong>.exe</strong></li>
-              <li data-n="c">Quando o download terminar, clique no arquivo baixado para abrir o instalador</li>
-              <li data-n="d">Se aparecer uma janela de segurança do Windows, clique em <strong>"Sim"</strong> ou <strong>"Executar assim mesmo"</strong></li>
-              <li data-n="e">O instalador vai rodar e o Claude Code vai aparecer na sua área de trabalho</li>
+              <li data-n="a">Acesse <strong><a href="https://code.visualstudio.com" target="_blank" style="color:var(--accent)">code.visualstudio.com</a></strong> no seu navegador</li>
+              <li data-n="b">Clique no botão azul grande <strong>"Download for Windows"</strong> — vai baixar um arquivo <strong>.exe</strong></li>
+              <li data-n="c">Quando o download terminar, abra o arquivo baixado para iniciar a instalação</li>
+              <li data-n="d">Clique em <strong>"Aceito o acordo"</strong> e depois em <strong>"Próximo"</strong> em todas as telas — as opções padrão são perfeitas</li>
+              <li data-n="e">Na tela de <strong>"Tarefas Adicionais"</strong>, certifique-se de que a opção <strong>"Adicionar ao PATH"</strong> está marcada (geralmente já vem marcada)</li>
+              <li data-n="f">Clique em <strong>"Instalar"</strong> e aguarde. Ao final, clique em <strong>"Concluir"</strong></li>
             </ul>
 
             <div class="see-box">
               <div class="see-box-header">📺 O que vai aparecer depois de instalar:</div>
-              <div class="see-box-body">Uma janela escura (fundo preto) com um campo de texto na parte de baixo. Parece um terminal, mas funciona como um chat. Essa é a interface do Claude Code — é aqui que você vai digitar os comandos do Ferabot.</div>
+              <div class="see-box-body">O VS Code vai abrir automaticamente. Você verá uma tela de boas-vindas com fundo escuro (ou claro, dependendo do seu sistema). Na lateral esquerda há ícones de navegação — barra lateral de arquivos, pesquisa, extensões, etc.</div>
+            </div>
+
+            <button class="step-done-btn" onclick="marcarPasso('step-1', this)">
+              <span>✓</span> VS Code instalado — marcar como concluído
+            </button>
+          </div>
+        </div>
+
+        <div class="step" id="step-2">
+          <div class="step-num-col"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <h3>Instalar a extensão Claude Code e fazer login</h3>
+            <p>A extensão do Claude Code transforma o VS Code no ambiente do Ferabot. Você instala direto pelo marketplace de extensões do VS Code.</p>
+
+            <ul class="substeps">
+              <li data-n="a">Com o VS Code aberto, pressione <strong>Ctrl+Shift+X</strong> no teclado — isso abre a aba de <strong>Extensões</strong></li>
+              <li data-n="b">No campo de busca que apareceu, digite <strong>Claude Code</strong></li>
+              <li data-n="c">Vai aparecer a extensão <strong>"Claude Code"</strong> com o ícone laranja da Anthropic — clique em <strong>"Instalar"</strong></li>
+              <li data-n="d">Aguarde a instalação terminar (leva alguns segundos)</li>
+            </ul>
+
+            <div class="see-box">
+              <div class="see-box-header">📺 O que vai aparecer depois de instalar a extensão:</div>
+              <div class="see-box-body">Um ícone do Claude (símbolo da Anthropic) vai aparecer na <strong>barra de atividades à esquerda</strong> do VS Code — é uma coluna estreita com ícones. Pode ser necessário rolar para baixo nessa barra para encontrar o ícone do Claude.</div>
+            </div>
+
+            <ul class="substeps" style="margin-top:10px">
+              <li data-n="e">Clique no ícone do Claude na barra lateral esquerda</li>
+              <li data-n="f">Um painel vai abrir pedindo para você fazer <strong>login</strong> — clique em <strong>"Sign in with Claude.ai"</strong></li>
+              <li data-n="g">Vai abrir uma aba no seu navegador. Se não tiver conta, clique em <strong>"Sign up"</strong> e crie uma conta gratuita com seu email</li>
+              <li data-n="h">Após o login no navegador, autorize o VS Code a acessar sua conta — clique em <strong>"Allow"</strong> ou <strong>"Autorizar"</strong></li>
+            </ul>
+
+            <div class="see-box">
+              <div class="see-box-header">✅ Como saber se o login funcionou:</div>
+              <div class="see-box-body">O painel do Claude no VS Code vai mudar — em vez do botão de login, vai aparecer um <strong>campo de chat</strong> na parte inferior. É aqui que você vai digitar os comandos do Ferabot.</div>
             </div>
 
             <div class="note tip">
               <span class="note-icon">💡</span>
-              <p><strong>Precisa de conta?</strong> Sim. Na primeira vez que abrir o Claude Code, vai pedir login. Acesse <a href="https://claude.ai" target="_blank" style="color:var(--accent)">claude.ai</a>, crie uma conta gratuita com seu email e use as mesmas credenciais no app.</p>
+              <p><strong>Plano gratuito é suficiente para começar.</strong> O Claude tem um plano gratuito com créditos mensais. Para uso intenso do Ferabot, o plano Pro (US$20/mês) vale muito a pena — mas não é obrigatório para dar os primeiros passos.</p>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-1', this)">
-              <span>✓</span> Claude Code instalado — marcar como concluído
+            <button class="step-done-btn" onclick="marcarPasso('step-2', this)">
+              <span>✓</span> Extensão instalada e login feito — marcar como concluído
             </button>
           </div>
         </div>
@@ -377,8 +400,8 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
       <div class="steps">
 
-        <div class="step" id="step-2">
-          <div class="step-num-col"><div class="step-num">2</div></div>
+        <div class="step" id="step-3">
+          <div class="step-num-col"><div class="step-num">3</div></div>
           <div class="step-body">
             <h3>Baixar e instalar o Python</h3>
 
@@ -402,16 +425,16 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             </ul>
 
             <div class="see-box">
-              <div class="see-box-header">✅ Como verificar se o Python foi instalado corretamente:</div>
+              <div class="see-box-header">✅ Como verificar no terminal do VS Code:</div>
               <div class="see-box-body">
-                Pressione <strong>Windows + R</strong> no teclado, digite <code class="ck">cmd</code> e pressione Enter. Uma janela preta vai abrir. Digite o comando abaixo e pressione Enter:
+                No VS Code, pressione <strong>Ctrl+`</strong> (acento grave, a tecla que fica abaixo do Esc) para abrir o terminal integrado. Uma janela preta vai aparecer na parte de baixo do VS Code. Digite o comando abaixo e pressione Enter:
               </div>
             </div>
 
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-label">Terminal (cmd)</span>
+                <span class="code-label">Terminal integrado do VS Code</span>
                 <button class="btn-copy-code" onclick="copiarCodigo(this, 'python --version')">Copiar</button>
               </div>
               <pre><code><span class="c-cmd">python</span> <span class="c-str">--version</span></code></pre>
@@ -422,7 +445,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
               <div class="see-box-body"><strong style="color:var(--green)">Python 3.12.x</strong> (ou outra versão 3.x). Se aparecer isso, está perfeito. Se aparecer um erro, o PATH não foi configurado — reinstale o Python e não esqueça de marcar a caixinha.</div>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-2', this)">
+            <button class="step-done-btn" onclick="marcarPasso('step-3', this)">
               <span>✓</span> Python instalado e verificado — marcar como concluído
             </button>
           </div>
@@ -438,13 +461,13 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
       <div class="section-header">
         <span class="section-tag">Passo 3 de 4 — Programa obrigatório</span>
         <h2>Instalar o Git</h2>
-        <p class="section-intro">Git é o programa que baixa o Ferabot para o seu computador e permite receber atualizações com um clique. A instalação é simples — você só precisa clicar em "Next" em tudo.</p>
+        <p class="section-intro">Git é o programa que baixa o Ferabot para o seu computador e permite receber atualizações com um clique. O VS Code integra com o Git automaticamente depois que você instalar.</p>
       </div>
 
       <div class="steps">
 
-        <div class="step" id="step-3">
-          <div class="step-num-col"><div class="step-num">3</div></div>
+        <div class="step" id="step-4">
+          <div class="step-num-col"><div class="step-num">4</div></div>
           <div class="step-body">
             <h3>Baixar e instalar o Git</h3>
 
@@ -459,10 +482,10 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
             <div class="note warning">
               <span class="note-icon">🔄</span>
-              <p><strong>Reinicie o computador agora.</strong> Após instalar o Python e o Git, é necessário reiniciar para que os programas sejam reconhecidos corretamente. Guarde esse tutorial no favorito do navegador antes de reiniciar.</p>
+              <p><strong>Reinicie o computador agora.</strong> Após instalar o Python e o Git, é necessário reiniciar para que os programas sejam reconhecidos corretamente pelo VS Code. Guarde esse tutorial no favorito do navegador antes de reiniciar.</p>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-3', this)">
+            <button class="step-done-btn" onclick="marcarPasso('step-4', this)">
               <span>✓</span> Git instalado e computador reiniciado — marcar como concluído
             </button>
           </div>
@@ -477,74 +500,54 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
     <section class="section" id="baixar">
       <div class="section-header">
         <span class="section-tag">Passo 4 de 4 — Baixar o sistema</span>
-        <h2>Baixar o Ferabot</h2>
-        <p class="section-intro">Agora você vai baixar os arquivos do Ferabot para o seu computador. Tem duas formas de fazer isso — escolha a que você preferir.</p>
+        <h2>Baixar o Ferabot pelo VS Code</h2>
+        <p class="section-intro">Agora você vai baixar os arquivos do Ferabot diretamente pelo VS Code, sem precisar abrir nenhum outro programa. O VS Code tem um recurso nativo chamado "Clone de Repositório" que faz tudo automaticamente.</p>
       </div>
 
       <div class="steps">
 
-        <div class="step" id="step-4">
-          <div class="step-num-col"><div class="step-num">4</div></div>
+        <div class="step" id="step-5">
+          <div class="step-num-col"><div class="step-num">5</div></div>
           <div class="step-body">
-            <h3>Baixar via terminal (opção mais rápida)</h3>
-            <p>Esse método baixa e organiza tudo automaticamente em um único comando.</p>
+            <h3>Clonar o repositório pelo VS Code</h3>
+            <p>O VS Code vai baixar todos os arquivos do Ferabot e abrir a pasta automaticamente. Siga cada sub-passo com atenção:</p>
 
             <ul class="substeps">
-              <li data-n="a">Pressione <strong>Windows + R</strong> no teclado simultaneamente</li>
-              <li data-n="b">Na janelinha que abriu, digite <code class="ck">cmd</code> e pressione <strong>Enter</strong></li>
-              <li data-n="c">Uma janela preta vai abrir — esse é o terminal. Não precisa ter medo, é só um campo de texto</li>
-              <li data-n="d">Clique no botão "Copiar" abaixo e depois cole no terminal com <strong>Ctrl+V</strong> (ou clique com o botão direito do mouse e escolha "Colar")</li>
+              <li data-n="a">Abra o VS Code (se fechou após reiniciar)</li>
+              <li data-n="b">Pressione <strong>Ctrl+Shift+P</strong> no teclado — isso abre a <strong>Paleta de Comandos</strong>, um campo de busca no topo da tela</li>
+              <li data-n="c">Digite <strong>git clone</strong> na paleta — vai aparecer a opção <strong>"Git: Clone"</strong>. Clique nela</li>
+              <li data-n="d">Um campo de texto vai aparecer pedindo a URL do repositório. Clique no botão "Copiar" abaixo e cole a URL com <strong>Ctrl+V</strong></li>
             </ul>
 
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-label">Terminal (cmd) — cole aqui</span>
-                <button class="btn-copy-code" onclick="copiarCodigo(this, 'git clone https://github.com/ThiagoVidaFera/ferabot.git %USERPROFILE%\\Ferabot')">Copiar</button>
+                <span class="code-label">URL do repositório — cole na Paleta de Comandos</span>
+                <button class="btn-copy-code" onclick="copiarCodigo(this, 'https://github.com/ThiagoVidaFera/ferabot.git')">Copiar</button>
               </div>
-              <pre><code><span class="c-cmd">git clone</span> <span class="c-str">https://github.com/ThiagoVidaFera/ferabot.git</span> <span class="c-acc">%USERPROFILE%\Ferabot</span></code></pre>
+              <pre><code><span class="c-str">https://github.com/ThiagoVidaFera/ferabot.git</span></code></pre>
             </div>
 
             <ul class="substeps">
-              <li data-n="e">Pressione <strong>Enter</strong> e aguarde. Vai aparecer um texto mostrando o progresso do download</li>
-              <li data-n="f">Quando aparecer <strong>"done"</strong> ou voltar para a linha de comando, o download terminou</li>
+              <li data-n="e">Pressione <strong>Enter</strong> após colar a URL</li>
+              <li data-n="f">Vai aparecer uma janela do Explorador de Arquivos pedindo para você escolher <strong>onde salvar a pasta</strong>. Escolha um local fácil de encontrar, como <strong>Documentos</strong> ou a pasta do seu usuário (<code class="ck">C:\Users\SeuNome</code>). Clique em <strong>"Selecionar como Destino do Repositório"</strong></li>
+              <li data-n="g">O VS Code vai baixar os arquivos. Você vai ver uma mensagem de progresso no canto inferior direito da tela</li>
+              <li data-n="h">Quando terminar, vai aparecer uma notificação perguntando <strong>"Deseja abrir o repositório clonado?"</strong>. Clique em <strong>"Abrir"</strong></li>
             </ul>
 
             <div class="see-box">
-              <div class="see-box-header">📺 O que vai aparecer durante o download:</div>
-              <div class="see-box-body">Algo como: <code class="ck">Cloning into 'C:\Users\SeuNome\Ferabot'... remote: Counting objects... done.</code> — isso é normal e significa que está funcionando.</div>
+              <div class="see-box-header">📺 O que vai acontecer depois de clicar em "Abrir":</div>
+              <div class="see-box-body">O VS Code vai carregar a pasta do Ferabot. Na barra lateral esquerda, você vai ver todos os arquivos: <strong>instalar.py</strong>, <code class="ck">SetupFera/</code>, <code class="ck">SkillsDoFera/</code>, <code class="ck">DashboardFera/</code> e outros. A pasta está pronta.</div>
             </div>
 
-            <div class="see-box">
-              <div class="see-box-header">📁 Onde ficou a pasta:</div>
-              <div class="see-box-body">A pasta <strong>Ferabot</strong> foi criada em <strong>C:\Users\SeuNome\Ferabot</strong> (dentro da sua pasta de usuário). Você pode abrir pelo Explorador de Arquivos e navegar até lá.</div>
+            <div class="note tip">
+              <span class="note-icon">💡</span>
+              <p><strong>Da próxima vez</strong> que quiser abrir o Ferabot, basta abrir o VS Code e ir em <strong>Arquivo → Abrir Pasta Recente → Ferabot</strong>. A pasta vai estar na lista de recentes automaticamente.</p>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-4', this)">
-              <span>✓</span> Ferabot baixado — marcar como concluído
+            <button class="step-done-btn" onclick="marcarPasso('step-5', this)">
+              <span>✓</span> Ferabot baixado e pasta aberta no VS Code — marcar como concluído
             </button>
-          </div>
-        </div>
-
-        <div class="step" id="step-4b">
-          <div class="step-num-col"><div class="step-num" style="background:var(--surface2);color:var(--muted);border:2px solid var(--border2);">ou</div></div>
-          <div class="step-body">
-            <h3>Baixar via ZIP (alternativa sem terminal)</h3>
-            <p>Se o método acima deu erro ou você prefere não usar o terminal agora, baixe o ZIP diretamente.</p>
-
-            <ul class="substeps">
-              <li data-n="a">Acesse <strong><a href="https://github.com/ThiagoVidaFera/ferabot" target="_blank" style="color:var(--accent)">github.com/ThiagoVidaFera/ferabot</a></strong></li>
-              <li data-n="b">Clique no botão verde <strong>"&lt;&gt; Code"</strong></li>
-              <li data-n="c">Clique em <strong>"Download ZIP"</strong></li>
-              <li data-n="d">Quando o download terminar, clique com o botão direito no arquivo ZIP e escolha <strong>"Extrair tudo..."</strong></li>
-              <li data-n="e">Escolha uma pasta fácil de encontrar, como <strong>Documentos</strong> ou a <strong>Área de Trabalho</strong></li>
-              <li data-n="f">Vai criar uma pasta chamada <strong>ferabot-main</strong> — renomeie para <strong>Ferabot</strong></li>
-            </ul>
-
-            <div class="note yellow">
-              <span class="note-icon">⚠️</span>
-              <p><strong>Atenção:</strong> Se você usar o ZIP em vez do terminal, o botão <strong>atualizar.bat</strong> não vai funcionar para receber atualizações futuras. Para isso funcionar, você precisa ter usado o git clone do passo anterior.</p>
-            </div>
           </div>
         </div>
 
@@ -558,67 +561,57 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
       <div class="section-header">
         <span class="section-tag">Configuração — Parte 1</span>
         <h2>Rodar o instalador</h2>
-        <p class="section-intro">O instalador faz tudo automaticamente: verifica se o ambiente está certo, instala o que faltar e prepara o sistema para o próximo passo.</p>
+        <p class="section-intro">O instalador faz tudo automaticamente: verifica se o ambiente está certo, instala o que faltar e prepara o sistema para o próximo passo. Você vai rodar ele pelo terminal integrado do VS Code.</p>
       </div>
 
       <div class="steps">
 
-        <div class="step" id="step-5">
-          <div class="step-num-col"><div class="step-num">5</div></div>
-          <div class="step-body">
-            <h3>Abrir a pasta Ferabot</h3>
-
-            <ul class="substeps">
-              <li data-n="a">Abra o <strong>Explorador de Arquivos</strong> (a pastinha na barra de tarefas ou pressione <strong>Windows + E</strong>)</li>
-              <li data-n="b">Navegue até <strong>C:\Users\SeuNome\Ferabot</strong> (troque "SeuNome" pelo seu nome de usuário no Windows)</li>
-              <li data-n="c">Você vai ver uma série de arquivos e pastas dentro — isso é o Ferabot</li>
-            </ul>
-
-            <div class="see-box">
-              <div class="see-box-header">📁 Arquivos que você deve ver na pasta Ferabot:</div>
-              <div class="see-box-body">
-                <code class="ck">instalar.py</code> &nbsp;·&nbsp; <code class="ck">ABRIR_FERABOT.bat</code> &nbsp;·&nbsp; <code class="ck">atualizar.bat</code> &nbsp;·&nbsp; pasta <code class="ck">SetupFera/</code> &nbsp;·&nbsp; pasta <code class="ck">SkillsDoFera/</code> &nbsp;·&nbsp; pasta <code class="ck">DashboardFera/</code>
-              </div>
-            </div>
-
-            <button class="step-done-btn" onclick="marcarPasso('step-5', this)">
-              <span>✓</span> Pasta Ferabot aberta — marcar como concluído
-            </button>
-          </div>
-        </div>
-
         <div class="step" id="step-6">
           <div class="step-num-col"><div class="step-num">6</div></div>
           <div class="step-body">
-            <h3>Executar o instalador</h3>
+            <h3>Abrir o terminal do VS Code e rodar o instalador</h3>
+            <p>O terminal integrado do VS Code já abre direto na pasta correta — sem precisar navegar por nenhuma pasta manualmente.</p>
 
             <ul class="substeps">
-              <li data-n="a">Dentro da pasta Ferabot, localize o arquivo <code class="ck">instalar.py</code></li>
-              <li data-n="b">Dê <strong>duplo-clique</strong> nele</li>
-              <li data-n="c">Se aparecer a janela <em>"Com qual programa deseja abrir este arquivo?"</em>, escolha <strong>Python</strong> ou <strong>Python 3</strong> e clique em OK</li>
-              <li data-n="d">Uma <strong>janela preta</strong> vai abrir — esse é o instalador rodando. <strong>Não feche essa janela</strong></li>
+              <li data-n="a">Com a pasta Ferabot aberta no VS Code, pressione <strong>Ctrl+`</strong> (acento grave, tecla abaixo do Esc) para abrir o terminal. Uma janela preta vai aparecer na parte de baixo do VS Code</li>
+              <li data-n="b">Confirme que o terminal está na pasta certa — deve aparecer algo como <strong>C:\Users\SeuNome\Ferabot&gt;</strong> no início da linha. Se estiver, ótimo.</li>
+              <li data-n="c">Clique no botão "Copiar" abaixo, depois clique no terminal e cole com <strong>Ctrl+V</strong></li>
+            </ul>
+
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">Terminal do VS Code — cole aqui e pressione Enter</span>
+                <button class="btn-copy-code" onclick="copiarCodigo(this, 'python instalar.py')">Copiar</button>
+              </div>
+              <pre><code><span class="c-cmd">python</span> <span class="c-str">instalar.py</span></code></pre>
+            </div>
+
+            <ul class="substeps" style="margin-top:10px">
+              <li data-n="d">Pressione <strong>Enter</strong> para executar o instalador</li>
+              <li data-n="e">O instalador vai verificar cada componente e mostrar <strong style="color:var(--green)">[OK]</strong> para os que já estão instalados</li>
             </ul>
 
             <div class="see-box">
-              <div class="see-box-header">📺 O que vai aparecer na janela preta:</div>
+              <div class="see-box-header">📺 O que vai aparecer no terminal:</div>
               <div class="see-box-body">
-                O instalador vai verificar cada componente e mostrar <strong style="color:var(--green)">[OK]</strong> para os que já estão instalados. Se algum componente estiver faltando (como o Playwright), ele vai perguntar: <strong>"Posso instalar X automaticamente agora? (s/n):"</strong>
+                O instalador vai mostrar o status de cada componente. Se algum estiver faltando (como o Playwright), vai aparecer a pergunta: <strong>"Posso instalar X automaticamente agora? (s/n):"</strong>
               </div>
             </div>
 
             <ul class="substeps" style="margin-top:10px">
-              <li data-n="e">Sempre que aparecer <em>"Posso instalar X automaticamente agora? (s/n):"</em>, clique na janela preta, digite <code class="ck">s</code> e pressione <strong>Enter</strong></li>
-              <li data-n="f">Aguarde cada instalação terminar antes de continuar</li>
+              <li data-n="f">Sempre que aparecer <em>"Posso instalar X automaticamente agora? (s/n):"</em>, clique no terminal, digite <code class="ck">s</code> e pressione <strong>Enter</strong></li>
+              <li data-n="g">Aguarde cada instalação terminar antes de continuar</li>
             </ul>
 
             <div class="note tip">
               <span class="note-icon">💡</span>
-              <p>O instalador pode demorar alguns minutos se precisar instalar o Playwright (o programa que converte HTML em imagem). Isso é normal — aguarde sem fechar a janela.</p>
+              <p>O instalador pode demorar alguns minutos se precisar instalar o Playwright (o programa que converte HTML em imagem). Isso é normal — aguarde sem fechar o terminal.</p>
             </div>
 
             <div class="see-box">
               <div class="see-box-header">📺 O que vai acontecer depois que tudo estiver [OK]:</div>
-              <div class="see-box-body">O instalador vai abrir automaticamente uma aba no seu navegador com um <strong>formulário de perfil</strong>. Pode parecer que a janela preta "travou" — isso é normal. Ela está aguardando você preencher o formulário.</div>
+              <div class="see-box-body">O instalador vai abrir automaticamente uma aba no seu navegador com um <strong>formulário de perfil</strong>. Pode parecer que o terminal "travou" — isso é normal. Ele está aguardando você preencher o formulário.</div>
             </div>
 
             <button class="step-done-btn" onclick="marcarPasso('step-6', this)">
@@ -675,16 +668,16 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
           <div class="step-num-col"><div class="step-num">8</div></div>
           <div class="step-body">
             <h3>Aguardar a instalação das skills</h3>
-            <p>Depois de salvar o perfil, volte para a janela preta do instalador. Ela vai continuar automaticamente instalando as 8 skills do Ferabot no Claude Code.</p>
+            <p>Depois de salvar o perfil, volte para o terminal do VS Code. Ele vai continuar automaticamente instalando as 8 skills do Ferabot no Claude Code.</p>
 
             <div class="see-box">
-              <div class="see-box-header">📺 O que vai aparecer na janela preta:</div>
+              <div class="see-box-header">📺 O que vai aparecer no terminal do VS Code:</div>
               <div class="see-box-body">Texto rolando com os nomes das skills sendo instaladas. Quando terminar, vai aparecer a mensagem em destaque: <strong style="color:var(--green)">FERABOT INSTALADO COM SUCESSO!</strong></div>
             </div>
 
             <div class="note success">
               <span class="note-icon">🔥</span>
-              <p><strong>Instalação concluída!</strong> O Ferabot está instalado. Você pode fechar a janela preta agora. O próximo passo é abrir o sistema pelo Claude Code.</p>
+              <p><strong>Instalação concluída!</strong> O Ferabot está pronto. Você pode fechar o terminal (clique no X ao lado de "bash" ou "cmd" na aba do terminal). Agora vamos usar o Claude para criar seu primeiro carrossel.</p>
             </div>
 
             <button class="step-done-btn" onclick="marcarPasso('step-8', this)">
@@ -698,12 +691,12 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
     <hr class="divider-section">
 
-    <!-- 8 — ABRIR O FERABOT -->
-    <section class="section" id="abrir">
+    <!-- 8 — PRIMEIRO USO -->
+    <section class="section" id="primeiro-uso">
       <div class="section-header">
-        <span class="section-tag">Configuração — Parte 3</span>
-        <h2>Abrir o Ferabot no Claude Code</h2>
-        <p class="section-intro">Agora você vai abrir o Claude Code dentro da pasta do Ferabot. O Ferabot só funciona quando o Claude Code está aberto nessa pasta específica.</p>
+        <span class="section-tag">Usando o Ferabot</span>
+        <h2>Criar o seu primeiro carrossel</h2>
+        <p class="section-intro">Com o Ferabot instalado, você vai usar o painel do Claude dentro do VS Code para criar tudo. O processo é simples: chama a skill, responde o briefing, aprova o texto e recebe os arquivos.</p>
       </div>
 
       <div class="steps">
@@ -711,28 +704,31 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
         <div class="step" id="step-9">
           <div class="step-num-col"><div class="step-num">9</div></div>
           <div class="step-body">
-            <h3>Abrir com ABRIR_FERABOT.bat</h3>
+            <h3>Abrir o painel do Claude no VS Code</h3>
+            <p>O painel do Claude é onde acontece tudo. Veja como abrir e entender a interface:</p>
 
             <ul class="substeps">
-              <li data-n="a">Abra a pasta <strong>Ferabot</strong> no Explorador de Arquivos (se fechou, vá em C:\Users\SeuNome\Ferabot)</li>
-              <li data-n="b">Procure o arquivo <code class="ck">ABRIR_FERABOT.bat</code></li>
-              <li data-n="c">Dê <strong>duplo-clique</strong> nele</li>
-              <li data-n="d">Pode aparecer um aviso: <em>"Windows protegeu seu computador"</em> ou <em>"Publisher desconhecido"</em></li>
-              <li data-n="e">Clique em <strong>"Mais informações"</strong> e depois em <strong>"Executar assim mesmo"</strong> (ou clique em "Sim" se aparecer a janela do Windows Defender)</li>
+              <li data-n="a">Com a pasta Ferabot aberta no VS Code, olhe para a <strong>barra lateral esquerda</strong> — a coluna estreita com ícones. Procure o ícone do <strong>Claude</strong> (símbolo da Anthropic, parecido com um diamante ou o logo laranja/cinza da Anthropic)</li>
+              <li data-n="b">Clique nesse ícone — o painel do Claude vai abrir à direita ou em uma aba separada</li>
+              <li data-n="c">Você vai ver uma janela de chat com um <strong>campo de texto na parte de baixo</strong>. É aqui que você digita os comandos</li>
             </ul>
 
             <div class="see-box">
-              <div class="see-box-header">📺 O que vai acontecer:</div>
-              <div class="see-box-body">Uma janela preta vai aparecer brevemente e depois o <strong>Claude Code vai abrir automaticamente</strong>, já na pasta do Ferabot. Você vai ver a interface escura do Claude Code com o campo de chat na parte inferior.</div>
+              <div class="see-box-header">📺 As partes da interface do Claude no VS Code:</div>
+              <div class="see-box-body">
+                <strong>Campo de chat (parte de baixo):</strong> onde você digita os comandos e conversa com o Ferabot.<br><br>
+                <strong>Área de resposta (parte do meio):</strong> onde o Claude responde, mostra o que foi gerado e faz perguntas.<br><br>
+                <strong>Comandos com /:</strong> todo comando do Ferabot começa com /. Digite / e uma lista vai aparecer com as skills disponíveis.
+              </div>
             </div>
 
-            <div class="note tip">
-              <span class="note-icon">💡</span>
-              <p>O arquivo ABRIR_FERABOT.bat é um atalho que abre o Claude Code já na pasta certa. Você pode arrastar esse arquivo para a sua área de trabalho para facilitar o acesso nas próximas vezes.</p>
+            <div class="note info">
+              <span class="note-icon">ℹ️</span>
+              <p>O Claude entende português normalmente. Você pode perguntar qualquer coisa como <em>"O que você pode fazer por mim?"</em> ou <em>"Qual skill devo usar para criar uma landing page?"</em></p>
             </div>
 
             <button class="step-done-btn" onclick="marcarPasso('step-9', this)">
-              <span>✓</span> Claude Code aberto na pasta do Ferabot — marcar como concluído
+              <span>✓</span> Painel do Claude aberto — marcar como concluído
             </button>
           </div>
         </div>
@@ -740,52 +736,13 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
         <div class="step" id="step-10">
           <div class="step-num-col"><div class="step-num">10</div></div>
           <div class="step-body">
-            <h3>Entender a interface do Claude Code</h3>
-            <p>Antes de usar, entenda as partes principais da tela:</p>
-
-            <ul class="substeps">
-              <li data-n="1"><strong>Campo de chat (parte de baixo):</strong> onde você digita os comandos e conversa com o Ferabot. Clique nesse campo e comece a digitar</li>
-              <li data-n="2"><strong>Área de resposta (parte do meio):</strong> onde o Claude responde, mostra o que foi gerado e faz perguntas</li>
-              <li data-n="3"><strong>Barra lateral (esquerda):</strong> mostra os arquivos da pasta Ferabot. Você pode abrir arquivos clicando neles</li>
-              <li data-n="4"><strong>Comandos com /:</strong> todo comando do Ferabot começa com /. Digite / no chat e uma lista vai aparecer com os comandos disponíveis</li>
-            </ul>
-
-            <div class="note info">
-              <span class="note-icon">ℹ️</span>
-              <p>O Claude Code funciona como um chat inteligente. Você pode perguntar qualquer coisa em português, como <em>"O que você pode fazer por mim?"</em> ou <em>"Qual etapa devo usar para criar um carrossel?"</em></p>
-            </div>
-
-            <button class="step-done-btn" onclick="marcarPasso('step-10', this)">
-              <span>✓</span> Interface entendida — marcar como concluído
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <hr class="divider-section">
-
-    <!-- 9 — PRIMEIRO USO -->
-    <section class="section" id="primeiro-uso">
-      <div class="section-header">
-        <span class="section-tag">Usando o Ferabot</span>
-        <h2>Criar o seu primeiro carrossel</h2>
-        <p class="section-intro">Com o Claude Code aberto, siga esse passo a passo para criar seu primeiro carrossel de feed do Instagram — do zero até o arquivo PNG pronto para publicar.</p>
-      </div>
-
-      <div class="steps">
-
-        <div class="step" id="step-11">
-          <div class="step-num-col"><div class="step-num">11</div></div>
-          <div class="step-body">
             <h3>Chamar a skill de carrossel</h3>
-            <p>Clique no campo de chat na parte de baixo do Claude Code, copie e cole o comando abaixo, e pressione Enter:</p>
+            <p>Clique no campo de chat na parte de baixo do painel do Claude, copie e cole o comando abaixo, e pressione Enter:</p>
 
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-label">Campo de chat do Claude Code</span>
+                <span class="code-label">Campo de chat do Claude — no VS Code</span>
                 <button class="btn-copy-code" onclick="copiarCodigo(this, '/squad-carrossel-fera')">Copiar</button>
               </div>
               <pre><code><span class="c-acc">/squad-carrossel-fera</span></code></pre>
@@ -796,17 +753,17 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
               <div class="see-box-body">O Claude vai ler seu perfil automaticamente e vai começar o processo de criação do carrossel. Ele vai se apresentar e fazer algumas perguntas de briefing para entender o que você quer criar.</div>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-11', this)">
+            <button class="step-done-btn" onclick="marcarPasso('step-10', this)">
               <span>✓</span> Comando digitado — marcar como concluído
             </button>
           </div>
         </div>
 
-        <div class="step" id="step-12">
-          <div class="step-num-col"><div class="step-num">12</div></div>
+        <div class="step" id="step-11">
+          <div class="step-num-col"><div class="step-num">11</div></div>
           <div class="step-body">
             <h3>Responder o briefing</h3>
-            <p>O Claude vai fazer perguntas para entender o que você precisa. Responda em português como se estivesse em uma conversa normal — sem jargão técnico:</p>
+            <p>O Claude vai fazer perguntas para entender o que você precisa. Responda em português como se estivesse em uma conversa normal:</p>
 
             <ul class="substeps">
               <li data-n="1"><strong>Tema do carrossel</strong> — qual assunto você quer abordar? Ex: "Quero falar sobre como profissionais deixam dinheiro na mesa por não saberem se posicionar". Se não tiver ideia, pode dizer "você escolhe um bom tema para o meu nicho"</li>
@@ -819,20 +776,20 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
               <p>Quanto mais detalhes você der, melhor fica o resultado. Mas se não souber responder alguma coisa, pode dizer "você decide" e o Claude vai escolher a melhor opção com base no seu perfil.</p>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-12', this)">
+            <button class="step-done-btn" onclick="marcarPasso('step-11', this)">
               <span>✓</span> Briefing respondido — marcar como concluído
             </button>
           </div>
         </div>
 
-        <div class="step" id="step-13">
-          <div class="step-num-col"><div class="step-num">13</div></div>
+        <div class="step" id="step-12">
+          <div class="step-num-col"><div class="step-num">12</div></div>
           <div class="step-body">
             <h3>Ler e aprovar a copy</h3>
             <p>O Claude vai gerar o texto dos 10 slides e mostrar para você revisar <strong>antes</strong> de criar qualquer imagem. Leia com atenção:</p>
 
             <ul class="substeps">
-              <li data-n="1">Leia todos os slides apresentados</li>
+              <li data-n="1">Leia todos os slides apresentados no painel do Claude</li>
               <li data-n="2">Verifique se o tom está certo, se as informações fazem sentido para o seu nicho</li>
               <li data-n="3">Veja se a chamada para ação (último slide) está do jeito que você quer</li>
             </ul>
@@ -842,7 +799,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-label">Claude Code — chat</span>
+                <span class="code-label">Claude — campo de chat</span>
                 <button class="btn-copy-code" onclick="copiarCodigo(this, 'APROVADO')">Copiar</button>
               </div>
               <pre><code><span class="c-grn">APROVADO</span></code></pre>
@@ -864,30 +821,30 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
               <p><strong>Regra de ouro:</strong> nunca escreva APROVADO sem ter lido o conteúdo. O texto aprovado vai sair como arte para o Instagram do seu negócio — leia com cuidado.</p>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-13', this)">
+            <button class="step-done-btn" onclick="marcarPasso('step-12', this)">
               <span>✓</span> Copy aprovada — marcar como concluído
             </button>
           </div>
         </div>
 
-        <div class="step" id="step-14">
-          <div class="step-num-col"><div class="step-num">14</div></div>
+        <div class="step" id="step-13">
+          <div class="step-num-col"><div class="step-num">13</div></div>
           <div class="step-body">
             <h3>Aguardar os arquivos e publicar</h3>
-            <p>Após o APROVADO, o Ferabot vai renderizar os 10 slides. Esse processo leva de 1 a 3 minutos — aguarde sem fechar o Claude Code.</p>
+            <p>Após o APROVADO, o Ferabot vai renderizar os 10 slides. Esse processo leva de 1 a 3 minutos — aguarde sem fechar o VS Code.</p>
 
             <div class="see-box">
               <div class="see-box-header">📺 O que vai acontecer:</div>
-              <div class="see-box-body">O Claude vai mostrar o progresso da renderização. Quando terminar, a <strong>pasta de output vai abrir automaticamente</strong> no seu Explorador de Arquivos, já com os 10 PNGs prontos.</div>
+              <div class="see-box-body">O Claude vai mostrar o progresso da renderização no painel. Quando terminar, a <strong>pasta de output vai abrir automaticamente</strong> no seu Explorador de Arquivos, já com os 10 PNGs prontos. O VS Code também vai mostrar os arquivos novos na barra lateral de arquivos.</div>
             </div>
 
             <p style="margin-top:14px">Os arquivos ficam em:</p>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-label">Localização dos arquivos</span>
+                <span class="code-label">Localização dos arquivos (dentro da pasta Ferabot)</span>
               </div>
-              <pre><code><span class="c-str">Ferabot\output\carrossel\</span><span class="c-acc">data-de-hoje\</span></code></pre>
+              <pre><code><span class="c-str">output/carrossel/</span><span class="c-acc">data-de-hoje/</span></code></pre>
             </div>
 
             <p>Para publicar no Instagram a partir do computador, transfira os arquivos para o celular:</p>
@@ -907,10 +864,10 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
             <div class="note success">
               <span class="note-icon">🎉</span>
-              <p><strong>Parabéns! Seu primeiro carrossel está pronto.</strong> O processo para todas as outras 8 etapas é idêntico: chama o comando, responde o briefing, aprova e recebe os arquivos.</p>
+              <p><strong>Parabéns! Seu primeiro carrossel está pronto.</strong> O processo para todas as outras 8 etapas é idêntico: chama o comando no Claude, responde o briefing, aprova e recebe os arquivos na pasta output.</p>
             </div>
 
-            <button class="step-done-btn" onclick="marcarPasso('step-14', this)">
+            <button class="step-done-btn" onclick="marcarPasso('step-13', this)">
               <span>✓</span> Primeiro carrossel publicado — marcar como concluído
             </button>
           </div>
@@ -921,12 +878,12 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
     <hr class="divider-section">
 
-    <!-- 10 — REFERÊNCIA -->
+    <!-- 9 — REFERÊNCIA -->
     <section class="section" id="referencia">
       <div class="section-header">
         <span class="section-tag">Referência rápida</span>
         <h2>Todos os comandos do Ferabot</h2>
-        <p class="section-intro">Dentro do Claude Code, copie e cole qualquer um desses comandos para iniciar a etapa correspondente.</p>
+        <p class="section-intro">Dentro do painel do Claude no VS Code, copie e cole qualquer um desses comandos para iniciar a etapa correspondente.</p>
       </div>
 
       <table class="ref-table">
@@ -983,18 +940,23 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
 
       <div class="note info" style="margin-top:24px">
         <span class="note-icon">🔄</span>
-        <p><strong>Para receber atualizações do Ferabot:</strong> abra a pasta Ferabot no Explorador de Arquivos e dê duplo-clique em <code class="ck">atualizar.bat</code>. Novas funcionalidades são instaladas automaticamente.</p>
+        <p><strong>Para receber atualizações do Ferabot:</strong> abra o terminal do VS Code (<strong>Ctrl+`</strong>) e rode <code class="ck">git pull</code>. As novas funcionalidades serão baixadas automaticamente.</p>
       </div>
 
       <div class="note tip" style="margin-top:12px">
         <span class="note-icon">✏️</span>
-        <p><strong>Para alterar seu perfil</strong> (nome, cores, produto, APIs): abra o Claude Code com o ABRIR_FERABOT.bat e clique no botão <strong>"✏️ Perfil"</strong> no Dashboard, ou diga para o Claude <em>"quero atualizar meu perfil"</em>.</p>
+        <p><strong>Para alterar seu perfil</strong> (nome, cores, produto, APIs): abra o terminal no VS Code e rode <code class="ck">python SetupFera/setup_form.py</code>. O formulário vai abrir com todos os seus dados atuais para editar.</p>
+      </div>
+
+      <div class="note yellow" style="margin-top:12px">
+        <span class="note-icon">📁</span>
+        <p><strong>Para abrir o Ferabot nas próximas vezes:</strong> abra o VS Code, vá em <strong>Arquivo → Abrir Pasta Recente</strong> e escolha a pasta <strong>Ferabot</strong>. Depois clique no ícone do Claude na barra lateral.</p>
       </div>
     </section>
 
     <hr class="divider-section">
 
-    <!-- 11 — FAQ -->
+    <!-- 10 — FAQ -->
     <section class="section" id="faq">
       <div class="section-header">
         <span class="section-tag">Dúvidas frequentes</span>
@@ -1009,30 +971,30 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Isso acontece quando as skills não foram instaladas corretamente. Volte para a pasta Ferabot, dê duplo-clique em <strong>instalar.py</strong> e aguarde até aparecer "FERABOT INSTALADO COM SUCESSO!". Depois feche o Claude Code e abra de novo com o <strong>ABRIR_FERABOT.bat</strong>.</p>
-            <p>Se o problema persistir, abra o Claude Code e diga: <em>"As skills do Ferabot não estão aparecendo, como resolvo?"</em></p>
+            <p>Isso acontece quando as skills não foram instaladas corretamente. Abra o terminal no VS Code (<strong>Ctrl+`</strong>), certifique-se de que está na pasta Ferabot e rode <code class="ck">python instalar.py</code> novamente. Aguarde até aparecer "FERABOT INSTALADO COM SUCESSO!". Depois feche o painel do Claude e abra novamente clicando no ícone na barra lateral.</p>
+            <p>Se o problema persistir, no painel do Claude escreva: <em>"As skills do Ferabot não estão aparecendo, como resolvo?"</em></p>
           </div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
-            Apareceu erro no terminal ou janela preta. O que faço?
+            Apareceu um erro em vermelho no terminal do VS Code
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
             <p>Não se preocupe. Faça o seguinte:</p>
-            <p>1. Selecione toda a mensagem de erro (clique no início do texto vermelho e arraste até o final)<br>2. Copie com Ctrl+C<br>3. Abra o Claude Code (com ABRIR_FERABOT.bat)<br>4. Cole no chat com Ctrl+V e escreva junto: <em>"Encontrei esse erro no Ferabot, o que faço?"</em><br>5. O Claude vai diagnosticar e te dar a solução passo a passo</p>
+            <p>1. Clique no início da mensagem de erro e arraste para selecionar tudo<br>2. Copie com <strong>Ctrl+C</strong><br>3. Clique no painel do Claude na barra lateral<br>4. Cole no chat com <strong>Ctrl+V</strong> e escreva junto: <em>"Encontrei esse erro no Ferabot, o que faço?"</em><br>5. O Claude vai diagnosticar e te dar a solução passo a passo</p>
           </div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
-            O Python não é reconhecido — aparece "python não é reconhecido como comando"
+            O Python não é reconhecido — aparece "'python' não é reconhecido"
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
             <p>Isso acontece quando o Python foi instalado sem marcar a opção <strong>"Add Python to PATH"</strong>. A solução é reinstalar:</p>
-            <p>1. Vá em <strong>Configurações do Windows</strong> → <strong>Aplicativos</strong> → procure "Python" → clique em <strong>Desinstalar</strong><br>2. Volte ao passo 2 deste guia e reinstale, desta vez <strong>marcando a caixinha "Add Python to PATH"</strong> antes de clicar em Install<br>3. Reinicie o computador e tente novamente</p>
+            <p>1. Vá em <strong>Configurações do Windows → Aplicativos</strong> → procure "Python" → clique em <strong>Desinstalar</strong><br>2. Volte ao passo 3 deste guia e reinstale, desta vez <strong>marcando a caixinha "Add Python to PATH"</strong> antes de clicar em Install<br>3. Reinicie o computador e tente novamente</p>
           </div></div>
         </div>
 
@@ -1042,19 +1004,34 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>O formulário abre no endereço <strong>http://localhost:8765</strong>. Se não abriu automaticamente, abra o navegador e acesse esse endereço manualmente. Certifique-se de que a janela preta do instalador ainda está aberta (não feche ela).</p>
-            <p>Se continuar sem funcionar, abra um terminal na pasta Ferabot (clique com o botão direito dentro da pasta → "Abrir no Terminal" ou "Abrir janela do PowerShell aqui") e rode:</p>
-            <div class="code-block" style="margin:12px 0"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-label">Terminal</span><button class="btn-copy-code" onclick="copiarCodigo(this, 'python SetupFera/setup_form.py')">Copiar</button></div><pre><code><span class="c-cmd">python</span> <span class="c-str">SetupFera/setup_form.py</span></code></pre></div>
+            <p>O formulário abre no endereço <strong>http://localhost:8765</strong>. Se não abriu automaticamente, abra o navegador e acesse esse endereço manualmente. Certifique-se de que o terminal no VS Code ainda está rodando (não feche a aba do terminal).</p>
+            <p>Se continuar sem funcionar, abra um novo terminal no VS Code (<strong>Ctrl+`</strong>) e rode diretamente:</p>
+            <div class="code-block" style="margin:12px 0"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-label">Terminal do VS Code</span><button class="btn-copy-code" onclick="copiarCodigo(this, 'python SetupFera/setup_form.py')">Copiar</button></div><pre><code><span class="c-cmd">python</span> <span class="c-str">SetupFera/setup_form.py</span></code></pre></div>
           </div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
-            O Windows bloqueou o arquivo ABRIR_FERABOT.bat
+            Não encontrei o ícone do Claude na barra lateral do VS Code
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Esse aviso aparece porque o arquivo veio da internet. É seguro ignorar. Clique com o botão direito no arquivo <strong>ABRIR_FERABOT.bat</strong>, escolha <strong>"Propriedades"</strong>, e na parte de baixo da janela procure uma mensagem de segurança com uma caixa de seleção <strong>"Desbloquear"</strong>. Marque essa caixa e clique em OK. Agora o arquivo vai abrir normalmente.</p>
+            <p>Tente estas opções:</p>
+            <p>1. Role para baixo na barra lateral — o ícone pode estar mais abaixo dos outros ícones<br>2. Pressione <strong>Ctrl+Shift+P</strong> e busque por "Claude" — vai aparecer uma opção "Claude Code: Open" ou similar<br>3. Se a extensão não foi instalada corretamente, volte ao passo 2 deste guia e reinstale a extensão Claude Code</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Como abro o Ferabot no VS Code nas próximas vezes?
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Existem três formas fáceis:</p>
+            <p><strong>Opção 1 (mais fácil):</strong> Abra o VS Code e vá em <strong>Arquivo → Abrir Pasta Recente → Ferabot</strong>. A pasta vai estar listada automaticamente.</p>
+            <p><strong>Opção 2:</strong> Navegue até a pasta Ferabot pelo Explorador de Arquivos, clique com o botão direito dentro da pasta e escolha <strong>"Abrir com Code"</strong> (se essa opção aparecer).</p>
+            <p><strong>Opção 3:</strong> Abra o VS Code, pressione <strong>Ctrl+K Ctrl+O</strong> (segure Ctrl, pressione K, solte, pressione O) e navegue até a pasta Ferabot.</p>
+            <p>Depois que a pasta abrir, clique no ícone do Claude na barra lateral para acessar o chat.</p>
           </div></div>
         </div>
 
@@ -1075,8 +1052,8 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Verifique se apareceu alguma pergunta em português na janela preta esperando uma resposta sua (como "Posso instalar X agora? (s/n):"). Se tiver, clique na janela, digite <strong>s</strong> e pressione Enter.</p>
-            <p>Se realmente pareceu travar (mais de 5 minutos sem movimento), feche a janela, abra um terminal na pasta Ferabot e rode: <code class="ck">python instalar.py</code>. O instalador continua de onde parou.</p>
+            <p>Verifique se apareceu alguma pergunta em português no terminal esperando uma resposta (como "Posso instalar X agora? (s/n):"). Se tiver, clique no terminal, digite <strong>s</strong> e pressione Enter.</p>
+            <p>Se realmente pareceu travar (mais de 5 minutos sem movimento), feche a aba do terminal, abra um novo terminal com <strong>Ctrl+`</strong> e rode novamente: <code class="ck">python instalar.py</code>. O instalador continua de onde parou.</p>
           </div></div>
         </div>
 
@@ -1086,7 +1063,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Sim. O processo é o mesmo, mas com algumas diferenças: o Python e o Git já vêm no Mac (confirme com <code class="ck">python3 --version</code> no Terminal). Para baixar o Ferabot, abra o Terminal (Cmd+Espaço → "Terminal") e use o mesmo comando git clone. Em vez do ABRIR_FERABOT.bat, abra o Terminal na pasta Ferabot e rode <code class="ck">claude .</code></p>
+            <p>Sim. O processo é o mesmo — o VS Code e a extensão do Claude funcionam igualmente no Mac. As únicas diferenças são: o Python e o Git podem já vir instalados no Mac (confirme com <code class="ck">python3 --version</code> e <code class="ck">git --version</code> no terminal). Use <strong>Cmd</strong> no lugar de Ctrl nos atalhos de teclado.</p>
           </div></div>
         </div>
 
@@ -1098,7 +1075,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
           <div class="faq-a"><div class="faq-a-inner">
             <p>Todos os arquivos ficam dentro da pasta <strong>output</strong>, dentro da pasta Ferabot, organizados por etapa e por data:</p>
             <p><code class="ck">Ferabot → output → carrossel → 2025-01-15 → slide-01.png ...</code></p>
-            <p>Quando a skill termina, essa pasta abre automaticamente no Explorador de Arquivos. Se você fechar sem ver, navegue até lá manualmente.</p>
+            <p>No VS Code, você pode ver esses arquivos diretamente na barra lateral de arquivos (lado esquerdo). Quando a skill termina, a pasta output também abre automaticamente no Explorador de Arquivos.</p>
           </div></div>
         </div>
 
@@ -1108,7 +1085,7 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>O Ferabot em si é gratuito. Para usá-lo, você precisa de uma assinatura do <strong>Claude Code</strong> — que dá acesso ao Claude (a IA). O Claude tem um plano gratuito com créditos mensais, suficiente para começar.</p>
+            <p>O VS Code e o Ferabot em si são gratuitos. Para usar o Claude, você precisa de uma conta na Anthropic — que tem plano gratuito com créditos mensais, suficiente para começar.</p>
             <p>Algumas etapas avançadas usam serviços externos que podem ter custos próprios: Meta Ads (você paga os anúncios diretamente ao Facebook), Gemini (plano gratuito disponível para gerar imagens), Zernio (automação de DMs — tem plano pago). Tudo isso é opcional e configurado separadamente.</p>
           </div></div>
         </div>
@@ -1119,8 +1096,9 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
             <span class="faq-arrow">▼</span>
           </button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Abra o Claude Code com o <strong>ABRIR_FERABOT.bat</strong> e olhe o Dashboard — tem um botão <strong>✏️ Perfil</strong>. Clique nele e siga as instruções.</p>
-            <p>Ou abra um terminal na pasta Ferabot e rode diretamente: <code class="ck">python SetupFera/setup_form.py</code>. O formulário vai abrir com todos os seus dados atuais para editar.</p>
+            <p>Abra o terminal no VS Code (<strong>Ctrl+`</strong>) e rode:</p>
+            <div class="code-block" style="margin:12px 0"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-label">Terminal do VS Code</span><button class="btn-copy-code" onclick="copiarCodigo(this, 'python SetupFera/setup_form.py')">Copiar</button></div><pre><code><span class="c-cmd">python</span> <span class="c-str">SetupFera/setup_form.py</span></code></pre></div>
+            <p>O formulário vai abrir no navegador com todos os seus dados atuais preenchidos. Edite o que quiser e clique em <strong>"Salvar Perfil"</strong>.</p>
           </div></div>
         </div>
 
@@ -1132,8 +1110,8 @@ body { background:var(--bg); color:var(--text); font-family:var(--font); line-he
       <div class="support-box">
         <div style="font-size:48px;margin-bottom:16px">🔥</div>
         <h3>Ficou com dúvida?</h3>
-        <p>O próprio Claude Code resolve a maioria dos problemas. Abra o Ferabot com o ABRIR_FERABOT.bat, descreva o que aconteceu e o Claude vai te guiar passo a passo.</p>
-        <a href="#claude-code" class="btn-primary">Voltar para o início da instalação</a>
+        <p>O próprio Claude resolve a maioria dos problemas. Com a pasta Ferabot aberta no VS Code, clique no painel do Claude, descreva o que aconteceu e ele vai te guiar passo a passo.</p>
+        <a href="#vscode" class="btn-primary">Voltar para o início da instalação</a>
       </div>
     </section>
 
@@ -1154,7 +1132,7 @@ const obs = new IntersectionObserver(entries => {
 document.querySelectorAll('.section').forEach(s => obs.observe(s));
 
 function updateNavActive() {
-  const secs = ['o-que-e','claude-code','python','git','baixar','instalador','perfil','abrir','primeiro-uso','referencia','faq','suporte'];
+  const secs = ['o-que-e','vscode','python','git','baixar','instalador','perfil','primeiro-uso','referencia','faq','suporte'];
   let current = '';
   secs.forEach(id => {
     const el = document.getElementById(id);
@@ -1165,24 +1143,17 @@ function updateNavActive() {
   });
 }
 
-function togglePrereq(id) {
-  const el = document.getElementById(id);
-  el.classList.toggle('done');
-  salvarEstado();
-  atualizarProgressoTarefas();
-}
-
 function marcarPasso(id, btn) {
   const step = document.getElementById(id);
   const done = step.classList.toggle('done');
-  btn.innerHTML = done ? '<span>✓</span> Concluído!' : '<span>✓</span> Marcar como concluído';
+  btn.innerHTML = done ? '<span>&#10003;</span> Concluído!' : '<span>&#10003;</span> Marcar como concluído';
   salvarEstado();
   atualizarProgressoTarefas();
 }
 
 function atualizarProgressoTarefas() {
-  const total = document.querySelectorAll('.prereq-item, .step').length;
-  const done  = document.querySelectorAll('.prereq-item.done, .step.done').length;
+  const total = document.querySelectorAll('.step').length;
+  const done  = document.querySelectorAll('.step.done').length;
   const pct   = total ? Math.round(done / total * 100) : 0;
   document.getElementById('task-progress').style.width = pct + '%';
   document.getElementById('task-percent').textContent = done + ' de ' + total + ' passos';
@@ -1190,22 +1161,22 @@ function atualizarProgressoTarefas() {
 
 function salvarEstado() {
   const estado = {};
-  document.querySelectorAll('.prereq-item, .step').forEach(el => {
+  document.querySelectorAll('.step').forEach(el => {
     estado[el.id] = el.classList.contains('done');
   });
-  try { localStorage.setItem('ferabot_tutorial_v2', JSON.stringify(estado)); } catch(e) {}
+  try { localStorage.setItem('ferabot_tutorial_v3', JSON.stringify(estado)); } catch(e) {}
 }
 
 function carregarEstado() {
   try {
-    const estado = JSON.parse(localStorage.getItem('ferabot_tutorial_v2') || '{}');
+    const estado = JSON.parse(localStorage.getItem('ferabot_tutorial_v3') || '{}');
     Object.entries(estado).forEach(([id, done]) => {
       if (!done) return;
       const el = document.getElementById(id);
       if (!el) return;
       el.classList.add('done');
       const btn = el.querySelector('.step-done-btn');
-      if (btn) btn.innerHTML = '<span>✓</span> Concluído!';
+      if (btn) btn.innerHTML = '<span>&#10003;</span> Concluído!';
     });
   } catch(e) {}
   atualizarProgressoTarefas();
@@ -1225,7 +1196,7 @@ function copiarCodigo(btn, texto) {
     fallbackCopy(texto);
   }
   const orig = btn.textContent;
-  btn.textContent = '✓ Copiado!';
+  btn.textContent = '&#10003; Copiado!';
   btn.classList.add('ok');
   setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
 }
