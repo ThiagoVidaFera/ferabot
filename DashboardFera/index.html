@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferabot — Dashboard</title>
+<script>
+  // Carrega perfil do cliente se disponível
+  try {
+    const raw = localStorage.getItem('ferabot_perfil');
+    if (raw) window.PERFIL = JSON.parse(raw);
+  } catch(e) {}
+</script>
+<!-- Gerado pelo instalar.py após o setup -->
+<script src="perfil.js" onerror="window.PERFIL = window.PERFIL || null"></script>
 <style>
   :root {
     --bg: #0A0A0F;
@@ -16,420 +25,429 @@
     --accent-dim: rgba(255, 79, 0, 0.12);
     --radius: 16px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg); color: var(--text);
     font-family: -apple-system, 'Inter', 'Segoe UI', sans-serif;
-    min-height: 100vh;
-    padding: 40px 24px 80px;
+    min-height: 100vh; padding: 40px 24px 80px;
   }
+  .w { max-width: 900px; margin: 0 auto; }
 
-  /* Header */
+  /* ── Header ── */
   .header {
-    max-width: 900px;
-    margin: 0 auto 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 24px;
+    margin-bottom: 56px;
   }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
+  .logo { display: flex; align-items: center; gap: 14px; }
   .logo-icon {
-    width: 48px; height: 48px;
+    width: 48px; height: 48px; background: var(--accent);
+    border-radius: 12px; display: flex; align-items: center;
+    justify-content: center; font-size: 24px;
+  }
+  .logo h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { font-size: 13px; color: var(--muted); }
+  .perfil-pill {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 99px; padding: 8px 18px;
+    font-size: 13px; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .perfil-pill .dot {
+    width: 8px; height: 8px; border-radius: 50%;
     background: var(--accent);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
   }
+  .perfil-nome { color: var(--text); font-weight: 600; }
 
-  .logo-text h1 {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-  }
-
-  .logo-text span {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .badge {
-    background: var(--accent-dim);
-    color: var(--accent);
+  /* ── Aviso sem perfil ── */
+  .aviso {
+    background: rgba(255,79,0,0.08);
     border: 1px solid rgba(255,79,0,0.3);
-    padding: 6px 16px;
-    border-radius: 99px;
-    font-size: 13px;
-    font-weight: 600;
+    border-radius: var(--radius); padding: 20px 24px;
+    margin-bottom: 40px; display: none;
+  }
+  .aviso.visivel { display: flex; align-items: flex-start; gap: 16px; }
+  .aviso-icon { font-size: 24px; flex-shrink: 0; }
+  .aviso h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .aviso p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .aviso code {
+    background: rgba(255,255,255,0.08); border-radius: 6px;
+    padding: 2px 8px; font-size: 13px; color: var(--text);
   }
 
-  /* Hero */
-  .hero {
-    max-width: 900px;
-    margin: 0 auto 56px;
-    text-align: center;
-  }
-
+  /* ── Hero ── */
+  .hero { text-align: center; margin-bottom: 56px; }
   .hero h2 {
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
+    font-size: clamp(28px, 5vw, 44px); font-weight: 800;
+    line-height: 1.15; letter-spacing: -1px; margin-bottom: 12px;
   }
-
   .hero h2 span { color: var(--accent); }
+  .hero p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.6; }
 
-  .hero p {
-    font-size: 18px;
-    color: var(--muted);
-    max-width: 560px;
-    margin: 0 auto 32px;
-    line-height: 1.6;
-  }
+  /* ── Labels de seção ── */
+  .sec { font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 
-  .hero-cmd {
-    display: inline-block;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 28px;
-    font-family: 'Courier New', monospace;
-    font-size: 15px;
-    color: var(--accent);
-  }
-
-  /* Section label */
-  .section-label {
-    max-width: 900px;
-    margin: 0 auto 20px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* Grid */
+  /* ── Grid de cards ── */
   .grid {
-    max-width: 900px;
-    margin: 0 auto 56px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px; margin-bottom: 48px;
   }
 
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    cursor: default;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px 20px;
     transition: background 0.15s, border-color 0.15s, transform 0.15s;
     position: relative;
-    overflow: hidden;
   }
+  .card:hover { background: var(--surface-hover); border-color: rgba(255,79,0,0.25); transform: translateY(-1px); }
+  .card.highlight { border-color: rgba(255,79,0,0.35); background: rgba(255,79,0,0.05); }
 
-  .card:hover {
-    background: var(--surface-hover);
-    border-color: rgba(255,79,0,0.3);
-    transform: translateY(-2px);
-  }
+  .card-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .card-icon { font-size: 30px; margin-bottom: 14px; display: block; }
+  .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 7px; }
+  .card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
 
-  .card-num {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-
-  .card-icon {
-    font-size: 32px;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .card h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-  }
-
-  .card p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .card-cmd {
-    display: inline-block;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    color: var(--accent);
-    background: var(--accent-dim);
+  /* ── Comando copiável ── */
+  .cmd-row { display: flex; align-items: center; gap: 8px; }
+  .cmd {
+    flex: 1; font-family: 'Courier New', monospace; font-size: 13px;
+    color: var(--accent); background: var(--accent-dim);
     border: 1px solid rgba(255,79,0,0.2);
-    padding: 6px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.15s;
+    padding: 7px 12px; border-radius: 8px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     user-select: all;
   }
-
-  .card-cmd:hover {
-    background: rgba(255,79,0,0.2);
+  .btn-copy {
+    flex-shrink: 0; background: var(--surface-hover);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 12px; font-size: 12px; color: var(--muted);
+    cursor: pointer; white-space: nowrap;
+    transition: background 0.1s, color 0.1s;
   }
+  .btn-copy:hover { background: rgba(255,79,0,0.15); color: var(--accent); border-color: rgba(255,79,0,0.3); }
+  .btn-copy.copiado { color: #4ade80; border-color: rgba(74,222,128,0.3); }
 
-  /* Setup cards (highlight) */
-  .card.highlight {
-    border-color: rgba(255,79,0,0.4);
-    background: rgba(255,79,0,0.06);
-  }
-
-  /* Steps */
+  /* ── Steps ── */
   .steps {
-    max-width: 900px;
-    margin: 0 auto 56px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 28px 24px;
+    margin-bottom: 48px;
   }
-
-  .steps h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 24px;
-  }
-
-  .step-list {
-    list-style: none;
-    counter-reset: step;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
+  .steps h3 { font-size: 17px; font-weight: 700; margin-bottom: 22px; }
+  .step-list { list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 14px; }
   .step-list li {
-    counter-increment: step;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
+    counter-increment: s; display: flex;
+    align-items: flex-start; gap: 14px;
   }
-
   .step-list li::before {
-    content: counter(step);
-    min-width: 28px;
-    height: 28px;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 13px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
+    content: counter(s); min-width: 26px; height: 26px;
+    background: var(--accent); color: #fff; font-weight: 800;
+    font-size: 12px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
   }
+  .step-list li strong { display: block; font-size: 14px; margin-bottom: 3px; }
+  .step-list li span { font-size: 13px; color: var(--muted); font-family: 'Courier New', monospace; }
 
-  .step-list li div {
-    flex: 1;
+  /* ── Semana recomendada ── */
+  .semana {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 10px; margin-bottom: 48px;
   }
-
-  .step-list li strong {
-    display: block;
-    font-size: 15px;
-    margin-bottom: 4px;
+  .dia {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px;
   }
+  .dia-label { font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .dia-cmd { font-family: 'Courier New', monospace; font-size: 13px; color: var(--accent); }
 
-  .step-list li span {
-    font-size: 13px;
-    color: var(--muted);
-    font-family: 'Courier New', monospace;
+  /* ── Footer ── */
+  footer {
+    text-align: center; color: var(--muted); font-size: 13px;
+    padding-top: 28px; border-top: 1px solid var(--border);
   }
-
-  /* Footer */
-  .footer {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer strong { color: var(--accent); }
+  footer strong { color: var(--accent); }
 </style>
 </head>
 <body>
+<div class="w">
 
+  <!-- Header -->
   <div class="header">
     <div class="logo">
       <div class="logo-icon">🔥</div>
-      <div class="logo-text">
+      <div>
         <h1>Ferabot</h1>
         <span>Sistema de Marketing com IA</span>
       </div>
     </div>
-    <div class="badge">9 Etapas</div>
+    <div class="perfil-pill">
+      <div class="dot"></div>
+      <span>Olá, <span class="perfil-nome" id="nome-header">fera</span>!</span>
+    </div>
   </div>
 
+  <!-- Aviso: perfil não configurado -->
+  <div class="aviso" id="aviso-perfil">
+    <div class="aviso-icon">⚠️</div>
+    <div>
+      <h3>Perfil não configurado</h3>
+      <p>Execute o instalador primeiro: <code>python instalar.py</code><br>
+      Ou configure o perfil manualmente: <code>python SetupFera/setup_form.py</code></p>
+    </div>
+  </div>
+
+  <!-- Hero -->
   <div class="hero">
-    <h2>O seu negócio de mentoria<br>rodando <span>no piloto automático</span></h2>
-    <p>Abra o Claude Code, invoque qualquer skill abaixo e deixa o sistema trabalhar por você, fera.</p>
-    <div class="hero-cmd">claude → /nome-da-skill</div>
+    <h2>Seu negócio de mentoria<br>rodando <span>no piloto automático</span></h2>
+    <p>Abra o Claude Code, copie o comando da etapa que você quer usar e cole no chat. É só isso.</p>
   </div>
 
-  <div class="section-label">Setup (faça uma vez)</div>
-
+  <!-- Setup -->
+  <div class="sec">Setup — faça uma vez</div>
   <div class="grid">
     <div class="card highlight">
       <div class="card-num">Passo 1</div>
       <span class="card-icon">⚙️</span>
-      <h3>Configurar Perfil</h3>
-      <p>Define nome, nicho, produto, cores e chaves de API. Tudo personalizado pra você.</p>
-      <code class="card-cmd">python SetupFera/setup_perfil.py</code>
+      <h3>Instalar tudo</h3>
+      <p>Configura perfil, verifica ambiente e instala as skills. Um único comando.</p>
+      <div class="cmd-row">
+        <span class="cmd">python instalar.py</span>
+        <button class="btn-copy" onclick="copiar(this, 'python instalar.py')">Copiar</button>
+      </div>
     </div>
-
     <div class="card highlight">
       <div class="card-num">Passo 2</div>
-      <span class="card-icon">🔧</span>
-      <h3>Verificar Ambiente</h3>
-      <p>Checa Python, Node.js, Playwright e cria estrutura de pastas.</p>
-      <code class="card-cmd">python SetupFera/setup_base.py</code>
+      <span class="card-icon">🚀</span>
+      <h3>Abrir o Ferabot</h3>
+      <p>Duplo-clique no arquivo <strong>ABRIR_FERABOT.bat</strong> para abrir o Claude Code na pasta certa.</p>
+      <div class="cmd-row">
+        <span class="cmd">ABRIR_FERABOT.bat</span>
+        <button class="btn-copy" onclick="copiar(this, 'ABRIR_FERABOT.bat')">Copiar</button>
+      </div>
     </div>
-
     <div class="card highlight">
       <div class="card-num">Passo 3</div>
-      <span class="card-icon">📦</span>
-      <h3>Instalar Skills</h3>
-      <p>Copia todas as 8 skills para o Claude Code. Invocação por /comando.</p>
-      <code class="card-cmd">python SetupFera/setup_skills.py</code>
+      <span class="card-icon">📖</span>
+      <h3>Guia do Primeiro Dia</h3>
+      <p>Leia o <strong>PRIMEIRO_DIA.md</strong> para entender como funciona cada etapa passo a passo.</p>
+      <div class="cmd-row">
+        <span class="cmd">PRIMEIRO_DIA.md</span>
+        <button class="btn-copy" onclick="copiar(this, 'PRIMEIRO_DIA.md')">Copiar</button>
+      </div>
     </div>
   </div>
 
-  <div class="section-label">As 9 Etapas do Ferabot</div>
-
+  <!-- 8 Etapas -->
+  <div class="sec">As 8 Etapas — cole o comando no Claude Code</div>
   <div class="grid">
+
     <div class="card">
       <div class="card-num">Etapa 2</div>
       <span class="card-icon">🎠</span>
       <h3>Carrossel de Feed</h3>
-      <p>10 slides personalizados com copy aprovada. Exporta PNGs pra publicar pelo app do Instagram.</p>
-      <code class="card-cmd">/squad-carrossel-fera</code>
+      <p>10 slides com copy aprovada. Exporta PNGs prontos para publicar.</p>
+      <div class="cmd-row">
+        <span class="cmd">/squad-carrossel-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/squad-carrossel-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 3</div>
       <span class="card-icon">📸</span>
       <h3>Stories de Bastidores</h3>
-      <p>Usa foto real sua como fundo. Copy em 5 camadas com safe zones de anúncio.</p>
-      <code class="card-cmd">/squad-stories-fera</code>
+      <p>Usa sua foto real como fundo. Copy em 5 camadas com safe zones.</p>
+      <div class="cmd-row">
+        <span class="cmd">/squad-stories-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/squad-stories-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 4</div>
       <span class="card-icon">💬</span>
       <h3>Caixinha de Perguntas</h3>
-      <p>Stories com perguntas reais + respostas em 4 estilos de bloco. Sem CTA.</p>
-      <code class="card-cmd">/squad-caixinha-fera</code>
+      <p>Stories com perguntas e respostas em 4 estilos de bloco.</p>
+      <div class="cmd-row">
+        <span class="cmd">/squad-caixinha-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/squad-caixinha-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 5</div>
       <span class="card-icon">🌐</span>
       <h3>Landing Page</h3>
-      <p>Página de venda completa (9 seções), dark premium, responsiva. Deploy Netlify opcional.</p>
-      <code class="card-cmd">/jack-fera</code>
+      <p>Página de venda completa (9 seções), dark premium, responsiva.</p>
+      <div class="cmd-row">
+        <span class="cmd">/jack-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/jack-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 6</div>
       <span class="card-icon">🧲</span>
       <h3>Isca Digital</h3>
-      <p>Lead magnet PDF + página de captura. Prompts nível engenheiro pra material de alto valor.</p>
-      <code class="card-cmd">/squad-isca-fera</code>
+      <p>Lead magnet PDF + página de captura para gerar leads todos os dias.</p>
+      <div class="cmd-row">
+        <span class="cmd">/squad-isca-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/squad-isca-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 7</div>
       <span class="card-icon">📢</span>
       <h3>Anúncios Meta Ads</h3>
-      <p>Cria e gerencia campanhas no Facebook/Instagram Ads via SDK. Relatório de performance.</p>
-      <code class="card-cmd">/meta-ads-fera</code>
+      <p>Cria e gerencia campanhas no Facebook e Instagram Ads.</p>
+      <div class="cmd-row">
+        <span class="cmd">/meta-ads-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/meta-ads-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 8</div>
       <span class="card-icon">📊</span>
       <h3>Slides e Apresentações</h3>
-      <p>Pitch de venda, webinar ou proposta. Exporta PNG por slide ou vídeo animado.</p>
-      <code class="card-cmd">/squad-slides-fera</code>
+      <p>Pitch de venda, webinar ou proposta. Exporta PNG ou vídeo animado.</p>
+      <div class="cmd-row">
+        <span class="cmd">/squad-slides-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/squad-slides-fera')">Copiar</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="card-num">Etapa 9</div>
       <span class="card-icon">🤖</span>
       <h3>Automação de DMs</h3>
-      <p>Configura keywords no Zernio pra responder automaticamente quem comenta ou manda DM.</p>
-      <code class="card-cmd">/zernio-fera</code>
+      <p>Configura respostas automáticas para quem comenta ou manda mensagem.</p>
+      <div class="cmd-row">
+        <span class="cmd">/zernio-fera</span>
+        <button class="btn-copy" onclick="copiar(this, '/zernio-fera')">Copiar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Semana recomendada -->
+  <div class="sec">Semana recomendada</div>
+  <div class="semana">
+    <div class="dia">
+      <div class="dia-label">Segunda</div>
+      <div class="dia-cmd">/squad-carrossel-fera</div>
+    </div>
+    <div class="dia">
+      <div class="dia-label">Quarta</div>
+      <div class="dia-cmd">/squad-stories-fera</div>
+    </div>
+    <div class="dia">
+      <div class="dia-label">Sexta</div>
+      <div class="dia-cmd">/squad-caixinha-fera</div>
+    </div>
+    <div class="dia">
+      <div class="dia-label">Quando precisar</div>
+      <div class="dia-cmd">/meta-ads-fera</div>
     </div>
   </div>
 
+  <!-- Como usar -->
+  <div class="sec">Como usar</div>
   <div class="steps">
-    <h3>🚀 Fluxo de trabalho recomendado</h3>
+    <h3>Passo a passo para cada etapa</h3>
     <ol class="step-list">
-      <li>
-        <div>
-          <strong>Rodar setup (uma vez)</strong>
-          <span>setup_perfil.py → setup_base.py → setup_skills.py</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <strong>Abrir o Claude Code</strong>
-          <span>Na pasta raiz do Ferabot</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <strong>Invocar a skill da semana</strong>
-          <span>/squad-carrossel-fera → aprovar copy → PNGs prontos</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <strong>Configurar automação de DM</strong>
-          <span>/zernio-fera → keyword vinculada ao conteúdo publicado</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <strong>Criar anúncios se precisar de tráfego pago</strong>
-          <span>/meta-ads-fera → campanha pausada → revisar → ativar</span>
-        </div>
-      </li>
+      <li><div>
+        <strong>Abrir o Ferabot</strong>
+        <span>Duplo-clique em ABRIR_FERABOT.bat</span>
+      </div></li>
+      <li><div>
+        <strong>Copiar o comando da etapa desejada</strong>
+        <span>Use o botão "Copiar" ao lado de cada etapa acima</span>
+      </div></li>
+      <li><div>
+        <strong>Colar no Claude Code e pressionar Enter</strong>
+        <span>Ctrl+V no chat do Claude Code</span>
+      </div></li>
+      <li><div>
+        <strong>Responder as perguntas do Claude</strong>
+        <span>Ele vai pedir tema, objetivo, tom — responda normalmente</span>
+      </div></li>
+      <li><div>
+        <strong>Aprovar a copy antes de gerar as artes</strong>
+        <span>Digitar APROVADO quando a copy estiver boa</span>
+      </div></li>
+      <li><div>
+        <strong>Pegar os arquivos gerados</strong>
+        <span>Ficam em output/ dentro da pasta do Ferabot</span>
+      </div></li>
     </ol>
   </div>
 
-  <div class="footer">
-    <p>Ferabot é fera. Você é fera. <strong>Vamos dominar o nicho.</strong></p>
-    <p style="margin-top: 8px;">Dúvidas? Abra o Claude Code na pasta raiz e pergunte diretamente.</p>
-  </div>
+  <footer>
+    <p>Ferabot é fera. <strong id="nome-footer">Você</strong> é fera. Vamos dominar o nicho.</p>
+    <p style="margin-top:8px">Dúvida? Abra o Claude Code e pergunte diretamente — ele conhece o seu negócio.</p>
+  </footer>
 
+</div>
+
+<script>
+// ── Carregar dados do perfil ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+  var p = window.PERFIL;
+
+  if (p && p.nome) {
+    // Atualiza nome no header
+    document.getElementById('nome-header').textContent = p.nome.split(' ')[0];
+    document.getElementById('nome-footer').textContent = p.nome.split(' ')[0];
+
+    // Aplica cor primária da marca
+    if (p.cor_primaria) {
+      document.documentElement.style.setProperty('--accent', p.cor_primaria);
+      // Recalcula accent-dim com opacidade
+      var hex = p.cor_primaria.replace('#','');
+      var r = parseInt(hex.substring(0,2),16);
+      var g = parseInt(hex.substring(2,4),16);
+      var b = parseInt(hex.substring(4,6),16);
+      document.documentElement.style.setProperty('--accent-dim', 'rgba('+r+','+g+','+b+',0.12)');
+    }
+  } else {
+    // Mostra aviso de perfil não configurado
+    document.getElementById('aviso-perfil').classList.add('visivel');
+  }
+});
+
+// ── Copiar comando ────────────────────────────────────────────────────
+function copiar(btn, texto) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(texto).then(function () {
+      feedbackCopia(btn);
+    });
+  } else {
+    // fallback para navegadores mais antigos
+    var el = document.createElement('textarea');
+    el.value = texto;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    feedbackCopia(btn);
+  }
+}
+
+function feedbackCopia(btn) {
+  var original = btn.textContent;
+  btn.textContent = '✓ Copiado';
+  btn.classList.add('copiado');
+  setTimeout(function () {
+    btn.textContent = original;
+    btn.classList.remove('copiado');
+  }, 2000);
+}
+</script>
 </body>
 </html>

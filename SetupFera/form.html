@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferabot — Configure seu Perfil</title>
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --surface: #1A1A24;
+    --border: rgba(255,255,255,0.1);
+    --accent: #FF4F00;
+    --text: #FFFFFF;
+    --muted: #8B8B95;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px 80px;
+  }
+  .container { width: 100%; max-width: 580px; }
+
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 40px;
+  }
+  .logo-icon {
+    width: 44px; height: 44px; background: var(--accent);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 22px;
+  }
+  .logo h1 { font-size: 20px; font-weight: 800; }
+  .logo span { font-size: 13px; color: var(--muted); display: block; }
+
+  h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .subtitle { color: var(--muted); margin-bottom: 40px; font-size: 15px; line-height: 1.5; }
+
+  .section {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent);
+    margin: 32px 0 16px;
+  }
+
+  .field { margin-bottom: 20px; }
+  label {
+    display: block; font-size: 14px; font-weight: 600;
+    margin-bottom: 8px; color: var(--text);
+  }
+  label .hint {
+    display: block; font-size: 12px; font-weight: 400;
+    color: var(--muted); margin-top: 2px;
+  }
+  input[type="text"], input[type="url"] {
+    width: 100%; padding: 14px 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-size: 15px; outline: none;
+    transition: border-color 0.15s;
+  }
+  input:focus { border-color: var(--accent); }
+  input::placeholder { color: var(--muted); }
+
+  .colors { display: flex; gap: 16px; }
+  .color-field { flex: 1; }
+  .color-preview {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 10px 16px;
+  }
+  input[type="color"] {
+    width: 36px; height: 36px; border: none; background: none;
+    cursor: pointer; padding: 0; border-radius: 6px;
+  }
+  .color-hex {
+    font-size: 14px; color: var(--text); font-family: monospace;
+    flex: 1; background: none; border: none; outline: none;
+  }
+
+  .optional {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 20px 4px;
+    margin-top: 8px;
+  }
+  .optional-label {
+    font-size: 12px; color: var(--muted); margin-bottom: 16px;
+  }
+
+  .btn {
+    width: 100%; padding: 18px;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: var(--radius);
+    font-size: 17px; font-weight: 700;
+    cursor: pointer; margin-top: 32px;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .footer {
+    text-align: center; margin-top: 24px;
+    font-size: 13px; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="logo">
+    <div class="logo-icon">🔥</div>
+    <div>
+      <h1>Ferabot</h1>
+      <span>Configure seu perfil uma vez, use para sempre</span>
+    </div>
+  </div>
+
+  <h2>Sobre o seu negócio</h2>
+  <p class="subtitle">Essas informações personalizam todo o conteúdo gerado pelo Ferabot — carrosseis, stories, landing pages, anúncios. Preencha com cuidado.</p>
+
+  <form method="POST" action="/">
+
+    <div class="section">Identidade</div>
+
+    <div class="field">
+      <label>
+        Seu nome
+        <span class="hint">Como você quer ser chamado nos textos (ex: Ana Lima)</span>
+      </label>
+      <input type="text" name="nome" placeholder="Ana Lima" required>
+    </div>
+
+    <div class="field">
+      <label>
+        Seu nicho de atuação
+        <span class="hint">Seja específico — quanto mais claro, melhor o conteúdo (ex: Nutrição esportiva para mulheres 40+)</span>
+      </label>
+      <input type="text" name="nicho" placeholder="Nutrição esportiva para mulheres 40+" required>
+    </div>
+
+    <div class="field">
+      <label>
+        Nome do seu produto / mentoria principal
+        <span class="hint">Como você chama o que você vende (ex: Método Transformação 90 dias)</span>
+      </label>
+      <input type="text" name="produto" placeholder="Método Transformação 90 dias" required>
+    </div>
+
+    <div class="field">
+      <label>
+        Preço do produto
+        <span class="hint">Formato livre (ex: R$ 3.500 ou 12x de R$ 320)</span>
+      </label>
+      <input type="text" name="preco" placeholder="R$ 3.500" required>
+    </div>
+
+    <div class="section">Instagram e Marca</div>
+
+    <div class="field">
+      <label>
+        Seu @ no Instagram
+        <span class="hint">Com o @ na frente (ex: @ananutri)</span>
+      </label>
+      <input type="text" name="handle_instagram" placeholder="@ananutri" required>
+    </div>
+
+    <div class="field">
+      <label>
+        Cores da sua marca
+        <span class="hint">Clique no quadrado colorido para escolher</span>
+      </label>
+      <div class="colors">
+        <div class="color-field">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Cor principal</div>
+          <div class="color-preview">
+            <input type="color" id="cp" value="#FF4F00"
+                   oninput="document.getElementById('cp_hex').value=this.value;document.getElementById('cp_hex').style.color=this.value">
+            <input type="text" id="cp_hex" name="cor_primaria" value="#FF4F00"
+                   class="color-hex" maxlength="7"
+                   oninput="if(this.value.length==7){document.getElementById('cp').value=this.value}">
+          </div>
+        </div>
+        <div class="color-field">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Cor secundária</div>
+          <div class="color-preview">
+            <input type="color" id="cs" value="#FFFFFF"
+                   oninput="document.getElementById('cs_hex').value=this.value">
+            <input type="text" id="cs_hex" name="cor_secundaria" value="#FFFFFF"
+                   class="color-hex" maxlength="7"
+                   oninput="if(this.value.length==7){document.getElementById('cs').value=this.value}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>
+        Link da sua página de vendas
+        <span class="hint">A URL onde as pessoas compram ou se inscrevem</span>
+      </label>
+      <input type="url" name="landing_page" placeholder="https://seusite.com/mentoria">
+    </div>
+
+    <div class="section">APIs (opcional)</div>
+
+    <div class="optional">
+      <p class="optional-label">Necessário apenas para gerar imagens com IA e usar o assistente de conteúdo. Pode pular por enquanto e preencher depois.</p>
+
+      <div class="field">
+        <label>
+          Chave API Gemini (Google)
+          <span class="hint">Obter em aistudio.google.com — começa com AIza</span>
+        </label>
+        <input type="text" name="api_gemini" placeholder="AIzaSy...">
+      </div>
+
+      <div class="field">
+        <label>
+          Chave API OpenAI
+          <span class="hint">Obter em platform.openai.com — começa com sk-</span>
+        </label>
+        <input type="text" name="api_openai" placeholder="sk-...">
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Salvar e Continuar →</button>
+
+  </form>
+
+  <p class="footer">Seus dados ficam só no seu computador. Nada é enviado para a internet.</p>
+
+</div>
+</body>
+</html>
