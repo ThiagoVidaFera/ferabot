@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferabot — Guia de Instalação e Uso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --bg:        #0A0A0F;
+  --bg2:       #0F0F18;
+  --surface:   #16161F;
+  --surface2:  #1E1E2A;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --text:      #F0F0F4;
+  --muted:     #8080A0;
+  --muted2:    #5A5A70;
+  --accent:    #FF4F00;
+  --accent-lo: rgba(255,79,0,0.12);
+  --accent-md: rgba(255,79,0,0.25);
+  --green:     #22C55E;
+  --green-lo:  rgba(34,197,94,0.12);
+  --radius:    14px;
+  --radius-sm: 8px;
+  --font:      'Inter', system-ui, sans-serif;
+  --mono:      'JetBrains Mono', 'Courier New', monospace;
+  --max:       760px;
+  --sidebar:   240px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET + BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR (topo)
+═══════════════════════════════════════════ */
+#progress-bar {
+  position: fixed; top:0; left:0; z-index:1000;
+  height: 3px; width:0;
+  background: linear-gradient(90deg, var(--accent), #FF8C42);
+  transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT PRINCIPAL
+═══════════════════════════════════════════ */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar) 1fr;
+  min-height: 100vh;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  gap: 48px;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR NAV
+═══════════════════════════════════════════ */
+.sidebar {
+  position: sticky; top: 40px;
+  height: fit-content;
+  padding: 40px 0;
+  align-self: start;
+}
+
+.sidebar-brand {
+  display: flex; align-items:center; gap:10px;
+  margin-bottom: 40px;
+}
+.sidebar-icon {
+  width:36px; height:36px; border-radius:9px;
+  background: var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; flex-shrink:0;
+}
+.sidebar-brand span { font-size:17px; font-weight:800; }
+
+.nav-label {
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--muted2);
+  margin-bottom:12px;
+}
+
+.nav-list { list-style:none; display:flex; flex-direction:column; gap:2px; }
+
+.nav-item a {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px; border-radius:var(--radius-sm);
+  text-decoration:none; font-size:13px; color:var(--muted);
+  transition: background 0.15s, color 0.15s;
+  border: 1px solid transparent;
+}
+.nav-item a:hover { background:var(--surface2); color:var(--text); }
+.nav-item a.active {
+  background:var(--accent-lo); color:var(--accent);
+  border-color:var(--accent-md);
+}
+.nav-num {
+  width:20px; height:20px; border-radius:50%;
+  background:var(--surface2); border:1px solid var(--border2);
+  font-size:10px; font-weight:700; color:var(--muted2);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.nav-item a.active .nav-num { background:var(--accent); color:#fff; border-color:transparent; }
+
+.progress-info {
+  margin-top:32px; padding:16px;
+  background:var(--surface); border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+}
+.progress-info .pi-label { font-size:11px; color:var(--muted); margin-bottom:8px; }
+.progress-bar-container {
+  height:6px; background:var(--surface2); border-radius:99px; overflow:hidden;
+}
+.progress-bar-fill {
+  height:100%; background:var(--accent); border-radius:99px;
+  transition: width 0.4s ease; width:0%;
+}
+.progress-percent { font-size:13px; font-weight:700; color:var(--accent); margin-top:8px; }
+
+/* ═══════════════════════════════════════════
+   CONTEÚDO PRINCIPAL
+═══════════════════════════════════════════ */
+.content { padding: 40px 0 100px; max-width: var(--max); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  padding: 64px 0 72px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 72px;
+}
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--accent-lo); border:1px solid var(--accent-md);
+  border-radius:99px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:var(--accent);
+  margin-bottom:28px; letter-spacing:0.5px;
+}
+.hero-badge::before { content:'🔥'; font-size:14px; }
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight:900; line-height:1.08;
+  letter-spacing:-1.5px; margin-bottom:20px;
+}
+.hero h1 em { font-style:normal; color:var(--accent); }
+
+.hero-sub {
+  font-size:18px; color:var(--muted); max-width:540px;
+  line-height:1.65; margin-bottom:36px;
+}
+
+.hero-stats {
+  display:flex; gap:32px; flex-wrap:wrap;
+}
+.stat {
+  display:flex; flex-direction:column; gap:2px;
+}
+.stat-val { font-size:24px; font-weight:800; color:var(--text); }
+.stat-label { font-size:12px; color:var(--muted); }
+
+/* ═══════════════════════════════════════════
+   SEÇÕES
+═══════════════════════════════════════════ */
+.section {
+  margin-bottom:80px;
+  opacity:0; transform:translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.section.visible { opacity:1; transform:translateY(0); }
+
+.section-header { margin-bottom:36px; }
+
+.section-tag {
+  font-size:11px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:10px; display:block;
+}
+
+.section h2 {
+  font-size:clamp(24px,3vw,32px); font-weight:800;
+  letter-spacing:-0.5px; line-height:1.2;
+  margin-bottom:10px;
+}
+
+.section-intro { font-size:16px; color:var(--muted); line-height:1.65; }
+
+/* ═══════════════════════════════════════════
+   CARDS DE ETAPAS
+═══════════════════════════════════════════ */
+.etapas-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap:12px; margin-top:28px;
+}
+.etapa-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:20px 18px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.etapa-card:hover { border-color:var(--accent-md); transform:translateY(-2px); }
+.etapa-icon { font-size:26px; margin-bottom:12px; display:block; }
+.etapa-num { font-size:10px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.etapa-card h4 { font-size:15px; font-weight:700; margin-bottom:6px; }
+.etapa-card p { font-size:13px; color:var(--muted); line-height:1.5; }
+
+/* ═══════════════════════════════════════════
+   PRÉ-REQUISITOS (CHECKLIST)
+═══════════════════════════════════════════ */
+.prereq-list { display:flex; flex-direction:column; gap:14px; margin-top:4px; }
+
+.prereq-item {
+  display:flex; align-items:flex-start; gap:16px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:18px 20px;
+  transition: border-color 0.2s;
+}
+.prereq-item.done { border-color:rgba(34,197,94,0.3); background:rgba(34,197,94,0.04); }
+
+.prereq-check {
+  width:24px; height:24px; border-radius:50%;
+  border:2px solid var(--border2); background:var(--surface2);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; cursor:pointer; margin-top:1px;
+  transition: all 0.2s;
+}
+.prereq-item.done .prereq-check {
+  background:var(--green); border-color:var(--green);
+}
+.prereq-check::after { content:''; display:none; }
+.prereq-item.done .prereq-check::after {
+  display:block; content:'✓'; color:#fff; font-size:12px; font-weight:700;
+}
+
+.prereq-body h4 { font-size:15px; font-weight:700; margin-bottom:4px; }
+.prereq-body p { font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:8px; }
+.prereq-link {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13px; font-weight:600; color:var(--accent);
+  text-decoration:none;
+  transition:opacity 0.15s;
+}
+.prereq-link:hover { opacity:0.8; }
+.prereq-link::after { content:'→'; }
+
+/* ═══════════════════════════════════════════
+   PASSOS NUMERADOS
+═══════════════════════════════════════════ */
+.steps { display:flex; flex-direction:column; gap:0; }
+
+.step {
+  display:grid; grid-template-columns:48px 1fr;
+  gap:0 24px; padding-bottom:48px; position:relative;
+}
+.step:not(:last-child)::before {
+  content:''; position:absolute;
+  left:23px; top:48px; bottom:0;
+  width:2px; background:var(--border2);
+}
+
+.step-num-col { display:flex; flex-direction:column; align-items:center; }
+.step-num {
+  width:48px; height:48px; border-radius:50%;
+  background:var(--accent); color:#fff;
+  font-size:20px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; position:relative; z-index:1;
+  box-shadow: 0 0 0 6px var(--bg);
+}
+.step.done .step-num { background:var(--green); }
+
+.step-body { padding-top:10px; }
+.step-body h3 { font-size:20px; font-weight:800; margin-bottom:8px; letter-spacing:-0.3px; }
+.step-body > p { font-size:15px; color:var(--muted); line-height:1.65; margin-bottom:16px; }
+
+/* Checkbox de passo */
+.step-done-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:16px; padding:8px 16px;
+  background:var(--surface2); border:1px solid var(--border2);
+  border-radius:var(--radius-sm); font-size:13px; font-weight:600;
+  color:var(--muted); cursor:pointer;
+  transition: all 0.2s;
+}
+.step-done-btn:hover { border-color:var(--green); color:var(--green); }
+.step.done .step-done-btn {
+  background:var(--green-lo); border-color:var(--green);
+  color:var(--green);
+}
+
+/* ═══════════════════════════════════════════
+   BLOCOS DE CÓDIGO / TERMINAL
+═══════════════════════════════════════════ */
+.code-block {
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:var(--radius); margin:16px 0;
+  overflow:hidden;
+}
+.code-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 16px;
+  background:rgba(255,255,255,0.03);
+  border-bottom:1px solid var(--border);
+}
+.code-dots { display:flex; gap:6px; }
+.code-dots span {
+  width:10px; height:10px; border-radius:50%;
+  background:var(--border2);
+}
+.code-dots span:nth-child(1) { background:#FF5F57; }
+.code-dots span:nth-child(2) { background:#FFBD2E; }
+.code-dots span:nth-child(3) { background:#28CA41; }
+.code-label { font-size:12px; color:var(--muted2); font-family:var(--mono); }
+.btn-copy-code {
+  font-size:12px; font-weight:600; color:var(--muted);
+  background:none; border:1px solid var(--border2);
+  padding:4px 12px; border-radius:6px; cursor:pointer;
+  transition: all 0.15s;
+}
+.btn-copy-code:hover { color:var(--accent); border-color:var(--accent-md); }
+.btn-copy-code.ok { color:var(--green); border-color:var(--green); }
+.code-block pre {
+  padding:18px 20px; overflow-x:auto;
+  font-family:var(--mono); font-size:14px; line-height:1.7;
+  color:#C9D1D9;
+}
+.code-block code { font-family:var(--mono); }
+.c-cmd   { color:#79C0FF; }
+.c-str   { color:#A5D6FF; }
+.c-cmt   { color:#6E7681; font-style:italic; }
+.c-acc   { color:#FF4F00; font-weight:600; }
+
+/* Variante compacta (inline cmd) */
+.inline-cmd {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--bg2); border:1px solid var(--border2);
+  border-radius:var(--radius-sm); padding:3px 10px;
+  font-family:var(--mono); font-size:13px; color:#79C0FF;
+  cursor:pointer;
+}
+.inline-cmd:hover { border-color:var(--accent-md); }
+
+/* ═══════════════════════════════════════════
+   NOTA / AVISO / DICA
+═══════════════════════════════════════════ */
+.note {
+  display:flex; gap:14px; padding:16px 18px;
+  border-radius:var(--radius-sm); margin:16px 0;
+  font-size:14px; line-height:1.6;
+}
+.note.tip {
+  background:rgba(255,79,0,0.07); border:1px solid rgba(255,79,0,0.2);
+}
+.note.info {
+  background:rgba(99,179,237,0.07); border:1px solid rgba(99,179,237,0.2);
+}
+.note.success {
+  background:var(--green-lo); border:1px solid rgba(34,197,94,0.25);
+}
+.note-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.note strong { color:var(--text); }
+.note p { color:var(--muted); margin:0; }
+
+/* ═══════════════════════════════════════════
+   TABELA DE REFERÊNCIA
+═══════════════════════════════════════════ */
+.ref-table {
+  width:100%; border-collapse:collapse;
+  margin-top:8px; font-size:14px;
+}
+.ref-table th {
+  text-align:left; padding:12px 16px;
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--muted2);
+  background:var(--surface); border-bottom:1px solid var(--border2);
+}
+.ref-table td {
+  padding:14px 16px; border-bottom:1px solid var(--border);
+  vertical-align:top;
+}
+.ref-table tr:hover td { background:rgba(255,255,255,0.02); }
+.ref-table td:first-child { font-family:var(--mono); color:var(--accent); font-size:13px; white-space:nowrap; }
+.ref-table td:last-child { color:var(--muted); }
+
+/* ═══════════════════════════════════════════
+   FAQ ACCORDION
+═══════════════════════════════════════════ */
+.faq-list { display:flex; flex-direction:column; gap:8px; }
+.faq-item {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); overflow:hidden;
+}
+.faq-q {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  padding:18px 20px; text-align:left; cursor:pointer;
+  background:none; border:none; color:var(--text);
+  font-family:var(--font); font-size:15px; font-weight:600;
+  gap:16px;
+}
+.faq-q:hover { background:rgba(255,255,255,0.02); }
+.faq-arrow { font-size:12px; color:var(--muted); transition:transform 0.25s; flex-shrink:0; }
+.faq-item.open .faq-arrow { transform:rotate(180deg); }
+.faq-a {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-a { max-height:600px; }
+.faq-a-inner {
+  padding:0 20px 20px;
+  font-size:14px; color:var(--muted); line-height:1.7;
+  border-top:1px solid var(--border);
+  padding-top:16px;
+}
+.faq-a-inner p + p { margin-top:10px; }
+
+/* ═══════════════════════════════════════════
+   SUPORTE / FINAL
+═══════════════════════════════════════════ */
+.support-box {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+  border:1px solid var(--border2); border-radius:var(--radius);
+  padding:40px; text-align:center;
+}
+.support-box h3 { font-size:24px; font-weight:800; margin-bottom:10px; }
+.support-box p { color:var(--muted); font-size:15px; line-height:1.6; max-width:420px; margin:0 auto 28px; }
+.btn-primary {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--accent); color:#fff;
+  padding:14px 28px; border-radius:var(--radius-sm);
+  font-size:15px; font-weight:700; text-decoration:none;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-primary:hover { opacity:0.9; transform:translateY(-1px); }
+
+/* ═══════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .layout { grid-template-columns:1fr; gap:0; padding:0 16px; }
+  .sidebar { display:none; }
+  .content { padding:24px 0 80px; }
+  .hero { padding:48px 0 56px; }
+  .hero h1 { letter-spacing:-1px; }
+  .etapas-grid { grid-template-columns:1fr 1fr; }
+  .step { grid-template-columns:36px 1fr; gap:0 16px; }
+  .step-num { width:36px; height:36px; font-size:16px; }
+  .step:not(:last-child)::before { left:17px; }
+}
+@media (max-width:480px) {
+  .etapas-grid { grid-template-columns:1fr; }
+  .hero-stats { gap:20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar de scroll -->
+<div id="progress-bar"></div>
+
+<div class="layout">
+
+  <!-- ── SIDEBAR ─────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-icon">🔥</div>
+      <span>Ferabot</span>
+    </div>
+
+    <div class="nav-label">Neste guia</div>
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#o-que-e"><span class="nav-num">1</span> O que é</a></li>
+      <li class="nav-item"><a href="#antes"><span class="nav-num">2</span> Antes de começar</a></li>
+      <li class="nav-item"><a href="#instalacao"><span class="nav-num">3</span> Instalação</a></li>
+      <li class="nav-item"><a href="#primeiro-uso"><span class="nav-num">4</span> Primeiro uso</a></li>
+      <li class="nav-item"><a href="#referencia"><span class="nav-num">5</span> Referência rápida</a></li>
+      <li class="nav-item"><a href="#faq"><span class="nav-num">6</span> Dúvidas frequentes</a></li>
+    </ul>
+
+    <div class="progress-info">
+      <div class="pi-label">Seu progresso</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="task-progress"></div>
+      </div>
+      <div class="progress-percent" id="task-percent">0 de 0 passos</div>
+    </div>
+  </aside>
+
+  <!-- ── CONTEÚDO ────────────────────────────────── -->
+  <main class="content">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-badge">Guia completo de instalação</div>
+      <h1>Tudo pronto em<br><em>menos de 15 minutos</em></h1>
+      <p class="hero-sub">
+        O Ferabot é o seu sistema de marketing com IA. Esse guia te leva do zero até criar o seu primeiro carrossel — sem precisar saber programação.
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-val">3</span><span class="stat-label">passos de instalação</span></div>
+        <div class="stat"><span class="stat-val">8</span><span class="stat-label">etapas de marketing</span></div>
+        <div class="stat"><span class="stat-val">15min</span><span class="stat-label">tempo estimado</span></div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 1 — O QUE É -->
+    <section class="section" id="o-que-e">
+      <div class="section-header">
+        <span class="section-tag">Visão geral</span>
+        <h2>O que o Ferabot faz por você</h2>
+        <p class="section-intro">O Ferabot é um conjunto de ferramentas instaladas dentro do Claude Code que já conhece o seu negócio, seu nicho e sua identidade visual. Você chama uma etapa, aprova o conteúdo e recebe os arquivos prontos.</p>
+      </div>
+
+      <div class="etapas-grid">
+        <div class="etapa-card">
+          <span class="etapa-icon">🎠</span>
+          <div class="etapa-num">Etapa 2</div>
+          <h4>Carrossel de Feed</h4>
+          <p>10 slides prontos para publicar no Instagram</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">📸</span>
+          <div class="etapa-num">Etapa 3</div>
+          <h4>Stories de Bastidores</h4>
+          <p>Stories com sua foto real e copy em camadas</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">💬</span>
+          <div class="etapa-num">Etapa 4</div>
+          <h4>Caixinha de Perguntas</h4>
+          <p>Stories respondendo dúvidas dos seguidores</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">🌐</span>
+          <div class="etapa-num">Etapa 5</div>
+          <h4>Landing Page</h4>
+          <p>Página de venda completa para sua mentoria</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">🧲</span>
+          <div class="etapa-num">Etapa 6</div>
+          <h4>Isca Digital</h4>
+          <p>PDF gratuito para capturar leads todo dia</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">📢</span>
+          <div class="etapa-num">Etapa 7</div>
+          <h4>Anúncios Meta Ads</h4>
+          <p>Campanhas no Facebook e Instagram Ads</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">📊</span>
+          <div class="etapa-num">Etapa 8</div>
+          <h4>Slides e Apresentações</h4>
+          <p>Pitch de venda, webinar, proposta de mentoria</p>
+        </div>
+        <div class="etapa-card">
+          <span class="etapa-icon">🤖</span>
+          <div class="etapa-num">Etapa 9</div>
+          <h4>Automação de DMs</h4>
+          <p>Respostas automáticas no Direct do Instagram</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2 — ANTES DE COMEÇAR -->
+    <section class="section" id="antes">
+      <div class="section-header">
+        <span class="section-tag">Pré-requisitos</span>
+        <h2>Antes de começar</h2>
+        <p class="section-intro">Você precisa de 2 programas instalados. Clique no link de cada um, faça o download e instale normalmente — como qualquer outro programa. Marque como feito quando terminar.</p>
+      </div>
+
+      <div class="prereq-list">
+
+        <div class="prereq-item" id="pre-1">
+          <div class="prereq-check" onclick="togglePrereq('pre-1')"></div>
+          <div class="prereq-body">
+            <h4>Claude Code</h4>
+            <p>O aplicativo onde o Ferabot roda. É gratuito e feito pela Anthropic.</p>
+            <a href="https://claude.ai/code" class="prereq-link" target="_blank">Baixar Claude Code</a>
+          </div>
+        </div>
+
+        <div class="prereq-item" id="pre-2">
+          <div class="prereq-check" onclick="togglePrereq('pre-2')"></div>
+          <div class="prereq-body">
+            <h4>Python 3.10 ou mais recente</h4>
+            <p>A linguagem de programação que roda os scripts do Ferabot. Na instalação, <strong>marque obrigatoriamente a opção "Add Python to PATH"</strong> antes de clicar em instalar.</p>
+            <a href="https://www.python.org/downloads/" class="prereq-link" target="_blank">Baixar Python</a>
+          </div>
+        </div>
+
+        <div class="prereq-item" id="pre-3">
+          <div class="prereq-check" onclick="togglePrereq('pre-3')"></div>
+          <div class="prereq-body">
+            <h4>Git (para receber atualizações)</h4>
+            <p>Permite que você receba novas versões do Ferabot com um clique. Instale com todas as opções padrão.</p>
+            <a href="https://git-scm.com/download/win" class="prereq-link" target="_blank">Baixar Git</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note tip" style="margin-top:20px">
+        <span class="note-icon">💡</span>
+        <p><strong>Reinicie o computador</strong> após instalar o Python e o Git. Isso garante que os programas sejam reconhecidos corretamente.</p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3 — INSTALAÇÃO -->
+    <section class="section" id="instalacao">
+      <div class="section-header">
+        <span class="section-tag">Instalação</span>
+        <h2>Instalando o Ferabot</h2>
+        <p class="section-intro">São 4 passos. Faça um de cada vez, na ordem. Marque cada passo como concluído antes de avançar.</p>
+      </div>
+
+      <div class="steps">
+
+        <!-- Passo 1 -->
+        <div class="step" id="step-1">
+          <div class="step-num-col"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <h3>Baixar o Ferabot</h3>
+            <p>Abra o terminal do Windows (pressione <strong>Windows + R</strong>, digite <code style="background:var(--surface2);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:13px">cmd</code> e pressione Enter). Cole o comando abaixo e pressione Enter:</p>
+
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">Terminal</span>
+                <button class="btn-copy-code" onclick="copiarCodigo(this, 'git clone https://github.com/SEU-USUARIO/ferabot.git %USERPROFILE%\\Ferabot')">Copiar</button>
+              </div>
+              <pre><code><span class="c-cmd">git clone</span> <span class="c-str">https://github.com/SEU-USUARIO/ferabot.git</span> <span class="c-acc">%USERPROFILE%\Ferabot</span></code></pre>
+            </div>
+
+            <p>Isso cria a pasta <strong>Ferabot</strong> dentro da sua pasta de usuário (ex: C:\Users\SeuNome\Ferabot).</p>
+
+            <div class="note info">
+              <span class="note-icon">ℹ️</span>
+              <p><strong>Não tem terminal?</strong> Você também pode baixar o ZIP diretamente do GitHub, extrair e renomear a pasta para "Ferabot".</p>
+            </div>
+
+            <button class="step-done-btn" onclick="marcarPasso('step-1', this)">
+              <span>✓</span> Marcar como concluído
+            </button>
+          </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step" id="step-2">
+          <div class="step-num-col"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <h3>Rodar o instalador</h3>
+            <p>Abra a pasta <strong>Ferabot</strong> no explorador de arquivos. Localize o arquivo <code style="background:var(--surface2);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:13px">instalar.py</code> e dê <strong>duplo-clique</strong> nele.</p>
+
+            <div class="note tip">
+              <span class="note-icon">💡</span>
+              <p>Se aparecer "Com qual programa abrir?", escolha <strong>Python</strong> ou <strong>Python 3</strong>.</p>
+            </div>
+
+            <p>O instalador vai:</p>
+            <ul style="margin:12px 0 12px 20px;color:var(--muted);font-size:14px;line-height:2">
+              <li>Verificar se tudo está instalado corretamente</li>
+              <li>Abrir um formulário no navegador para você preencher seus dados</li>
+              <li>Instalar as 8 skills do Ferabot no Claude Code automaticamente</li>
+            </ul>
+            <p>Siga as instruções que aparecem na tela. Quando terminar, aparece a mensagem <strong style="color:var(--green)">FERABOT INSTALADO COM SUCESSO!</strong></p>
+
+            <button class="step-done-btn" onclick="marcarPasso('step-2', this)">
+              <span>✓</span> Marcar como concluído
+            </button>
+          </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step" id="step-3">
+          <div class="step-num-col"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <h3>Preencher o formulário de perfil</h3>
+            <p>Durante a instalação, um formulário vai abrir no seu navegador. Preencha todos os campos com os dados do seu negócio:</p>
+
+            <ul style="margin:16px 0;color:var(--muted);font-size:14px;line-height:2.2">
+              <li>🏷️ <strong style="color:var(--text)">Seu nome</strong> — como você quer ser chamado nos textos</li>
+              <li>🎯 <strong style="color:var(--text)">Seu nicho</strong> — quem você atende e qual transformação entrega</li>
+              <li>📦 <strong style="color:var(--text)">Nome do produto</strong> — como se chama sua mentoria ou consultoria</li>
+              <li>💰 <strong style="color:var(--text)">Preço</strong> — valor do seu produto principal</li>
+              <li>📸 <strong style="color:var(--text)">@ do Instagram</strong> — com o @ na frente</li>
+              <li>🎨 <strong style="color:var(--text)">Cores da marca</strong> — clique no quadrado colorido para escolher</li>
+              <li>🔗 <strong style="color:var(--text)">Link da landing page</strong> — URL da sua página de vendas</li>
+            </ul>
+
+            <p>As APIs (Gemini, OpenAI) são opcionais agora. Você pode pular e configurar depois.</p>
+
+            <div class="note success">
+              <span class="note-icon">✅</span>
+              <p>Após salvar, aparece "Perfil salvo!" no navegador. Pode fechar a aba e voltar pro instalador.</p>
+            </div>
+
+            <button class="step-done-btn" onclick="marcarPasso('step-3', this)">
+              <span>✓</span> Marcar como concluído
+            </button>
+          </div>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step" id="step-4">
+          <div class="step-num-col"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <h3>Abrir o Ferabot</h3>
+            <p>Volte para a pasta <strong>Ferabot</strong> no explorador de arquivos. Dê <strong>duplo-clique</strong> no arquivo:</p>
+
+            <div class="code-block" style="margin:16px 0">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">Arquivo</span>
+              </div>
+              <pre><code><span class="c-acc">ABRIR_FERABOT.bat</span></code></pre>
+            </div>
+
+            <p>O Claude Code vai abrir automaticamente na pasta certa. Se aparecer uma janela de segurança do Windows, clique em <strong>"Executar assim mesmo"</strong> ou <strong>"Sim"</strong>.</p>
+
+            <div class="note success">
+              <span class="note-icon">🔥</span>
+              <p><strong>Instalação concluída!</strong> O Ferabot está pronto. Agora você vai criar seu primeiro carrossel.</p>
+            </div>
+
+            <button class="step-done-btn" onclick="marcarPasso('step-4', this)">
+              <span>✓</span> Marcar como concluído
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4 — PRIMEIRO USO -->
+    <section class="section" id="primeiro-uso">
+      <div class="section-header">
+        <span class="section-tag">Primeiro uso</span>
+        <h2>Seu primeiro carrossel</h2>
+        <p class="section-intro">Com o Claude Code aberto na pasta do Ferabot, siga esse passo a passo para criar seu primeiro carrossel de feed.</p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step" id="step-5">
+          <div class="step-num-col"><div class="step-num">5</div></div>
+          <div class="step-body">
+            <h3>Digitar o comando no Claude Code</h3>
+            <p>Clique na área de chat do Claude Code, copie o comando abaixo e pressione Enter:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">Claude Code — chat</span>
+                <button class="btn-copy-code" onclick="copiarCodigo(this, '/squad-carrossel-fera')">Copiar</button>
+              </div>
+              <pre><code><span class="c-acc">/squad-carrossel-fera</span></code></pre>
+            </div>
+            <button class="step-done-btn" onclick="marcarPasso('step-5', this)">
+              <span>✓</span> Feito
+            </button>
+          </div>
+        </div>
+
+        <div class="step" id="step-6">
+          <div class="step-num-col"><div class="step-num">6</div></div>
+          <div class="step-body">
+            <h3>Responder o briefing</h3>
+            <p>O Claude vai te fazer algumas perguntas. Responda como se estivesse conversando normalmente:</p>
+            <ul style="margin:12px 0 12px 20px;color:var(--muted);font-size:14px;line-height:2.2">
+              <li><strong style="color:var(--text)">Tema do carrossel</strong> — ou diga "pode escolher" e ele sugere</li>
+              <li><strong style="color:var(--text)">Formato</strong> — storytelling (história real) ou educativo (dicas)</li>
+              <li><strong style="color:var(--text)">Objetivo</strong> — capturar lead, vender produto, ou engajamento</li>
+            </ul>
+            <button class="step-done-btn" onclick="marcarPasso('step-6', this)">
+              <span>✓</span> Feito
+            </button>
+          </div>
+        </div>
+
+        <div class="step" id="step-7">
+          <div class="step-num-col"><div class="step-num">7</div></div>
+          <div class="step-body">
+            <h3>Aprovar a copy</h3>
+            <p>O Claude vai gerar o texto dos 10 slides e mostrar para você revisar antes de criar qualquer arte. Leia com calma. Se gostar, escreva:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">Claude Code — chat</span>
+                <button class="btn-copy-code" onclick="copiarCodigo(this, 'APROVADO')">Copiar</button>
+              </div>
+              <pre><code><span class="c-acc">APROVADO</span></code></pre>
+            </div>
+            <p>Se quiser mudar alguma coisa, basta dizer o que quer ajustar. O Claude corrige e mostra novamente.</p>
+            <div class="note tip">
+              <span class="note-icon">💡</span>
+              <p><strong>Regra de ouro:</strong> nunca escreva APROVADO sem ter lido. A copy é o conteúdo que vai sair pro Instagram.</p>
+            </div>
+            <button class="step-done-btn" onclick="marcarPasso('step-7', this)">
+              <span>✓</span> Feito
+            </button>
+          </div>
+        </div>
+
+        <div class="step" id="step-8">
+          <div class="step-num-col"><div class="step-num">8</div></div>
+          <div class="step-body">
+            <h3>Receber os arquivos prontos</h3>
+            <p>Após a aprovação, o Claude vai gerar os 10 slides em PNG. Quando terminar, a pasta de output abre automaticamente no seu computador com os arquivos prontos.</p>
+            <p style="margin-top:12px">Os arquivos ficam em:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-label">Pasta</span>
+              </div>
+              <pre><code><span class="c-str">Ferabot\output\carrossel\</span><span class="c-acc">data-de-hoje\</span></code></pre>
+            </div>
+            <p>Copie os PNGs para o celular e publique pelo app do Instagram como um post de carrossel (selecione as imagens na ordem slide-01 → slide-10).</p>
+            <div class="note success">
+              <span class="note-icon">🎉</span>
+              <p><strong>Parabéns!</strong> Você criou seu primeiro carrossel com o Ferabot. Use o mesmo processo para qualquer uma das 8 etapas.</p>
+            </div>
+            <button class="step-done-btn" onclick="marcarPasso('step-8', this)">
+              <span>✓</span> Feito
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5 — REFERÊNCIA -->
+    <section class="section" id="referencia">
+      <div class="section-header">
+        <span class="section-tag">Referência rápida</span>
+        <h2>Comandos do Ferabot</h2>
+        <p class="section-intro">Dentro do Claude Code, basta copiar e colar o comando da etapa que você quer usar.</p>
+      </div>
+
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Comando</th>
+            <th>O que cria</th>
+            <th>Formato final</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>/squad-carrossel-fera</td>
+            <td>Carrossel de feed com 10 slides</td>
+            <td>10 PNGs 1080×1350</td>
+          </tr>
+          <tr>
+            <td>/squad-stories-fera</td>
+            <td>Stories de bastidores com sua foto</td>
+            <td>PNG 1080×1920</td>
+          </tr>
+          <tr>
+            <td>/squad-caixinha-fera</td>
+            <td>Stories de caixinha de perguntas</td>
+            <td>PNGs 1080×1920</td>
+          </tr>
+          <tr>
+            <td>/jack-fera</td>
+            <td>Landing page ou página de venda</td>
+            <td>Arquivo HTML</td>
+          </tr>
+          <tr>
+            <td>/squad-isca-fera</td>
+            <td>Isca digital (lead magnet) + página</td>
+            <td>PDF + HTML</td>
+          </tr>
+          <tr>
+            <td>/meta-ads-fera</td>
+            <td>Campanhas no Meta Ads</td>
+            <td>Campanha criada no Facebook</td>
+          </tr>
+          <tr>
+            <td>/squad-slides-fera</td>
+            <td>Apresentação de slides</td>
+            <td>PNGs ou MP4 animado</td>
+          </tr>
+          <tr>
+            <td>/zernio-fera</td>
+            <td>Automação de DMs no Instagram</td>
+            <td>Automação ativa no Zernio</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note info" style="margin-top:24px">
+        <span class="note-icon">🔄</span>
+        <p>Para receber atualizações do Ferabot, dê <strong>duplo-clique em atualizar.bat</strong> na pasta do Ferabot. Tudo é atualizado automaticamente.</p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6 — FAQ -->
+    <section class="section" id="faq">
+      <div class="section-header">
+        <span class="section-tag">Dúvidas frequentes</span>
+        <h2>Perguntas comuns</h2>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            O Claude não reconheceu o comando /squad-carrossel-fera
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Isso acontece quando as skills não foram instaladas corretamente. Volte para a pasta Ferabot, dê duplo-clique em <strong>instalar.py</strong> e aguarde terminar. Depois abra novamente com o <strong>ABRIR_FERABOT.bat</strong>.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Apareceu uma mensagem de erro com letras em inglês no terminal
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Não se preocupe. Copie toda a mensagem de erro, abra o Claude Code e cole com a pergunta <em>"Encontrei esse erro no Ferabot, o que faço?"</em>. O Claude vai diagnosticar e te dar a solução passo a passo.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            O formulário de perfil não abriu no navegador
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Abra um terminal na pasta Ferabot (clique com o botão direito dentro da pasta → "Abrir no Terminal") e execute:</p>
+            <div class="code-block" style="margin:12px 0">
+              <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-label">Terminal</span><button class="btn-copy-code" onclick="copiarCodigo(this, 'python SetupFera/setup_form.py')">Copiar</button></div>
+              <pre><code><span class="c-cmd">python</span> <span class="c-str">SetupFera/setup_form.py</span></code></pre>
+            </div>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Quero mudar meu perfil (nome, cores, produto)
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>No Claude Code, clique no botão <strong>✏️ Perfil</strong> no Dashboard ou abra um terminal na pasta Ferabot e rode:</p>
+            <div class="code-block" style="margin:12px 0">
+              <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-label">Terminal</span><button class="btn-copy-code" onclick="copiarCodigo(this, 'python SetupFera/setup_form.py')">Copiar</button></div>
+              <pre><code><span class="c-cmd">python</span> <span class="c-str">SetupFera/setup_form.py</span></code></pre>
+            </div>
+            <p>O formulário vai abrir com os dados atuais. Edite o que quiser e salve.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Onde ficam os arquivos que o Ferabot gera?
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>Todos os arquivos ficam na pasta <strong>output</strong> dentro da pasta Ferabot, organizados por etapa e data. Quando a skill termina, a pasta abre automaticamente no explorador de arquivos.</p>
+            <p>Se precisar encontrar manualmente: <code style="font-family:var(--mono);font-size:13px">Ferabot → output → [etapa] → [data]</code></p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Preciso pagar para usar o Ferabot?
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">
+            <p>O Ferabot em si é gratuito. Você vai precisar de uma assinatura do Claude Code para usar as skills. Algumas etapas avançadas (Meta Ads, Zernio, imagens com IA) usam serviços externos que podem ter custos próprios — mas todos têm planos gratuitos para começar.</p>
+          </div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SUPORTE -->
+    <section class="section" id="suporte">
+      <div class="support-box">
+        <div style="font-size:48px;margin-bottom:16px">🔥</div>
+        <h3>Ficou com dúvida?</h3>
+        <p>O próprio Claude Code resolve a maioria dos problemas. Abra o Ferabot e descreva o que aconteceu — ele conhece todo o sistema e vai te guiar.</p>
+        <a href="#instalacao" class="btn-primary">Voltar para a instalação</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// ─── Progress bar de scroll ───────────────────────────────────────────
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+  updateNavActive();
+});
+
+// ─── Scroll reveal das seções ────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+// ─── Nav ativo por seção ─────────────────────────────────────────────
+function updateNavActive() {
+  const secs = ['o-que-e','antes','instalacao','primeiro-uso','referencia','faq','suporte'];
+  let current = '';
+  secs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 120) current = id;
+  });
+  document.querySelectorAll('.nav-item a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+
+// ─── Pré-requisitos ──────────────────────────────────────────────────
+function togglePrereq(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('done');
+  salvarEstado();
+  atualizarProgressoTarefas();
+}
+
+// ─── Passos de instalação ────────────────────────────────────────────
+function marcarPasso(id, btn) {
+  const step = document.getElementById(id);
+  const done = step.classList.toggle('done');
+  btn.innerHTML = done
+    ? '<span>✓</span> Concluído!'
+    : '<span>✓</span> Marcar como concluído';
+  salvarEstado();
+  atualizarProgressoTarefas();
+}
+
+// ─── Progresso de tarefas ────────────────────────────────────────────
+function atualizarProgressoTarefas() {
+  const total = document.querySelectorAll('.prereq-item, .step').length;
+  const done  = document.querySelectorAll('.prereq-item.done, .step.done').length;
+  const pct   = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('task-progress').style.width = pct + '%';
+  document.getElementById('task-percent').textContent = `${done} de ${total} passos`;
+}
+
+// ─── Persistência no localStorage ────────────────────────────────────
+function salvarEstado() {
+  const estado = {};
+  document.querySelectorAll('.prereq-item').forEach(el => {
+    estado[el.id] = el.classList.contains('done');
+  });
+  document.querySelectorAll('.step').forEach(el => {
+    estado[el.id] = el.classList.contains('done');
+  });
+  localStorage.setItem('ferabot_tutorial', JSON.stringify(estado));
+}
+
+function carregarEstado() {
+  try {
+    const estado = JSON.parse(localStorage.getItem('ferabot_tutorial') || '{}');
+    Object.entries(estado).forEach(([id, done]) => {
+      if (!done) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('done');
+      const btn = el.querySelector('.step-done-btn');
+      if (btn) btn.innerHTML = '<span>✓</span> Concluído!';
+    });
+  } catch(e) {}
+  atualizarProgressoTarefas();
+}
+
+// ─── FAQ Accordion ───────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ─── Copiar código ───────────────────────────────────────────────────
+function copiarCodigo(btn, texto) {
+  navigator.clipboard?.writeText(texto) ?? fallbackCopy(texto);
+  const orig = btn.textContent;
+  btn.textContent = '✓ Copiado!';
+  btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('ok'); }, 2000);
+}
+
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text; document.body.appendChild(el);
+  el.select(); document.execCommand('copy');
+  document.body.removeChild(el);
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────
+carregarEstado();
+</script>
+</body>
+</html>
