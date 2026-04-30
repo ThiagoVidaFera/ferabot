@@ -56,6 +56,22 @@ def ensure_output_dir(etapa):
     return path
 
 
+def abrir_output(etapa):
+    """Abre o Windows Explorer na pasta de output da etapa após gerar os arquivos."""
+    import subprocess, platform
+    path = ensure_output_dir(etapa)
+    try:
+        if platform.system() == "Windows":
+            subprocess.Popen(["explorer", str(path)])
+        elif platform.system() == "Darwin":
+            subprocess.Popen(["open", str(path)])
+        else:
+            subprocess.Popen(["xdg-open", str(path)])
+        print(f"\n  📂 Pasta aberta: {path}")
+    except Exception:
+        print(f"\n  📂 Arquivos salvos em: {path}")
+
+
 def fera_print(msg):
     print(f"\n  🔥 {msg}\n")
 

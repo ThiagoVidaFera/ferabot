@@ -19,6 +19,23 @@ print(f"  Olá, {nome.split()[0]}! Vamos checar se tudo está instalado...\n")
 erros = []
 avisos = []
 
+
+def instalar_automatico(pacote_pip, descricao):
+    resposta = input(f"\n  Posso instalar {descricao} automaticamente agora? (s/n): ").strip().lower()
+    if resposta in ("s", "sim", "y", "yes"):
+        print(f"  Instalando {descricao}...")
+        r = subprocess.run([sys.executable, "-m", "pip", "install", pacote_pip],
+                           capture_output=True, text=True)
+        if r.returncode == 0:
+            print(f"  [OK] {descricao} instalado!")
+            return True
+        else:
+            print(f"  [ERRO] Não foi possível instalar automaticamente.")
+            print(f"  Tente manualmente: pip install {pacote_pip}")
+            return False
+    return False
+
+
 # ── Python ──────────────────────────────────────────────────────────────
 py_ver = platform.python_version()
 major, minor = int(py_ver.split('.')[0]), int(py_ver.split('.')[1])
@@ -30,6 +47,7 @@ if major < 3 or (major == 3 and minor < 10):
     ))
 else:
     print(f"  [OK] Python {py_ver}")
+
 
 # ── Node.js ──────────────────────────────────────────────────────────────
 try:
@@ -46,18 +64,87 @@ except (FileNotFoundError, subprocess.TimeoutExpired):
     ))
     print("  [FALTA] Node.js — necessário para renderizar artes")
 
+
 # ── Playwright ───────────────────────────────────────────────────────────
+playwright_ok = False
 try:
     import playwright
+    playwright_ok = True
     print("  [OK] Playwright (Python)")
 except ImportError:
-    erros.append((
-        "Playwright não está instalado.",
-        "Abra um terminal e rode os dois comandos abaixo:\n"
-        "    pip install playwright\n"
-        "    playwright install chromium"
-    ))
     print("  [FALTA] Playwright — necessário para gerar PNGs")
+    instalado = instalar_automatico("playwright", "Playwright")
+    if instalado:
+        playwright_ok = True
+    else:
+        erros.append((
+            "Playwright não está instalado.",
+            "Abra um terminal e rode:\n"
+            "    pip install playwright\n"
+            "    playwright install chromium"
+        ))
+
+# ── Playwright Chromium ───────────────────────────────────────────────────
+if playwright_ok:
+    try:
+        r = subprocess.run(
+            [sys.executable, "-m", "playwright", "install", "chromium", "--dry-run"],
+            capture_output=True, text=True, timeout=10
+        )
+        # dry-run retorna erro se não instalado
+        r2 = subprocess.run(
+            [sys.executable, "-c",
+             "from playwright.sync_api import sync_playwright; p=sync_playwright().start(); p.chromium; p.stop()"],
+            capture_output=True, text=True, timeout=10
+        )
+        if r2.returncode == 0:
+            print("  [OK] Playwright Chromium")
+        else:
+            raise Exception("chromium não disponível")
+    except Exception:
+        print("  [FALTA] Playwright Chromium — o navegador interno")
+        resp = input("\n  Posso instalar o Chromium automaticamente agora? (s/n): ").strip().lower()
+        if resp in ("s", "sim", "y", "yes"):
+            print("  Instalando Chromium (pode demorar 1-2 minutos)...")
+            r = subprocess.run(
+                [sys.executable, "-m", "playwright", "install", "chromium"],
+                timeout=300
+            )
+            if r.returncode == 0:
+                print("  [OK] Chromium instalado!")
+            else:
+                erros.append((
+                    "Chromium não pôde ser instalado automaticamente.",
+                    "Tente manualmente: playwright install chromium"
+                ))
+        else:
+            erros.append((
+                "Chromium do Playwright não instalado.",
+                "Rode manualmente: playwright install chromium"
+            ))
+
+
+# ── Requests ─────────────────────────────────────────────────────────────
+try:
+    import requests
+    print("  [OK] requests (Python)")
+except ImportError:
+    print("  [FALTA] requests — necessário para Meta Ads e Zernio")
+    instalar_automatico("requests", "requests")
+
+
+# ── Facebook Business SDK ─────────────────────────────────────────────────
+try:
+    import facebook_business
+    print("  [OK] facebook-business SDK")
+except ImportError:
+    print("  [INFO] facebook-business SDK não instalado (só necessário para Meta Ads)")
+    resp = input("  Quer instalar agora? (s/n): ").strip().lower()
+    if resp in ("s", "sim", "y", "yes"):
+        subprocess.run([sys.executable, "-m", "pip", "install", "facebook-business"],
+                       capture_output=True)
+        print("  [OK] facebook-business instalado!")
+
 
 # ── Git ──────────────────────────────────────────────────────────────────
 try:
@@ -67,10 +154,14 @@ try:
     else:
         raise FileNotFoundError
 except (FileNotFoundError, subprocess.TimeoutExpired):
-    avisos.append("Git não encontrado (opcional, mas recomendado para salvar seu trabalho).")
-    print("  [AVISO] Git — opcional")
+    avisos.append(
+        "Git não encontrado — necessário para receber atualizações do Ferabot.\n"
+        "    Instale em: https://git-scm.com/download/win"
+    )
+    print("  [AVISO] Git não encontrado")
 
 print()
+
 
 # ── Criar estrutura de output ────────────────────────────────────────────
 etapas = ["carrossel", "stories", "caixinha", "landing-pages",
@@ -81,6 +172,7 @@ try:
     print("  [OK] Pastas de saída criadas (output/)")
 except Exception as e:
     avisos.append(f"Não foi possível criar algumas pastas de saída: {e}")
+
 
 # ── .gitignore ───────────────────────────────────────────────────────────
 gitignore_path = ROOT_DIR / ".gitignore"
@@ -94,6 +186,7 @@ try:
     print("  [OK] Arquivos sensíveis protegidos (.gitignore)")
 except Exception:
     pass
+
 
 # ── Resultado ────────────────────────────────────────────────────────────
 print()
@@ -117,5 +210,5 @@ if erros:
 else:
     mark_checkpoint("setup_base", "done", "ambiente ok")
     fera_print(f"Ambiente perfeito, {nome.split()[0]}! Tudo instalado.")
-    print("  Próximo passo: python SetupFera/setup_skills.py")
+    print("  Próximo passo: configurar seu perfil.")
     print()

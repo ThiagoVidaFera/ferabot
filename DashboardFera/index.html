@@ -47,6 +47,7 @@
   }
   .logo h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
   .logo span { font-size: 13px; color: var(--muted); }
+  .header-right { display: flex; align-items: center; gap: 10px; }
   .perfil-pill {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 99px; padding: 8px 18px;
@@ -58,6 +59,14 @@
     background: var(--accent);
   }
   .perfil-nome { color: var(--text); font-weight: 600; }
+  .btn-editar {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 99px; padding: 8px 16px;
+    font-size: 13px; color: var(--muted); cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-editar:hover { border-color: rgba(255,79,0,0.4); color: var(--accent); }
 
   /* ── Aviso sem perfil ── */
   .aviso {
@@ -184,9 +193,12 @@
         <span>Sistema de Marketing com IA</span>
       </div>
     </div>
-    <div class="perfil-pill">
-      <div class="dot"></div>
-      <span>Olá, <span class="perfil-nome" id="nome-header">fera</span>!</span>
+    <div class="header-right">
+      <div class="perfil-pill">
+        <div class="dot"></div>
+        <span>Olá, <span class="perfil-nome" id="nome-header">fera</span>!</span>
+      </div>
+      <span class="btn-editar" id="btn-editar-perfil" title="Editar perfil">✏️ Perfil</span>
     </div>
   </div>
 
@@ -391,6 +403,11 @@
   <footer>
     <p>Ferabot é fera. <strong id="nome-footer">Você</strong> é fera. Vamos dominar o nicho.</p>
     <p style="margin-top:8px">Dúvida? Abra o Claude Code e pergunte diretamente — ele conhece o seu negócio.</p>
+    <p style="margin-top:16px">
+      <a href="../API_SETUP.md" style="color:var(--muted);text-decoration:none;margin:0 12px" target="_blank">📋 Como obter chaves de API</a>
+      <a href="../PRIMEIRO_DIA.md" style="color:var(--muted);text-decoration:none;margin:0 12px" target="_blank">📖 Guia do Primeiro Dia</a>
+      <a href="../atualizar.bat" style="color:var(--muted);text-decoration:none;margin:0 12px" download>🔄 Atualizar Ferabot</a>
+    </p>
   </footer>
 
 </div>
@@ -419,6 +436,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Mostra aviso de perfil não configurado
     document.getElementById('aviso-perfil').classList.add('visivel');
   }
+});
+
+// ── Botão Editar Perfil ───────────────────────────────────────────────
+document.getElementById('btn-editar-perfil').addEventListener('click', function () {
+  var msg = 'Para editar seu perfil:\n\n' +
+    '1. Abra um terminal na pasta do Ferabot\n' +
+    '2. Digite: python SetupFera/setup_form.py\n' +
+    '3. O formulário vai abrir no navegador\n' +
+    '4. Salve e recarregue esta página';
+  alert(msg);
 });
 
 // ── Copiar comando ────────────────────────────────────────────────────
