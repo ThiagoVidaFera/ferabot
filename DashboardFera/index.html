@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferabot — Dashboard</title>
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --surface: #1A1A24;
+    --surface-hover: #22222E;
+    --border: rgba(255,255,255,0.08);
+    --text: #FFFFFF;
+    --muted: #8B8B95;
+    --accent: #FF4F00;
+    --accent-dim: rgba(255, 79, 0, 0.12);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Inter', 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+  }
+
+  /* Header */
+  .header {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-icon {
+    width: 48px; height: 48px;
+    background: var(--accent);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+
+  .logo-text h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-text span {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .badge {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(255,79,0,0.3);
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Hero */
+  .hero {
+    max-width: 900px;
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+
+  .hero h2 {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  .hero h2 span { color: var(--accent); }
+
+  .hero p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+
+  .hero-cmd {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    color: var(--accent);
+  }
+
+  /* Section label */
+  .section-label {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Grid */
+  .grid {
+    max-width: 900px;
+    margin: 0 auto 56px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    cursor: default;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    background: var(--surface-hover);
+    border-color: rgba(255,79,0,0.3);
+    transform: translateY(-2px);
+  }
+
+  .card-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .card-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .card-cmd {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(255,79,0,0.2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: all;
+  }
+
+  .card-cmd:hover {
+    background: rgba(255,79,0,0.2);
+  }
+
+  /* Setup cards (highlight) */
+  .card.highlight {
+    border-color: rgba(255,79,0,0.4);
+    background: rgba(255,79,0,0.06);
+  }
+
+  /* Steps */
+  .steps {
+    max-width: 900px;
+    margin: 0 auto 56px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+
+  .steps h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .step-list {
+    list-style: none;
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step-list li {
+    counter-increment: step;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .step-list li::before {
+    content: counter(step);
+    min-width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-list li div {
+    flex: 1;
+  }
+
+  .step-list li strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .step-list li span {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Footer */
+  .footer {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer strong { color: var(--accent); }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">🔥</div>
+      <div class="logo-text">
+        <h1>Ferabot</h1>
+        <span>Sistema de Marketing com IA</span>
+      </div>
+    </div>
+    <div class="badge">9 Etapas</div>
+  </div>
+
+  <div class="hero">
+    <h2>O seu negócio de mentoria<br>rodando <span>no piloto automático</span></h2>
+    <p>Abra o Claude Code, invoque qualquer skill abaixo e deixa o sistema trabalhar por você, fera.</p>
+    <div class="hero-cmd">claude → /nome-da-skill</div>
+  </div>
+
+  <div class="section-label">Setup (faça uma vez)</div>
+
+  <div class="grid">
+    <div class="card highlight">
+      <div class="card-num">Passo 1</div>
+      <span class="card-icon">⚙️</span>
+      <h3>Configurar Perfil</h3>
+      <p>Define nome, nicho, produto, cores e chaves de API. Tudo personalizado pra você.</p>
+      <code class="card-cmd">python SetupFera/setup_perfil.py</code>
+    </div>
+
+    <div class="card highlight">
+      <div class="card-num">Passo 2</div>
+      <span class="card-icon">🔧</span>
+      <h3>Verificar Ambiente</h3>
+      <p>Checa Python, Node.js, Playwright e cria estrutura de pastas.</p>
+      <code class="card-cmd">python SetupFera/setup_base.py</code>
+    </div>
+
+    <div class="card highlight">
+      <div class="card-num">Passo 3</div>
+      <span class="card-icon">📦</span>
+      <h3>Instalar Skills</h3>
+      <p>Copia todas as 8 skills para o Claude Code. Invocação por /comando.</p>
+      <code class="card-cmd">python SetupFera/setup_skills.py</code>
+    </div>
+  </div>
+
+  <div class="section-label">As 9 Etapas do Ferabot</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-num">Etapa 2</div>
+      <span class="card-icon">🎠</span>
+      <h3>Carrossel de Feed</h3>
+      <p>10 slides personalizados com copy aprovada. Exporta PNGs pra publicar pelo app do Instagram.</p>
+      <code class="card-cmd">/squad-carrossel-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 3</div>
+      <span class="card-icon">📸</span>
+      <h3>Stories de Bastidores</h3>
+      <p>Usa foto real sua como fundo. Copy em 5 camadas com safe zones de anúncio.</p>
+      <code class="card-cmd">/squad-stories-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 4</div>
+      <span class="card-icon">💬</span>
+      <h3>Caixinha de Perguntas</h3>
+      <p>Stories com perguntas reais + respostas em 4 estilos de bloco. Sem CTA.</p>
+      <code class="card-cmd">/squad-caixinha-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 5</div>
+      <span class="card-icon">🌐</span>
+      <h3>Landing Page</h3>
+      <p>Página de venda completa (9 seções), dark premium, responsiva. Deploy Netlify opcional.</p>
+      <code class="card-cmd">/jack-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 6</div>
+      <span class="card-icon">🧲</span>
+      <h3>Isca Digital</h3>
+      <p>Lead magnet PDF + página de captura. Prompts nível engenheiro pra material de alto valor.</p>
+      <code class="card-cmd">/squad-isca-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 7</div>
+      <span class="card-icon">📢</span>
+      <h3>Anúncios Meta Ads</h3>
+      <p>Cria e gerencia campanhas no Facebook/Instagram Ads via SDK. Relatório de performance.</p>
+      <code class="card-cmd">/meta-ads-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 8</div>
+      <span class="card-icon">📊</span>
+      <h3>Slides e Apresentações</h3>
+      <p>Pitch de venda, webinar ou proposta. Exporta PNG por slide ou vídeo animado.</p>
+      <code class="card-cmd">/squad-slides-fera</code>
+    </div>
+
+    <div class="card">
+      <div class="card-num">Etapa 9</div>
+      <span class="card-icon">🤖</span>
+      <h3>Automação de DMs</h3>
+      <p>Configura keywords no Zernio pra responder automaticamente quem comenta ou manda DM.</p>
+      <code class="card-cmd">/zernio-fera</code>
+    </div>
+  </div>
+
+  <div class="steps">
+    <h3>🚀 Fluxo de trabalho recomendado</h3>
+    <ol class="step-list">
+      <li>
+        <div>
+          <strong>Rodar setup (uma vez)</strong>
+          <span>setup_perfil.py → setup_base.py → setup_skills.py</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Abrir o Claude Code</strong>
+          <span>Na pasta raiz do Ferabot</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Invocar a skill da semana</strong>
+          <span>/squad-carrossel-fera → aprovar copy → PNGs prontos</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Configurar automação de DM</strong>
+          <span>/zernio-fera → keyword vinculada ao conteúdo publicado</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Criar anúncios se precisar de tráfego pago</strong>
+          <span>/meta-ads-fera → campanha pausada → revisar → ativar</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="footer">
+    <p>Ferabot é fera. Você é fera. <strong>Vamos dominar o nicho.</strong></p>
+    <p style="margin-top: 8px;">Dúvidas? Abra o Claude Code na pasta raiz e pergunte diretamente.</p>
+  </div>
+
+</body>
+</html>
