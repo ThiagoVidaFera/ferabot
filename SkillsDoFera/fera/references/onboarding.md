@@ -1,4 +1,4 @@
-# Onboarding conversacional — briefing de perfil + meta
+# Onboarding conversacional — tour + briefing de perfil + meta
 
 Roda SEMPRE que `perfil.json` ou `metas.json` não existirem na pasta do Ferabot — inclusive logo
 após a instalação (o instalador em modo assistido pula o setup de terminal de propósito e
@@ -6,6 +6,37 @@ delega o briefing pra cá). **Nunca mandar o usuário rodar script no terminal p
 perguntas são feitas no chat e VOCÊ grava os arquivos.
 
 Não fazer nada de produção (peça, página, anúncio) antes do briefing completo.
+
+## Fase 0 — Tour: o que acabou de ser instalado (1 mensagem, logo após a instalação)
+
+Antes de qualquer pergunta, apresentar o Ferabot em UMA mensagem curta. Formato: 2 linhas de
+abertura + a tabela de possibilidades com exemplo de uso real em cada linha + 1 linha fechando.
+Sem parágrafo longo, sem promessa de "automático" — done-with-you sempre.
+
+Abertura (adaptar, não copiar robótico):
+
+> Instalação pronta. Você acaba de ganhar um time de assistentes de marketing e vendas dentro
+> do seu computador — eu construo as peças, você executa e vende.
+>
+> O que dá pra fazer por aqui, com exemplos reais de como pedir:
+
+| Área | O que sai | Exemplo de pedido |
+|---|---|---|
+| **Instagram** | posts, carrosséis, stories e anúncios prontos (arte + copy), campanha no Meta Ads | "monta um carrossel sobre os 3 erros do meu nicho" |
+| **YouTube** | roteiro, vídeo narrado por IA, título e thumbnail, upload no seu canal | "cria um vídeo de 1 minuto sobre X pro meu canal" |
+| **Disparo de WhatsApp** | mensagens em lote pros seus contatos, com variação e ritmo seguro (seu número, sua máquina) | "dispara um convite pra minha lista de leads" |
+| **Slides** | apresentação profissional pra aula, pitch ou webinar | "monta os slides da minha aula de quinta" |
+| **Direct automático** | quem comenta a palavra-chave no seu post recebe DM com o link (captação) | "quem comentar EU QUERO recebe o link do material" |
+| **Páginas** | landing, página de venda e quiz de qualificação, publicadas | "cria uma página de captura pra minha mentoria" |
+| **CRM de leads** | registro de todo lead, follow-up pronto, cobrança de quem está sem resposta | "como estão meus leads dessa semana?" |
+| **Propostas** | PDF de proposta comercial pronto pra enviar | "monta a proposta pro cliente que pediu orçamento" |
+
+Fechamento do tour (a ponte pro briefing):
+
+> Tudo isso sai personalizado com o SEU negócio — e é por isso que antes de produzir qualquer
+> coisa eu preciso te conhecer. São 2 blocos de perguntas rápidas. Primeiro, quem é você:
+
+E emendar direto na Fase 1, na mesma mensagem ou na seguinte.
 
 ## Fase 1 — Perfil (uma mensagem, todas as perguntas juntas)
 

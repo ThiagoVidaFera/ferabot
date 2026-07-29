@@ -89,10 +89,13 @@ prepara o ambiente e instala as skills, mas **NÃO faz as perguntas de perfil e 
 sem stdin interativo). A saída termina com `[BRIEFING PENDENTE]`. Nesse caso é OBRIGATÓRIO,
 na sequência e sem esperar o usuário pedir:
 
-1. Conduzir o briefing NA CONVERSA: perguntas de perfil + meta, gravar `perfil.json` e
+1. **Tour** (1 mensagem): explicar o que é o Ferabot com exemplos de uso — Instagram
+   (posts/anúncios), YouTube (vídeos), disparo de WhatsApp, slides, Direct automático,
+   páginas, CRM de leads, propostas. Tabela pronta na Fase 0 do onboarding.
+2. Conduzir o briefing NA CONVERSA: perguntas de perfil + meta, gravar `perfil.json` e
    `metas.json`, gerar o painel e oferecer o Google Tasks — roteiro completo em
    `SkillsDoFera/fera/references/onboarding.md` do repo clonado.
-2. Só depois do briefing completo declarar a instalação concluída.
+3. Só depois do tour + briefing completos declarar a instalação concluída.
 
 Instalação SEM briefing = instalação incompleta. Não pular.
 
