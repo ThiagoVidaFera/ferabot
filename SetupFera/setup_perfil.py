@@ -4,6 +4,21 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "ScriptsFera"))
 from lib import save_perfil, fera_print, header, mark_checkpoint, PERFIL_PATH, ROOT_DIR
 
+# Sem stdin interativo (rodado pelo Claude/pipe vazio), input() recebe EOF.
+_input_original = input
+
+
+def input(msg=""):  # noqa: A001 — shadow proposital
+    try:
+        return _input_original(msg)
+    except EOFError:
+        print()
+        print("[ERRO] Sem terminal interativo pra fazer as perguntas.")
+        print("       Faça o briefing pela conversa: digite /fera no Claude Code")
+        print("       (ele pergunta perfil e meta no chat e grava os arquivos).")
+        sys.exit(2)
+
+
 header("FERABOT — Configuração do Perfil")
 
 print("  Fera, vamos configurar o seu sistema!")

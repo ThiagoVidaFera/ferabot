@@ -3,16 +3,19 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "ScriptsFera"))
-from lib import load_perfil, fera_print, header, mark_checkpoint, ROOT_DIR
+from lib import load_perfil, fera_print, header, mark_checkpoint, ROOT_DIR, PERFIL_PATH
 
 header("FERABOT — Instalação das Skills")
 
-try:
+# Perfil ainda pode não existir (instalação assistida: o briefing vem depois,
+# na conversa). As skills não dependem dele pra instalar.
+if PERFIL_PATH.exists():
     perfil = load_perfil()
     nome = perfil.get("nome", "fera")
-except SystemExit:
-    print("  [ERRO] Configure o perfil primeiro: python SetupFera/setup_form.py")
-    sys.exit(1)
+else:
+    perfil = None
+    nome = "fera"
+    print("  (perfil ainda não configurado — o briefing acontece na conversa)")
 
 print(f"  Instalando as skills do Ferabot para {nome.split()[0]}...\n")
 
@@ -63,17 +66,18 @@ for skill_dir in sorted(skills_list):
 
 print()
 
-# ── Gerar perfil.js para o dashboard ─────────────────────────────────────
+# ── Gerar perfil.js para o dashboard (só se o perfil já existir) ─────────
 import json
-try:
-    js_path = ROOT_DIR / "DashboardFera" / "perfil.js"
-    js_path.write_text(
-        f"window.PERFIL = {json.dumps(perfil, ensure_ascii=False, indent=2)};\n",
-        encoding="utf-8"
-    )
-    print("  [OK] Dashboard atualizado com seus dados")
-except Exception as e:
-    print(f"  [AVISO] Não foi possível atualizar o dashboard: {e}")
+if perfil is not None:
+    try:
+        js_path = ROOT_DIR / "DashboardFera" / "perfil.js"
+        js_path.write_text(
+            f"window.PERFIL = {json.dumps(perfil, ensure_ascii=False, indent=2)};\n",
+            encoding="utf-8"
+        )
+        print("  [OK] Dashboard atualizado com seus dados")
+    except Exception as e:
+        print(f"  [AVISO] Não foi possível atualizar o dashboard: {e}")
 
 # ── Resultado ─────────────────────────────────────────────────────────────
 if falhas:

@@ -84,6 +84,18 @@ Procurar na raiz do repo, em ordem de prioridade:
 
 Rodar o instalador no terminal e mostrar a saída pro usuário.
 
+**IMPORTANTE (Ferabot):** rodado pelo Claude, o `instalar.py` entra em modo assistido — ele
+prepara o ambiente e instala as skills, mas **NÃO faz as perguntas de perfil e meta** (terminal
+sem stdin interativo). A saída termina com `[BRIEFING PENDENTE]`. Nesse caso é OBRIGATÓRIO,
+na sequência e sem esperar o usuário pedir:
+
+1. Conduzir o briefing NA CONVERSA: perguntas de perfil + meta, gravar `perfil.json` e
+   `metas.json`, gerar o painel e oferecer o Google Tasks — roteiro completo em
+   `SkillsDoFera/fera/references/onboarding.md` do repo clonado.
+2. Só depois do briefing completo declarar a instalação concluída.
+
+Instalação SEM briefing = instalação incompleta. Não pular.
+
 ### 6. Confirmar sucesso
 
 Ao final:

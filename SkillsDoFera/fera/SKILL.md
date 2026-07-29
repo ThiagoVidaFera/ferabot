@@ -16,14 +16,10 @@ Ler, nesta ordem:
 3. `entregas.json` — o que já foi entregue
 4. `CLAUDE.md` da raiz — a doutrina completa
 
-Se `perfil.json` ou `metas.json` não existirem, parar tudo e mandar rodar o setup:
-
-> Você ainda não me disse quem é nem qual a meta.
->
-> Roda isso no terminal e volta:
->
-> `python SetupFera/setup_perfil.py`
-> `python SetupFera/setup_metas.py`
+Se `perfil.json` ou `metas.json` não existirem: **conduzir o briefing NA CONVERSA, agora** —
+seguir `references/onboarding.md` (perguntas de perfil + meta no chat, VOCÊ grava os dois
+arquivos, gera o painel e oferece o Google Tasks). Nunca mandar o usuário rodar script no
+terminal pra isso, e nunca produzir peça antes do briefing completo.
 
 Se os arquivos existem mas o cliente está em outra pasta, os caminhos relativos falham. Nesse caso,
 procurar a pasta `ferabot` no diretório home do usuário e ler de lá.
@@ -34,6 +30,7 @@ procurar a pasta `ferabot` no diretório home do usuário e ler de lá.
 2. Ler `references/doutrina.md` — o que você defende em toda resposta.
 3. Ler `references/coach.md` — como a meta entra em toda conversa.
 4. Rotear por `references/roteador.md` — mentor-first, os 6 FeraBots, fallback.
+5. Sem perfil ou meta → `references/onboarding.md` antes de qualquer outra coisa.
 
 ## Regra mestra
 

@@ -22,6 +22,9 @@ Se instalou pelo comando `/instale`, isso já foi resolvido pra você.
 2. Dê **duplo-clique** em `instalar.py` (se perguntar o programa, escolha Python)
 3. São 4 etapas: ambiente → **seu perfil** → **sua meta** → instalação dos FeraBots
 
+> Instalou pelo Claude Code (comando `/instale`)? Então as perguntas de perfil e meta acontecem
+> **na própria conversa**, logo depois da instalação — é só responder no chat.
+
 A parte da meta é a mais importante. Você vai dizer quanto quer faturar por mês e quanto custa o
 que você vende — e o sistema te mostra a conta na hora:
 
@@ -85,6 +88,13 @@ página, subir campanha, subir vídeo, gerar imagem com IA.
 Quando quiser: `python SetupFera/setup_chaves.py` · guia de cada chave em `API_SETUP.md`.
 
 ---
+
+## Google Tasks (recomendado)
+
+No briefing o Ferabot oferece transformar seus compromissos da semana numa lista
+**"FERABOT — Semana"** no Google Tasks (grátis, sincroniza com o celular e o Gmail). Vale aceitar:
+você marca lá o que fez, reporta no chat, e o índice do painel registra. O Tasks organiza; o
+painel cobra.
 
 ## O dia a dia (o ritmo que funciona)
 

@@ -62,6 +62,15 @@ python ScriptsFera/metas-api.py painel
 start DashboardFera/index.html
 ```
 
+### "Organiza minhas tarefas" / usuário perdido na semana
+
+Oferecer o **Google Tasks** como espelho da coluna direita (regra no coach.md):
+
+1. Com integração Google disponível (ToolSearch "tasks"): criar/atualizar a lista
+   **"FERABOT — Semana"** — uma tarefa por compromisso semanal + a meta do mês no topo.
+2. Sem integração: entregar a lista pronta pra colar em tasks.google.com (2 minutos).
+3. Deixar o combinado claro: ele marca lá, reporta aqui, eu registro no índice.
+
 ### "Quero mudar a meta"
 
 Diferenciar antes de aceitar:

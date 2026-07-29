@@ -4,14 +4,14 @@ import platform
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "ScriptsFera"))
-from lib import load_perfil, fera_print, header, mark_checkpoint, OUTPUT_DIR, ROOT_DIR
+from lib import load_perfil, fera_print, header, mark_checkpoint, OUTPUT_DIR, ROOT_DIR, PERFIL_PATH
 
 header("FERABOT — Verificação do Ambiente")
 
-try:
+if PERFIL_PATH.exists():
     perfil = load_perfil()
     nome = perfil.get("nome", "fera")
-except SystemExit:
+else:
     nome = "fera"
 
 print(f"  Olá, {nome.split()[0]}! Vamos checar se tudo está instalado...\n")

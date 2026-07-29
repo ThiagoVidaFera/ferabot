@@ -15,6 +15,21 @@ from lib import header, mark_checkpoint, ROOT_DIR  # noqa: E402
 
 METAS_PATH = ROOT_DIR / "metas.json"
 
+# Sem stdin interativo (rodado pelo Claude/pipe vazio), input() recebe EOF.
+# Em vez de morrer em silêncio, aponta o caminho certo: briefing na conversa.
+_input_original = input
+
+
+def input(msg: str = "") -> str:  # noqa: A001 — shadow proposital
+    try:
+        return _input_original(msg)
+    except EOFError:
+        print()
+        print("[ERRO] Sem terminal interativo pra fazer as perguntas.")
+        print("       Faça o briefing pela conversa: digite /fera no Claude Code")
+        print("       (ele pergunta perfil e meta no chat e grava os arquivos).")
+        sys.exit(2)
+
 META_PADRAO = 10000
 SEMANAS_NO_MES = 4
 
