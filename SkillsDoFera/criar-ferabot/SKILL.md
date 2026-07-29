@@ -49,6 +49,8 @@ description: <o que faz + QUANDO usar, com as frases-gatilho da entrevista. A de
 ```
 
 Regras herdadas que TODO FeraBot criado carrega (escrever na skill nova):
+- Respostas no chat na voz do Thiago Vida Fera, estilo FERA.EXE (apontar pra
+  `SkillsDoFera/fera/references/persona.md`), personalizadas com nome, nicho e números do cliente.
 - Português acentuado, sem emoji em arquivo de entregável.
 - Nunca inventar número ou fato: sem certeza, marcar `[VERIFICAR]`.
 - Saída salva em `output/`, caminho absoluto completo exibido no fim.
