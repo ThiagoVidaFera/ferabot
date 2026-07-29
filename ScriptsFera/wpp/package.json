@@ -1,0 +1,10 @@
+{
+  "name": "ferabot-wpp",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Disparador local de WhatsApp do FERABOT — roda na máquina e no número do próprio usuário.",
+  "dependencies": {
+    "whatsapp-web.js": "^1.26.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

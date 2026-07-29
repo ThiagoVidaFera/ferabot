@@ -1,123 +1,98 @@
 # Ferabot — Guia do Primeiro Dia
 
-Bem-vindo ao Ferabot, fera! Esse guia te leva do zero até o primeiro conteúdo gerado.
-Leva cerca de 15 minutos. Sem mistério.
+Do zero até a primeira peça pronta e a sua meta no painel. Leva cerca de 20 minutos.
 
 ---
 
 ## Antes de começar
 
-Você precisa ter instalado no seu computador:
+Você precisa ter instalado:
 
-- **Claude Code** — o aplicativo onde o Ferabot roda
-  → Baixe em: https://claude.ai/code
-- **Python 3.10 ou mais novo**
-  → Baixe em: https://python.org/downloads
-  → Na instalação, **marque a opção "Add Python to PATH"**
+- **Claude Code** — o aplicativo onde o Ferabot roda → https://claude.ai/code
+- **Python 3.10 ou mais novo** → https://python.org/downloads
+  (na instalação, **marque "Add Python to PATH"**)
 
-Se já instalou tudo, siga em frente.
+Se instalou pelo comando `/instale`, isso já foi resolvido pra você.
 
 ---
 
-## Passo 1 — Instalar o Ferabot (só uma vez)
+## Passo 1 — Instalar (uma vez só)
 
-1. Abra a pasta onde você baixou/clonou o Ferabot
-2. Dê **duplo-clique** no arquivo `instalar.py`
-   - Se pedir "com qual programa abrir?", escolha **Python**
-3. Um formulário vai abrir no seu navegador
-4. Preencha seus dados e clique em **Salvar**
-5. Aguarde a instalação terminar (aparece a mensagem de sucesso)
+1. Abra a pasta do Ferabot
+2. Dê **duplo-clique** em `instalar.py` (se perguntar o programa, escolha Python)
+3. São 4 etapas: ambiente → **seu perfil** → **sua meta** → instalação dos FeraBots
 
-**Pronto. Você não precisa fazer isso nunca mais.**
+A parte da meta é a mais importante. Você vai dizer quanto quer faturar por mês e quanto custa o
+que você vende — e o sistema te mostra a conta na hora:
+
+```
+R$ 10.000 ÷ ticket de R$ 2.500 = 4 clientes por mês
+4 clientes ÷ 4 semanas = 1 venda por semana
+```
+
+**É esse número que o Ferabot vai cobrar de você.** Não os 10 mil.
+
+No fim, o **Painel do Operador** abre no navegador. Ele tem duas colunas:
+
+- **Pronto e no ar** — o que os FeraBots construíram. Se preenche sozinha.
+- **Só anda se você andar** — gravar, publicar, responder lead. Essa é sua, e não se preenche nunca.
 
 ---
 
 ## Passo 2 — Abrir o Ferabot
 
-1. Dê **duplo-clique** no arquivo `ABRIR_FERABOT.bat`
-2. O Claude Code vai abrir automaticamente na pasta do Ferabot
-3. Aguarde carregar (pode demorar alguns segundos na primeira vez)
-
-> Se aparecer uma janela pedindo permissão do Windows, clique em **Sim** ou **Executar assim mesmo**.
+1. Duplo-clique em `ABRIR_FERABOT.bat`
+2. O Claude Code abre na pasta certa
 
 ---
 
-## Passo 3 — Criar seu primeiro carrossel
+## Passo 3 — Um comando só: `/fera`
 
-Agora você está dentro do Claude Code com o Ferabot ativo.
+Digite `/fera` no chat e converse. É o único comando que você precisa decorar.
 
-1. **Clique na área de chat** do Claude Code
-2. **Digite exatamente:** `/squad-carrossel-fera`
-3. Pressione **Enter**
-4. O Claude vai perguntar sobre o tema do carrossel — responda normalmente, como se estivesse conversando
-5. Ele vai gerar a copy, te mostrar para aprovar
-6. Depois de você aprovar, gera os 10 slides em PNG na pasta `output/carrossel/`
+- Chegou com dúvida ou travado → ele mentora.
+- Pediu uma peça ("faz minha proposta", "monta o anúncio") → ele chama o FeraBot certo por baixo.
 
-**Regra de ouro:** espere o Claude te mostrar a copy antes de mandar renderizar. Sempre aprove antes.
+**Missão do primeiro dia:** sair com UMA peça real pronta. Sugestão — digite:
+
+> /fera quero fechar minha primeira venda da semana. Monta a proposta do meu serviço.
+
+Regra de ouro: ele mostra a copy ANTES de gerar a arte. Leia e aprove (ou mande mexer). Nunca
+aprove sem ler — a peça sai com a sua cara e o seu nome.
 
 ---
 
-## Como usar cada etapa
+## Os 6 FeraBots (o /fera chama sozinho, mas dá pra chamar direto)
 
-| O que você quer criar | O que digitar no Claude Code |
+| Você quer | Comando direto |
 |---|---|
-| Carrossel de feed (10 slides) | `/squad-carrossel-fera` |
-| Stories de bastidores | `/squad-stories-fera` |
-| Caixinha de perguntas | `/squad-caixinha-fera` |
-| Landing page ou página de venda | `/jack-fera` |
-| Isca digital (PDF + página) | `/squad-isca-fera` |
-| Anúncios no Meta Ads | `/meta-ads-fera` |
-| Slides de apresentação | `/squad-slides-fera` |
-| Automação de DMs no Instagram | `/zernio-fera` |
+| Saber como está a meta, o que fazer hoje, relatório | `/copiloto-de-gestao` |
+| Proposta em PDF pra mandar pro cliente | `/propostas` |
+| Landing, página de venda, quiz | `/paginas-e-quiz` |
+| Anúncio, carrossel, story, post, campanha | `/conteudo-e-anuncios` |
+| Roteiro, vídeo, YouTube, slides | `/roteiros-e-oratoria` |
+| Leads, disparo de WhatsApp, comentário → DM | `/crm-de-leads` |
+| Criar um agente novo do zero (qualquer área) | `/criar-ferabot` |
 
 ---
 
-## Onde ficam os arquivos gerados?
+## Chaves de API (opcional, quando quiser)
 
-Tudo fica na pasta `output/` dentro do Ferabot:
+Sem chave nenhuma o Ferabot já produz propostas, páginas, anúncios, carrosséis, roteiros e vídeo
+narrado. As chaves (todas **suas**, das suas contas) só automatizam o último passo — publicar
+página, subir campanha, subir vídeo, gerar imagem com IA.
 
-```
-Ferabot/
-└── output/
-    ├── carrossel/     ← seus carrosseis (PNGs)
-    ├── stories/       ← seus stories (PNGs)
-    ├── caixinha/      ← suas caixinhas (PNGs)
-    ├── landing-pages/ ← suas páginas (HTML)
-    ├── iscas/         ← suas iscas (PDF + HTML)
-    └── slides/        ← suas apresentações (PNG ou MP4)
-```
+Quando quiser: `python SetupFera/setup_chaves.py` · guia de cada chave em `API_SETUP.md`.
 
 ---
 
-## Dúvidas frequentes
+## O dia a dia (o ritmo que funciona)
 
-**O Claude não reconheceu o comando `/squad-carrossel-fera`**
-→ Verifique se o `instalar.py` terminou com sucesso. Se não, rode novamente.
+1. Abrir com `/fera` — ele te diz quanto falta pra meta e qual o gargalo.
+2. Fazer O gargalo primeiro (geralmente: responder leads parados).
+3. Produzir a peça do dia com o FeraBot certo.
+4. Registrar o que VOCÊ fez: "gravei 2 vídeos", "fiz a call", "fechei uma venda de 2500".
+5. Olhar o painel: `python ScriptsFera/metas-api.py painel` e abrir `DashboardFera/index.html`.
 
-**O formulário de perfil não abriu no navegador**
-→ Abra manualmente: duplo-clique em `instalar.py`, se pedir o programa, escolha Python.
-
-**A arte gerou com erro ou ficou feia**
-→ Descreva o problema para o Claude no chat. Ele vai corrigir e regenerar.
-
-**Quero mudar meu perfil (nome, cores, produto)**
-→ Abra o Claude Code, digite: `python SetupFera/setup_form.py` e salve novamente.
-
-**Não sei se o conteúdo ficou bom antes de publicar**
-→ Abra os PNGs na pasta `output/` e revise. Só publique quando estiver satisfeito.
-
----
-
-## Fluxo da semana recomendado
-
-```
-Segunda   → /squad-carrossel-fera     (conteúdo educativo)
-Quarta    → /squad-stories-fera       (bastidores)
-Sexta     → /squad-caixinha-fera      (engajamento)
-Qualquer  → /meta-ads-fera            (tráfego pago quando precisar)
-```
-
----
-
-Qualquer dúvida, abra o Claude Code e fale diretamente com ele.
-Ele conhece o seu negócio e está aqui pra te ajudar. 🔥
+O Ferabot constrói as peças e cobra o caminho. Quem grava, publica, responde e vende é você.
+É assim que a meta sai do papel.

@@ -7,10 +7,29 @@ ROOT_DIR = Path(__file__).parent.parent
 PERFIL_PATH = ROOT_DIR / "perfil.json"
 CHECKPOINT_PATH = ROOT_DIR / "ScriptsFera" / "checkpoints.json"
 OUTPUT_DIR = ROOT_DIR / "output"
+ENV_PATH = ROOT_DIR / ".env"
 
 
 def now_iso():
     return datetime.now().isoformat()
+
+
+def carregar_env():
+    """Carrega o .env da raiz em os.environ (sem sobrescrever o que já existe).
+
+    As chaves são do UTILIZADOR do Ferabot — criadas por ele via setup_chaves.py.
+    """
+    import os
+    if not ENV_PATH.exists():
+        return
+    for linha in ENV_PATH.read_text(encoding="utf-8").splitlines():
+        linha = linha.strip()
+        if not linha or linha.startswith("#") or "=" not in linha:
+            continue
+        chave, _, valor = linha.partition("=")
+        chave, valor = chave.strip(), valor.strip().strip('"').strip("'")
+        if chave and valor and chave not in os.environ:
+            os.environ[chave] = valor
 
 
 def load_perfil():

@@ -128,7 +128,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "ScriptsFera"))
 from lib import load_perfil
 
 perfil = load_perfil()
-NETLIFY_TOKEN = os.environ.get("NETLIFY_TOKEN")  # via .env
+NETLIFY_AUTH_TOKEN = os.environ.get("NETLIFY_AUTH_TOKEN")  # via .env
 handle = perfil["handle_instagram"].replace("@", "")
 site_name = f"{handle}-fera"
 
@@ -137,7 +137,7 @@ html_path = Path("output/landing-pages") / ...  # caminho gerado
 # 1. Criar site
 r = requests.post(
     "https://api.netlify.com/api/v1/sites",
-    headers={"Authorization": f"Bearer {NETLIFY_TOKEN}"},
+    headers={"Authorization": f"Bearer {NETLIFY_AUTH_TOKEN}"},
     json={"name": site_name}
 )
 site_id = r.json()["id"]
@@ -148,7 +148,7 @@ sha1 = hashlib.sha1(content).hexdigest()
 r = requests.put(
     f"https://api.netlify.com/api/v1/deploys/{site_id}/files/index.html",
     headers={
-        "Authorization": f"Bearer {NETLIFY_TOKEN}",
+        "Authorization": f"Bearer {NETLIFY_AUTH_TOKEN}",
         "Content-Type": "text/html",
         "X-Content-SHA1": sha1,
     },

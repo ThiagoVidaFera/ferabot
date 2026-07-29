@@ -288,12 +288,12 @@ Com a decisão 2, isso deixa de bloquear a v2 de qualquer forma.
 
 | Fase | Entrega | Status |
 |---|---|---|
-| **1. Cérebro** | CLAUDE.md reescrito, skill `/fera` (porta única), persona + doutrina + roteador + coach | ✅ **feito** |
-| **2. Coach** | `setup_metas.py`, `metas-api.py`, Painel do Operador, wiring no `instalar.py` | ✅ **feito** (falta a skill `/copiloto-de-gestao`) |
-| **3. Braços grátis** | propostas, páginas & quiz, conteúdo & anúncios, slides | pendente |
-| **4. Braços BYOK** | `setup_chaves.py`, Meta Ads, YouTube, Netlify, DM oficial, WhatsApp local | pendente |
-| **5. Capacitação** | `criar-ferabot` | pendente |
-| **6. Distribuição** | tutorial, PRIMEIRO_DIA, README, `atualizar.bat`, push pro GitHub, teste em máquina limpa | pendente |
+| **1. Cérebro** | CLAUDE.md reescrito, skill `/fera` (porta única), persona + doutrina + roteador + coach | ✅ feito |
+| **2. Coach** | `setup_metas.py`, `metas-api.py`, Painel do Operador, `copiloto-de-gestao`, wiring no `instalar.py` | ✅ feito |
+| **3. Braços grátis** | propostas, páginas & quiz, conteúdo & anúncios, roteiros & oratória + motores (`render.py`, `narrar.py`) | ✅ feito |
+| **4. Braços BYOK** | `setup_chaves.py`, `imagem.py` (Gemini), `youtube_upload.py`, Netlify, DM oficial, WhatsApp local (`wpp/`), `leads-api.py` | ✅ feito |
+| **5. Capacitação** | `criar-ferabot` | ✅ feito |
+| **6. Distribuição** | tutorial, PRIMEIRO_DIA, README, API_SETUP, push pro GitHub | ✅ feito (falta só teste em máquina 100% virgem) |
 
 Fases 3 e 4 são paralelizáveis por bot.
 

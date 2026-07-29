@@ -1,72 +1,80 @@
 # Ferabot
 
-Sistema de marketing com IA para mentores. 9 etapas, do conteúdo aos anúncios, tudo personalizado com o seu perfil.
+Time de assistentes de marketing e vendas rodando na sua máquina, com uma meta declarada e um
+painel que mostra todo dia o que já está pronto e o que só anda se você andar.
+
+Um comando: **`/fera`**. Ele mentora, e chama o FeraBot certo quando você pede uma peça.
 
 ## Instalação
 
-### Requisitos
-- Python 3.10+
-- Node.js 18+
-- Claude Code instalado
-- Git
+### Caminho rápido (recomendado)
 
-### Setup em 3 comandos
+No Claude Code, digite:
+
+```
+/instale https://github.com/ThiagoVidaFera/ferabot
+```
+
+Ele resolve Python, Git, clona e roda o instalador sozinho.
+
+### Caminho manual
+
+Requisitos: Python 3.10+, Claude Code. (Node.js 18+ só pra disparo de WhatsApp.)
 
 ```bash
-# 1. Configurar seu perfil (nome, nicho, produto, cores, APIs)
-python SetupFera/setup_perfil.py
-
-# 2. Verificar ambiente e criar estrutura de pastas
-python SetupFera/setup_base.py
-
-# 3. Instalar skills no Claude Code
-python SetupFera/setup_skills.py
+python instalar.py
 ```
 
-### Depois do setup
+São 4 etapas: ambiente → seu perfil → **sua meta** → instalação dos FeraBots. No fim, o Painel do
+Operador abre no navegador.
 
-Abra o Claude Code na pasta raiz do Ferabot e invoque qualquer skill:
+## Os 6 FeraBots
 
-```
-/squad-carrossel-fera    → carrosseis de feed
-/squad-stories-fera      → stories de bastidores
-/squad-caixinha-fera     → caixinha de perguntas
-/jack-fera               → landing pages
-/squad-isca-fera         → iscas digitais
-/meta-ads-fera           → anúncios Meta Ads
-/squad-slides-fera       → apresentações e slides
-/zernio-fera             → automação de DMs
-```
+| Comando | Entrega |
+|---|---|
+| `/copiloto-de-gestao` | meta, índice de execução, painel, relatório semanal |
+| `/propostas` | PDF de proposta comercial |
+| `/paginas-e-quiz` | landing, página de venda, quiz, deploy |
+| `/conteudo-e-anuncios` | anúncios, carrossel, stories, posts, campanha Meta |
+| `/roteiros-e-oratoria` | roteiro, vídeo narrado, YouTube, slides |
+| `/crm-de-leads` | leads, disparo WhatsApp, comentário → DM |
 
-### Dashboard
+E `/criar-ferabot` — você descreve um agente novo e o sistema escreve a skill dele. É a parte que
+te torna dono da fábrica, não só usuário dos robôs.
 
-Abra `DashboardFera/index.html` no browser para ver todas as etapas com os comandos.
+## Chaves de API (opcionais, todas SUAS)
+
+Sem chave nenhuma o Ferabot já produz proposta, página, anúncio, carrossel, roteiro e vídeo
+narrado (voz IA grátis). As chaves — das **suas** contas — automatizam o último passo:
+
+| Chave | Automatiza |
+|---|---|
+| Gemini (grátis) | imagens com IA |
+| Netlify (grátis) | publicar páginas |
+| Meta Ads | subir campanhas (nascem pausadas) |
+| YouTube OAuth | subir vídeos no seu canal |
+| Instagram | comentário → DM (captação) |
+
+Configurar: `python SetupFera/setup_chaves.py` · guia: `API_SETUP.md`.
+
+O `.env` e o `perfil.json` ficam só na sua máquina (`.gitignore`). Se algum subir pro git por
+acidente, revogue e regenere as chaves.
 
 ## Estrutura
 
 ```
-Ferabot/
-├── CLAUDE.md              ← instruções do sistema
-├── perfil.json            ← seu perfil (criado pelo setup, não commitar)
-├── ScriptsFera/           ← funções utilitárias
-├── SetupFera/             ← scripts de instalação
-├── SkillsDoFera/          ← as 8 skills de conteúdo
-├── DashboardFera/         ← painel de navegação
-└── output/                ← todos os arquivos gerados
+ferabot/
+├── CLAUDE.md          ← doutrina do sistema (persona, regras)
+├── perfil.json        ← seu perfil (setup, não commitar)
+├── metas.json         ← sua meta e compromissos (setup)
+├── entregas.json      ← o que os FeraBots entregaram
+├── SetupFera/         ← instalação, perfil, metas, chaves
+├── ScriptsFera/       ← motores (render, narração, CRM, WhatsApp, YouTube)
+├── SkillsDoFera/      ← /fera + os 6 FeraBots + fábrica
+├── DashboardFera/     ← Painel do Operador
+└── output/            ← tudo que é gerado
 ```
 
-## Segurança
+## Primeiro dia
 
-> **Importante:** o arquivo `perfil.json` contém suas chaves de API (Gemini, OpenAI). Ele está listado no `.gitignore` e **nunca deve ser commitado ou compartilhado**. Se acidentalmente subir esse arquivo pro git, revogue e regenere as chaves imediatamente.
-
-Copie `.env.example` para `.env` e preencha com suas credenciais:
-```bash
-cp .env.example .env
-```
-
-## Dependências Python
-
-```bash
-pip install playwright python-dotenv requests facebook-business
-playwright install chromium
-```
+Leia o `PRIMEIRO_DIA.md`. Missão: sair do dia 1 com a meta no painel e UMA peça real pronta.

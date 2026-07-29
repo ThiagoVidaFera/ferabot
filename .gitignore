@@ -12,3 +12,9 @@ entregas.json
 DashboardFera/painel.js
 DashboardFera/perfil.js
 ScriptsFera/checkpoints.json
+leads.json
+*.results.jsonl
+lote*.json
+ScriptsFera/wpp/node_modules/
+ScriptsFera/wpp/.sessao/
+ScriptsFera/wpp/package-lock.json

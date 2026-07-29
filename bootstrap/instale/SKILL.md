@@ -107,7 +107,7 @@ Próximo passo, fera:
 
 1. File → Open Folder → <target_dir>
 2. Painel Claude (ícone na lateral)
-3. Digita /squad-carrossel-fera pra começar
+3. Digita /fera pra começar
 ```
 
 ## Tratamento de erros
