@@ -31,22 +31,23 @@ def erro(msg, dica=""):
     if dica:
         print(f"    → {dica}")
 
-def rodar(script, descricao):
+def rodar(script, descricao, *args):
     print(f"  Rodando {descricao}...")
-    result = subprocess.run([sys.executable, str(ROOT / script)], text=True)
+    comando = [sys.executable, str(ROOT / script), *args]
+    result = subprocess.run(comando, text=True)
     return result.returncode == 0
 
 
 titulo("FERABOT — INSTALAÇÃO COMPLETA")
 
-print("  Olá, fera! Vamos configurar tudo em 3 passos.")
-print("  Isso leva cerca de 2 minutos.")
+print("  Vamos configurar tudo em 4 passos.")
+print("  Leva cerca de 3 minutos.")
 print()
 input("  Pressione ENTER para começar → ")
 
 
 # ─── Passo 1: Verificar ambiente ───────────────────────────────────────────
-passo(1, 3, "Verificando se tudo está instalado no seu computador...")
+passo(1, 4, "Verificando se tudo está instalado no seu computador...")
 
 ok_env = rodar("SetupFera/setup_base.py", "verificação de ambiente")
 if not ok_env:
@@ -61,7 +62,7 @@ ok("Ambiente verificado!")
 
 
 # ─── Passo 2: Configurar perfil ────────────────────────────────────────────
-passo(2, 3, "Configurando o seu perfil no Ferabot...")
+passo(2, 4, "Configurando o seu perfil no Ferabot...")
 
 print()
 print("  Vou abrir um formulário no seu navegador.")
@@ -88,8 +89,28 @@ if not ok_perfil:
 ok("Perfil configurado!")
 
 
-# ─── Passo 3: Instalar skills ──────────────────────────────────────────────
-passo(3, 3, "Instalando as skills no Claude Code...")
+# ─── Passo 3: Declarar a meta ──────────────────────────────────────────────
+passo(3, 4, "Definindo a sua meta...")
+
+print()
+print("  Sem meta declarada eu não tenho como te cobrar.")
+print("  São 5 perguntas.")
+print()
+
+ok_metas = rodar("SetupFera/setup_metas.py", "configuração de metas")
+if not ok_metas:
+    erro(
+        "Não foi possível configurar a meta.",
+        "Tente rodar manualmente: python SetupFera/setup_metas.py"
+    )
+    input("\n  Pressione ENTER para fechar.")
+    sys.exit(1)
+
+ok("Meta definida!")
+
+
+# ─── Passo 4: Instalar skills ──────────────────────────────────────────────
+passo(4, 4, "Instalando os FeraBots no Claude Code...")
 
 ok_skills = rodar("SetupFera/setup_skills.py", "instalação de skills")
 if not ok_skills:
@@ -100,7 +121,10 @@ if not ok_skills:
     input("\n  Pressione ENTER para fechar.")
     sys.exit(1)
 
-ok("Skills instaladas!")
+ok("FeraBots instalados!")
+
+# Gera o painel já com o estado inicial honesto (coluna direita preenchida).
+rodar("ScriptsFera/metas-api.py", "geração do painel", "painel")
 
 
 # ─── Conclusão ─────────────────────────────────────────────────────────────
