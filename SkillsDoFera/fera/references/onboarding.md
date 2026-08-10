@@ -163,11 +163,30 @@ daquela dor específica, nunca antes. Guia completo de cada uma: `API_SETUP.md`.
 | "queria outro estilo de imagem" | **fal.ai** | por uso |
 | "quero disparar pra lista toda, em vários números" | **WAHA** — ⚠️ só com servidor próprio | ~R$30/mês de VPS |
 | "quero receber relatório por e-mail" | **Resend** | free tier |
-| "queria saber o número real desse perfil" | **apidirect** | pago |
+| **"onde eu cobro?" / "como recebo?" / "preciso de link de pagamento"** | **Cakto** — PIX, cartão e boleto; eu crio o produto e devolvo o link | grátis (taxa por venda) |
+| "quero os dados desse perfil do Instagram" / "quanto esse cara tem de seguidor?" | **Apify** — robô `apify/instagram-scraper` | free tier |
+| "queria o número real desse perfil em qualquer rede" | **apidirect** | pago |
 | "não sei o que funciona no meu nicho" | **ScrapeCreators** — anúncio ativo do concorrente | crédito por busca |
 | "vou abrir um canal, que tema?" | **NicheFinder** — 65 mil canais por dado | pago |
-| "preciso de dado de um site sem API" | **Apify** | free tier |
 | "publiquei, entrou alguém?" | **Cloudflare Web Analytics** | grátis |
+
+**Cakto é a recomendação de checkout — oferecer ativamente**, não só quando ele perguntar. Assim
+que ele disser o preço do produto no briefing (Fase 1), a pergunta natural é: *"e onde você
+cobra hoje?"*. Se não tiver checkout, é a Cakto. Se já usar Kiwify, Hotmart, Guru ou PerfectPay,
+**não empurrar a troca** — o link entra na página igual e nada quebra; ele só não ganha o
+"cria o checkout por comando".
+
+Três avisos que vão junto com a Cakto, sempre:
+- A **imagem do checkout não entra por API** — só pelo Checkout Builder do painel. Eu monto o
+  banner "O QUE VOCÊ RECEBE HOJE", ele cola em 2 minutos.
+- O Builder tem layout **separado** de desktop e celular. Colar só no desktop deixa o celular sem
+  imagem — de onde vem quase toda a venda. No modo mobile tem "Copiar Do Desktop".
+- **Compra-teste no PIX antes de rodar tráfego.** Checkout no ar não prova que a entrega chega.
+
+**Apify é a rota do Instagram.** Quando o cliente quiser dado de perfil (o dele, de concorrente
+ou de lead), o caminho é o `apify/instagram-scraper`: seguidores, bio, posts, curtidas,
+comentários e hashtag. Serve pra qualificar lead com audiência **medida** em vez de declarada —
+o @ que ele digita no quiz vira dado real.
 
 ### 4.3 — O que já funciona sem chave (dizer sempre, fecha a fase)
 

@@ -38,8 +38,9 @@ quiser).
 | `APIDIRECT_API_KEY` | dados reais de perfil em qualquer rede social | pago |
 | `SCRAPECREATORS_API_KEY` | ver o anúncio que o concorrente está rodando | crédito por busca |
 | `NICHEFINDER_API_KEY` | achar nicho de YouTube por dado | pago |
-| `APIFY_TOKEN` | raspagem pronta de sites | free tier |
+| `APIFY_TOKEN` | puxar dados do Instagram (perfil, posts, comentários) | free tier |
 | `CLOUDFLARE_ANALYTICS_TOKEN` | visitas na sua página, sem cookie | grátis |
+| `CAKTO_CLIENT_ID` + `CAKTO_CLIENT_SECRET` | criar produto e gerar link de checkout (PIX, cartão, boleto) | grátis (paga só a taxa da venda) |
 
 ---
 
@@ -263,14 +264,28 @@ própria média. Crie conta em **myagentsbuddy.com** e copie a chave (começa co
 
 ---
 
-## 15. Apify (raspagem pronta) — 5 minutos
+## 15. Apify (puxar dados do Instagram) — 5 minutos
 
-**Dói quando:** você precisa de dado de um site que não tem API.
+**Dói quando:** você precisa dos dados de um perfil do Instagram — o seu, o de um concorrente ou
+o de um lead — e está copiando número na mão.
 
 1. Crie conta em **console.apify.com**.
-2. **Settings → Integrations → API token.**
+2. **Settings → Integrations → API token** (começa com `apify_api_`).
 
-Catálogo de robôs prontos. Free tier mensal resolve uso ocasional.
+O robô é o **`apify/instagram-scraper`**, que já vem pronto na plataforma. Puxa:
+
+| O que | Serve pra |
+|---|---|
+| Perfil (seguidores, bio, link, verificado) | qualificar lead que chega pelo Instagram — audiência **medida**, não declarada |
+| Posts (legenda, curtidas, comentários, data) | ver o que engaja de verdade no seu nicho |
+| Comentários de um post | achar quem já interage e virar lista de abordagem |
+| Hashtag e localização | mapear quem produz no seu tema |
+
+Uso mais direto no dia a dia: o lead digita o **@** dele no seu quiz ou na conversa, e a página
+confirma quem é com dado real em vez de aceitar o que ele diz.
+
+**Free tier mensal** resolve uso ocasional. Serve também pra raspar qualquer outro site — o
+catálogo de robôs prontos é grande — mas o Instagram é o que você vai usar toda semana.
 
 ---
 
@@ -282,6 +297,50 @@ Catálogo de robôs prontos. Free tier mensal resolve uso ocasional.
 2. **Analytics & Logs → Web Analytics → Add a site.**
 
 Grátis, sem cookie e sem banner de consentimento.
+
+---
+
+## 17. Cakto (receber pagamento) — 10 minutos
+
+**Dói quando:** você tem o produto pronto e não tem onde cobrar.
+
+**A recomendação é Cakto.** É o checkout que eu uso e o que o Ferabot cria por comando. PIX,
+cartão e boleto, em real, com valor mínimo de R$5 — funciona tanto pra um produto de R$27 quanto
+pra uma mentoria.
+
+1. Crie conta em **app.cakto.com.br**.
+2. Complete o cadastro de recebimento (dados bancários e documento).
+3. No painel, vá em **API** e gere as credenciais: **Client ID** e **Client Secret**.
+
+Com as duas no `.env`, você pede *"cria o checkout do meu produto de R$97"* e recebe o link
+`pay.cakto.com.br/xxxxx` pronto pra colar na página e no anúncio.
+
+### Três coisas que economizam uma tarde
+
+**A imagem do checkout não entra por comando.** Eu crio o produto, o preço e o link por API — mas
+a imagem só renderiza pelo **Checkout Builder do painel** (Produto → aba Checkout → Personalizar).
+Eu monto o banner pra você; colar leva 2 minutos.
+
+**O Builder tem layout de desktop e de celular separados.** Colou no desktop e achou que acabou?
+No celular continua sem imagem — e é de onde vem quase toda a sua venda. No modo mobile tem o
+botão **"Copiar Do Desktop"**, que resolve num clique.
+
+**Antes de rodar tráfego, faça uma compra-teste no PIX.** É a única forma de confirmar que o
+e-mail de entrega chega no comprador. Checkout no ar não prova entrega funcionando.
+
+### O padrão de banner que converte melhor
+
+Uma imagem tipo **"O QUE VOCÊ RECEBE HOJE"**, acima do formulário: uma linha de hero + print do
+produto + 3 ou 4 benefícios em cards + selos (Vitalício · Acesso imediato · Garantia de 7 dias).
+Explicar antes de pedir o cartão gera desejo — formulário seco só coleta desistência.
+
+**Já usa outra plataforma?** Kiwify, Hotmart, Guru, PerfectPay funcionam igual: o link entra na
+página como link e nada quebra. Você só não ganha o "cria o checkout por comando".
+
+**Uma regra que vale de graça:** a régua de decisão de campanha é o **painel do checkout**, nunca
+o Gerenciador de Anúncios. O Gerenciador conta o que ele quer contar.
+
+---
 
 ---
 
@@ -301,17 +360,6 @@ Instalado junto com o Ferabot, custo zero, sem conta:
 | **Jina Reader** | lê qualquer página como texto limpo (`r.jina.ai/<url>`) |
 
 Não peça chave pra nada disso. Só peça o trabalho.
-
----
-
-## Ah — e o seu checkout
-
-O Ferabot **não toca no seu checkout**. Não existe chave a configurar aqui: Kiwify, Hotmart,
-Guru, Cakto, PerfectPay ou o que você usar continua sendo seu, e o link entra na página como
-link mesmo.
-
-Uma regra que vale de graça: a régua de decisão de campanha é o **painel do checkout**, nunca o
-Gerenciador de Anúncios. O Gerenciador conta o que ele quer contar.
 
 ---
 
