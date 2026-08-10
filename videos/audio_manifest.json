@@ -1,0 +1,130 @@
+{
+  "ferabot-propostas": [
+    {
+      "frame": 1,
+      "text": "Quantas propostas você já perdeu, só por demorar pra mandar?",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-propostas\\assets\\audio\\line-01.mp3"
+    },
+    {
+      "frame": 2,
+      "text": "Isso aqui é o Claude Code, com o FeraBot Propostas instalado.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-propostas\\assets\\audio\\line-02.mp3"
+    },
+    {
+      "frame": 3,
+      "text": "Fala o que precisa: gera a proposta pro Ricardo, plano premium.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-propostas\\assets\\audio\\line-03.mp3"
+    },
+    {
+      "frame": 4,
+      "text": "Em segundos, o PDF sai pronto. Sua marca, seu preço, sua voz.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-propostas\\assets\\audio\\line-04.mp3"
+    },
+    {
+      "frame": 5,
+      "text": "Sem equipe. Sem saber programar. Menos de duas horas por dia.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-propostas\\assets\\audio\\line-05.mp3"
+    },
+    {
+      "frame": 6,
+      "text": "Eu instalo isso na sua máquina, ao vivo. Claude Code, no link.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-propostas\\assets\\audio\\line-06.mp3"
+    }
+  ],
+  "ferabot-videoedicao": [
+    {
+      "frame": 1,
+      "text": "Quantos vídeos você já gravou e nunca editou?",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-videoedicao\\assets\\audio\\line-01.mp3"
+    },
+    {
+      "frame": 2,
+      "text": "Isso aqui é o Claude Code, com o FeraBot Conteúdo instalado.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-videoedicao\\assets\\audio\\line-02.mp3"
+    },
+    {
+      "frame": 3,
+      "text": "Fala o que precisa: corta esse vídeo, tira os silêncios e sobe a legenda.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-videoedicao\\assets\\audio\\line-03.mp3"
+    },
+    {
+      "frame": 4,
+      "text": "Corte pronto. Legenda no lugar. Formato certo pro Reels.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-videoedicao\\assets\\audio\\line-04.mp3"
+    },
+    {
+      "frame": 5,
+      "text": "Sem equipe. Sem saber editar. Menos de duas horas por dia.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-videoedicao\\assets\\audio\\line-05.mp3"
+    },
+    {
+      "frame": 6,
+      "text": "Eu instalo isso na sua máquina, ao vivo. Claude Code, no link.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-videoedicao\\assets\\audio\\line-06.mp3"
+    }
+  ],
+  "ferabot-paginavendas": [
+    {
+      "frame": 1,
+      "text": "Quanto custaria uma página de vendas, se você contratasse um dev?",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-paginavendas\\assets\\audio\\line-01.mp3"
+    },
+    {
+      "frame": 2,
+      "text": "Isso aqui é o Claude Code, com o FeraBot Páginas instalado.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-paginavendas\\assets\\audio\\line-02.mp3"
+    },
+    {
+      "frame": 3,
+      "text": "Fala o que precisa: monta a página do meu curso, com formulário de captura.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-paginavendas\\assets\\audio\\line-03.mp3"
+    },
+    {
+      "frame": 4,
+      "text": "Hero, prova, oferta, botão, e já sobe no ar, com link próprio.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-paginavendas\\assets\\audio\\line-04.mp3"
+    },
+    {
+      "frame": 5,
+      "text": "Sem dev. Sem agência. Menos de duas horas por dia.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-paginavendas\\assets\\audio\\line-05.mp3"
+    },
+    {
+      "frame": 6,
+      "text": "Eu instalo isso na sua máquina, ao vivo. Claude Code, no link.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-paginavendas\\assets\\audio\\line-06.mp3"
+    }
+  ],
+  "ferabot-crm": [
+    {
+      "frame": 1,
+      "text": "Cada lead que você não responde rápido foi pro concorrente.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-crm\\assets\\audio\\line-01.mp3"
+    },
+    {
+      "frame": 2,
+      "text": "Isso aqui é o Claude Code, com o FeraBot CRM instalado.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-crm\\assets\\audio\\line-02.mp3"
+    },
+    {
+      "frame": 3,
+      "text": "Fala o que precisa: organiza os leads da semana e me avisa quem esfriou.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-crm\\assets\\audio\\line-03.mp3"
+    },
+    {
+      "frame": 4,
+      "text": "Cada lead no lugar certo. E um aviso pra quem tá esfriando.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-crm\\assets\\audio\\line-04.mp3"
+    },
+    {
+      "frame": 5,
+      "text": "Sem planilha. Sem CRM caro. Menos de duas horas por dia.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-crm\\assets\\audio\\line-05.mp3"
+    },
+    {
+      "frame": 6,
+      "text": "Eu instalo isso na sua máquina, ao vivo. Claude Code, no link.",
+      "mp3": "c:/ccos-ratos/videos\\ferabot-crm\\assets\\audio\\line-06.mp3"
+    }
+  ]
+}

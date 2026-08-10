@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>03 — Demo: o pedido</title>
+    <!-- head is metadata for the source file only; the runtime discards everything
+         outside <template> when this file is loaded as a sub-composition. -->
+  </head>
+  <body>
+    <template>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <style>
+        [data-composition-id="03-demo-pedido"],
+        [data-composition-id="03-demo-pedido"] * {
+          box-sizing: border-box;
+        }
+
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: block;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2");
+          font-weight: 700;
+          font-style: normal;
+          font-display: block;
+        }
+
+        /* Root: style by #root, never a class — see hyperframes-core Pitfall 3 */
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        .03-demo-pedido-bg {
+          position: absolute;
+          inset: 0;
+          background: #fbf3ea; /* {colors.cream} ground */
+        }
+
+        #03-demo-pedido-terminal {
+          position: absolute;
+          left: 40px;
+          top: 460px;
+          width: 1000px;
+          height: 860px;
+          background: #181615; /* {colors.navy} */
+          border: 1px solid rgba(251, 243, 234, 0.14); /* cream@14% on navy */
+          border-radius: 8px;
+          box-shadow:
+            0 1px 3px rgba(34, 29, 24, 0.08),
+            0 4px 16px rgba(34, 29, 24, 0.04);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+
+        .03-demo-pedido-titlebar {
+          flex: 0 0 84px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          background: #252220; /* {colors.navy-elev} */
+          border-bottom: 1px solid rgba(251, 243, 234, 0.14);
+          padding: 0 30px;
+        }
+
+        .03-demo-pedido-dots {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .03-demo-pedido-dot {
+          display: block;
+          width: 13px;
+          height: 13px;
+          border-radius: 9999px;
+          background: rgba(251, 243, 234, 0.22);
+        }
+
+        .03-demo-pedido-filename {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 24px;
+          letter-spacing: 0.02em;
+          color: rgba(251, 243, 234, 0.72);
+          pointer-events: none;
+        }
+
+        .03-demo-pedido-body {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 44px;
+          background: #181615;
+        }
+
+        .03-demo-pedido-promptline {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
+        .03-demo-pedido-prompt {
+          flex: 0 0 auto;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 700;
+          font-size: 30px;
+          line-height: 1;
+          color: #d9622b; /* {colors.coral} — the frame's single voltage moment */
+        }
+
+        .03-demo-pedido-textwrap {
+          display: inline-flex;
+          align-items: center;
+          white-space: nowrap;
+        }
+
+        #03-demo-pedido-text {
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 30px;
+          line-height: 1;
+          color: #fbf3ea; /* {colors.cream} */
+        }
+
+        #03-demo-pedido-cursor {
+          display: inline-block;
+          width: 11px;
+          height: 40px;
+          margin-left: 8px;
+          background: #d9622b; /* {colors.coral} */
+          flex: 0 0 auto;
+        }
+      </style>
+
+      <div
+        id="root"
+        data-composition-id="03-demo-pedido"
+        data-width="1080"
+        data-height="1920"
+        data-duration="5.3"
+      >
+        <div
+          class="03-demo-pedido-bg clip"
+          id="03-demo-pedido-bg"
+          data-start="0"
+          data-duration="5.3"
+          data-track-index="0"
+        ></div>
+
+        <div
+          class="clip"
+          id="03-demo-pedido-terminal"
+          data-start="0"
+          data-duration="5.3"
+          data-track-index="1"
+        >
+          <div class="03-demo-pedido-titlebar">
+            <div class="03-demo-pedido-dots">
+              <span class="03-demo-pedido-dot"></span>
+              <span class="03-demo-pedido-dot"></span>
+              <span class="03-demo-pedido-dot"></span>
+            </div>
+            <div class="03-demo-pedido-filename">claude — sua máquina</div>
+          </div>
+          <div class="03-demo-pedido-body">
+            <div class="03-demo-pedido-promptline">
+              <span class="03-demo-pedido-prompt">&gt;</span>
+              <span class="03-demo-pedido-textwrap">
+                <span id="03-demo-pedido-text"></span>
+                <span id="03-demo-pedido-cursor"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          window.__timelines = window.__timelines || {};
+
+          // ---- deterministic constants (no Date.now / no Math.random) ----
+          var TOTAL_DURATION = 5.3;
+          var ENTRY_AT = 0; // terminal pop begins immediately
+          var POP_DUR = 0.45; // hero (the terminal) fully settled well before t<=0.5s
+          var TYPE_START = 1.5; // matches Scene 2's "~1.5s" cue in STORYBOARD.md
+          var CHAR_RATE = 0.07; // seconds per character — human-typed cadence
+          var BLINK_HALF_PERIOD = 0.3; // one on/off half-cycle of the caret
+
+          var fullText = "gera a proposta pro Ricardo, plano premium";
+          var TYPE_DUR = fullText.length * CHAR_RATE;
+
+          var textEl = document.getElementById("03-demo-pedido-text");
+          var cursorEl = document.getElementById("03-demo-pedido-cursor");
+
+          var tl = gsap.timeline({ paused: true });
+
+          // Scene 1 — the code-surface terminal establishes centered on cream
+          // ground (title bar + dots + filename chrome). fromTo so the collapsed
+          // start is correct even when the renderer seeks straight to t=0.
+          tl.fromTo(
+            "#03-demo-pedido-terminal",
+            { scale: 0.94, opacity: 0 },
+            { scale: 1, opacity: 1, duration: POP_DUR, ease: "power3.out" },
+            ENTRY_AT,
+          );
+
+          // Scene 1→2 — coral caret blinks at the empty prompt, then keeps
+          // blinking through and after the typed command. Finite yoyo driven
+          // by the paused timeline (never a CSS @keyframes loop — see
+          // determinism-rules.md).
+          var blinkWindow = TOTAL_DURATION - POP_DUR;
+          var blinkRepeats = Math.max(0, Math.ceil(blinkWindow / BLINK_HALF_PERIOD) - 1);
+          tl.to(
+            "#03-demo-pedido-cursor",
+            {
+              opacity: 0,
+              duration: BLINK_HALF_PERIOD,
+              ease: "steps(1)",
+              yoyo: true,
+              repeat: blinkRepeats,
+            },
+            POP_DUR,
+          );
+
+          // Scene 2 — "gera a proposta pro Ricardo, plano premium" types on
+          // character-by-character after the coral `>` prompt glyph. Smooth
+          // character-slice typewriter (discrete-text-sequence.md variation):
+          // continuous typing, no pauses/edits needed for this single beat.
+          var lenDriver = { v: 0 };
+          tl.to(
+            lenDriver,
+            {
+              v: fullText.length,
+              duration: TYPE_DUR,
+              ease: "power1.inOut",
+              onUpdate: function () {
+                textEl.textContent = fullText.substring(0, Math.floor(lenDriver.v));
+              },
+            },
+            TYPE_START,
+          );
+
+          window.__timelines["03-demo-pedido"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
