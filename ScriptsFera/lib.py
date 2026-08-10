@@ -3,6 +3,20 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+# Blindagem de encoding, no import: todo script de setup passa por aqui.
+#
+# Bug de campo reproduzido em 2026-08-10: rodando pelo Claude Code a saída é
+# pipe, o Python resolve stdout em cp1252, e o PRIMEIRO caractere de moldura
+# (═) derrubava o setup_base.py com UnicodeEncodeError. A instalação morria
+# no passo 1 e a mensagem de erro mandava o cliente "instalar o que está
+# faltando", quando não faltava nada. Passava em teste manual porque o console
+# do PowerShell resolve UTF-8, e só quebrava com a saída redirecionada.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
+    except Exception:
+        pass
+
 ROOT_DIR = Path(__file__).parent.parent
 PERFIL_PATH = ROOT_DIR / "perfil.json"
 CHECKPOINT_PATH = ROOT_DIR / "ScriptsFera" / "checkpoints.json"
