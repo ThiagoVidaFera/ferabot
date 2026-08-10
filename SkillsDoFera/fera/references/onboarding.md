@@ -123,7 +123,72 @@ start DashboardFera/index.html
 Explicar as duas colunas em 3 linhas: a esquerda é o que os FeraBots constroem (se preenche
 sozinha), a direita é o irredutível dele (não se preenche nunca).
 
-## Fase 4 — Google Tasks (oferecer SEMPRE, uma vez)
+## Fase 4 — Recursos: as chaves (oferecer SEMPRE, uma vez)
+
+O agente tem 4 camadas: **Fontes** (o que ele lê — o briefing que você acabou de fazer) ·
+**Especializações** (o que cada FeraBot faz) · **Recursos** (o acesso) · **Automações** (o que
+roda sozinho). Esta fase é a **terceira**: é o que separa um agente que **te dá conselho** de um
+que **faz**.
+
+**REGRA DURA: não despejar a lista de 23 chaves.** Isso trava o cliente no primeiro dia. Pedir
+**duas** agora e deixar o resto pra quando doer.
+
+### 4.1 — As duas do primeiro dia
+
+> Duas chaves e você já publica sozinho — as duas são grátis e levam uns 8 minutos no total:
+>
+> - **Gemini** (aistudio.google.com → Get API key) — as imagens dos seus posts e anúncios
+> - **Netlify** (app.netlify.com → User settings → Applications → Personal access tokens) —
+>   publicar página e quiz num comando
+>
+> Me manda as duas aqui que eu gravo, ou roda `python SetupFera/setup_chaves.py`.
+
+Se ele mandar no chat: gravar no `.env` e **nunca repetir a chave de volta** na resposta.
+Se recusar ou adiar: seguir normalmente. Sem chave o FeraBot entrega a peça pronta e ensina o
+caminho manual — dizer isso e não insistir.
+
+### 4.2 — O resto, só quando doer
+
+Guardar esta tabela e oferecer **a linha certa no momento certo** — quando o cliente reclamar
+daquela dor específica, nunca antes. Guia completo de cada uma: `API_SETUP.md`.
+
+| Quando ele disser… | Oferecer | Custo |
+|---|---|---|
+| "quero subir anúncio" | **Meta Ads** (`META_ACCESS_TOKEN`) — campanha nasce pausada | grátis |
+| "quero postar no YouTube" | **YouTube OAuth** — sobe como não listado | grátis |
+| "queria automatizar o direct" | **Instagram** (`IG_USER_ID`) — comentário → DM | grátis |
+| "perco tempo postando na mão" | **Post for Me** — feed, carrossel, story e TikTok | pago barato |
+| "o Gemini travou no meio" / "quero clipe de vídeo" | **Gathos** Creator — imagem, voz e vídeo ilimitados (3 chaves) | US$45/mês |
+| "a narração parece robô" | **ElevenLabs** — voz premium PT-BR | free tier |
+| "queria outro estilo de imagem" | **fal.ai** | por uso |
+| "quero disparar pra lista toda, em vários números" | **WAHA** — ⚠️ só com servidor próprio | ~R$30/mês de VPS |
+| "quero receber relatório por e-mail" | **Resend** | free tier |
+| "queria saber o número real desse perfil" | **apidirect** | pago |
+| "não sei o que funciona no meu nicho" | **ScrapeCreators** — anúncio ativo do concorrente | crédito por busca |
+| "vou abrir um canal, que tema?" | **NicheFinder** — 65 mil canais por dado | pago |
+| "preciso de dado de um site sem API" | **Apify** | free tier |
+| "publiquei, entrou alguém?" | **Cloudflare Web Analytics** | grátis |
+
+### 4.3 — O que já funciona sem chave (dizer sempre, fecha a fase)
+
+> Uma coisa importante: **Playwright** (as artes), **FFmpeg** (o vídeo), **Edge TTS** (a
+> narração), **yt-dlp**, **Hyperframes** e **Remotion** (as animações) e **Marp** (os slides) já
+> estão instalados, são grátis e não pedem chave nenhuma. Você já pode me pedir carrossel, vídeo
+> narrado e slides agora, antes de configurar qualquer coisa.
+
+Isso derruba a objeção de "então eu preciso pagar um monte de coisa antes de começar" — que é
+falsa e trava o primeiro dia.
+
+### Avisos que NÃO se omitem
+
+- **WAHA:** cadência de disparo é **12/dia → +2/dia → teto 45**, mínimo 2 min entre mensagens.
+  Um número comercial já foi restringido por 24h com **49 envios num dia**. Nunca oferecer WAHA
+  sem esse número junto.
+- **ScrapeCreators:** é leitura de mercado, **nunca cópia** de peça.
+- **Meta Ads:** toda campanha nasce **pausada**. O Ferabot nunca liga verba sozinho.
+- **Chave que o cliente mandar no chat não se repete de volta** na resposta.
+
+## Fase 5 — Google Tasks (oferecer SEMPRE, uma vez)
 
 Depois do painel, oferecer:
 
@@ -146,7 +211,7 @@ ele marcar lá, reporta aqui ("gravei 2 vídeos") pra eu registrar no índice
 
 **Se recusar:** ok, não insistir. O painel continua sendo a fonte.
 
-## Fase 5 — Fechar o briefing
+## Fase 6 — Fechar o briefing
 
 1. Resumo em 5 linhas: quem ele é, a meta, o número da semana, onde está o painel.
 2. Registrar em silêncio:

@@ -1,14 +1,21 @@
 # Ferabot — Suas chaves de API (passo a passo)
 
-Todas as chaves são **suas**: das suas contas Google, Netlify e Meta. Elas ficam no arquivo `.env`
-na sua máquina e não saem dela.
+Todas as chaves são **suas**, das suas próprias contas. Elas ficam no arquivo `.env` na sua
+máquina e não saem dela.
 
 **Nenhuma é obrigatória.** Sem a chave, o FeraBot entrega a peça pronta e ensina o caminho manual.
 Com a chave, ele automatiza o último passo.
 
-Pra preencher: `python SetupFera/setup_chaves.py` (pode rodar quantas vezes quiser).
+Pra preencher: `python SetupFera/setup_chaves.py` (pergunta em blocos, pode rodar quantas vezes
+quiser).
+
+> **Comece pelas duas primeiras e pare.** Gemini e Netlify levam 8 minutos, são grátis, e já te
+> dão arte pronta e página publicada. O resto desta página é pra depois — pegue cada uma **quando
+> doer**, não antes. Ninguém precisa de 23 chaves no primeiro dia.
 
 ## Qual chave desbloqueia o quê
+
+### As cinco do começo — todas grátis
 
 | Chave | Desbloqueia | Custo |
 |---|---|---|
@@ -17,6 +24,26 @@ Pra preencher: `python SetupFera/setup_chaves.py` (pode rodar quantas vezes quis
 | `META_ACCESS_TOKEN` + `META_AD_ACCOUNT_ID` | subir campanhas no Gerenciador | grátis (paga só o anúncio) |
 | `YT_CLIENT_ID` + `YT_CLIENT_SECRET` + `YT_REFRESH_TOKEN` | subir vídeos no seu canal | grátis |
 | `IG_USER_ID` + `IG_ACCESS_TOKEN` | comentário → DM automático (captação de lead) | grátis |
+
+### As opcionais — só quando bater o limite
+
+| Chave | Desbloqueia | Custo |
+|---|---|---|
+| `POSTFORME_API_KEY` | publicar feed, carrossel, story e TikTok | pago barato |
+| `GATHOS_API_KEY` + `GATHOS_TTS_API_KEY` + `GATHOS_VIDEO_API_KEY` | imagem, voz e vídeo **ilimitados** | US$45/mês |
+| `ELEVENLABS_API_KEY` | voz premium em português | free tier |
+| `FAL_KEY` | modelos de imagem e vídeo que o Gemini não tem | por uso |
+| `WAHA_BASE_URL` + `WAHA_API_KEY` | WhatsApp multi-conta ⚠️ exige servidor próprio | ~R$30/mês de VPS |
+| `RESEND_API_KEY` | e-mail e relatório automático | free tier |
+| `APIDIRECT_API_KEY` | dados reais de perfil em qualquer rede social | pago |
+| `SCRAPECREATORS_API_KEY` | ver o anúncio que o concorrente está rodando | crédito por busca |
+| `NICHEFINDER_API_KEY` | achar nicho de YouTube por dado | pago |
+| `APIFY_TOKEN` | raspagem pronta de sites | free tier |
+| `CLOUDFLARE_ANALYTICS_TOKEN` | visitas na sua página, sem cookie | grátis |
+
+---
+
+# Parte 1 — As cinco do começo
 
 ---
 
@@ -97,7 +124,212 @@ quem conversa com o lead depois é **você**.
 
 ---
 
+---
+
+# Parte 2 — As opcionais (só quando fizer falta)
+
+As cinco de cima resolvem 80% do dia. As de baixo entram quando você bater num limite específico.
+**Não configure tudo de uma vez.** Configure quando doer.
+
+---
+
+## 6. Post for Me (publicar sem abrir o app) — 5 minutos
+
+**Dói quando:** você produz 10 peças por semana e perde 20 minutos por dia postando na mão.
+
+1. Crie conta em **postforme.dev**.
+2. Painel → **API keys** → copie.
+3. Conecte suas contas (Instagram, TikTok).
+
+Publica feed, carrossel, story e TikTok num comando só.
+
+**Três armadilhas que já derrubaram entrega:**
+- O status `connected` **não prova** que a conexão com a Meta está viva. Testar antes de agendar.
+- Token morto fica **45 minutos** dizendo "processando" antes de avisar que falhou.
+- Conecte pelo **Instagram nativo**, não pelo Facebook — conexão via Facebook cai muito mais.
+
+---
+
+## 7. Gathos (imagem, voz e vídeo ilimitados) — 5 minutos
+
+**Dói quando:** o free tier do Gemini trava no meio de um lote, ou você quer clipes de vídeo.
+
+1. Assine em **gathos.com** — plano **Creator, US$ 45/mês**.
+2. Painel → **API keys**.
+3. São **três chaves diferentes**, uma por capacidade — copie as três:
+   `img_live_…` (imagem) · `tts_live_…` (voz) · `vid_live_…` (vídeo).
+
+No plano Creator os três são **ilimitados**: depois de assinar, gerar mais uma imagem custa zero.
+É o motor padrão de quem produz em volume.
+
+Sem ele o Ferabot continua fazendo vídeo — com voz grátis (Edge TTS) e FFmpeg. O Gathos é o
+upgrade de quem já produz toda semana, não o ponto de partida.
+
+---
+
+## 8. ElevenLabs (voz premium) — 3 minutos
+
+**Dói quando:** a narração grátis soa robótica no seu nicho.
+
+1. Crie conta em **elevenlabs.io**.
+2. **Profile → API Keys → Create.**
+
+⚠️ **A armadilha que pega todo mundo:** o código hexadecimal que aparece na coluna KEY do painel
+é o **ID da chave**, não a chave. A chave real começa com **`sk_`** e só aparece **uma vez**, no
+pop-up de *Create*. Se você fechou sem copiar, use *Rotate* pra gerar de novo.
+
+---
+
+## 9. fal.ai (modelos que o Gemini não tem) — 3 minutos
+
+**Dói quando:** você precisa de um estilo de imagem ou vídeo específico.
+
+1. Crie conta em **fal.ai**.
+2. **Dashboard → Keys → Add key.**
+
+Pago por uso, sem mensalidade.
+
+---
+
+## 10. WAHA (WhatsApp em escala) — avançado, 1 hora
+
+**Dói quando:** o disparo local não dá conta — você quer vários números e envio contínuo.
+
+⚠️ **Isto exige um servidor seu** (VPS de ~R$30/mês). Se você tem um número só e uma lista
+pequena, **não faça isto** — o disparo local que já vem no Ferabot resolve.
+
+1. Contrate uma VPS (Hostinger, Contabo, DigitalOcean).
+2. Suba o WAHA por Docker: `docker run -p 3000:3000 devlikeapro/waha:noweb`
+3. Documentação completa: **waha.devlike.pro**
+
+**Aqui a chave funciona ao contrário de todas as outras: você não gera, você inventa.**
+Não existe painel do WAHA. O software roda no seu servidor e a chave é uma senha que você
+escolhe e coloca na variável `WHATSAPP_API_KEY` do container. É um cadeado que você comprou e
+você mesmo trancou. Coloque a mesma senha no `.env` do Ferabot.
+
+**REGRA DURA anti-ban** — o limite não é técnico, é o WhatsApp:
+comece em **12 mensagens/dia**, suba **2 por dia**, teto em **45**, mínimo **2 minutos** entre
+uma e outra. Um número comercial oficial já foi restringido por 24h com **49 envios num dia**.
+Só suba o teto depois de **semanas** estáveis. E "enviado" no painel **não** é "entregue".
+
+---
+
+## 11. Resend (e-mail) — 5 minutos
+
+**Dói quando:** você quer receber o resumo do dia por e-mail, ou disparar pra lista.
+
+1. Crie conta em **resend.com**.
+2. **API Keys → Create API Key** (começa com `re_`).
+3. Verifique seu domínio em **Domains** pra enviar como `voce@seudominio.com`.
+
+Free tier: 3.000 e-mails/mês.
+
+---
+
+## 12. apidirect (dados de rede social) — 3 minutos
+
+**Dói quando:** você quer saber o número real de um perfil em vez de chutar.
+
+Puxa perfil, posts e métricas de Instagram, TikTok, YouTube, LinkedIn, Reddit, X e Facebook.
+Crie conta no painel do apidirect e copie a chave.
+
+Uso típico: o lead digita o @ dele no seu quiz e a página confirma quem é, com dado real.
+
+---
+
+## 13. ScrapeCreators (espionar anúncio de concorrente) — 3 minutos
+
+**Dói quando:** você não sabe o que está funcionando no seu nicho e fica adivinhando.
+
+1. Crie conta em **scrapecreators.com**.
+2. Copie a API key do painel.
+
+Lê a Biblioteca de Anúncios pública da Meta e mostra o que o concorrente roda **hoje** — e há
+quanto tempo. Anúncio que roda há meses é anúncio validado; é essa a informação que vale.
+
+**Consome crédito por busca** (~1 por página de ~10 anúncios; busca por palavra-chave gasta
+mais). O Ferabot avisa antes de uma busca grande.
+
+**Isto é leitura de mercado, nunca cópia.** Serve pra entender o ângulo, não pra clonar a peça.
+
+---
+
+## 14. NicheFinder (nicho de YouTube por dado) — 3 minutos
+
+**Dói quando:** você vai começar um canal e está escolhendo tema no achismo.
+
+Base de 65 mil canais com quanto cada um fatura, se é faceless e o quanto performa acima da
+própria média. Crie conta em **myagentsbuddy.com** e copie a chave (começa com `nf_`).
+
+---
+
+## 15. Apify (raspagem pronta) — 5 minutos
+
+**Dói quando:** você precisa de dado de um site que não tem API.
+
+1. Crie conta em **console.apify.com**.
+2. **Settings → Integrations → API token.**
+
+Catálogo de robôs prontos. Free tier mensal resolve uso ocasional.
+
+---
+
+## 16. Cloudflare Web Analytics (visitas na sua página) — 5 minutos
+
+**Dói quando:** você publicou a página e não sabe se alguém entrou.
+
+1. Crie conta grátis em **dash.cloudflare.com**.
+2. **Analytics & Logs → Web Analytics → Add a site.**
+
+Grátis, sem cookie e sem banner de consentimento.
+
+---
+
+# Parte 3 — O que já funciona sem chave nenhuma
+
+Instalado junto com o Ferabot, custo zero, sem conta:
+
+| Ferramenta | O que faz |
+|---|---|
+| **Playwright** | transforma HTML em imagem — é o motor de todo carrossel, story e slide |
+| **FFmpeg** | corta, junta, queima legenda e converte vídeo |
+| **Edge TTS** | narração em português, grátis e ilimitada |
+| **yt-dlp** | baixa vídeo e transcrição do YouTube, TikTok, Instagram |
+| **Hyperframes** | animação (HTML + GSAP → MP4), sem After Effects |
+| **Remotion** | vídeo programático em React, pra peça repetível |
+| **Marp** | slides a partir de texto |
+| **Jina Reader** | lê qualquer página como texto limpo (`r.jina.ai/<url>`) |
+
+Não peça chave pra nada disso. Só peça o trabalho.
+
+---
+
+## Ah — e o seu checkout
+
+O Ferabot **não toca no seu checkout**. Não existe chave a configurar aqui: Kiwify, Hotmart,
+Guru, Cakto, PerfectPay ou o que você usar continua sendo seu, e o link entra na página como
+link mesmo.
+
+Uma regra que vale de graça: a régua de decisão de campanha é o **painel do checkout**, nunca o
+Gerenciador de Anúncios. O Gerenciador conta o que ele quer contar.
+
+---
+
 ## Onde as chaves ficam
 
 No arquivo `.env` na raiz do Ferabot. Ele está no `.gitignore` — não sobe pra lugar nenhum.
 Pra ver o estado de cada uma: `python SetupFera/setup_chaves.py`.
+
+O setup pergunta em **blocos**: o básico sempre, e os outros só se você disser que quer. Pode
+rodar quantas vezes quiser — ENTER pula e mantém o que já está lá.
+
+## Por que isto tudo é a camada "Recursos"
+
+Um agente tem quatro camadas: **Fontes** (o que ele lê) · **Especializações** (o que ele faz e o
+que não faz) · **Recursos** (o acesso) · **Automações** (o que roda sem você pedir).
+
+Cada chave desta página é a terceira camada. É a diferença entre um agente que **te dá conselho**
+e um que **faz**. Sem chave, o Ferabot te entrega o post pronto e você publica. Com chave, ele
+publica.
+
+Por isso nenhuma é obrigatória — e por isso vale a pena ir pegando uma por vez.

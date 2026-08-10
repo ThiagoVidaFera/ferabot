@@ -55,7 +55,15 @@ narrado (voz IA grátis). As chaves — das **suas** contas — automatizam o ú
 | YouTube OAuth | subir vídeos no seu canal |
 | Instagram | comentário → DM (captação) |
 
-Configurar: `python SetupFera/setup_chaves.py` · guia: `API_SETUP.md`.
+**Comece por Gemini e Netlify e pare aí.** 8 minutos, as duas grátis.
+
+Existe um segundo grupo de opcionais pra quando você bater num limite específico — publicação
+automática (Post for Me), mídia ilimitada (Gathos, ElevenLabs, fal.ai), WhatsApp em escala (WAHA),
+e-mail (Resend), pesquisa e espionagem de anúncio (apidirect, ScrapeCreators, NicheFinder, Apify)
+e métrica de página (Cloudflare). Detalhe de cada uma na Parte 2 do `API_SETUP.md`.
+
+Configurar: `python SetupFera/setup_chaves.py` (pergunta em blocos, o opcional só se você quiser)
+· guia: `API_SETUP.md`.
 
 O `.env` e o `perfil.json` ficam só na sua máquina (`.gitignore`). Se algum subir pro git por
 acidente, revogue e regenere as chaves.

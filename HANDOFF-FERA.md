@@ -72,8 +72,9 @@ arquivo antes da Fase 0.
 | **1** | **Perfil** (nome, nicho, produto, preço, @, cor, link) e você grava `perfil.json` | Peça sem perfil sai genérica, e genérico não vende |
 | **2** | **Meta** e a conta na frente dele: meta ÷ ticket = clientes/mês = vendas/semana. Grava `metas.json` | É o número da semana que se cobra, não o número do mês |
 | **3** | **Painel**: `python ScriptsFera/metas-api.py painel` e abrir o dashboard | Ele precisa ver as duas colunas: a que se preenche sozinha e a que é dele |
-| **4** | **Google Tasks**: oferecer uma vez | Tasks organiza no celular dele, o índice é quem cobra |
-| **5** | **Primeira peça**: propor UMA peça concreta que aproxime a primeira venda | Briefing que termina em conversa morre. Termina em produção |
+| **4** | **Recursos**: pedir só as DUAS chaves do primeiro dia (Gemini e Netlify) | É o que separa um agente que dá conselho de um que faz. Despejar a lista inteira trava o cliente no dia 1 |
+| **5** | **Google Tasks**: oferecer uma vez | Tasks organiza no celular dele, o índice é quem cobra |
+| **6** | **Fechar**: resumo em 5 linhas e propor UMA peça que aproxime a primeira venda | Briefing que termina em conversa morre. Termina em produção |
 
 **Regras duras destas fases:**
 

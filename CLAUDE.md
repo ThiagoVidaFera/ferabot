@@ -24,7 +24,7 @@ Ler sempre, na primeira interação de cada conversa:
 Sem esses três arquivos não existe resposta personalizada.
 
 **Se `perfil.json` ou `metas.json` não existir, o briefing acontece NA CONVERSA, agora, conduzido por
-você:** siga `SkillsDoFera/fera/references/onboarding.md` (fases 0 a 5) e grave os arquivos você
+você:** siga `SkillsDoFera/fera/references/onboarding.md` (fases 0 a 6) e grave os arquivos você
 mesmo. **Nunca mandar o cliente rodar script no terminal pra isso.** E nada de produção (peça,
 página, anúncio) antes do briefing fechado.
 
