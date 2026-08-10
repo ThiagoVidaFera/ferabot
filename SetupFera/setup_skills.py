@@ -66,6 +66,22 @@ for skill_dir in sorted(skills_list):
 
 print()
 
+# ── Instalar/atualizar a skill de bootstrap `instale` ─────────────────────
+# A versão que circulou até abril mandava o cliente digitar /squad-carrossel-fera,
+# comando que na v2 não é mais porta de entrada. Como a máquina do cliente pode
+# ter essa cópia velha, o repo passa a ser a fonte e sobrescreve na instalação.
+bootstrap_instale = ROOT_DIR / "bootstrap" / "instale"
+if bootstrap_instale.exists():
+    try:
+        dst = skills_dst / "instale"
+        if dst.exists():
+            shutil.rmtree(dst)
+        shutil.copytree(bootstrap_instale, dst)
+        print("  [OK] /instale atualizado (bootstrap)")
+    except Exception as e:
+        print(f"  [AVISO] Não foi possível atualizar a /instale: {e}")
+    print()
+
 # ── Gerar perfil.js para o dashboard (só se o perfil já existir) ─────────
 import json
 if perfil is not None:
@@ -96,9 +112,20 @@ print("  ╔══════════════════════�
 print(f"  ║  {len(instaladas)} skills instaladas, {nome.split()[0]}.".ljust(55) + "║")
 print("  ╚══════════════════════════════════════════════════════╝")
 print()
-print("  O que fazer agora:")
-print()
-print("  1. Feche este terminal")
-print("  2. Dê duplo-clique em  ABRIR_FERABOT.bat")
-print("  3. No Claude Code, digite:  /fera")
+
+# Rodando pelo Claude Code (modo assistido), mandar "feche este terminal" é
+# instrução morta: quem lê essa saída é o Claude, no meio da conversa. Quem dá
+# o próximo passo ali é o handoff do instalar.py, depois do briefing.
+import os
+_assistido = os.environ.get("CLAUDECODE") == "1" or not sys.stdin.isatty()
+
+if _assistido:
+    print("  Skills no lugar. O próximo passo é o briefing na conversa,")
+    print("  não um comando de terminal.")
+else:
+    print("  O que fazer agora:")
+    print()
+    print("  1. Feche este terminal")
+    print("  2. Dê duplo-clique em  ABRIR_FERABOT.bat")
+    print("  3. No Claude Code, digite:  /fera")
 print()
