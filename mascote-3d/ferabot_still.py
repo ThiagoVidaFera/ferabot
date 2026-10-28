@@ -120,7 +120,7 @@ def main():
     scene = bm.reset_scene()
     body = make_body_material(args.skin)
     eye_glow = make_glow_material("EyeGlow", CREME_GLOW, 14.0)
-    chest_glow = make_glow_material("ChestGlow", FERA_ORANGE, 4.0)
+    chest_glow = make_glow_material("ChestGlow", (1.0, 1.0, 1.0, 1.0), 2.2)  # wordmark branco: leitura
     tip_glow = make_glow_material("AntennaGlow", FERA_ORANGE, 6.0)
 
     bm.build_mascot(body, eye_glow)
