@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anuncio Nativo"
+  short_description: "Stories nativos que parecem print e vendem por DM"
+  default_prompt: "Use $anuncio-nativo para criar um anuncio nativo em formato story com copy, layout e CTA por palavra-chave."

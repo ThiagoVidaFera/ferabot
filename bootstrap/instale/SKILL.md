@@ -63,8 +63,11 @@ E parar aqui. NÃO tentar continuar nesse mesmo shell — vai falhar com "comman
 Se já tem Python e Git:
 
 ```powershell
-git clone <repo_url> <target_dir>
+git clone --depth 1 <repo_url> <target_dir>
 ```
+
+`--depth 1` baixa só a versão atual, sem o histórico inteiro — a instalação fica leve e o
+`git pull` do `atualizar.bat` continua funcionando.
 
 Se a pasta já existe, perguntar:
 

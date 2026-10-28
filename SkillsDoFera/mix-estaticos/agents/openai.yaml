@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mix Estáticos"
+  short_description: "Variações de posts estáticos a partir de uma ideia"
+  default_prompt: "Use $mix-estaticos para transformar uma ideia em variações de posts estáticos com diferentes ângulos de copy e design."

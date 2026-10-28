@@ -42,6 +42,18 @@ Operador abre no navegador.
 E `/criar-ferabot` — você descreve um agente novo e o sistema escreve a skill dele. É a parte que
 te torna dono da fábrica, não só usuário dos robôs.
 
+## Squads que já vêm instalados
+
+| Comando | Entrega |
+|---|---|
+| `/squad-onboarding` | o sistema de captação inteiro pronto: prévia do perfil com o feed montado nas artes reais, 4 páginas (agendamento, grupo com isca, slides do vídeo, proposta), kit de ~55 artes + PDF da isca, 3 campanhas de R$ 20/dia e o fluxo de WhatsApp E0–E7. Serve pro seu negócio ou pra um cliente seu. |
+| `/anuncio-nativo` | story ad com cara de post nativo do Instagram (o que não parece anúncio) |
+| `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed, vários ângulos da mesma oferta |
+| `/mix-estaticos` | variações de estáticos a partir de uma ideia só |
+| `/anuncios-de-ouro` | kit de anúncio multiformato (feed, story, reel, carrossel) com as suas fotos |
+
+Já instalou antes? Rode `atualizar.bat` (ou diga "atualiza o ferabot") e eles aparecem.
+
 ## Chaves de API (opcionais, todas SUAS)
 
 Sem chave nenhuma o Ferabot já produz proposta, página, anúncio, carrossel, roteiro e vídeo

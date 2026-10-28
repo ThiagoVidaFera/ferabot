@@ -15,7 +15,8 @@ Na dúvida: mentora. Empurrar fluxo sem ele pedir é o erro mais caro do sistema
 |---|---|---|
 | proposta, orçamento, PDF pra mandar pro cliente, apresentar meu serviço | Propostas | `/propostas` |
 | landing, página de vendas, página de captura, quiz, funil | Páginas & Quiz | `/paginas-e-quiz` |
-| anúncio, criativo, carrossel, story, post do feed, subir campanha, arte | Conteúdo & Anúncios | `/conteudo-e-anuncios` |
+| anúncio, criativo, story ad, anúncio estático, carrossel, story, post do feed, subir campanha, arte | Conteúdo & Anúncios | `/conteudo-e-anuncios` |
+| monta meu sistema de captação inteiro, prévia do perfil, kit de feed, onboarding de um cliente meu | Squad Onboarding | `/squad-onboarding` |
 | roteiro, vídeo, reel, YouTube, thumbnail, título, slides, apresentação, aula | Roteiros & Oratória | `/roteiros-e-oratoria` |
 | lead, CRM, disparo de WhatsApp, comentário pra DM, follow-up, lista | CRM de Leads | `/crm-de-leads` |
 | meta, painel, o que fazer hoje, como estou, relatório, semana | Copiloto de Gestão | `/copiloto-de-gestao` |

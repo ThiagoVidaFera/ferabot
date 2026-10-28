@@ -1,0 +1,158 @@
+name: "Squad ONBOARDING (v5)"
+code: onboarding
+description: >
+  Monta o SISTEMA de captação pronto pra rodar — para o seu próprio negócio ou para um cliente seu
+  (mentor, consultor, dono de negócio B2B): o perfil do Instagram como vai ficar, as 3 páginas
+  (agendamento, grupo com isca, proposta), o feed inicial (6 carrosséis fixados + 9 estáticos que
+  são também os criativos das 3 campanhas de R$ 20/dia), os slides do vídeo de 18 minutos, o fluxo
+  de WhatsApp E0–E7 com modelos de resposta, e as orientações didáticas. A entrega é um link
+  publicado + uma pasta no Drive + duas mensagens prontas pra você mandar. Metodologia em
+  METODOLOGIA-V5.md; procedimento em pipeline/steps/step-22-previa-perfil.md. Os 9 entregáveis da
+  v4 seguem como acervo opcional.
+icon: 🚀
+mode: alta-performance
+created: "2026-03-25"
+updated: "2026-10-28"
+version: "5.0"
+changelog: |
+  v5.0 (2026-10-26): a entrega passa a ser um sistema ligado (prévia + 4 páginas + kit de feed +
+    3 campanhas + WhatsApp E0–E7), com fonte única e QA automático. FERABOT (2026-10-28): roda
+    standalone, chaves BYOK no .env, Drive opcional com caminho manual.
+  v4.3 (2026-10-25): novo entregável Prévia do Perfil (step-22, agente Pedro Perfil).
+  v4.2 (2026-05-15): roteiro YouTube em duas camadas (na tela × prompter).
+  v4.0 (2026-05-14): padrão de mensagem de entrega final com links na ordem + roteiro YouTube.
+  v3.0 (2026-05-05): isca livro-funil, sequência WhatsApp, proposta, caixinhas, Drive em 3 subpastas.
+
+context:
+  operador: "o usuário do FERABOT (dono do negócio, ou quem roda o onboarding para um cliente)"
+  niche: "Mentorias, consultorias e serviços B2B de ticket alto"
+  tone: "Direto, conversacional, anti-complexidade — adaptável ao tom do cliente"
+  language: "Português (Brasil)"
+  pasta_do_run: "<FERABOT>/output/onboarding/<slug>-<data>/"
+  link_jornada: "[A PREENCHER: link da sua área de membros/checklist, se tiver — opcional]"
+
+skills:
+  - web_search
+  - web_fetch
+
+# Skills do FERABOT que apoiam os steps do acervo v4 (opcionais; os steps trazem a regra inline).
+skills_ferabot_apoio:
+  - id: squad-isca-fera
+    used_by_step: step-12-isca-livro-funil
+  - id: squad-carrossel-fera
+    used_by_step: step-07-carousels
+  - id: squad-stories-fera
+    used_by_step: step-15-stories-texto-only
+  - id: squad-caixinha-fera
+    used_by_step: step-16-caixinhas-perguntas
+  - id: propostas
+    used_by_step: step-14-proposta-comercial
+
+# Todas as chaves são OPCIONAIS (BYOK, no .env da raiz do FERABOT). Sem a chave, o passo entrega a
+# peça e mostra o caminho manual.
+env_vars:
+  optional:
+    - GEMINI_API_KEY        # fase 2 — ensaio por IA (gerar_fotos*.py). Sem ela: gerar no Gemini à mão
+    - NETLIFY_AUTH_TOKEN    # fase 4 — publicar.py (ou `netlify login`). Sem ela: app.netlify.com/drop
+    - META_ACCESS_TOKEN     # fase 6 — puxar_criativos.py. Sem ela: Biblioteca de Anúncios da Meta
+    - META_AD_ACCOUNT_ID    # fase 6 — idem
+    - GOOGLE_DRIVE_CLIENT_ID      # fase 5 — subir_drive.mjs (o FERABOT não traz). Sem ela: subir à mão + --manual
+    - GOOGLE_DRIVE_CLIENT_SECRET  # idem; token em <FERABOT>/drive-token.json ou GOOGLE_DRIVE_TOKEN_FILE
+
+data:
+  - pipeline/data/research-brief.md
+  - pipeline/data/domain-framework.md
+  - pipeline/data/quality-criteria.md
+  - pipeline/data/output-examples.md
+  - pipeline/data/anti-patterns.md
+  - pipeline/data/tone-of-voice.md
+
+agents:
+  # Agente da entrega v5 (padrão)
+  - id: pedro-perfil
+    path: ./agents/pedro-perfil.agent.md
+    entrega: O sistema inteiro — prévia, 4 páginas, kit de feed, campanhas, WhatsApp E0–E7 (step-22)
+
+  # Acervo v4 (opcional)
+  - id: paula-pagina
+    path: ./agents/paula-pagina.agent.md
+    entrega: Página de vendas
+  - id: marco-marketing
+    path: ./agents/marco-marketing.agent.md
+    entrega: Plano de marketing (12 seções)
+  - id: sofia-stories
+    path: ./agents/sofia-stories.agent.md
+    entrega: 10 stories texto-only (1080×1920)
+  - id: carlos-carrossel
+    path: ./agents/carlos-carrossel.agent.md
+    entrega: 3 carrosséis (estrutura 7 partes + filtro de exclusão)
+  - id: tania-thumb
+    path: ./agents/tania-thumb.agent.md
+    entrega: 3 thumbnails YouTube
+  - id: netuno-netlify
+    path: ./agents/netuno-netlify.agent.md
+    entrega: Deploy Netlify
+  - id: danilo-drive
+    path: ./agents/danilo-drive.agent.md
+    entrega: Drive em 3 subpastas (só PNGs) — opcional; sem credencial, upload manual
+
+  # Novos agentes v3
+  - id: lara-livro
+    path: ./agents/lara-livro.agent.md
+    entrega: Isca digital tipo livro-funil (Tipo 4 — vende mentoria)
+  - id: walter-whatsapp
+    path: ./agents/walter-whatsapp.agent.md
+    entrega: Sequência de 9 mensagens WhatsApp de funil
+  - id: patricia-proposta
+    path: ./agents/patricia-proposta.agent.md
+    entrega: Proposta comercial 1:1 (formato pitch personalizado)
+  - id: clara-caixinhas
+    path: ./agents/clara-caixinhas.agent.md
+    entrega: 10 caixinhas de perguntas
+  - id: rita-render
+    path: ./agents/rita-render.agent.md
+    entrega: Renderização batch de todos os PNGs (Playwright Node)
+
+  # Novo agente v4
+  - id: renata-roteiro
+    path: ./agents/renata-roteiro.agent.md
+    entrega: Roteiro completo de 1 vídeo YouTube (20 slides, CTA WhatsApp, SEM preço, nome do PDF = título atraente)
+
+pipeline: ./pipeline/pipeline.yaml
+
+# Output esperado por cliente no acervo v4 (9 entregáveis principais + 3 thumbs + render)
+# Tudo em <FERABOT>/output/onboarding/<slug>-<data>/
+output_inventory:
+  htmls:
+    - "{client-slug}-sales-page.html"
+    - "{client-slug}-marketing-plan.html"
+    - "{client-slug}-livro-{slug-livro}.html"
+    - "{client-slug}-mensagens-whatsapp.html"
+    - "{client-slug}-proposta-comercial.html"
+    - "{client-slug}-roteiro-youtube.html"  # v4: novo
+    - "v3/stories-texto/{NN-slug}.html ×10"
+    - "v3/caixinhas/{NN-slug}.html ×10"
+    - "v3/carrosseis/carrossel-{NN}-{tema}/slide-{NN}-{tipo}.html ×24"
+    - "{client-slug}-thumb-{NN}.html ×3"
+  pngs:
+    total_aproximado: 47
+    distribuicao:
+      stories: 10
+      caixinhas: 10
+      carrosseis: 24  # 3 × 8
+      thumbnails: 3
+      capas_livro: 0  # v4: capas saem do Drive (livro vai como PDF; capa fica embedded)
+      documentos_screenshots: 0  # v4: documentos viram PDF, não screenshot PNG
+  pdfs:
+    total: 4
+    arquivos:
+      - "{Cliente} — Livro-Funil.pdf"
+      - "{Cliente} — Proposta Comercial.pdf"
+      - "{Cliente} — Sequência WhatsApp.pdf"
+      - "{Título atraente do vídeo}.pdf"  # roteiro YouTube — nome = título do vídeo
+  links_finais:  # 4 links na ordem que aparecem na mensagem WhatsApp final
+    1_checklist_metodologia: "{{link_jornada}}"  # [A PREENCHER: link da sua área de membros/checklist] — opcional; vazio, o bloco sai da mensagem
+    2_pagina_vendas: "https://{client-slug}-vendas.netlify.app"  # Netlify dedicado — sales letter pública
+    3_plano_marketing: "https://{client-slug}-plano.netlify.app"  # Netlify dedicado — plano estratégico do cliente
+    4_drive: "https://drive.google.com/drive/folders/{folder-id}"  # Google Drive — PNGs + PDFs
+  drive_structure: 3 subpastas raiz (Carrossel · Thumbnail · Outros materiais com Stories/Caixinhas/Documentos PDF)

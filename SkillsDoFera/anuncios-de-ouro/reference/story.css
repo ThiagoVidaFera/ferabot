@@ -1,0 +1,132 @@
+/* Anúncio de Ouro — design system do STORY 1080x1920 (9:16) (molde).
+   Safe zones IG: topo ~250px (avatar/user) e base ~320px (barra de resposta) livres de texto. */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy: #0A1B3D;
+  --ink: #060E22;
+  --muted: #9DB0D2;
+  --emerald: #10B981;
+  --blue: #3B82F6;
+  --gold: #E8B23A;
+  --red: #EF4444;
+  --acc: var(--emerald);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #333; }
+
+.accent-emerald { --acc: var(--emerald); }
+.accent-blue    { --acc: var(--blue); }
+.accent-gold    { --acc: var(--gold); }
+.accent-red     { --acc: var(--red); }
+
+.st {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* full-bleed photo + scrim que joga o foco pra base */
+.st .photo { position: absolute; inset: 0; z-index: 0; }
+.st .photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: var(--objpos, 60% 22%);
+}
+.st .photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6,14,34,.55) 0%, rgba(6,14,34,.05) 26%, rgba(6,14,34,.12) 46%, rgba(6,14,34,.80) 68%, var(--ink) 90%);
+}
+
+/* faint dev grid */
+.st::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 60px 60px; pointer-events: none;
+}
+
+/* SAFE-ZONE guides (só visuais no dev; invisíveis no export pois transparentes) */
+
+/* conteúdo ancorado na base, dentro da safe zone */
+.st .content {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 300px;           /* deixa a base livre pra barra/link sticker */
+  z-index: 3;
+  padding: 0 72px;
+  display: flex; flex-direction: column;
+}
+
+.topbar { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+.brand {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 24px;
+  letter-spacing: 2px; color: #fff; background: var(--acc);
+  padding: 10px 17px; border-radius: 8px; text-transform: uppercase;
+}
+.accent-gold .brand { color: var(--ink); }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 21px; color: #C7D5EE; font-weight: 500; }
+
+.headline {
+  font-family: 'Sora', sans-serif; font-weight: 800;
+  font-size: 82px; line-height: 1.04; letter-spacing: -1.8px; margin-bottom: 26px;
+}
+.headline .hl { color: var(--acc); }
+
+.sub { font-size: 36px; line-height: 1.32; color: #E7EEFB; font-weight: 500; margin-bottom: 24px; }
+
+.ctx {
+  font-family: 'JetBrains Mono', monospace; font-size: 25px; line-height: 1.45;
+  color: var(--muted); font-weight: 500; margin-bottom: 34px;
+}
+.ctx b { color: #EAF1FF; font-weight: 700; }
+
+.offerbar { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+.price { display: flex; flex-direction: column; gap: 2px; }
+.price .line1 { font-size: 27px; color: var(--muted); font-weight: 600; }
+.price .line1 s { opacity: .8; }
+.price .big { font-family: 'Sora', sans-serif; font-size: 58px; font-weight: 800; letter-spacing: -1px; color: #fff; line-height: 1; white-space: nowrap; }
+.price .big small { font-size: 30px; color: var(--acc); font-weight: 700; }
+.price .cond { font-size: 24px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+.cta {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: var(--acc); color: #fff;
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 34px;
+  padding: 26px 34px; border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.35); white-space: nowrap;
+}
+.accent-gold .cta { color: var(--ink); }
+.cta .wa {
+  width: 40px; height: 40px; flex: none; background: #fff;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m5.8 14.03c-.24.68-1.42 1.32-1.95 1.36-.5.04-.5.4-3.15-.66-2.66-1.05-4.32-3.79-4.45-3.97-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.81 2 .88 2.15.07.14.12.31.02.5-.09.18-.14.29-.28.45-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.26.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.2.5.31.06.11.06.64-.18 1.32'/></svg>") center/contain no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m5.8 14.03c-.24.68-1.42 1.32-1.95 1.36-.5.04-.5.4-3.15-.66-2.66-1.05-4.32-3.79-4.45-3.97-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.81 2 .88 2.15.07.14.12.31.02.5-.09.18-.14.29-.28.45-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.26.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.2.5.31.06.11.06.64-.18 1.32'/></svg>") center/contain no-repeat;
+}
+.accent-gold .cta .wa { background: var(--ink); }
+
+/* selo topo — abaixo da safe zone superior */
+.seal-float {
+  position: absolute; z-index: 4; right: 60px; top: 300px;
+  background: rgba(6,14,34,.72); border: 2px solid var(--acc); color: #fff;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 25px;
+  padding: 14px 22px; border-radius: 16px; backdrop-filter: blur(4px);
+  text-align: center; line-height: 1.15;
+}
+.seal-float b { color: var(--acc); }
+
+/* rótulo de marca no topo (dentro do quadro, abaixo do avatar IG) */
+.kicker {
+  position: absolute; z-index: 3; top: 292px; left: 72px;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 26px;
+  letter-spacing: 3px; color: #fff; text-transform: uppercase;
+  background: rgba(6,14,34,.55); border: 1.5px solid rgba(255,255,255,.25);
+  padding: 10px 18px; border-radius: 10px;
+}

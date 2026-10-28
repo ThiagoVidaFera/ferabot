@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0a">
+  <!-- Trocar pelo nome do cliente em cada run: "<Nome> — proposta de perfil". O app.js também
+       ajusta o document.title ao carregar, mas este valor é o que aparece antes do JS rodar,
+       na aba e na prévia de link compartilhado. -->
+  <title>Proposta de perfil</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="criativos.css">
+  <script defer src="assets/content.js"></script>
+  <script defer src="app.js"></script>
+  <script defer src="criativos.js"></script>
+  <script defer src="kit.js"></script>
+  <script defer src="plan.js"></script>
+</head>
+<body>
+  <main class="profile-page" id="profilePage">
+    <header class="preview-bar"><a class="preview-wordmark" href="#" aria-label="Voltar ao perfil">Instagram</a><span class="preview-label">Proposta de perfil</span></header>
+    <section class="profile-header" id="profileHeader" aria-label="Perfil"></section>
+    <section class="highlights" id="highlights" aria-label="Destaques"></section>
+    <nav class="feed-tabs" aria-label="Conteúdos">
+      <button class="feed-tab active" data-filter="all" aria-pressed="true"><span class="tab-icon grid-icon" aria-hidden="true"></span><span>Publicações</span></button>
+      <button class="feed-tab" data-filter="reels" aria-pressed="false"><span class="tab-icon reel-icon" aria-hidden="true"></span><span>Reels</span></button>
+    </nav>
+    <section class="feed-grid" id="feedGrid" aria-label="Publicações do perfil"></section>
+    <section class="plan-sections" id="planSections" aria-label="Plano por trás do perfil"></section>
+    <footer class="profile-footer"><span id="footerName"></span></footer>
+  </main>
+  <dialog class="content-dialog" id="contentDialog" aria-labelledby="dialogTitle">
+    <button class="close-button" type="button" aria-label="Fechar" data-action="close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    <div id="dialogContent"></div>
+  </dialog>
+  <div class="screen-reader-status" id="liveStatus" role="status" aria-live="polite"></div>
+  <noscript><p class="load-note">Ative o JavaScript para abrir os conteúdos desta prévia.</p></noscript>
+</body>
+</html>

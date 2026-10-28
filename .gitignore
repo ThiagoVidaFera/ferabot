@@ -18,3 +18,7 @@ lote*.json
 ScriptsFera/wpp/node_modules/
 ScriptsFera/wpp/.sessao/
 ScriptsFera/wpp/package-lock.json
+
+# renders e frames de vídeo/mascote (material de divulgação, não vai pro cliente)
+mascote-3d/saida/
+videos/2026-10-28-leads-alto-ticket/

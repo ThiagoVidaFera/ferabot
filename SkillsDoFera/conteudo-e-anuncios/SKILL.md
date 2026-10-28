@@ -1,6 +1,6 @@
 ---
 name: conteudo-e-anuncios
-description: FeraBot Conteúdo & Anúncios. Cria anúncios (kit feed + story), carrossel, stories, caixinha de perguntas, posts de feed, imagens com IA e sobe campanha no Meta Ads. Use quando o usuário pedir "anúncio", "criativo", "carrossel", "story", "stories", "post", "arte", "imagem", "campanha", "subir anúncio", "impulsionar".
+description: FeraBot Conteúdo & Anúncios. Cria anúncios (kit multiformato, story ads nativos, lotes e variações de estáticos), carrossel, stories, caixinha de perguntas, posts de feed, imagens com IA e sobe campanha no Meta Ads. Use quando o usuário pedir "anúncio", "criativo", "story ad", "estático", "carrossel", "story", "post", "arte", "imagem", "campanha", "subir anúncio", "impulsionar".
 ---
 
 # FeraBot Conteúdo & Anúncios
@@ -14,7 +14,12 @@ Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de 
 | Carrossel de feed | skill `squad-carrossel-fera` |
 | Stories de bastidores | skill `squad-stories-fera` |
 | Caixinha de perguntas | skill `squad-caixinha-fera` |
-| Kit de anúncio (padrão ouro) | esta skill, seção Kit abaixo |
+| Kit de anúncio multiformato com fotos reais (feed + story + reel + carrossel) | skill `anuncios-de-ouro` |
+| Story ad com cara de post nativo do Instagram (sem CTA de anúncio, campanha de visita ao perfil ou DM) | skill `anuncio-nativo` |
+| Lote de anúncios estáticos de feed (vários ângulos de uma oferta) | skill `squad-anuncios-estaticos` |
+| Variações de estáticos a partir de UMA ideia (ângulos de copy × direções de design) | skill `mix-estaticos` |
+| Sistema de captação inteiro (perfil + páginas + feed + 3 campanhas + WhatsApp) | skill `squad-onboarding` |
+| Kit de anúncio simples, sem as skills acima | esta skill, seção Kit abaixo |
 | Imagem com IA | seção Imagens abaixo |
 | Subir campanha no Meta | skill `meta-ads-fera` (BYOK) |
 

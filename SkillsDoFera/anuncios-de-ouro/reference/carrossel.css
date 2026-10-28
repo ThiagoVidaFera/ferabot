@@ -1,0 +1,147 @@
+/* Anúncio de Ouro — design system do CARROSSEL 1080x1350 (molde). Navy + emerald, dev-flavored. */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy: #0A1B3D; --navy-2: #0E2450; --ink: #060E22;
+  --muted: #9DB0D2; --emerald: #10B981; --blue: #3B82F6; --gold: #E8B23A; --red: #EF4444;
+  --acc: var(--emerald);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #333; }
+.accent-emerald { --acc: var(--emerald); }
+.accent-blue { --acc: var(--blue); }
+.accent-gold { --acc: var(--gold); }
+.accent-red  { --acc: var(--red); }
+
+.slide {
+  position: relative; width: 1080px; height: 1350px; overflow: hidden;
+  background: var(--navy); color: #fff; font-family: 'Inter', sans-serif;
+  display: flex; flex-direction: column;
+}
+.slide::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 56px 56px; pointer-events: none;
+}
+.slide > * { position: relative; z-index: 2; }
+
+/* ---------- COVER ---------- */
+.slide--cover .bg, .slide--cta .bg { position: absolute; inset: 0; z-index: 0; }
+.slide--cover .bg img, .slide--cta .bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: var(--objpos, 60% 24%);
+}
+.slide--cover .bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(6,14,34,.55) 0%, rgba(6,14,34,.15) 32%, rgba(6,14,34,.62) 66%, var(--ink) 100%);
+}
+.slide--cover .capcontent { margin-top: auto; padding: 64px; }
+.slide--cover .kicker {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 24px; letter-spacing: 3px;
+  color: #fff; background: var(--acc); display: inline-block; padding: 10px 18px; border-radius: 8px;
+  text-transform: uppercase; margin-bottom: 26px;
+}
+.accent-gold .kicker { color: var(--ink); }
+.slide--cover h1 {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 82px; line-height: 1.03;
+  letter-spacing: -2px; margin-bottom: 30px;
+}
+.slide--cover h1 .hl { color: var(--acc); }
+.hint {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 27px; color: var(--acc);
+}
+.hint .arrow {
+  display: inline-flex; gap: 4px;
+}
+
+/* ---------- TEXT SLIDE ---------- */
+.slide--text { padding: 76px 72px; justify-content: center; }
+.slide--text .num {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 96px; line-height: 1;
+  color: var(--acc); letter-spacing: -3px; margin-bottom: 20px;
+}
+.slide--text .kick {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 24px; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase; margin-bottom: 18px;
+}
+.slide--text h2 {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 66px; line-height: 1.08;
+  letter-spacing: -1.5px; margin-bottom: 28px;
+}
+.slide--text h2 .hl { color: var(--acc); }
+.slide--text p {
+  font-size: 37px; line-height: 1.4; color: #DCE6F7; font-weight: 500; max-width: 900px;
+}
+.slide--text p b { color: #fff; font-weight: 700; }
+.slide--text .rule { width: 92px; height: 8px; background: var(--acc); border-radius: 4px; margin-bottom: 34px; }
+
+/* ---------- PHOTO SLIDE (foto topo + texto base) ---------- */
+.slide--photo .ph { width: 100%; height: 620px; flex: none; position: relative; overflow: hidden; }
+.slide--photo .ph img { width: 100%; height: 100%; object-fit: cover; object-position: var(--objpos, 58% 22%); }
+.slide--photo .ph::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(6,14,34,0) 55%, rgba(6,14,34,.6) 84%, var(--navy) 100%);
+}
+.slide--photo .ph .bar { position: absolute; left: 0; bottom: 0; height: 8px; width: 100%; background: var(--acc); }
+.slide--photo .body { padding: 44px 72px; display: flex; flex-direction: column; justify-content: center; flex: 1; }
+.slide--photo .kick {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 23px; letter-spacing: 2px;
+  color: var(--muted); text-transform: uppercase; margin-bottom: 16px;
+}
+.slide--photo h2 {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 58px; line-height: 1.08;
+  letter-spacing: -1.3px; margin-bottom: 22px;
+}
+.slide--photo h2 .hl { color: var(--acc); }
+.slide--photo p { font-size: 33px; line-height: 1.4; color: #DCE6F7; font-weight: 500; }
+.slide--photo p b { color: #fff; font-weight: 700; }
+
+/* ---------- CTA SLIDE ---------- */
+.slide--cta .bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6,14,34,.55) 0%, rgba(6,14,34,.12) 30%, rgba(6,14,34,.7) 62%, var(--ink) 100%);
+}
+.slide--cta .capcontent { margin-top: auto; padding: 64px; }
+.slide--cta .kicker {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 24px; letter-spacing: 3px;
+  color: #fff; background: var(--acc); display: inline-block; padding: 10px 18px; border-radius: 8px;
+  text-transform: uppercase; margin-bottom: 24px;
+}
+.slide--cta h1 {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 68px; line-height: 1.05;
+  letter-spacing: -1.6px; margin-bottom: 26px;
+}
+.slide--cta h1 .hl { color: var(--acc); }
+.ctarow { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.price { display: flex; flex-direction: column; gap: 2px; }
+.price .line1 { font-size: 27px; color: var(--muted); font-weight: 600; }
+.price .line1 s { opacity: .8; }
+.price .big { font-family: 'Sora', sans-serif; font-size: 56px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+.price .big small { font-size: 30px; color: var(--acc); font-weight: 700; }
+.price .cond { font-size: 24px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+.cta {
+  display: inline-flex; align-items: center; gap: 14px; background: var(--acc); color: #fff;
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 33px; padding: 26px 34px;
+  border-radius: 18px; box-shadow: 0 16px 40px rgba(0,0,0,.35); white-space: nowrap;
+}
+.accent-gold .cta { color: var(--ink); }
+.cta .wa {
+  width: 40px; height: 40px; flex: none; background: #fff;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m5.8 14.03c-.24.68-1.42 1.32-1.95 1.36-.5.04-.5.4-3.15-.66-2.66-1.05-4.32-3.79-4.45-3.97-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.81 2 .88 2.15.07.14.12.31.02.5-.09.18-.14.29-.28.45-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.26.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.2.5.31.06.11.06.64-.18 1.32'/></svg>") center/contain no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='black' d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2m5.8 14.03c-.24.68-1.42 1.32-1.95 1.36-.5.04-.5.4-3.15-.66-2.66-1.05-4.32-3.79-4.45-3.97-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.81 2 .88 2.15.07.14.12.31.02.5-.09.18-.14.29-.28.45-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.26.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.43.2.5.31.06.11.06.64-.18 1.32'/></svg>") center/contain no-repeat;
+}
+.accent-gold .cta .wa { background: var(--ink); }
+.slide--cta .sub { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: #C7D5EE; font-weight: 500; }
+
+/* ---------- FOOTER (marca + página) ---------- */
+.foot {
+  position: absolute; left: 72px; right: 72px; bottom: 40px; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace; font-size: 21px; color: var(--muted); font-weight: 600;
+}
+.foot .b { color: #fff; }
+.slide--cover .foot, .slide--cta .foot { display: none; }

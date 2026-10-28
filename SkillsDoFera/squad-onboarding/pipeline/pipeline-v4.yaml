@@ -1,0 +1,175 @@
+squad: onboarding
+version: "4.2"
+created: "2026-03-25"
+updated: "2026-05-15"
+
+# Pipeline v4.3 — + Prévia do Perfil interativa (step-22, agente Pedro Perfil): mockup navegável do IG + agendamento + campanha grupo/isca PDF + vídeo 18min + conversas WhatsApp
+# Pipeline v4.2 — roteiro YT (step-19) com 2 camadas: NA TELA limpa × PROMPTER/PRODUÇÃO oculta (slides vão pra tela do vídeo)
+# Pipeline v4.1 — + página de workshop low-ticket obrigatória (step-21) · 5 links na mensagem final
+#
+# Caminhos: arquivos de steps/agents/data são relativos à pasta da skill (squad-onboarding/).
+# Todo output do run vai em <FERABOT>/output/onboarding/{client-slug}-{data}/ — nunca dentro da pasta da skill.
+# Placeholders opcionais do operador: {{link_jornada}} (área de membros/checklist), {{link_suporte}} (grupo/canal de suporte), {{drive_pasta_mae}} (pasta-mãe no Drive).
+steps:
+  # ── BRIEFING ──
+  - file: steps/step-01-client-briefing.md
+    type: checkpoint
+
+  # ── PÁGINA DE VENDAS ──
+  - file: steps/step-02-sales-page.md
+    agent: paula-pagina
+    execution: inline
+  - file: steps/step-03-sales-page-approval.md
+    type: checkpoint
+
+  # ── PLANO DE MARKETING (12 seções, sem KPIs) ──
+  - file: steps/step-04-marketing-plan.md
+    agent: marco-marketing
+    execution: inline
+  - file: steps/step-05-plan-approval.md
+    type: checkpoint
+
+  # ── CRIATIVOS PRINCIPAIS ──
+  # Stories texto-only (formato anúncio-texto adaptado) e carrosséis (estrutura de 7 partes) — specs completas nos próprios steps
+  - file: steps/step-15-stories-texto-only.md
+    agent: sofia-stories
+    execution: inline
+    format: anuncio-texto adaptado 1080×1920 (spec inline no step)
+    quantity: 10
+  - file: steps/step-07-carousels.md
+    agent: carlos-carrossel
+    execution: inline
+    external_skill: squad-carrossel-fera (opcional — render; estrutura de 7 partes inline no step)
+    quantity: 3
+    slides_each: 8
+  - file: steps/step-08-thumbnails.md
+    agent: tania-thumb
+    execution: inline
+    quantity: 3
+
+  # ── ENTREGÁVEIS NOVOS v3 ──
+  - file: steps/step-12-isca-livro-funil.md
+    agent: lara-livro
+    execution: inline
+    external_skill: squad-isca-fera (opcional — PDF/página de captura; estrutura livro-funil inline no step)
+    output: 1 livro-funil Tipo 4 (HTML) + 5-6 PNGs (capas + livro completo)
+  - file: steps/step-13-mensagens-whatsapp.md
+    agent: walter-whatsapp
+    execution: inline
+    output: 9 mensagens WhatsApp de funil em HTML
+  - file: steps/step-14-proposta-comercial.md
+    agent: patricia-proposta
+    execution: inline
+    output: Proposta comercial HTML formato pitch 1:1
+  - file: steps/step-16-caixinhas-perguntas.md
+    agent: clara-caixinhas
+    execution: inline
+    external_skill: squad-caixinha-fera (opcional — render)
+    quantity: 10
+    requires_internal_gates: true  # GATE planejamento + GATE copy da skill
+
+  # ── ROTEIRO YOUTUBE (v4 — novo) ──
+  - file: steps/step-19-roteiro-youtube.md
+    agent: renata-roteiro
+    execution: inline
+    output: "1 roteiro YouTube HTML 20 slides (2 camadas — NA TELA × PROMPTER) + título atraente sugerido (vira nome do PDF no Step 18)"
+    rules:
+      - "Slides vão pra TELA do vídeo: camada NA TELA = só mensagem limpa; camada PROMPTER/PRODUÇÃO separada e rotulada 'não vai pra tela'"
+      - "NUNCA renderizar na tela rótulo de estrutura/persuasão (Gancho/Objeção/Filtro/CTA/Autoridade), tempo ou estágio"
+      - "Sem mencionar valor do programa"
+      - "CTA único = WhatsApp"
+      - "20 slides, 5-10min vídeo total"
+
+  # ── PÁGINA DE WORKSHOP LOW-TICKET (v4.1 — novo, obrigatório) ──
+  - file: steps/step-21-workshop-page.md
+    agent: paula-pagina
+    execution: inline
+    output: 1 página de workshop HTML ({slug}-workshop.html)
+    fixed_params:
+      data: "próximo sábado (calculado do run)"
+      horario: "09h às 12h"
+      preco: "R$ 37"
+    rules:
+      - "Tema SEMPRE específico, amarrado ao inimigo + mecanismo do dossiê (nunca genérico)"
+      - "CTA primário = inscrição no workshop R$37; mentoria principal só citada honestamente no fim"
+      - "Herda paleta/voz da sales page + livro-funil"
+      - "Estatística sem fonte → [INSERIR: confirmar dado/fonte]"
+
+  # ── PRÉVIA DO PERFIL (v4.3 — novo) ──
+  - file: steps/step-22-previa-perfil.md
+    agent: pedro-perfil
+    execution: inline
+    template: templates/previa-perfil/
+    output: pacote HTML standalone previa-perfil/ (perfil IG navegável + 4 seções de plano) — vira rota /perfil no step-10 e 1º link da mensagem do step-20
+    rules:
+      - "Link da bio SEMPRE aponta pra página de agendamento (modelo /agendar/) — a seção 01 mostra o mockup dela no nicho do cliente"
+      - "Seção 02 logo abaixo da visão geral do IG: campanha → grupo WhatsApp → isca digital PDF gratuita (modelo grupo Bastidores)"
+      - "Seção 03: roteiro do vídeo de 18 minutos (SEMPRE assim nomeado), CTA único WhatsApp, sem preço — condensa o roteiro do step-19"
+      - "Seção 04: conversas WhatsApp simuladas no fluxo de atendimento padrão (separar antes de apresentar · 3 coisas antes da reunião · retomada pelo motivo de origem · 1 follow-up)"
+      - "topNote de demonstração obrigatório + prova real (peça pública usa só prova real; dado que só o dono tem vira pergunta ou [A PREENCHER]; cenário hipotético só em material didático e rotulado no corpo — nada de case/print fabricado)"
+      - "Conteúdo só em assets/content.js — app.js/plan.js/styles.css não mudam por cliente"
+      - "QA: clicar todos os posts/destaques/DM + screenshot 375px"
+
+  # ── APROVAÇÃO COMPLETA DOS CRIATIVOS ──
+  - file: steps/step-09-creatives-approval.md
+    type: checkpoint
+    aprova:
+      - 10 stories texto
+      - 3 carrosséis repelente
+      - 3 thumbnails
+      - 10 caixinhas
+      - 1 livro-funil
+      - 9 mensagens WhatsApp
+      - 1 proposta comercial
+      - 1 roteiro YouTube
+      - 1 página de workshop low-ticket
+
+  # ── RENDERIZAÇÃO BATCH ──
+  - file: steps/step-17-render-batch-pngs.md
+    agent: rita-render
+    execution: subagent
+    output: ~58 PNGs em v3/ (stories, caixinhas, carrosseis, thumbnails, isca-livro, documentos)
+
+  # ── PUBLICAÇÃO (v4: 2 sites Netlify dedicados — vendas + plano) ──
+  - file: steps/step-10-publish-netlify.md
+    agent: netuno-netlify
+    execution: subagent
+    sites:
+      - "{slug}-vendas.netlify.app"     # página de vendas
+      - "{slug}-plano.netlify.app"      # plano de marketing
+      - "{slug}-workshop.netlify.app"   # página do workshop low-ticket (v4.1)
+    note: "v4.1 — vendas, plano e workshop em sites Netlify SEPARADOS. Opcional: se o operador tiver área de membros/checklist, o link entra como {{link_jornada}}"
+  - file: steps/step-18-drive-pngs-3-subpastas.md
+    agent: danilo-drive
+    execution: subagent
+    folders: [Carrossel/, Thumbnail/, Outros materiais/]
+    pngs_only_for: [stories, caixinhas, carrosseis, thumbnails]
+    pdfs: [livro, proposta, whatsapp, roteiro-youtube]
+
+  # ── MENSAGEM FINAL DE ENTREGA (v4 — novo) ──
+  - file: steps/step-20-mensagem-entrega.md
+    agent: danilo-drive
+    execution: inline
+    template: pipeline/data/client-message-template.md
+    output: "{slug}-mensagem-entrega.md — 5 links na ordem (Jornada → Vendas → Workshop → Plano → Drive), tom conversacional/didático"
+
+checkpoints:
+  - step-01-client-briefing
+  - step-03-sales-page-approval
+  - step-05-plan-approval
+  - step-09-creatives-approval
+
+# Steps obsoletos / descontinuados
+deprecated:
+  - step-06-stories.md  # substituído por step-15-stories-texto-only.md (formato + skill diferentes)
+
+# GATES INTERNOS de skills externas
+internal_gates:
+  - step: step-07-carousels (estrutura de 7 partes)
+    gate: "Marco temporal vs Manchete + keyword + deliverable (perguntar ANTES de gerar)"
+  - step: step-16-caixinhas-perguntas
+    gates:
+      - "[01] Estrategista — distribuição × ângulo × formato (md aprovação)"
+      - "[03] Copywriter Viral — copies finais (md aprovação)"
+  - step: step-12-isca-livro-funil
+    gate: "Título do livro + tipo (1/2/3/4) + tese central — confirmar com usuário"

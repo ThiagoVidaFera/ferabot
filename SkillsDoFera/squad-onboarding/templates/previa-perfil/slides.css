@@ -1,0 +1,112 @@
+@charset "UTF-8";
+/* Player dos slides do vídeo. Cada tela é uma cena: texto à esquerda, visual à direita. */
+#slWrap{max-width:1040px;margin:0 auto}
+.sl-tela{position:relative;aspect-ratio:16/9;container-type:inline-size;background:#0B2038;border-radius:14px;overflow:hidden;
+  box-shadow:0 20px 60px #0b203826}
+.sl-slide{position:absolute;inset:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  gap:4.4cqw;align-items:center;padding:5.4cqw 5.4cqw 7cqw;
+  opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+.sl-slide.ativo{opacity:1;transform:none;pointer-events:auto}
+.sl-slide:not(:has(.viz)){grid-template-columns:1fr}
+.sl-texto{min-width:0}
+.sl-rot{display:inline-block;font-size:calc(1.22cqw * var(--k,1));letter-spacing:.16em;text-transform:uppercase;
+  color:#86A7CC;font-weight:600;margin-bottom:1.5cqw}
+.sl-tela h2.sl-frase{font-family:Fraunces,Georgia,serif;font-weight:600;color:#fff;line-height:1.07;
+  letter-spacing:-.025em;font-size:calc(5.3cqw * var(--k,1));margin:0;text-wrap:balance}
+.sl-ctx{font-size:calc(2.05cqw * var(--k,1));line-height:1.5;color:#AFC2D6;margin:1.9cqw 0 0;max-width:32ch}
+.sl-slide.ativo .sl-texto{animation:slSobe .5s .05s both}
+.sl-slide.ativo .sl-viz{animation:slSobe .5s .16s both}
+@keyframes slSobe{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.sl-viz{min-width:0;display:flex;align-items:center;justify-content:center}
+
+/* --- Infográficos --- */
+.viz{width:100%;color:#E7EEF6;font-size:calc(1.52cqw * var(--k,1));line-height:1.42}
+.viz-numero{text-align:center}
+.viz-num{display:flex;align-items:baseline;justify-content:center;gap:.12em}
+.viz-num b{font-family:Fraunces,Georgia,serif;font-size:calc(14cqw * var(--k,1));line-height:.9;
+  letter-spacing:-.05em;color:#fff;font-weight:600}
+.viz-num span{font-size:calc(3.1cqw * var(--k,1));color:#8FB0D2;font-weight:600}
+.viz-de{margin-top:1cqw;font-size:calc(1.85cqw * var(--k,1));color:#8FB0D2}
+.viz-cap{margin:1.7cqw auto 0;max-width:24ch;color:#AFC2D6}
+
+.viz-barras{display:flex;flex-direction:column;gap:1.75cqw;width:100%}
+.viz-barra{display:grid;grid-template-columns:minmax(58px,auto) 1fr auto;gap:10px;align-items:center}
+.viz-rot{color:#9FB7CE;white-space:nowrap}
+.viz-trilho{height:1.7cqw;background:#ffffff14;border-radius:99px;overflow:hidden}
+.viz-trilho i{display:block;height:100%;width:var(--w);border-radius:99px;background:#3E6FA8;
+  animation:slCresce .75s .2s cubic-bezier(.2,.7,.3,1) both;transform-origin:left}
+.viz-barra.on .viz-trilho i{background:#EAF0F6}
+.viz-val{font-variant-numeric:tabular-nums;color:#fff;font-weight:600}
+@keyframes slCresce{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+.viz-fluxo{display:flex;flex-direction:column;align-items:stretch;gap:.9cqw}
+.viz-caixa{background:#ffffff0f;border:1px solid #ffffff21;border-radius:10px;
+  padding:1.5cqw 1.8cqw;text-align:center;min-width:0}
+.viz-caixa b{display:block;color:#fff;font-size:calc(1.62cqw * var(--k,1))}
+.viz-caixa span{display:block;color:#93AECA;margin-top:.5cqw;font-size:calc(1.3cqw * var(--k,1))}
+.viz-caixa.fim{background:#EAF0F6;border-color:#EAF0F6}
+.viz-caixa.fim b{color:#0B2038}.viz-caixa.fim span{color:#3E5878}
+.viz-seta{width:1px;height:1.8cqw;background:#ffffff38;position:relative;flex:0 0 auto;margin:0 auto}
+.viz-seta:after{content:"";position:absolute;bottom:0;left:-3px;border:3px solid transparent;border-top-color:#ffffff5c}
+
+.viz-pilhas{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:1.5cqw;width:100%}
+.viz-pilha{background:#ffffff0d;border-top:2px solid #4E7BB0;border-radius:0 0 9px 9px;padding:11px 12px}
+.viz-pilha b{display:block;color:#7FA3C8;font-size:10px;letter-spacing:.1em;margin-bottom:6px}
+.viz-pilha strong{display:block;color:#fff;font-size:calc(1.7cqw * var(--k,1));line-height:1.22;margin-bottom:.9cqw}
+.viz-pilha ul{margin:0;padding-left:14px;color:#A8BFD4}
+.viz-pilha li{margin-bottom:3px}
+
+.viz-comp{display:grid;grid-template-columns:1fr 1fr;gap:1.5cqw;width:100%}
+.viz-lado{border-radius:10px;padding:12px 14px;background:#ffffff0d}
+.viz-lado b{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
+.viz-lado ul{margin:0;padding-left:15px;color:#BBCDE0}
+.viz-lado li{margin-bottom:5px}
+.viz-lado.ruim{border-left:2px solid #B4645C}.viz-lado.ruim b{color:#D88E86}
+.viz-lado.bom{border-left:2px solid #6FA07C}.viz-lado.bom b{color:#8FC49C}
+
+.viz-lista ul{margin:0;padding:0;list-style:none}
+.viz-lista li{display:flex;gap:10px;align-items:flex-start;padding:1.05cqw 0;border-bottom:1px solid #ffffff14}
+.viz-lista li:last-child{border-bottom:0}
+.viz-lista i{font-style:normal;color:#8FC49C;flex:0 0 auto}
+.viz-lista span{color:#C3D2E2}
+
+.viz-msg{width:100%}
+.viz-bolha{background:#EAF0F6;color:#17191D;border-radius:13px 13px 13px 4px;padding:1.9cqw;
+  max-width:94%;line-height:1.45;box-shadow:0 6px 18px #0003}
+.viz-bolha.lead{background:#2F5584;color:#fff;border-radius:13px 13px 4px 13px;margin-left:auto}
+
+/* A foto preenche a altura do slide, nunca impõe proporção: proporção fixa estoura o quadro. */
+.sl-viz{align-self:stretch;min-height:0}
+.viz-foto{height:100%;width:100%;display:flex}
+.viz-foto img{width:100%;height:100%;border-radius:12px;object-fit:cover;object-position:center 20%}
+
+/* --- Progresso e controles --- */
+.sl-progresso{position:absolute;left:0;right:0;bottom:0;display:flex;gap:3px;padding:0 14px 14px}
+.sl-progresso button{flex:1;height:14px;padding:0;background:none;border:0;cursor:pointer}
+.sl-progresso i{display:block;height:3px;border-radius:2px;background:#ffffff2e;transition:background .3s}
+.sl-progresso button.feito i{background:#EAF0F6}
+.sl-controles{display:flex;align-items:center;gap:12px;margin:20px 0 26px;flex-wrap:wrap}
+.sl-btn{border:1px solid var(--linha);background:#fff;border-radius:999px;padding:11px 18px;
+  font-family:inherit;font-size:14px;font-weight:600;color:var(--tinta);cursor:pointer;transition:all .15s}
+.sl-btn:hover{border-color:var(--navy)}
+.sl-play{background:var(--navy);color:#fff;border-color:var(--navy);min-width:132px}
+.sl-play:hover{background:#1d4374}
+.sl-contador{margin-left:auto;font-size:13px;color:var(--leve);font-variant-numeric:tabular-nums}
+.sl-fala{background:#17191D;color:#E8EAED;border-radius:12px;padding:20px 22px}
+.sl-fala b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8A94A3;margin-bottom:11px}
+.sl-fala p{margin:0;font-size:clamp(15px,1.8vw,17px);line-height:1.6}
+.sl-fala small{display:block;margin-top:12px;font-size:12.5px;color:#8A94A3;line-height:1.5}
+
+@media(max-width:760px){
+  .sl-tela{aspect-ratio:3/4}
+  /* container estreito: a mesma medida em cqw ficaria pequena demais pra ler no celular */
+  .sl-tela h2.sl-frase{font-size:calc(7.4cqw * var(--k,1))}.sl-ctx{font-size:calc(3.4cqw * var(--k,1));max-width:none}.sl-rot{font-size:calc(2.5cqw * var(--k,1))}
+  .viz{font-size:calc(2.9cqw * var(--k,1))}.viz-num b{font-size:calc(19cqw * var(--k,1))}.viz-num span{font-size:calc(4.6cqw * var(--k,1))}
+  .viz-de{font-size:calc(3cqw * var(--k,1))}.viz-caixa b{font-size:calc(3cqw * var(--k,1))}.viz-caixa span{font-size:calc(2.5cqw * var(--k,1))}
+  .viz-pilha strong{font-size:calc(3.1cqw * var(--k,1))}
+  .sl-slide{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);align-content:start;gap:16px}
+  .sl-viz{align-items:flex-start}
+  .viz-foto{min-height:26cqw}
+  .sl-contador{margin-left:0;width:100%}
+  .sl-btn{flex:1}
+}

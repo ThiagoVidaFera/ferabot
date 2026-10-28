@@ -160,6 +160,18 @@ O cliente descobre abrindo o painel e vendo a máquina ter trabalhado.
 
 Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skill.
 
+**Squads e motores que vêm junto:**
+
+| Comando | Entrega |
+|---|---|
+| `/squad-onboarding` | o sistema de captação inteiro pronto: prévia do perfil com o feed montado, 4 páginas, kit de ~55 artes + PDF da isca, 3 campanhas de R$ 20/dia e o fluxo de WhatsApp E0–E7 — pro negócio dele ou de um cliente dele |
+| `/anuncio-nativo` | story ad com cara de post nativo do Instagram |
+| `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed |
+| `/mix-estaticos` | variações de estáticos a partir de uma ideia |
+| `/anuncios-de-ouro` | kit de anúncio multiformato com fotos reais |
+
+Os quatro de anúncio são chamados pelo `/conteudo-e-anuncios`; o cliente também pode digitar direto.
+
 **WhatsApp e DM são captação**, não atendimento. O sistema dispara campanha e captura lead. Nunca
 se posiciona como robô que responde e qualifica sozinho.
 

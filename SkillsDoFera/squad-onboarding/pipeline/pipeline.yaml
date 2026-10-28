@@ -1,0 +1,112 @@
+squad: onboarding
+version: "5.0"
+created: "2026-03-25"
+updated: "2026-10-26"
+
+# Pipeline v5.0 — a entrega é UM sistema ligado, não um conjunto de peças.
+#   O cliente recebe: link da prévia (perfil + 4 páginas + 6 seções didáticas) · pasta no Drive
+#   (≈55 artes + legendas + COMO-POSTAR) · 2 mensagens de entrega. Ele só publica, liga e responde.
+#   Leia primeiro: METODOLOGIA-V5.md. Procedimento: steps/step-22-previa-perfil.md.
+#   O pipeline v4 (9 entregáveis soltos) está preservado em pipeline-v4.yaml como acervo.
+# Pipeline v4.3 — + Prévia do Perfil interativa (step-22)
+# Pipeline v4.2 — roteiro YT em 2 camadas · v4.1 — página de workshop
+
+leia_antes:
+  - METODOLOGIA-V5.md
+  - PADROES-COPY.md
+  - PADROES-DESIGN.md
+  - OTIMIZACOES.md        # o que ainda NÃO entregamos e deveríamos — em ordem de prioridade
+
+pasta_do_run: <FERABOT>/output/onboarding/<slug>-<data>/   # os motores nunca escrevem dentro da pasta da skill
+
+fases:
+  # ── 1 · DIAGNÓSTICO E OFERTA DE ENTRADA ──
+  - id: diagnostico
+    agent: pedro-perfil
+    metodo: Big Idea · contracrença · mecanismo nomeado · inimigo · vocabulário próprio (ver step-22, fase 1)
+    entrada: pasta do run (um cliente = uma pasta) · perfil.json (se for o próprio negócio) · fotos reais · perfil do Instagram (métricas reais dos últimos 60 dias)
+    saida: OFERTA-<nome>.md — Big Idea, inimigo, mecanismo em 4 peças nomeadas, entrega por semana, promessa de entrega, preço, pendências do cliente
+    regras:
+      - "Diagnóstico de engajamento é INTERNO: nunca vai pra peça que o cliente lê"
+      - "Oferta de entrada cabe em UMA venda do cliente (R$ 3 mil pra ticket de R$ 12 mil)"
+      - "Termina com a mensagem de coleta dos dados que só o cliente tem (caso real, links, limites)"
+    checkpoint: você valida a oferta (e o cliente, se o run for de um cliente seu)
+
+  # ── 2 · ENSAIO POR IA ──
+  - id: fotos
+    agent: pedro-perfil
+    chave: GEMINI_API_KEY (opcional — sem ela, gerar à mão no Gemini com o mesmo prompt)
+    motor: [templates/previa-perfil/gerar_fotos.py, templates/previa-perfil/gerar_fotos_mulher.py, templates/previa-perfil/recortar45.py]
+    saida: 4–5 retratos 4:5 gradeados + avatar com QA em círculo (110/56/32px)
+    regras:
+      - "Foto de pessoa é SEMPRE gerada por IA a partir das reais; frame de vídeo é referência, não arte"
+      - "Direção fixa: mais jovem, sorrindo, trabalho ou luxo discreto, sem olhar pra câmera — avatar é a exceção"
+      - "Grade de cor: a mesma correção em todas as fotos do lote, pra parecerem um ensaio só"
+      - "Lote substituído vai pra archive/ com WHY.md; nunca se apaga"
+
+  # ── 3 · PRÉVIA DO PERFIL ──
+  - id: previa
+    agent: pedro-perfil
+    template: templates/previa-perfil/
+    contrato: templates/previa-perfil/CONTRATO-DE-CONTEUDO.md
+    saida: index.html navegável (bio, destaques, feed, DM, guia, oferta) + 6 seções de plano (agendamento, grupo, vídeo, WhatsApp, criativos da proposta, kit)
+    antes_de_escrever:
+      - "puxar_criativos.py (opcional, META_ACCESS_TOKEN + META_AD_ACCOUNT_ID): decupar os anúncios ATIVOS — o molde dos 9 criativos vem deles; sem chave, pela Biblioteca de Anúncios da Meta"
+    regras:
+      - "topNote de demonstração obrigatório · número sem fonte vira [A PREENCHER] visível"
+      - "Link da bio abre agendar.html em aba nova · seção 02 abre grupo.html · seção 03 abre slides.html · fecho abre proposta.html"
+      - "Cada porta mostra 3 criativos nos moldes vivos: feed-resultado · story-nativo · feed-editorial"
+      - "Slides do vídeo são CENAS (frase + contexto + infográfico), nunca frase solta, nunca tempo na tela"
+      - "WhatsApp = esqueleto E0–E7 + 3 regras; respostas manuais com modelo pronto"
+    checkpoint: você aprova a prévia → o cliente aprova a prévia → só então o kit
+
+  # ── 4 · PUBLICAÇÃO ──
+  - id: publicar
+    motor: templates/previa-perfil/publicar.py
+    chave: NETLIFY_AUTH_TOKEN (ou `netlify login`; sem nenhum, arrastar _publicar/ em app.netlify.com/drop)
+    saida: URL pública (noindex), só a prévia e as artes no ar, .md internos em 404
+    regras:
+      - "Entrega por LINK, nunca zip"
+      - "'Deploy is live' não é prova — QA por HTTP e Playwright em 375px e 1280px"
+
+  # ── 5 · KIT DE FEED INICIAL ──
+  - id: kit
+    agent: pedro-perfil
+    spec: KIT-FEED-INICIAL.md
+    motor: [templates/montar_cliente.py, templates/kit-feed/build_feed.py, templates/kit-feed/build_isca.py, templates/kit-feed/feed_do_kit.py, templates/kit-feed/subir_drive.mjs, templates/kit-feed/gerar_docs.py]
+    saida: 6 carrosséis (grade 3+3) + 9 estáticos (= criativos das 3 campanhas) + 4 capas de destaque + foto de perfil + PDF DA ISCA (A4, 9 págs) + COMO-POSTAR.md + COPY.md por peça · tudo no Drive · feed e destaques da prévia apontando pras artes reais
+    regras:
+      - "Zona morta de 250px checada no render — reprova é bloqueante"
+      - "As 6 capas em xadrez de tipo e fundo, pelo menos duas com foto — conferir no GRID, não peça a peça"
+      - "Estáticos rotacionam as campanhas A·B·C por linha, pra não empilhar o mesmo convite na coluna"
+      - "Capa de destaque: conteúdo em área segura central; QA na folha em círculo"
+      - "O PDF da isca é OBRIGATÓRIO: o carrossel, a página do grupo e a keyword prometem o material. Cada situação leva onde procurar + como calcular + mensagem pronta"
+      - "Upload ao Drive roda 2x (1ª gera o link do PDF, 2ª leva os docs com o link). Sem credencial do Drive (o FERABOT não traz), sobe à mão e grava os links com subir_drive.mjs --manual. Abrir o link em janela anônima antes de entregar"
+      - "Pastas _qa* (capturas de conferência) nunca sobem pro Drive do cliente"
+      - "FONTE ÚNICA: conteúdo se escreve em fonte/ (fatos.json + content.tpl.js + feed.tpl.json); content.js e feed.json são gerados pelo montar_cliente.py e nunca editados à mão"
+      - "Valor do exemplo é calculado (qtd × ticket), nunca digitado, senão o mesmo exemplo sai com dois valores"
+
+  # ── 5b · QA ÚNICO ──
+  - id: qa
+    motor: templates/qa_run.py
+    comando: python -I <SKILL>/templates/qa_run.py <run> --url https://<slug>.netlify.app --entrega
+    saida: tabela PASSA/AVISO/FALHA (exit 1 em falha) + _qa/grid.png + _qa/circulos.jpg pra conferir a olho
+    cobre: fonte em dia · tokens · fato fora do token · kit completo · [A PREENCHER] e [LINK] · motor igual ao template · prévia 375/1280 local e no ar · páginas e PDF em 200 · internos em 404 · Drive público e sem _qa* (AVISO se o Drive não estiver configurado)
+
+  # ── 6 · ENTREGA ──
+  - id: entrega
+    saida: MENSAGEM-ENTREGA.md (entrega + cobrança dos dados; parágrafos curtos, linha em branco entre blocos) · README.md do run
+    gate_final:
+      - "qa_run.py --entrega sem nenhuma FALHA (inclui zero imagem quebrada, zero erro de console, zero ** ou <b> literal)"
+      - "Lista explícita do que o cliente ainda precisa fornecer"
+
+# O que v5 ainda NÃO faz e está em OTIMIZACOES.md, em ordem: páginas vivas com backend ·
+# campanhas pausadas no Gerenciador · checklist de coleta · CRM mínimo ·
+# respostas rápidas no WhatsApp Business · semana zero dia a dia · meta de tempo · placar · gate "pronto pra ligar".
+
+acervo_v4:
+  nota: >
+    Os entregáveis da v4 (página de vendas Netlify, plano de marketing 12 seções, livro-funil,
+    proposta comercial, 10 stories, 3 carrosséis repelente, 10 caixinhas, 3 thumbnails, roteiro
+    YouTube 20 slides, página de workshop) continuam disponíveis como steps opcionais — ver
+    pipeline-v4.yaml e os steps/step-02 a step-21. Não fazem parte da entrega padrão v5.

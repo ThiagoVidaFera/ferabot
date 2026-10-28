@@ -1,0 +1,8 @@
+id,name,title,icon,execution,path,skills,tasks
+paula-pagina,Paula Página,Sales Page Copywriter,📝,inline,./agents/paula-pagina.agent.md,,
+marco-marketing,Marco Marketing,Digital Marketing Strategist,🗺️,inline,./agents/marco-marketing.agent.md,,
+sofia-stories,Sofia Stories,Instagram Stories Creator,📱,inline,./agents/sofia-stories.agent.md,,
+carlos-carrossel,Carlos Carrossel,Instagram Carousel Designer,🎠,inline,./agents/carlos-carrossel.agent.md,,
+tania-thumb,Tânia Thumb,YouTube Thumbnail Designer,🎬,inline,./agents/tania-thumb.agent.md,,
+netuno-netlify,Netuno Netlify,Netlify Publisher,🌐,subagent,./agents/netuno-netlify.agent.md,,
+danilo-drive,Danilo Drive,Google Drive Uploader,💾,subagent,./agents/danilo-drive.agent.md,,
