@@ -106,3 +106,18 @@ painel cobra.
 
 O Ferabot constrói as peças e cobra o caminho. Quem grava, publica, responde e vende é você.
 É assim que a meta sai do papel.
+
+---
+
+## Depois do dia 1 — os dois movimentos que destravam o resto
+
+**1. Crie a página de agendamento.** Digite `/funil-reuniao-fantasma`. É uma página de reunião de
+20 minutos em que o lead trava o horário primeiro e só ganha a reunião se responder no WhatsApp e
+provar o perfil. É a primeira página que você cria: todo conteúdo e todo anúncio manda para ela.
+
+**2. Teste formatos de carrossel no seu perfil.** Em 2 semanas, publique 3 formatos diferentes
+(clássico, ilustrado, historinha ou tela viva), cada um com uma palavra-chave de comentário
+diferente. Depois de 48 horas, compare comentários e conversas. Repita só o que gerou conversa.
+
+Com a página no ar, ligue o `/agente-de-leads`: ele recebe quem agendou, qualifica, lembra da
+reunião e prepara a proposta pra você aprovar. Roda no seu computador e no seu WhatsApp.

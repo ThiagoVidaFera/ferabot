@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{{titulo}}</title>
+<meta name="description" content="{{descricao}}">
+<meta property="og:title" content="{{titulo}}">
+<meta property="og:description" content="{{descricao}}">
+<meta name="robots" content="noindex,nofollow">
+{{{pixel}}}
+<style>
+{{{css}}}
+</style>
+</head>
+<body>
+
+<header class="topo wrap">
+  <span class="marca">{{marca}}</span>
+  <span class="chip">Reunião de {{duracao}} minutos</span>
+</header>
+
+<main>
+
+<section class="hero-bg">
+  <div class="wrap hero">
+    <div class="hero-txt">
+      <h1>{{h1}}</h1>
+      <p class="lead">{{sub}}</p>
+      <a class="btn btn-hero" href="#agenda" data-cta="hero">{{cta}} <span class="seta" aria-hidden="true">&rarr;</span></a>
+      <p class="mini">{{microcopy}}</p>
+    </div>
+    <figure class="conversa" aria-label="Ilustração do passo a passo">
+      <div class="bar"><i></i><span></span><span></span></div>
+      <div class="msgs">
+        <div class="b eu m1"><span class="cad" aria-hidden="true"></span>{{anim_1}}</div>
+        <div class="b ele m2">{{anim_2}}</div>
+        <div class="b eu m3">{{anim_3}}</div>
+        <div class="b ok m4"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M6.5 12.5l4 4 7-8"/></svg>{{anim_4}}</div>
+      </div>
+      <figcaption>Ilustração de como funciona. Não é uma conversa real.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="como">
+  <div class="wrap narrow">
+    <p class="eyebrow">Como funciona</p>
+    <h2>{{como_titulo}}</h2>
+    <ol class="passos">
+      {{{passos}}}
+    </ol>
+  </div>
+</section>
+
+<!--SEC:dores-->
+<section class="alt">
+  <div class="wrap narrow">
+    <p class="eyebrow">Você se reconhece?</p>
+    <h2>{{dores_titulo}}</h2>
+    <ul class="dores">
+      {{{dores}}}
+    </ul>
+  </div>
+</section>
+<!--/SEC:dores-->
+
+<section>
+  <div class="wrap narrow">
+    <p class="eyebrow">Por que é assim</p>
+    <h2>{{porque_titulo}}</h2>
+    {{{porque}}}
+    <!--SEC:ilustracao-->
+    <img class="ilus" src="{{ilustracao}}" alt="" loading="lazy">
+    <!--/SEC:ilustracao-->
+  </div>
+</section>
+
+<!--SEC:prova-->
+<section class="alt">
+  <div class="wrap narrow">
+    <p class="eyebrow">Prova</p>
+    <h2>{{prova_titulo}}</h2>
+    <div class="provas">
+      {{{prova}}}
+    </div>
+  </div>
+</section>
+<!--/SEC:prova-->
+
+<section>
+  <div class="wrap narrow">
+    <p class="eyebrow">Filtro</p>
+    <h2>{{filtro_titulo}}</h2>
+    <div class="filtro">
+      <div class="nao"><h3>Não entre se</h3><ul>{{{nao_para_quem}}}</ul></div>
+      <div class="sim"><h3>Entre se</h3><ul>{{{para_quem}}}</ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="agenda-sec" id="agenda">
+  <div class="wrap narrow">
+    <p class="eyebrow">Passo 1 de 2</p>
+    <h2>{{agenda_titulo}}</h2>
+    <p class="fino">{{agenda_sub}}</p>
+
+    <div id="dias" class="dias" role="tablist" aria-label="Dias disponíveis"></div>
+    <div id="horas" class="horas" aria-live="polite"></div>
+    <p id="sem-horario" class="fino" hidden>Sem horário livre nos próximos dias. Chama no WhatsApp: <a id="link-zap-vazio" href="#">abrir conversa</a>.</p>
+
+    <form id="form" class="form" hidden novalidate>
+      <p class="escolhido" id="escolhido"></p>
+      <label>Seu nome
+        <input name="nome" autocomplete="name" required maxlength="60" placeholder="Nome e sobrenome">
+      </label>
+      <label>Seu WhatsApp
+        <input name="whatsapp" inputmode="tel" autocomplete="tel" required placeholder="(00) 00000-0000">
+      </label>
+      <label>Seu Instagram
+        <input name="instagram" autocapitalize="off" autocorrect="off" required placeholder="@seuperfil">
+      </label>
+      {{{perguntas}}}
+      <label class="check">
+        <input type="checkbox" name="ciente" required>
+        <span>{{compromisso}}</span>
+      </label>
+      <p class="aviso" id="aviso" role="alert" hidden></p>
+      <button class="btn btn-main" type="submit" id="enviar">{{cta_enviar}} <span class="seta" aria-hidden="true">&rarr;</span></button>
+      <p class="fino">{{privacidade}}</p>
+    </form>
+
+    <div id="passo2" class="passo2" hidden>
+      <p class="eyebrow">Passo 2 de 2</p>
+      <h3>Falta só mandar a mensagem.</h3>
+      <p>O horário só fica reservado quando a mensagem chega no WhatsApp de {{dono}}. Se o WhatsApp não abriu, toque no botão.</p>
+      <a class="btn btn-main" id="abrir-zap" href="#" rel="noopener">Abrir o WhatsApp &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap narrow">
+    <p class="eyebrow">Perguntas</p>
+    <h2>O que costuma perguntar antes de agendar</h2>
+    <div class="faq">
+      {{{faq}}}
+    </div>
+  </div>
+</section>
+
+<section class="fecho hero-bg">
+  <div class="wrap narrow centro">
+    <h2>{{fecho_titulo}}</h2>
+    <p class="lead">{{fecho_sub}}</p>
+    <a class="btn btn-hero" href="#agenda" data-cta="fecho">{{cta}} <span class="seta" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape wrap">
+  <p>{{marca}}{{{rodape_links}}}</p>
+  <p class="fino">Seus dados vão direto para o WhatsApp de {{dono}}. Esta página não guarda nada.</p>
+</footer>
+
+<div class="barra" id="barra" hidden>
+  <a class="btn btn-main" href="#agenda" data-cta="barra">{{cta}} <span class="seta" aria-hidden="true">&rarr;</span></a>
+</div>
+
+<script>window.FUNIL = {{{config}}};</script>
+<script>
+{{{js}}}
+</script>
+</body>
+</html>

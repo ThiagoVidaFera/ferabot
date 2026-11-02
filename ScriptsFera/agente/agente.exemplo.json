@@ -1,0 +1,68 @@
+{
+  "_leia": "Copie para agente.json e troque os textos pela sua voz. Nada aqui é enviado sem você ligar o modo --enviar.",
+  "dono": { "nome": "Seu Nome", "assistente": "assistente de inteligência artificial" },
+  "modelo": "gemini-2.5-pro",
+  "origem_lead": "funil-reuniao-fantasma",
+  "apresentacao": "Oi, {nome}. Eu sou o assistente de inteligência artificial do {dono}, não sou uma pessoa. Cuido do seu agendamento e de algumas perguntas rápidas pra reunião render. Quem conversa com você na reunião é o próprio {dono}.",
+  "confirmacao_horario": "Vi aqui que você marcou {dia} às {hora}.",
+  "materiais": [
+    {
+      "id": "guia",
+      "quando": "apos_primeira_resposta",
+      "texto": "Enquanto a gente conversa, te deixo esse material pra você chegar na reunião com a cabeça aquecida:",
+      "url": "https://exemplo.com/seu-material"
+    },
+    {
+      "id": "video",
+      "quando": "apos_qualificacao",
+      "texto": "Esse vídeo mostra como o {dono} trabalha. Vale assistir antes da reunião:",
+      "url": "https://exemplo.com/seu-video"
+    },
+    {
+      "id": "checklist",
+      "quando": "no_lembrete_24h",
+      "texto": "Esse checklist ajuda a separar o que levar pra reunião:",
+      "arquivo": "ScriptsFera/agente/materiais/checklist.pdf"
+    }
+  ],
+  "perguntas": [
+    { "id": "instagram", "pergunta": "Qual é o seu @ do Instagram? Quero olhar seu perfil antes da reunião.", "obrigatoria": true },
+    { "id": "vende", "pergunta": "O que você vende hoje, em uma frase?", "obrigatoria": true },
+    { "id": "publico", "pergunta": "Pra quem você vende?", "obrigatoria": true },
+    { "id": "tentou", "pergunta": "O que você já tentou pra conseguir clientes?", "obrigatoria": true },
+    { "id": "objetivo", "pergunta": "Qual resultado você quer tirar dessa reunião?", "obrigatoria": true }
+  ],
+  "preco_liberado": false,
+  "preco_texto": "",
+  "janela": { "inicio": "09:00", "fim": "20:00", "dias": [1, 2, 3, 4, 5, 6] },
+  "handoff": {
+    "palavras_fechar": ["quero fechar com", "vamos fechar", "bora fechar", "quero contratar", "quero comprar", "como pago", "pix", "mandar o contrato"],
+    "palavras_preco": ["preço", "preco", "valor", "quanto custa", "quanto é", "quanto fica", "investimento"],
+    "palavras_ligar": ["me liga", "me ligue", "ligar", "ligação", "ligacao", "chamada de voz"],
+    "palavras_humano": ["humano", "atendente", "pessoa de verdade", "falar com o", "falar com a"],
+    "palavra_unica": "gente",
+    "palavras_parar": ["parar", "sair", "cancelar", "remover", "não quero receber", "nao quero receber"]
+  },
+  "limites": {
+    "max_envios_dia": 40,
+    "max_leads_novos_dia": 20,
+    "max_toques_noshow": 2,
+    "horas_ate_toque1": 3,
+    "horas_entre_toques": 20,
+    "max_mensagens_por_turno": 3,
+    "pausa_resposta_seg": [6, 20],
+    "pausa_proativa_seg": [20, 90]
+  },
+  "textos": {
+    "confirmacao": "Combinado, {nome}. Sua reunião com o {dono} está confirmada para {dia} às {hora}.",
+    "qualificado": "Obrigado pelas respostas, {nome}. Já passei tudo pro {dono}, ele chega na reunião sabendo do seu cenário.",
+    "toque1": "Oi, {nome}. Passando pra confirmar sua reunião de {dia} às {hora}. Me responde com o @ do seu Instagram e eu deixo tudo certo?",
+    "toque2": "{nome}, última mensagem minha por aqui. Se ainda fizer sentido a reunião de {dia} às {hora}, é só me mandar o @ do seu Instagram. Se não der, sem problema.",
+    "lembrete_24h": "Oi, {nome}. Lembrando que sua reunião com o {dono} é amanhã, {dia} às {hora}.",
+    "lembrete_1h": "{nome}, sua reunião com o {dono} começa em 1 hora, às {hora}. Separe um lugar tranquilo pra gente conversar.",
+    "lembrete_10min": "{nome}, faltam 10 minutos pra reunião com o {dono}. Já pode se preparar.",
+    "handoff": "Entendi, {nome}. Vou chamar o {dono} pra seguir com você, ele responde por aqui.",
+    "parar": "Tudo bem, {nome}. Não te mando mais mensagens. Se mudar de ideia, é só chamar.",
+    "preco_liberado": "{preco_texto}"
+  }
+}

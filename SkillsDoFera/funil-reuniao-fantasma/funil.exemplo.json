@@ -1,0 +1,37 @@
+{
+  "_ajuda": "Copie para output/paginas/reuniao-fantasma/funil.json e preencha com o dono. Campo que ele não tem: deixe de fora ou escreva [FONTE OMISSA: o que falta]. Nunca invente.",
+  "whatsapp_dono": "11999990000",
+  "duracao_min": 20,
+  "fuso": "America/Sao_Paulo",
+  "disponibilidade": {
+    "dias": ["seg", "ter", "qua", "qui", "sex"],
+    "horarios": ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"],
+    "antecedencia_horas": 12,
+    "janela_dias": 10,
+    "bloqueios": []
+  },
+  "perguntas": [
+    { "rotulo": "Em uma frase: o que você quer resolver nesta reunião?", "placeholder": "Hoje o que mais me trava é...", "minimo": 12 }
+  ],
+  "pixel_id": "",
+  "dores": [
+    "Eu agendo reunião e metade das pessoas não aparece.",
+    "Passo 20 minutos explicando o básico para quem nem estava preparado."
+  ],
+  "para_quem": [
+    "Você já vende seu serviço e quer vender com mais previsibilidade.",
+    "Você aceita responder no WhatsApp antes da reunião."
+  ],
+  "nao_para_quem": [
+    "Você quer só uma conversa para tirar dúvida solta.",
+    "Você não vai responder as perguntas antes."
+  ],
+  "provas": [
+    { "titulo": "[FONTE OMISSA: caso real do dono]", "texto": "", "fonte": "" }
+  ],
+  "imagens": { "ilustracao": "" },
+  "copy": {
+    "h1": "20 minutos comigo, só para quem chega preparado.",
+    "sub": "Você escolhe o horário agora e ele fica reservado no seu nome. A reunião acontece depois que você responde no WhatsApp."
+  }
+}

@@ -1,0 +1,17 @@
+{
+ "personagem": {"nome": "Rodrigo"},
+ "slides": [
+  ["O CARA PRECISAVA DE 3 CLIENTES PELO YOUTUBE.", "Comprou 3 microfones, 2 luzes e um curso de edição.", "E não gravou um vídeo sequer."],
+  ["Vamos chamar esse consultor de Rodrigo. Ele não existe, mas você conhece uns cinco.", "O serviço é bom, ele conhece o mercado e sabe quem poderia comprar.", "Só que, na hora de gravar, pensa: “Antes, preciso montar o estúdio.”", "LÁ VEM."],
+  ["Segunda: “Vou comprar um microfone melhor.”\nTerça: “Falta iluminação.”", "Quarta: “Vou fazer um curso de edição.”\nQuinta: “O fundo tá feio.”", "Sexta: “Semana que vem eu começo.”", "KKKKKKKK"],
+  ["MEU AMIGO.", "A pasta de ideias do Rodrigo tem 63 títulos, o tripé é profissional e o fundo da estante já foi trocado duas vezes.", "QUE ESTRUTURA MARAVILHOSA."],
+  ["Rodrigo não é preguiçoso. Preguiçoso não compra 3 microfones.", "Ele só está otimizando um canal que ainda não existe.", "Montou a vitrine antes de descobrir o que o cliente procura."],
+  ["Equipamento dá uma sensação deliciosa de progresso.", "Você compra, instala, configura e termina o dia pensando: “Hoje eu avancei.”", "AVANÇOU O QUÊ, RODRIGO? O cliente nem sabe que você tem um canal."],
+  ["Montar estúdio é confortável: o microfone não te julga.", "Gravar um vídeo de 18 minutos é diferente. Alguém pode assistir, achar simples demais ou comparar.", "Nenhum equipamento elimina essa incerteza."],
+  ["Antes de comprar qualquer coisa, grave.", "Pega a pergunta que o cliente mais faz antes de contratar e responde, no celular, em 18 minutos.", "DEPOIS melhora o som. Equipamento melhora um vídeo que existe."],
+  ["No fim, o Rodrigo precisava de um vídeo respondendo uma pergunta.", "Mas está lendo isso e pensando: “Vou pesquisar um microfone melhor.”", "NÃO, RODRIGO. APOIA O CELULAR E GRAVA."]
+ ],
+ "cta": {"titulo": "Precisa de ajuda?", "palavra": "ROTEIRO",
+         "texto": "Comenta a palavra ROTEIRO aqui embaixo e eu te chamo no direct pra gente montar junto o seu primeiro vídeo.",
+         "selo": "VOCÊ GRAVA. A GENTE MONTA JUNTO."}
+}

@@ -26,6 +26,8 @@ Abertura (adaptar, não copiar robótico):
 | **YouTube** | roteiro, vídeo narrado por IA, título e thumbnail, upload no seu canal | "cria um vídeo de 1 minuto sobre X pro meu canal" |
 | **Disparo de WhatsApp** | mensagens em lote pros seus contatos, com variação e ritmo seguro (seu número, sua máquina) | "dispara um convite pra minha lista de leads" |
 | **Slides** | apresentação profissional pra aula, pitch ou webinar | "monta os slides da minha aula de quinta" |
+| **Primeira página** | página de agendamento de 20 minutos no mecanismo Reunião Fantasma: o lead trava o horário e só ganha a reunião se responder no WhatsApp | "cria minha página de agendamento" |
+| **Agente de leads** | recebe o lead da página, qualifica, manda seus materiais, lembra da reunião e prepara a proposta para você aprovar | "liga o agente de leads" |
 | **Direct automático** | quem comenta a palavra-chave no seu post recebe DM com o link (captação) | "quem comentar EU QUERO recebe o link do material" |
 | **Páginas** | landing, página de venda e quiz de qualificação, publicadas | "cria uma página de captura pra minha mentoria" |
 | **CRM de leads** | registro de todo lead, follow-up pronto, cobrança de quem está sem resposta | "como estão meus leads dessa semana?" |
@@ -235,5 +237,51 @@ ele marcar lá, reporta aqui ("gravei 2 vídeos") pra eu registrar no índice
 1. Resumo em 5 linhas: quem ele é, a meta, o número da semana, onde está o painel.
 2. Registrar em silêncio:
    `python ScriptsFera/metas-api.py entrega add "fera" "Briefing completo: perfil + meta configurados" --link "DashboardFera/index.html"`
-3. Primeira missão do dia 1, sem esperar ele pedir: propor UMA peça concreta que aproxime a
-   primeira venda (proposta pronta, ou página de captura). Sair do briefing direto pra produção.
+3. Emendar sem pausa na Fase 7 (carrosséis) e na Fase 8 (a primeira página). A primeira missão do
+   dia 1 é a Fase 8: sem página de agendamento, nenhum conteúdo tem para onde mandar o lead.
+
+## Fase 7 — Carrosséis: os formatos e o desafio de testar (logo após o briefing, uma vez)
+
+Ele acabou de instalar e ainda não sabe que carrossel não é um formato só. Apresentar o catálogo em
+UMA mensagem curta, tabela abaixo, e depois lançar o desafio.
+
+| Formato | Skill | Quando usar | Cara da peça |
+|---|---|---|---|
+| Clássico 10 slides | `squad-carrossel-fera` | ensinar, listar, quebrar crença | gancho, desenvolvimento, virada, CTA |
+| Ilustrado (modelo Greco) | `carrossel-ilustrado` | explicar método com prova visual | card de tweet, manchete técnica, uma prova em cada slide |
+| Historinha (modelo Vaz) | `carrossel-historinha` | mostrar um erro comum sem sermão | personagem fictícia declarada na capa, card de tweet preto, CTA no fim |
+| Tela viva (modelo Lucas Lopes) | `carrossel-tela-viva` | mostrar o sistema funcionando | card de tweet com uma tela em vídeo de 12 segundos em cada slide |
+
+Diga com todas as letras o que está medido e o que não está: os três modelos novos vêm de perfis
+que publicaram esse padrão e o Thiago já usou. Nenhum deles tem resultado garantido no perfil dele.
+Quem decide o que funciona no perfil do cliente é o número do perfil do cliente.
+
+**O desafio (dito na cara, é dele que executa):**
+
+1. Nas próximas 2 semanas, publicar um carrossel de CADA formato que combine com o nicho (mínimo 3).
+2. Cada um com uma palavra-chave de comentário DIFERENTE, para saber qual formato gera conversa.
+3. Anotar, depois de 48 horas, comentários e conversas por formato. Eu monto a tabela.
+4. Repetir só o formato que gerou conversa. Formato que não gerou sai.
+
+Gravar o desafio em `output/conteudo-e-anuncios/desafio-carrosseis.md` (formato, palavra-chave,
+data de publicação, comentários e conversas depois de 48 horas) e cobrar essa tabela na semana.
+Não produzir os três na hora: oferecer o primeiro e perguntar qual formato ele quer testar
+primeiro. Copy aprovada antes de renderizar, como sempre.
+
+## Fase 8 — A primeira página: funil Reunião Fantasma (oferecer logo após a Fase 7)
+
+É a primeira página que todo cliente cria, antes de qualquer outro conteúdo ou anúncio: uma página
+de agendamento de reunião de 20 minutos no mecanismo Reunião Fantasma.
+
+Explicar em 4 linhas: o lead escolhe o horário e TRAVA a agenda primeiro. A reunião só acontece se
+ele responder no WhatsApp e provar o perfil. Se não responder, o no-show é seu, não dele.
+
+Disparar `/funil-reuniao-fantasma`. Não fazer 12 perguntas: o perfil já está em `perfil.json`.
+Faltam só os horários disponíveis, o WhatsApp que recebe e as perguntas de qualificação. Dado de
+prova que ele não tem vira `[FONTE OMISSA: ...]`, nunca inventado.
+
+**Depois que a página estiver no ar,** oferecer UMA vez o agente de leads (`/agente-de-leads`): ele
+recebe quem agendou, qualifica, manda os materiais do dono, lembra da reunião e, depois da reunião,
+prepara a proposta no padrão (`/proposta-pagina`) para o dono aprovar. Dizer a limitação na cara: o
+agente roda no computador dele e no WhatsApp dele. Computador desligado, agente parado. E ele nunca
+envia proposta sozinho.

@@ -1,0 +1,96 @@
+/* ===== proposta-pagina: componentes do layout ===== */
+[hidden]{display:none!important}
+button.btn{font-family:inherit}
+.btn.grande{min-height:64px;padding:0 38px;font-size:1.2rem}
+
+/* personalização + validade */
+.sel{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.chip{padding:7px 13px;border-radius:99px;border:1px solid #4A443D;font-size:.8rem;font-weight:700;color:#CFC6B8;line-height:1.3}
+.chip b{color:#fff}
+.chip.val{border-color:var(--acc)}
+.venceu{display:none;background:#B3261E;color:#fff;padding:14px var(--pad);text-align:center;font-weight:700}
+body.vencida .venceu{display:block}
+
+/* diagramas animados */
+.ent-card .foto.diag,.diag{background:#141210;aspect-ratio:3/2;display:block;position:relative}
+@media (min-width:860px){.ent-card .foto.diag{height:auto;align-self:center;margin:18px;border-radius:18px;overflow:hidden}}
+.diag svg{width:100%;height:100%;display:block}
+.diag text{font-family:Inter,system-ui,sans-serif;font-weight:700;fill:#F5EFE6}
+.diag .mut{fill:#B9B0A3;font-weight:600}
+.diag .nd{fill:#221F1B;stroke:#4A443D;stroke-width:2;animation:ndOn 7s infinite;animation-delay:var(--d,0s)}
+.diag .nd.dm{stroke-linejoin:round}
+@keyframes ndOn{0%,4%{fill:#221F1B;stroke:#4A443D}8%,22%{fill:var(--acc);stroke:var(--acc)}30%,100%{fill:#221F1B;stroke:#4A443D}}
+.diag .ar{stroke:#7A7166;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.diag .tile{fill:var(--acc);opacity:.14;animation:tileOn 7s infinite;animation-delay:var(--d,0s)}
+@keyframes tileOn{0%{opacity:.14}6%,70%{opacity:1}90%,100%{opacity:.14}}
+.diag .bar{transform-box:fill-box;transform-origin:bottom;animation:grow 7s infinite var(--ease);animation-delay:var(--d,0s)}
+.diag .barfill{fill:var(--acc)}
+@keyframes grow{0%{transform:scaleY(0)}14%,78%{transform:scaleY(1)}92%,100%{transform:scaleY(0)}}
+.diag .trend{fill:none;stroke:#F5EFE6;stroke-width:3;stroke-dasharray:640;stroke-dashoffset:640;stroke-linecap:round;stroke-linejoin:round;animation:draw 7s infinite}
+@keyframes draw{0%,10%{stroke-dashoffset:640}40%,78%{stroke-dashoffset:0}92%,100%{stroke-dashoffset:640}}
+.diag .cap{fill:#2A2622;animation:capOn 7s infinite;animation-delay:var(--d,0s)}
+@keyframes capOn{0%,4%{fill:#2A2622}12%,76%{fill:var(--acc)}92%,100%{fill:#2A2622}}
+@media (prefers-reduced-motion:reduce){.diag *{animation:none!important}.diag .tile{opacity:1}.diag .bar{transform:none}.diag .trend{stroke-dashoffset:0}.diag .cap{fill:var(--acc)}}
+
+/* garantia colada no preço */
+.invest + .garantia{padding-top:clamp(40px,6vw,72px)}
+.garantia .caixa small{display:block;margin-top:18px;color:var(--mute);font-size:.88rem}
+
+/* o que acontece depois do clique */
+.depois .passos{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:14px;counter-reset:p}
+.depois .passo{counter-increment:p;position:relative;border:1px solid var(--line);border-radius:20px;background:var(--white);padding:20px 22px 22px 72px}
+.depois .passo::before{content:counter(p);position:absolute;left:20px;top:18px;width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.depois .passo b{display:block;font-size:1.12rem;letter-spacing:-.01em}
+.depois .passo p{color:var(--mute);font-size:.96rem;margin-top:3px}
+@media (min-width:900px){.depois .passos{grid-template-columns:repeat(4,1fr)}.depois .passo{padding:70px 20px 22px}.depois .passo::before{left:20px;top:20px}}
+
+/* palavras que eu uso */
+.gloss{margin-top:26px;border:1px solid var(--line);border-radius:18px;background:var(--white);padding:4px 20px}
+.gloss summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none}
+.gloss summary::after{content:" +";color:var(--acc)}
+.gloss[open] summary::after{content:" −"}
+.gloss dl{display:grid;gap:12px;margin:0 0 16px}
+.gloss dt{font-weight:800}
+.gloss dd{margin:0;color:var(--mute);font-size:.96rem}
+
+/* clientes que já atendo (mesmo bloco da página de contrato) */
+.clientes .ig-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:26px}
+.clientes .ig{display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);border-radius:18px;padding:16px;color:var(--ink);text-decoration:none;background:var(--white)}
+.clientes .ig:hover{border-color:var(--acc)}
+.ig-topo{display:flex;align-items:center;gap:10px}
+.ig-av{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none}
+.ig-user{font-size:.95rem;font-weight:700}
+.ig-num{color:var(--mute);font-size:.8rem}
+.ig-bio{font-size:.85rem;line-height:1.5;color:var(--mute);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.ig-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.ig-grade img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.ig-ver{color:var(--acc);font-size:.85rem;font-weight:700}
+.clientes .aviso{margin-top:18px;color:var(--mute);font-size:.9rem;max-width:44em}
+
+/* quem sou eu com foto */
+.sobre-grid{display:grid;gap:26px;margin-top:22px;align-items:center}
+.sobre-grid .faixa{margin-top:0}
+.eu{margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/5;max-height:560px;background:var(--paper-2)}
+.eu img{width:100%;height:100%;object-fit:cover}
+@media (min-width:760px){.sobre-grid{grid-template-columns:.78fr 1.22fr;gap:40px}}
+.final .peq{margin-top:14px;font-size:.88rem;color:var(--mute);max-width:36em}
+
+/* modal de dados do contrato */
+.modal{border:0;border-radius:26px;padding:0;width:min(580px,calc(100vw - 24px));max-height:calc(100dvh - 24px);background:var(--white);color:var(--ink);box-shadow:0 40px 120px -20px rgba(0,0,0,.6);overflow:auto}
+.modal::backdrop{background:rgba(20,18,16,.72);backdrop-filter:blur(3px)}
+.modal form{padding:clamp(22px,5vw,36px);display:grid;gap:14px}
+.modal h3{font-size:clamp(1.4rem,5vw,1.8rem)}
+.modal .sub{color:var(--mute);font-size:.96rem;margin-top:-6px}
+.modal label{display:block;font-weight:700;font-size:.9rem;margin-bottom:5px}
+.modal input{width:100%;min-height:52px;border-radius:14px;border:2px solid var(--line);background:var(--paper);color:var(--ink);padding:0 14px;font:600 1rem Inter,sans-serif}
+.modal input:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-color:var(--acc)}
+.modal input[aria-invalid="true"]{border-color:#B3261E}
+.modal .duas2{display:grid;gap:14px}
+@media (min-width:520px){.modal .duas2{grid-template-columns:1fr 1fr}}
+.modal .erro{color:#B3261E;font-weight:700;font-size:.92rem;min-height:1.2em}
+.modal .lgpd{font-size:.8rem;color:var(--mute)}
+.modal .fechar{position:absolute;right:14px;top:12px;width:40px;height:40px;border-radius:50%;border:0;background:var(--paper-2);color:var(--ink);font-size:1.3rem;cursor:pointer}
+.modal .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* barra fixa: um botão só */
+.barra .btn{white-space:nowrap}

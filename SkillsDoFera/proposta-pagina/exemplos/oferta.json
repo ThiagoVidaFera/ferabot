@@ -1,0 +1,61 @@
+{
+  "whatsapp": "(11) 98888-7766",
+  "checkout_url": "https://pay.exemplo.com.br/mentoria-prato-forte",
+  "valor_avista": 4800,
+  "parcelas": 3,
+  "valor_parcela": 1700,
+  "nota": "Os exames de sangue, se forem necessários, são pagos por você direto ao laboratório.",
+  "entregaveis": [
+    {
+      "titulo": "Diagnóstico da sua rotina e plano alimentar",
+      "nome_curto": "Diagnóstico e plano alimentar",
+      "preco": 1500,
+      "muda": "você deixa de adivinhar o que comer e passa a ter um prato desenhado para a sua rotina de treino.",
+      "itens": [
+        {"t": "Conversa de 60 minutos", "d": "para entender horários, treino, sono e o que você gosta de comer."},
+        {"t": "Plano alimentar individual", "d": "com trocas simples para dias corridos."},
+        {"t": "Lista de compras", "d": "pronta para levar ao mercado."}
+      ]
+    },
+    {
+      "titulo": "Acompanhamento semanal por 12 semanas",
+      "nome_curto": "Acompanhamento semanal",
+      "preco": 2800,
+      "muda": "você não fica sozinha quando a rotina aperta, e o plano é ajustado toda semana com o que aconteceu de verdade.",
+      "itens": [
+        {"t": "Encontro quinzenal de 30 minutos", "d": "por vídeo."},
+        {"t": "Mensagem semanal", "d": "para ajustar o prato e tirar dúvidas."},
+        {"t": "Registro de medidas e fotos", "d": "para você ver a evolução com os próprios olhos."}
+      ],
+      "diagrama": {
+        "tipo": "barras", "rotulo": "Diagrama: 7 semanas de acompanhamento em crescimento até a rotina fixa",
+        "titulo": "Semanas de acompanhamento", "destino": "Rotina fixa"
+      }
+    },
+    {
+      "titulo": "Guia de receitas para a semana toda",
+      "nome_curto": "Guia de receitas",
+      "preco": 1000,
+      "muda": "cozinhar uma vez e comer bem a semana inteira.",
+      "itens": [
+        {"t": "30 receitas rápidas", "d": "com foto e passo a passo."},
+        {"t": "Cardápio de domingo", "d": "para preparar tudo em duas horas."}
+      ]
+    }
+  ],
+  "garantia": {
+    "texto": "Se em 30 dias você sentir que o plano não combina com a sua rotina, eu refaço o plano sem custo.",
+    "destaque": "eu refaço o plano sem custo",
+    "itens": [
+      "Vale uma vez, para o plano alimentar do primeiro mês.",
+      "Os detalhes estão escritos no combinado que você lê antes de pagar."
+    ]
+  },
+  "quem_faz": {
+    "eu": ["Monto o plano, as receitas e o cardápio", "Acompanho você toda semana", "Ajusto o prato quando a rotina mudar"],
+    "voce": ["Me contar com sinceridade como foi a semana", "Registrar medidas e fotos a cada 15 dias"]
+  },
+  "glossario": [
+    {"termo": "Plano alimentar", "significa": "O cardápio pensado para o seu corpo, o seu treino e a sua rotina."}
+  ]
+}

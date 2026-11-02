@@ -74,7 +74,9 @@ arquivo antes da Fase 0.
 | **3** | **Painel**: `python ScriptsFera/metas-api.py painel` e abrir o dashboard | Ele precisa ver as duas colunas: a que se preenche sozinha e a que é dele |
 | **4** | **Recursos**: pedir só as DUAS chaves do primeiro dia (Gemini e Netlify) | É o que separa um agente que dá conselho de um que faz. Despejar a lista inteira trava o cliente no dia 1 |
 | **5** | **Google Tasks**: oferecer uma vez | Tasks organiza no celular dele, o índice é quem cobra |
-| **6** | **Fechar**: resumo em 5 linhas e propor UMA peça que aproxime a primeira venda | Briefing que termina em conversa morre. Termina em produção |
+| **6** | **Fechar**: resumo em 5 linhas | Briefing que termina em conversa morre. Termina em produção |
+| **7** | **Carrosséis**: apresentar os 4 formatos (clássico, ilustrado modelo Greco, historinha modelo Vaz, tela viva modelo Lucas Lopes) e lançar o desafio: testar 3 formatos em 2 semanas, cada um com palavra-chave diferente | Cliente que só conhece um formato nunca descobre qual funciona no perfil dele |
+| **8** | **Primeira página**: `/funil-reuniao-fantasma`, agendamento de 20 minutos. Com a página no ar, oferecer uma vez o `/agente-de-leads` | Conteúdo sem página de agendamento não tem para onde mandar o lead |
 
 **Regras duras destas fases:**
 

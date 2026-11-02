@@ -11,7 +11,10 @@ Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de 
 
 | Pedido | Motor |
 |---|---|
-| Carrossel de feed | skill `squad-carrossel-fera` |
+| Carrossel de feed (formato não definido: perguntar qual) | skill `squad-carrossel-fera`, que traz o catálogo |
+| Carrossel ilustrado, com prova visual em cada slide (modelo Greco) | skill `carrossel-ilustrado` |
+| Carrossel de historinha com personagem fictícia (modelo Vaz) | skill `carrossel-historinha` |
+| Carrossel com tela em vídeo em cada slide (modelo Lucas Lopes) | skill `carrossel-tela-viva` |
 | Stories de bastidores | skill `squad-stories-fera` |
 | Caixinha de perguntas | skill `squad-caixinha-fera` |
 | Kit de anúncio multiformato com fotos reais (feed + story + reel + carrossel) | skill `anuncios-de-ouro` |

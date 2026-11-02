@@ -47,6 +47,12 @@ te torna dono da fábrica, não só usuário dos robôs.
 | Comando | Entrega |
 |---|---|
 | `/squad-onboarding` | o sistema de captação inteiro pronto: prévia do perfil com o feed montado nas artes reais, 4 páginas (agendamento, grupo com isca, slides do vídeo, proposta), kit de ~55 artes + PDF da isca, 3 campanhas de R$ 20/dia e o fluxo de WhatsApp E0–E7. Serve pro seu negócio ou pra um cliente seu. |
+| `/funil-reuniao-fantasma` | a primeira página que você cria: agendamento de reunião de 20 minutos. O lead trava o horário e só ganha a reunião se responder no WhatsApp e provar o perfil |
+| `/agente-de-leads` | assistente no seu WhatsApp que recebe quem agendou, qualifica, manda seus materiais, lembra da reunião e prepara a proposta pra você aprovar. Roda no seu computador: desligado, parado |
+| `/proposta-pagina` | proposta comercial em página (modelo dossiê vivo) montada com as falas do lead |
+| `/carrossel-ilustrado` | carrossel de card de tweet com prova visual em cada slide (modelo Greco) |
+| `/carrossel-historinha` | carrossel de historinha com personagem fictícia declarada (modelo Vaz) |
+| `/carrossel-tela-viva` | carrossel com uma tela em vídeo em cada slide (modelo Lucas Lopes) |
 | `/anuncio-nativo` | story ad com cara de post nativo do Instagram (o que não parece anúncio) |
 | `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed, vários ângulos da mesma oferta |
 | `/mix-estaticos` | variações de estáticos a partir de uma ideia só |
@@ -97,4 +103,4 @@ ferabot/
 
 ## Primeiro dia
 
-Leia o `PRIMEIRO_DIA.md`. Missão: sair do dia 1 com a meta no painel e UMA peça real pronta.
+Leia o `PRIMEIRO_DIA.md`. Missão: sair do dia 1 com a meta no painel e a página de agendamento (`/funil-reuniao-fantasma`) no ar. Depois, teste 3 formatos de carrossel no seu perfil e compare.

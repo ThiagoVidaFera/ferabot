@@ -7,9 +7,11 @@ description: FeraBot CRM de Leads. Registra e acompanha leads, dispara mensagens
 
 Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de tudo.
 
-**Posicionamento fixo:** isto é CAPTAÇÃO e DISTRIBUIÇÃO — o usuário dispara, o sistema captura e
-organiza. Isto NÃO é atendimento automático. Quem responde lead é ELE (e responder lead em 24h é
-compromisso da semana dele). Nunca prometer "robô que responde e qualifica sozinho".
+**Posicionamento fixo:** esta skill é CAPTAÇÃO e DISTRIBUIÇÃO. O usuário dispara, o sistema captura e
+organiza. Quem responde lead é ELE (e responder lead em 24h é compromisso da semana dele).
+**Única exceção:** o lead que agendou pela página do funil Reunião Fantasma é triado pelo
+`/agente-de-leads` (skill própria, com guardas e passagem para o dono). Fora disso, nunca prometer
+"robô que responde e qualifica sozinho".
 
 ## CRM local (sem chave nenhuma)
 

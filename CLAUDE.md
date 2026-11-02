@@ -24,7 +24,7 @@ Ler sempre, na primeira interação de cada conversa:
 Sem esses três arquivos não existe resposta personalizada.
 
 **Se `perfil.json` ou `metas.json` não existir, o briefing acontece NA CONVERSA, agora, conduzido por
-você:** siga `SkillsDoFera/fera/references/onboarding.md` (fases 0 a 6) e grave os arquivos você
+você:** siga `SkillsDoFera/fera/references/onboarding.md` (fases 0 a 8) e grave os arquivos você
 mesmo. **Nunca mandar o cliente rodar script no terminal pra isso.** E nada de produção (peça,
 página, anúncio) antes do briefing fechado.
 
@@ -156,7 +156,7 @@ O cliente descobre abrindo o painel e vendo a máquina ter trabalhado.
 | `/paginas-e-quiz` | Páginas & Quiz | landing, página de venda, quiz, deploy |
 | `/conteudo-e-anuncios` | Conteúdo & Anúncios | anúncios, carrossel, stories, posts, campanha Meta |
 | `/roteiros-e-oratoria` | Roteiros & Oratória | roteiro, vídeo, YouTube, slides |
-| `/crm-de-leads` | CRM de Leads | captura de lead, disparo WhatsApp, comentário para DM |
+| `/crm-de-leads` | CRM de Leads | captura de lead, disparo WhatsApp, comentário para DM, agente de leads |
 
 Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skill.
 
@@ -165,6 +165,10 @@ Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skil
 | Comando | Entrega |
 |---|---|
 | `/squad-onboarding` | o sistema de captação inteiro pronto: prévia do perfil com o feed montado, 4 páginas, kit de ~55 artes + PDF da isca, 3 campanhas de R$ 20/dia e o fluxo de WhatsApp E0–E7 — pro negócio dele ou de um cliente dele |
+| `/funil-reuniao-fantasma` | a primeira página do cliente: agendamento de reunião de 20 minutos no mecanismo Reunião Fantasma |
+| `/agente-de-leads` | recebe quem agendou, qualifica, manda os materiais, lembra da reunião e prepara a proposta para o dono aprovar |
+| `/proposta-pagina` | proposta comercial em página, no padrão dossiê vivo, a partir da conversa com o lead |
+| `/carrossel-ilustrado` · `/carrossel-historinha` · `/carrossel-tela-viva` | os três formatos novos de carrossel, além do clássico `squad-carrossel-fera` |
 | `/anuncio-nativo` | story ad com cara de post nativo do Instagram |
 | `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed |
 | `/mix-estaticos` | variações de estáticos a partir de uma ideia |
@@ -172,8 +176,13 @@ Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skil
 
 Os quatro de anúncio são chamados pelo `/conteudo-e-anuncios`; o cliente também pode digitar direto.
 
-**WhatsApp e DM são captação**, não atendimento. O sistema dispara campanha e captura lead. Nunca
-se posiciona como robô que responde e qualifica sozinho.
+**WhatsApp e DM em massa são captação.** O disparo vai só para quem já interagiu, com ritmo seguro.
+**Exceção única, por decisão do Thiago:** o `/agente-de-leads` conversa com o lead que agendou
+pela página do funil Reunião Fantasma. Ele se apresenta como assistente (nunca finge ser humano),
+qualifica, manda os materiais do dono e lembra da reunião. Sai da conversa quando o dono digita ou
+quando o lead quer fechar, e nunca envia proposta sem o dono aprovar. Roda no computador e no
+WhatsApp do dono, então computador desligado é agente parado. Fora desse caso, ninguém vende o
+sistema como "robô que atende sozinho".
 
 ---
 

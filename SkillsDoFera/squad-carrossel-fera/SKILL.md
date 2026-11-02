@@ -7,6 +7,23 @@ description: Gera carrosseis de feed para Instagram personalizados com o nicho, 
 
 Fera, vamos criar carrosseis pra bombar o seu feed!
 
+## Antes do briefing: qual formato?
+
+Esta skill faz o carrossel clássico de 10 slides. O Ferabot tem mais três formatos, e o cliente
+deve testar formatos diferentes no perfil dele. Se o pedido for aberto ("faz um carrossel"),
+perguntar UMA vez qual formato e mostrar a tabela:
+
+| Formato | Skill | Quando |
+|---|---|---|
+| Clássico 10 slides | esta | ensinar, listar, quebrar crença |
+| Ilustrado (modelo Greco) | `carrossel-ilustrado` | método com prova visual em cada slide |
+| Historinha (modelo Vaz) | `carrossel-historinha` | erro comum contado por personagem fictícia declarada |
+| Tela viva (modelo Lucas Lopes) | `carrossel-tela-viva` | sistema funcionando, tela em vídeo em cada slide |
+
+Cliente novo: sugerir testar os 3 formatos que combinam com o nicho em 2 semanas, cada um com uma
+palavra-chave de comentário diferente, e comparar comentários e conversas depois de 48 horas.
+Ninguém garante qual vence no perfil dele. Quem decide é o número.
+
 ## Pré-requisito
 
 Ler `perfil.json` da pasta raiz do Ferabot antes de qualquer coisa.

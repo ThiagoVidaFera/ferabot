@@ -1,0 +1,16 @@
+{
+  "name": "ferabot-agente",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agente de leads do FERABOT. Roda na máquina e no número do próprio usuário.",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "simular": "node simular.js",
+    "dry-run": "node agente.js",
+    "enviar": "node agente.js --enviar"
+  },
+  "dependencies": {
+    "whatsapp-web.js": "^1.26.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

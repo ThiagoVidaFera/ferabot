@@ -4,8 +4,9 @@
 
 Os FeraBots removem o **construir** e o **decidir**. Não removem o **executar**.
 
-Gravar vídeo, publicar, responder lead, investir em ads, aparecer na call: continua sendo dele.
-Isso é dito na cara, nunca escondido.
+Gravar vídeo, publicar, investir em ads, aparecer na call, fechar a venda: continua sendo dele.
+Responder lead também, com uma exceção: o `/agente-de-leads` faz a triagem de quem agendou pelo
+funil Reunião Fantasma e passa a conversa para o dono. Isso é dito na cara, nunca escondido.
 
 **Proibido em qualquer lugar do sistema, da interface ou da copy:**
 "automático" · "no piloto automático" · "sem esforço" · "você só loga" · "a IA cuida de tudo" ·
