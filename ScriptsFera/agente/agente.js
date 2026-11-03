@@ -72,7 +72,8 @@ function ligarEventos(client, ctx, proprias) {
       if (msg.fromMe || msg.from === 'status@broadcast') return;
       const chat = await msg.getChat();
       const numero = await numeroDe(msg);
-      await processarMensagem(ctx, { numero, texto: msg.body || '', grupo: chat.isGroup });
+      const midia = msg.hasMedia ? msg.type : null;
+      await processarMensagem(ctx, { numero, texto: msg.body || '', grupo: chat.isGroup, midia });
     } catch (e) {
       ctx.store.log('ERRO', `falha ao processar mensagem: ${e.message}`);
     }

@@ -180,6 +180,8 @@ async function tratarIntencao(ctx, c, intencao) {
   return passarParaHumano(ctx, c, intencao.motivo);
 }
 
+const NOME_DA_MIDIA = { ptt: 'áudio', audio: 'áudio', image: 'foto', video: 'vídeo', document: 'documento', sticker: 'figurinha' };
+
 async function processarMensagem(ctx, m) {
   const { store } = ctx;
   if (m.grupo) {
@@ -193,10 +195,16 @@ async function processarMensagem(ctx, m) {
     store.log('IGNORA', `número fora da lista branca: ${m.numero.slice(0, 4)}...`);
     return { acao: 'ignorado-fora-da-lista' };
   }
-  registrarFala(c, 'lead', m.texto, ctx.agora());
+  const midia = m.midia ? NOME_DA_MIDIA[m.midia] || 'arquivo' : null;
+  registrarFala(c, 'lead', midia ? `[${midia}]` : m.texto, ctx.agora());
   if (c.silenciado || c.estagio === 'handoff' || c.estagio === 'encerrado') {
     store.salvar();
     return { acao: 'calado' };
+  }
+  // Áudio, foto, vídeo, documento e figurinha nunca recebem resposta do agente: só avisa o dono e fica calado.
+  if (midia) {
+    await passarParaHumano(ctx, c, `Mandou ${midia}`, { silenciarLead: true });
+    return { acao: 'handoff-midia' };
   }
   capturarInstagram(c, m.texto);
   const intencao = detectarIntencao(m.texto, ctx.cfg);
