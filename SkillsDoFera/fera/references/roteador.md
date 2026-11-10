@@ -20,7 +20,8 @@ Na dúvida: mentora. Empurrar fluxo sem ele pedir é o erro mais caro do sistema
 | roteiro, vídeo, reel, YouTube, thumbnail, título, slides, apresentação, aula | Roteiros & Oratória | `/roteiros-e-oratoria` |
 | página de agendamento, reunião de 20 minutos, funil de reunião, reunião fantasma | Páginas & Quiz | `/funil-reuniao-fantasma` |
 | agente que atende o lead, qualifica, lembrete da reunião | CRM de Leads | `/agente-de-leads` |
-| proposta em página pro lead depois da reunião | Propostas | `/proposta-pagina` |
+| proposta em página pro lead depois da reunião, mensagem do link, follow-up da proposta | Propostas | `/proposta-pagina` |
+| testar uma ideia em todos os formatos, "qual formato combina comigo", galeria de artes ou de anúncios | Conteúdo & Anúncios | `/galeria-de-artes` |
 | lead, CRM, disparo de WhatsApp, comentário pra DM, follow-up, lista | CRM de Leads | `/crm-de-leads` |
 | meta, painel, o que fazer hoje, como estou, relatório, semana | Copiloto de Gestão | `/copiloto-de-gestao` |
 | quero um agente pra outra coisa (RH, financeiro, gestão, o que for) | Criar FeraBot | `/criar-ferabot` |

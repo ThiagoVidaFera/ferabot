@@ -20,7 +20,8 @@ Publicação: `SkillsDoFera/paginas-e-quiz` (Netlify). A mensagem que acompanha 
    - `checkout_url` (link de pagamento https) e/ou `whatsapp` do dono. Um dos dois é obrigatório: é o destino do botão.
    - `garantia`: `{texto, destaque, itens}`. Sem garantia no arquivo, o bloco não aparece (nunca inventamos).
    - Opcionais: `quem_faz {eu, voce}`, `jornada [{t,d}]`, `depois [{t,d}]`, `glossario [{termo, significa}]`,
-     `entregas_titulo`, `entregas_lead`, `jornada_titulo`.
+     `entregas_titulo`, `entregas_lead`, `jornada_titulo`, `em_contrato` (o que fica por escrito, abaixo da garantia) e
+     `dois_mundos` (contraste curto antes das entregas, máximo 3 itens por lado). Detalhes em `references/blocos-opcionais.md`.
 3. `lead.json` (quem chama esta skill, por exemplo a skill `agente-de-leads`):
 
 ```json
@@ -70,9 +71,11 @@ Código de saída: `0` gerada e publicável. `2` gerada com pendências, NÃO pu
    `playwright install chromium`). Gera `375-pagina.png`, `375-topo.png` e `1280-pagina.png` em `<dir>/_qa/`.
    Abrir o print de 375px e conferir a olho: primeira dobra, preço, botão e diagramas.
 5. Publicar com `SkillsDoFera/paginas-e-quiz` (apague `_qa/` antes). Mostrar ao dono o caminho absoluto da pasta e o link.
-   Enviar o link ao contato com mensagem curta, sem valor.
+   Enviar o link ao contato com mensagem curta, sem valor (modelo e follow-up em `references/mensagem-e-followup.md`).
 
 ## Arquivos
 
 `gerar_proposta.py` (CLI e validação) · `paginas.py` (blocos HTML) · `paleta.py` (cores) · `diagramas.py` (SVG animado) ·
-`util.py` · `qa_proposta.py` · `assets/` (CSS e JS) · `exemplos/` (perfil, oferta e lead fictícios).
+`util.py` · `qa_proposta.py` · `assets/` (CSS e JS) · `exemplos/` (perfil, oferta e lead fictícios) ·
+`references/mensagem-e-followup.md` (mensagem do link, follow-up do dia 3, travou pelo dinheiro, de onde vêm as falas) ·
+`references/blocos-opcionais.md`.

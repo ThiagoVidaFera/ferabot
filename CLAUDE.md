@@ -167,8 +167,10 @@ Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skil
 | `/squad-onboarding` | o sistema de captação inteiro pronto: prévia do perfil com o feed montado, 4 páginas, kit de ~55 artes + PDF da isca, 3 campanhas de R$ 20/dia e o fluxo de WhatsApp E0–E7 — pro negócio dele ou de um cliente dele |
 | `/funil-reuniao-fantasma` | a primeira página do cliente: agendamento de reunião de 20 minutos no mecanismo Reunião Fantasma |
 | `/agente-de-leads` | recebe quem agendou, qualifica, manda os materiais, lembra da reunião e prepara a proposta para o dono aprovar |
-| `/proposta-pagina` | proposta comercial em página, no padrão dossiê vivo, a partir da conversa com o lead |
+| `/proposta-pagina` | proposta comercial em página, no padrão dossiê vivo, a partir da conversa com o lead (blocos opcionais `em_contrato` e `dois_mundos`; mensagem do link e follow-up em `references/`) |
+| `/galeria-de-artes` | uma ideia testada em todos os formatos de carrossel (capa) ou nos 17 formatos de anúncio de oferta direta, com galeria HTML e ranking |
 | `/carrossel-ilustrado` · `/carrossel-historinha` · `/carrossel-tela-viva` | os três formatos novos de carrossel, além do clássico `squad-carrossel-fera` |
+| `/meta-ads-fera` | sobe e lê campanhas no Meta Ads do cliente; pré-voo de rastreamento obrigatório (UTM, pixel, evento com `eventID`, CAPI) antes de subir |
 | `/anuncio-nativo` | story ad com cara de post nativo do Instagram |
 | `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed |
 | `/mix-estaticos` | variações de estáticos a partir de uma ideia |

@@ -49,10 +49,12 @@ te torna dono da fábrica, não só usuário dos robôs.
 | `/squad-onboarding` | o sistema de captação inteiro pronto: prévia do perfil com o feed montado nas artes reais, 4 páginas (agendamento, grupo com isca, slides do vídeo, proposta), kit de ~55 artes + PDF da isca, 3 campanhas de R$ 20/dia e o fluxo de WhatsApp E0–E7. Serve pro seu negócio ou pra um cliente seu. |
 | `/funil-reuniao-fantasma` | a primeira página que você cria: agendamento de reunião de 20 minutos. O lead trava o horário e só ganha a reunião se responder no WhatsApp e provar o perfil |
 | `/agente-de-leads` | assistente no seu WhatsApp que recebe quem agendou, qualifica, manda seus materiais, lembra da reunião e prepara a proposta pra você aprovar. Roda no seu computador: desligado, parado |
-| `/proposta-pagina` | proposta comercial em página (modelo dossiê vivo) montada com as falas do lead |
+| `/proposta-pagina` | proposta comercial em página (modelo dossiê vivo) montada com as falas do lead. Blocos opcionais "Em contrato" e "Dois mundos", mensagem do link e follow-up do dia 3 prontos |
+| `/galeria-de-artes` | testa UMA ideia em todos os formatos: a capa em cada formato de carrossel, ou a oferta nos 17 formatos de anúncio, numa galeria lado a lado com ranking |
 | `/carrossel-ilustrado` | carrossel de card de tweet com prova visual em cada slide (modelo Greco) |
 | `/carrossel-historinha` | carrossel de historinha com personagem fictícia declarada (modelo Vaz) |
 | `/carrossel-tela-viva` | carrossel com uma tela em vídeo em cada slide (modelo Lucas Lopes) |
+| `/meta-ads-fera` | sobe e lê campanhas no seu Meta Ads. Toda campanha passa por um pré-voo de rastreamento (UTM, pixel, evento com ID, API de Conversões) e só sobe se fechar |
 | `/anuncio-nativo` | story ad com cara de post nativo do Instagram (o que não parece anúncio) |
 | `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed, vários ângulos da mesma oferta |
 | `/mix-estaticos` | variações de estáticos a partir de uma ideia só |

@@ -12,6 +12,7 @@ Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de 
 | Pedido | Motor |
 |---|---|
 | Carrossel de feed (formato não definido: perguntar qual) | skill `squad-carrossel-fera`, que traz o catálogo |
+| Testar UMA ideia em todos os formatos (capa de carrossel ou anúncio de oferta), com galeria para escolher | skill `galeria-de-artes` |
 | Carrossel ilustrado, com prova visual em cada slide (modelo Greco) | skill `carrossel-ilustrado` |
 | Carrossel de historinha com personagem fictícia (modelo Vaz) | skill `carrossel-historinha` |
 | Carrossel com tela em vídeo em cada slide (modelo Lucas Lopes) | skill `carrossel-tela-viva` |
@@ -72,6 +73,9 @@ python ScriptsFera/imagem.py "<prompt em inglês, detalhado>" --out output/conte
 Delegar pra `meta-ads-fera` com as chaves `META_ACCESS_TOKEN` + `META_AD_ACCOUNT_ID` do `.env`.
 
 Regras invioláveis:
+- **Rastreamento antes de subir.** Rodar o pré-voo de `meta-ads-fera/scripts/rastreamento.py` (UTM no
+  anúncio, pixel igual na página e no conjunto, evento de otimização com `eventID`). Falhou: não sobe, e o motivo vai ao dono
+  em uma linha. Guia em `meta-ads-fera/references/rastreamento.md`.
 - Campanha **nasce PAUSADA**. Ativa só com OK explícito dele depois de revisar no Gerenciador.
 - Toda peça sobe com a copy do anúncio junto (texto principal, título, descrição) — sem isso não
   existe anúncio, existe imagem órfã.

@@ -122,6 +122,39 @@ def depois_padrao(cta_checkout: bool, dono: str, primeira: str) -> list[dict]:
     ]
 
 
+def normalizar_em_contrato(bruto: object, erros: list[str]) -> dict | None:
+    """Bloco opcional 'Em contrato': o que fica escrito no contrato. Só aparece se o dono escreveu."""
+    if not bruto:
+        return None
+    itens = [str(x).strip() for x in (bruto.get("itens") if isinstance(bruto, dict) else None) or [] if str(x).strip()]
+    titulo = str(bruto.get("titulo") or "").strip() if isinstance(bruto, dict) else ""
+    if not titulo or not itens:
+        erros.append("em_contrato precisa de 'titulo' e de ao menos um item em 'itens'")
+        return None
+    return {"titulo": titulo, "texto": str(bruto.get("texto") or "").strip(), "itens": itens,
+            "link_texto": str(bruto.get("link_texto") or "").strip(), "link": https(bruto.get("link"))}
+
+
+def normalizar_dois_mundos(bruto: object, falas: list[str], erros: list[str], avisos: list[str]) -> dict | None:
+    """Bloco opcional 'Dois mundos': contraste curto montado das falas do lead (máximo 3 itens por mundo)."""
+    if not bruto:
+        return None
+    if not falas:
+        avisos.append("dois_mundos ignorado: sem falas do lead não se escreve o contraste (nada inventado)")
+        return None
+    mundos = {}
+    for chave in ("mundo1", "mundo2"):
+        m = bruto.get(chave) if isinstance(bruto, dict) else None
+        itens = [str(x).strip() for x in (m or {}).get("itens") or [] if str(x).strip()]
+        titulo = str((m or {}).get("titulo") or "").strip()
+        if not titulo or not itens:
+            erros.append(f"dois_mundos.{chave} precisa de 'titulo' e 'itens'")
+        elif len(itens) > 3:
+            erros.append(f"dois_mundos.{chave} tem {len(itens)} itens: o máximo é 3 (contraste longo atrasa o preço)")
+        mundos[chave] = {"titulo": titulo, "itens": itens}
+    return mundos
+
+
 def normalizar(perfil: dict, oferta_in: dict, lead_in: dict) -> tuple[dict, list[str], list[str], list[str]]:
     """Junta perfil, oferta e lead num contexto único. Devolve (contexto, erros, pendências, avisos)."""
     erros: list[str] = []
@@ -196,6 +229,8 @@ def normalizar(perfil: dict, oferta_in: dict, lead_in: dict) -> tuple[dict, list
             "jornada": jornada or [], "quem_faz": of.get("quem_faz") or None,
             "depois": of.get("depois") or depois_padrao(bool(checkout), nome_dono, prim),
             "glossario": of.get("glossario") or [],
+            "em_contrato": normalizar_em_contrato(of.get("em_contrato"), erros),
+            "dois_mundos": normalizar_dois_mundos(of.get("dois_mundos"), falas, erros, avisos),
         },
         "cta_url": cta,
     }

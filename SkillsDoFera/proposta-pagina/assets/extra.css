@@ -94,3 +94,14 @@ body.vencida .venceu{display:block}
 
 /* barra fixa: um botão só */
 .barra .btn{white-space:nowrap}
+
+/* dois mundos (antes das entregas) e bloco "Em contrato" (depois da garantia) */
+.dmundos{display:grid;gap:14px;margin:0 0 clamp(28px,5vw,48px)}
+@media (min-width:760px){.dmundos{grid-template-columns:1fr 1fr}}
+.dmx{border:1px solid var(--line);border-radius:18px;padding:22px 24px;background:var(--white)}
+.dmx h3{margin:0 0 10px;font-size:1.05rem}
+.dmx ul{margin:0;padding-left:1.1em;display:grid;gap:8px;color:var(--ink-2)}
+.dmx.dois{border-color:var(--acc);box-shadow:inset 4px 0 0 var(--acc)}
+.emc{margin-top:22px;border:1px dashed var(--line);border-radius:18px;padding:22px 24px;background:var(--white)}
+.emc h3{margin:8px 0 10px}
+.emc ul{margin:12px 0 0;padding-left:1.1em;display:grid;gap:8px;color:var(--ink-2)}

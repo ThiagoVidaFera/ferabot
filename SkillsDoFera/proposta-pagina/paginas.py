@@ -113,6 +113,27 @@ def glossario_html(c: dict) -> str:
     return f'<details class="gloss"><summary>Palavras que eu uso aqui, em português claro</summary><dl>{dl}</dl></details>'
 
 
+def dois_mundos_html(dm: dict | None) -> str:
+    """Contraste curto antes das entregas: o que continua se nada mudar x o que muda com a proposta."""
+    if not dm:
+        return ""
+    def col(m: dict, classe: str) -> str:
+        lis = "".join(f"<li>{e(x)}</li>" for x in m["itens"])
+        return f'<div class="dmx {classe}"><h3>{e(m["titulo"])}</h3><ul>{lis}</ul></div>'
+    return f'<div class="dmundos rv">{col(dm["mundo1"], "um")}{col(dm["mundo2"], "dois")}</div>'
+
+
+def em_contrato_html(ec: dict | None) -> str:
+    """Logo abaixo da garantia: o que fica por escrito. Só aparece se o dono escreveu o bloco."""
+    if not ec:
+        return ""
+    texto = f'<p>{e(ec["texto"])}</p>' if ec["texto"] else ""
+    link = f'<p><a href="{e(ec["link"])}" target="_blank" rel="noopener">{e(ec["link_texto"] or "Ver o modelo de contrato")}</a></p>' if ec["link"] else ""
+    lis = "".join(f"<li>{e(x)}</li>" for x in ec["itens"])
+    return (f'<div class="emc rv"><span class="tag">Em contrato</span><h3>{e(ec["titulo"])}</h3>{texto}'
+            f'<ul>{lis}</ul>{link}</div>')
+
+
 def plano(c: dict) -> str:
     of = c["oferta"]
     mods = ""
@@ -132,7 +153,7 @@ def plano(c: dict) -> str:
         </div>
         <div class="mfig diag">{diagramas.montar(str(i), en["diagrama"])}</div>
       </article>"""
-    corpo = f"""<h2>{e(of["entregas_titulo"])}</h2>
+    corpo = f"""{dois_mundos_html(of.get("dois_mundos"))}<h2>{e(of["entregas_titulo"])}</h2>
     <p class="lead">{e(of["entregas_lead"])}</p>
     <div class="mods">{mods}
     </div>
@@ -204,7 +225,8 @@ def investimento(c: dict) -> str:
       <strong data-count="{of["a_vista"]}">{brl(of["a_vista"])}</strong><small>à vista</small></div>
     {alt}
     {nota}
-    {gar}"""
+    {gar}
+    {em_contrato_html(of.get("em_contrato"))}"""
     return (f'<section class="band inv" id="investimento" data-sec data-n="04" data-l="Investimento">'
             f'<div class="sec"><div class="sh"><span class="n">04</span><span class="l">Investimento</span></div>{corpo}</div></section>')
 

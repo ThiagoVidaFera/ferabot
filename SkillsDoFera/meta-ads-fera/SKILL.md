@@ -25,6 +25,18 @@ Ler `perfil.json` antes de qualquer coisa.
 pip install facebook-business python-dotenv
 ```
 
+## Rastreamento obrigatório (gate antes de subir)
+
+Toda campanha nasce rastreada: UTM no anúncio (`url_tags`), pixel igual no conjunto e na página, evento de otimização
+com `eventID` e, quando houver backend, API de Conversões com o mesmo `event_id`. Antes de qualquer criação, rode o pré-voo:
+
+```bash
+PYTHONUTF8=1 python SkillsDoFera/meta-ads-fera/scripts/rastreamento.py --url <página> --pixel <pixel> --evento LEAD
+```
+
+Se der **FALHA**, a campanha não sobe e o motivo vai ao dono em uma linha. Guia completo, `rastreio.js` para a sua página e
+relato final: `references/rastreamento.md`.
+
 ## Setup inicial (uma vez)
 
 Verificar se `.env` existe na raiz do Ferabot com:
