@@ -1,0 +1,3 @@
+InterTight.woff2 (Inter Tight) e InstrumentSerif-Italic.woff2 (Instrument Serif): fontes livres sob a SIL Open Font License 1.1
+(https://openfontlicense.org). Podem ser usadas em vídeos comerciais. Para trocar pela fonte da sua identidade, coloque o
+arquivo .woff2 aqui e ajuste os @font-face no topo do index.html.

@@ -171,6 +171,10 @@ Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skil
 | `/galeria-de-artes` | uma ideia testada em todos os formatos de carrossel (capa) ou nos 17 formatos de anúncio de oferta direta, com galeria HTML e ranking |
 | `/carrossel-ilustrado` · `/carrossel-historinha` · `/carrossel-tela-viva` | os três formatos novos de carrossel, além do clássico `squad-carrossel-fera` |
 | `/meta-ads-fera` | sobe e lê campanhas no Meta Ads do cliente; pré-voo de rastreamento obrigatório (UTM, pixel, evento com `eventID`, CAPI) antes de subir |
+| `/eva-pov-produto` · `/eva-anuncio-dentro-do-anuncio` · `/eva-remarketing-escassez` · `/eva-ensaio-noir-empresario` · `/eva-hq-ia-noir` · `/eva-ia-plus` | formatos de anúncio em vídeo (celular filmando a tela real, anúncio dentro do anúncio, remarketing com escassez real, ensaio noir, HQ de IA). HQ e personagem de IA ilustram a tese; tela e número são sempre reais |
+| `/prova-na-tela` · `/painel-do-comprador-na-cena` | anima um print ou gravação REAL do seu painel (círculo no número, zoom, checklist), sem redesenhar a tela. Todo número exige origem |
+| `/estilo-36-avatar-explica` · `/estilo-37-cartoon-grotesco` · `/estilo-visual-ads` · `/estilo-por-referencia` | estilos visuais de vídeo e de anúncio |
+| `/formatos-criativos-por-perfil` · `/gancho-dos-tres-segundos` · `/direcao-de-edicao-ia` · `/catalogo-de-efeitos` · `/video-redaction-seguranca` | escolha do formato do vídeo, abertura dos 3 primeiros segundos, direção de edição, catálogo de efeitos e borrão de dado sensível |
 | `/anuncio-nativo` | story ad com cara de post nativo do Instagram |
 | `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed |
 | `/mix-estaticos` | variações de estáticos a partir de uma ideia |

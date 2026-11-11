@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1536" viewBox="0 0 1024 1536">
+  <!-- Marcador do estilo 36: aparece enquanto você não gerou o seu personagem (gerar_personagem.py). Não vai para o vídeo final. -->
+  <g fill="#cfcac3" stroke="#121110" stroke-width="8">
+    <circle cx="512" cy="430" r="230"/>
+    <path d="M150 1536 C150 1040 300 820 512 820 C724 820 874 1040 874 1536 Z"/>
+  </g>
+  <text x="512" y="390" text-anchor="middle" font-family="sans-serif" font-size="52" font-weight="700" fill="#121110">SUA</text>
+  <text x="512" y="452" text-anchor="middle" font-family="sans-serif" font-size="52" font-weight="700" fill="#121110">CARICATURA</text>
+  <text x="512" y="514" text-anchor="middle" font-family="sans-serif" font-size="52" font-weight="700" fill="#121110">AQUI</text>
+</svg>

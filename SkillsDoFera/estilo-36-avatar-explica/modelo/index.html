@@ -1,0 +1,228 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=1080, height=1920">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+/* Estilo 36 · Avatar explica — projeto-modelo (HyperFrames). Cores: troque as 3 variáveis de :root pelas da sua identidade
+   (o JavaScript lê as mesmas variáveis). Personagem: assets/personagem/*.png (gere com gerar_personagem.py); sem eles aparece o marcador. */
+@font-face{font-family:"IT";font-weight:100 900;src:url("assets/fonts/InterTight.woff2")}
+@font-face{font-family:"IS";font-style:italic;font-weight:400;src:url("assets/fonts/InstrumentSerif-Italic.woff2")}
+:root{--claro:#f6f4f0;--destaque:#ff4b1c;--tinta:#121110;--cinza:#8a8784;--branco:#ffffff;--linha:#e4e0da}
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:var(--claro)}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--claro);font-family:"IT",sans-serif;color:var(--tinta)}
+#fundo{position:absolute;inset:0;background:var(--claro)}
+#veu{position:absolute;inset:0;opacity:0}
+#brilho{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at 50% 36%,var(--destaque) 0,color-mix(in srgb,var(--destaque) 86%,transparent) 18%,transparent 46%);
+  -webkit-mask-image:radial-gradient(circle,#000 2.3px,transparent 2.9px);-webkit-mask-size:8px 8px}
+#retic{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(20,16,12,.075) 1.15px,transparent 1.6px);background-size:6px 6px}
+#faixa{position:absolute;left:132px;right:132px;top:132px;display:flex;justify-content:space-between;font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:25px;color:var(--cinza)}
+#faixa .dir{text-transform:uppercase;letter-spacing:2px}
+#faixa b{font-weight:700}
+#palco{position:absolute;inset:0}
+#fala{position:absolute;left:132px;width:830px;top:238px;font-size:70px;font-weight:600;line-height:1.08;letter-spacing:-1.2px}
+#fala .w{display:inline-block;margin-right:.22em;opacity:0}
+#fala .k{font-family:"IS",serif;font-style:italic;font-weight:400;font-size:82px;letter-spacing:-.5px;line-height:.9}
+.obj{position:absolute;left:0;top:0;opacity:0;transform-origin:50% 50%}
+.sombra{position:absolute;inset:0;transform:translate(14px,16px);border-radius:16px;
+  background-image:radial-gradient(circle,rgba(36,30,24,.62) 1.5px,transparent 2px);background-size:6px 6px}
+.face{position:relative;background:var(--branco);border:1.5px solid var(--linha);border-radius:16px;padding:22px 26px}
+.rot{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:21px;color:var(--cinza)}
+.big{font-weight:700;letter-spacing:-6px;color:var(--destaque);line-height:1;font-variant-numeric:tabular-nums}
+.roll{display:inline-flex;overflow:hidden;height:1em;line-height:1}
+.col{display:flex;flex-direction:column}
+.col span{height:1em;display:block}
+.carimbo{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:26px;letter-spacing:2px;color:var(--destaque);border:3px dashed var(--destaque);border-radius:10px;padding:8px 16px;background:#fff8f5}
+.balao{display:inline-block;background:#efece7;border-radius:22px 22px 22px 6px;padding:14px 22px;font-size:34px;font-weight:500;margin-top:14px}
+.chip{position:absolute;left:0;top:0;opacity:0;padding:12px 18px;background:#fff;border:1.5px solid var(--linha);border-radius:14px;font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:22px;color:var(--tinta);white-space:nowrap;box-shadow:10px 12px 0 -2px rgba(36,30,24,.18)}
+.chip i{font-style:normal;color:var(--destaque);font-weight:700;margin-right:8px}
+#pers,#fant{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+#pers img,#fant img{position:absolute;width:980px;left:50px;top:960px;opacity:0}
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12.4" data-width="1080" data-height="1920">
+<div id="cena" class="clip" data-start="0" data-duration="12.4" data-track-index="0" style="position:absolute;inset:0">
+  <div id="fundo"></div>
+  <div id="brilho"></div>
+  <div id="retic"></div>
+
+  <div id="palco">
+    <div id="faixa"><span id="cap">// 01 — o painel</span><span class="dir">CONTATOS <b id="contN">214</b></span></div>
+    <div id="fala"></div>
+
+    <!-- 01 · o painel -->
+    <div id="num1" class="obj big" style="font-size:210px;width:1080px;text-align:center"></div>
+    <div id="c1a" class="obj" style="width:330px"><div class="sombra"></div><div class="face">
+      <div class="rot">// vendas · este mês</div><div style="font-size:64px;font-weight:700;letter-spacing:-2px;margin-top:4px">4</div></div></div>
+    <div id="c1b" class="obj" style="width:430px"><div class="sombra"></div><div class="face">
+      <div class="rot" style="display:flex;justify-content:space-between"><span>// novo contato</span><span>214</span></div>
+      <div class="balao">“Quanto fica?”</div>
+      <div id="c1ok" class="rot" style="margin-top:16px;color:var(--tinta)">contou como contato <b style="color:var(--destaque)">✓</b></div></div></div>
+    <div id="st1" class="obj carimbo">FICHA FALSA</div>
+
+    <!-- 02 · o curioso -->
+    <div id="c2" class="obj" style="width:540px"><div class="sombra"></div><div class="face" style="padding:26px 30px 30px">
+      <div class="rot" style="display:flex;justify-content:space-between"><span>// conversa</span><span>02</span></div>
+      <div style="font-size:44px;font-weight:700;letter-spacing:-1px;margin-top:6px">Novo contato</div>
+      <div id="b2a" class="balao" style="opacity:0">“Quanto fica?”</div><br>
+      <div id="b2b" class="balao" style="opacity:0">“Vou pensar.”</div>
+      <div class="rot" style="margin-top:22px;color:var(--destaque)">comprou?</div>
+      <div id="c2n" style="margin-top:6px;border:2.5px dashed var(--destaque);border-radius:12px;padding:12px 18px;font-family:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;font-size:24px;color:var(--destaque);opacity:.35">não</div></div></div>
+    <div id="st2" class="obj carimbo" style="background:#fff">FICHA FALSA</div>
+    <div id="tag2" class="obj" style="font-family:'IS',serif;font-style:italic;font-size:92px;color:#fff;white-space:nowrap">= o curioso</div>
+
+    <!-- 03 · a cópia -->
+    <div id="c3a" class="obj" style="width:380px"><div class="sombra"></div><div class="face">
+      <div class="rot">// contador</div>
+      <div class="big" style="font-size:130px;letter-spacing:-4px;margin-top:6px">214</div>
+      <div class="rot" style="margin-top:10px;color:var(--tinta)">? quanto fica · ? vou pensar</div></div></div>
+    <div id="c3b" class="obj" style="width:400px"><div class="sombra" style="border-radius:18px"></div>
+      <div class="face" style="background:var(--tinta);border-color:var(--tinta);border-radius:18px;color:#fff">
+      <div class="rot" style="display:flex;justify-content:space-between"><span>// o meta aprende</span><span style="color:var(--destaque)">copiando</span></div>
+      <div style="margin-top:18px;height:16px;background:#2a2826;border-radius:8px;overflow:hidden"><div id="bar1" style="height:100%;width:0;background:#f6f4f0"></div></div>
+      <div style="margin-top:12px;height:16px;width:78%;background:#2a2826;border-radius:8px;overflow:hidden"><div id="bar2" style="height:100%;width:0;background:#f6f4f0"></div></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:16px"><div style="width:58px;height:58px;border-radius:50%;background:var(--destaque);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;color:#fff">↑</div></div></div></div>
+    <svg id="seta3" class="obj" width="120" height="40" viewBox="0 0 120 40"><path d="M2 20 H104" stroke="#8a8784" stroke-width="4" stroke-dasharray="10 8"/><path d="M98 8 L116 20 L98 32" fill="none" stroke="#8a8784" stroke-width="4" stroke-linecap="round"/><circle id="pulso" cx="2" cy="20" r="9" fill="currentColor" style="color:var(--destaque)"/></svg>
+    <div id="k3a" class="chip"><i>?</i>quanto fica</div>
+    <div id="k3b" class="chip"><i>?</i>vou pensar</div>
+    <div id="k3c" class="chip"><i>?</i>só pra saber</div>
+
+    <!-- 04 · o ciclo -->
+    <div id="num4" class="obj big" style="font-size:240px;width:1080px;text-align:center"></div>
+    <div id="pil4" class="obj" style="width:1080px;text-align:center"><span style="display:inline-block;background:#fff;color:var(--tinta);font-family:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;font-size:24px;padding:8px 18px;border-radius:30px">contatos</span></div>
+    <div id="ch4"></div>
+  </div>
+
+  <div id="fant"></div>
+  <div id="pers"></div>
+  <div id="veu"></div>
+</div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=x=>x<0?0:x>1?1:x, span=(t,a,d)=>cl((t-a)/d), eO=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c=1.9,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const F=1/30;
+const _css=getComputedStyle(document.documentElement),cor=n=>_css.getPropertyValue(n).trim();
+const CLARO=cor("--claro")||"#f6f4f0",DEST=cor("--destaque")||"#ff4b1c",TINTA=cor("--tinta")||"#121110";
+
+const W=[["Seu",0,0.182],["anúncio",0.218,0.655],["conta",0.727,1.018],["ficha",1.091,1.309],["falsa",1.455,1.818],["como",1.891,2.036],["moeda.",2.109,2.545],["Ficha",2.97,3.231],["falsa",3.376,3.813],["é",3.885,3.958],["o",3.995,4.031],["curioso:",4.104,4.613],["“Quanto",5.049,5.267],["fica?”",5.34,5.631],["“Vou",6.067,6.213],["pensar.”",6.285,6.722],["O",7.12,7.265],["Meta",7.447,7.629],["copia",7.702,8.138],["o",8.175,8.211],["que",8.247,8.284],["cai",8.429,8.575],["no",8.611,8.647],["contador.",8.902,9.156],["Conta",9.593,9.811],["curioso,",9.884,10.32],["chega",10.611,10.829],["mais",10.975,11.193],["curioso.",11.265,11.702]];
+// capítulos: início, rótulo, palavras [de,até), chaves, fundo, texto, chave, faixa, contador, x do personagem
+const CAP=[
+ {a:0,   r:"// 01 — o painel", w:[0,7],  k:[3,4],  bg:CLARO,tx:TINTA,kc:DEST,     fx:"#8a8784",nc:DEST,     px:0},
+ {a:2.93,r:"// 02 — o curioso",w:[7,16], k:[11],   bg:DEST, tx:CLARO,kc:"#ffffff",fx:"#ffffffb3",nc:"#ffffff",px:250},
+ {a:7.0, r:"// 03 — a cópia",  w:[16,24],k:[17,18],bg:CLARO,tx:TINTA,kc:DEST,     fx:"#8a8784",nc:DEST,     px:-40},
+ {a:9.5, r:"// 04 — o ciclo",  w:[24,29],k:[27,28],bg:TINTA,tx:CLARO,kc:DEST,     fx:"#8a8784",nc:DEST,     px:0}];
+const capDe=t=>{let c=0;while(c<CAP.length-1&&t>=CAP[c+1].a)c++;return c};
+
+// fala
+const fala=$("fala"), WE=W.map(w=>{const s=document.createElement("span");s.className="w";s.textContent=w[0];return s});
+
+// contador com dígitos que rolam (odômetro)
+function rolo(el,n){el.innerHTML="";const cols=[];for(let i=0;i<n;i++){const r=document.createElement("span");r.className="roll";const c=document.createElement("span");c.className="col";
+  for(let d=0;d<=10;d++){const s=document.createElement("span");s.textContent=d%10;c.appendChild(s)}r.appendChild(c);el.appendChild(r);cols.push(c)}return cols}
+function odo(cols,v,blur){const n=cols.length;for(let i=0;i<n;i++){const k=n-1-i,p=Math.pow(10,k);let pos=Math.floor(v/p)%10;const resto=v%p;
+  if(k===0)pos=v%10;else if(resto>p-1)pos+=resto-(p-1);cols[i].style.transform=`translateY(${(-pos).toFixed(3)}em)`;cols[i].style.filter=blur?`blur(${blur.toFixed(1)}px)`:"none"}}
+const R1=rolo($("num1"),3), R4=rolo($("num4"),3);
+
+// personagem: 6 poses, cada uma com boca fechada e falando
+const POSES=["p1-apresenta","p2-surpreso","p3-aponta","p4-ombros","p5-pensa","p6-cabeca"];
+const IM={},FA={};
+for(const p of POSES)for(const v of ["","-falando"]){if(p==="p2-surpreso"&&v)continue;
+  const i=document.createElement("img");i.onerror=()=>{i.onerror=null;i.src="assets/personagem/marcador.svg"};i.src=`assets/personagem/${p}${v}.png`;$("pers").appendChild(i);IM[p+v]=i;
+  const g=document.createElement("img");g.onerror=()=>{g.onerror=null;g.src="assets/personagem/marcador.svg"};g.src=`assets/personagem/${p}${v}.png`;$("fant").appendChild(g);FA[p+v]=g;}
+const PS=[[0,"p1-apresenta"],[1.40,"p2-surpreso"],[2.05,"p1-apresenta"],[2.93,"p3-aponta"],[4.05,"p4-ombros"],[4.95,"p3-aponta"],[6.0,"p5-pensa"],
+  [7.0,"p1-apresenta"],[7.62,"p3-aponta"],[8.85,"p1-apresenta"],[9.5,"p2-surpreso"],[10.9,"p6-cabeca"]];
+const poseDe=t=>{let i=0;while(i<PS.length-1&&t>=PS[i+1][0])i++;return i};
+const falando=t=>W.some(w=>t>=w[1]&&t<=w[2]&&Math.floor((t-w[1])*9)%2===0);
+const PISCA=[1.9,4.6,6.9,9.2,11.6];
+
+// cartões: entram pequenos perto do personagem, crescem com passagem e eco nos 2 primeiros quadros
+function cartao(id,t,a,b,x,y,ox,oy,rot=0){const el=$(id);if(t<a-F||t>=b){el.style.opacity=0;return}
+  const k=span(t,a,6*F),s=.2+.8*back(k),xx=x+(ox-x)*(1-eO(k)),yy=y+(oy-y)*(1-eO(k));
+  el.style.opacity=cl(span(t,a,2*F)).toFixed(3);el.style.transform=`translate(${xx.toFixed(1)}px,${yy.toFixed(1)}px) scale(${s.toFixed(4)}) rotate(${(rot+(1-k)*-6).toFixed(2)}deg)`;
+  el.style.filter=k<.34?`drop-shadow(0 ${(-26).toFixed(0)}px 0 rgba(255,255,255,.55))`:"none";}
+function carimbo(id,t,a,b,x,y,rot){const el=$(id);if(t<a||t>=b){el.style.opacity=0;return}
+  const k=span(t,a,4*F),s=1.6-.6*eO(k);el.style.opacity=cl(span(t,a,F)).toFixed(3);el.style.transform=`translate(${x}px,${y}px) scale(${s.toFixed(3)}) rotate(${rot}deg)`;}
+function chip(el,t,a,b,x,y,r){if(t<a||t>=b){el.style.opacity=0;return}const k=span(t,a,5*F);el.style.opacity=cl(span(t,a,F)).toFixed(3);
+  el.style.transform=`translate(${x}px,${(y+(1-eO(k))*40).toFixed(1)}px) scale(${(.3+.7*back(k)).toFixed(3)}) rotate(${r}deg)`;}
+
+// perguntas do ciclo 04 (posições fixas)
+const CH4=[];const TX=["quanto fica?","vou pensar","só pra saber","tem desconto?","manda o preço","depois vejo"];
+const POS4=[[70,560,-4],[790,540,3],[60,690,2],[820,680,-3],[110,820,-2],[770,820,4],[40,470,3],[830,420,-2],[160,950,-3],[760,960,2],[60,1080,1],[840,1090,-4]];
+POS4.forEach((p,j)=>{const e=document.createElement("div");e.className="chip";e.innerHTML="<i>?</i>"+TX[j%6];$("ch4").appendChild(e);CH4.push({e,x:p[0],y:p[1],r:p[2],a:9.62+j*.16})});
+
+let ecos=[];
+function frame(t){
+  const c=capDe(t),C=CAP[c];
+  // fundo: corte seco de cor; 1 quadro de véu a 50% antes do corte
+  $("fundo").style.background=C.bg;
+  const prox=CAP[c+1]; const veu=prox&&t>=prox.a-F&&t<prox.a;
+  $("veu").style.background=prox?prox.bg:"transparent";$("veu").style.opacity=veu?.5:0;
+  $("brilho").style.opacity=c===3?(eO(span(t,9.5,.5))*(.85+.15*Math.sin(t*5))).toFixed(3):0;
+  $("retic").style.backgroundImage=c===3?"radial-gradient(circle,rgba(255,255,255,.06) 1.15px,transparent 1.6px)":"radial-gradient(circle,rgba(20,16,12,.075) 1.15px,transparent 1.6px)";
+
+  // faixa
+  $("cap").textContent=C.r;$("faixa").style.color=C.fx;
+  const cont=t<9.6?214:Math.round(214+275*eIO(span(t,9.62,2.2)));$("contN").textContent=cont;$("contN").style.color=C.nc;
+
+  // fala: só o capítulo atual; palavra nasce desfocada em ~4 quadros
+  if(fala.dataset.c!=c){fala.innerHTML="";for(let i=C.w[0];i<C.w[1];i++){WE[i].className="w"+(C.k.includes(i)?" k":"");fala.appendChild(WE[i])}fala.dataset.c=c}
+  fala.style.color=C.tx;
+  for(let i=C.w[0];i<C.w[1];i++){const w=W[i],k=span(t,w[1]-4*F,4*F);WE[i].style.opacity=(k*k).toFixed(3);WE[i].style.filter=k<1?`blur(${((1-k)*7).toFixed(1)}px)`:"none";
+    WE[i].style.color=C.k.includes(i)?C.kc:"";}
+
+  // 01 · painel
+  const vis1=t<2.93;
+  $("num1").style.opacity=vis1?1:0;$("num1").style.transform="translate(0,500px)";
+  {odo(R1,214,0);const k=span(t,0.727,5*F);if(t>=0.727&&k<1){R1[2].style.transform=`translateY(${(-((4+10*eO(k))%10)).toFixed(3)}em)`;R1[2].style.filter=`blur(${((1-k)*6).toFixed(1)}px)`}}
+  cartao("c1a",t,0.72,2.93,100,740,300,1000,-2);
+  cartao("c1b",t,1.06,2.93,560,740,640,1000,2);
+  carimbo("st1",t,1.455,2.93,700,676,-7);
+  $("c1ok").style.opacity=span(t,2.1,3*F).toFixed(3);
+
+  // 02 · o curioso
+  cartao("c2",t,2.97,7.0,110,590,700,1100,-1.5);
+  carimbo("st2",t,3.05,7.0,420,560,-6);
+  {const el=$("tag2");if(t>=4.1&&t<7.0){const k=span(t,4.1,5*F);el.style.opacity=k.toFixed(3);el.style.filter=k<1?`blur(${((1-k)*8).toFixed(1)}px)`:"none";el.style.transform=`translate(690px,${(640+(1-eO(k))*30).toFixed(1)}px)`}else el.style.opacity=0}
+  {const a=span(t,5.04,4*F),b=span(t,6.06,4*F);$("b2a").style.opacity=a;$("b2a").style.transform=`scale(${(.6+.4*back(a)).toFixed(3)})`;
+   $("b2b").style.opacity=b;$("b2b").style.transform=`scale(${(.6+.4*back(b)).toFixed(3)})`;$("c2n").style.opacity=(.35+.65*span(t,6.5,4*F)).toFixed(3)}
+
+  // 03 · a cópia
+  cartao("c3a",t,7.08,9.5,100,600,300,1000,-1.5);
+  cartao("c3b",t,7.42,9.5,580,600,700,1000,1.5);
+  {const el=$("seta3");el.style.opacity=t>=7.6&&t<9.5?1:0;el.style.transform="translate(474px,770px)";$("pulso").setAttribute("cx",(2+100*eIO(span(t,7.7,.4))).toFixed(1))}
+  $("bar1").style.width=(100*eO(span(t,7.72,.42))).toFixed(1)+"%";$("bar2").style.width=(100*eO(span(t,8.0,.4))).toFixed(1)+"%";
+  chip($("k3a"),t,8.2,9.5,820,860,-3);chip($("k3b"),t,8.36,9.5,850,930,2);chip($("k3c"),t,8.52,9.5,825,1000,-2);
+  {const k=Math.sin(Math.PI*span(t,8.9,.3));$("c3a").querySelector(".face").style.borderColor=k>0.05?DEST:"";$("c3a").querySelector(".face").style.borderWidth=k>0.05?"3px":""}
+
+  // 04 · o ciclo
+  {const vis=t>=9.5;$("num4").style.opacity=vis?1:0;$("num4").style.transform="translate(0,520px)";
+   const v=214+275*eIO(span(t,9.62,2.2)),vel=span(t,9.62,2.2)>0&&span(t,9.62,2.2)<1?3:0;odo(R4,v,vel);
+   const p=$("pil4");p.style.opacity=vis?span(t,9.7,3*F):0;p.style.transform="translate(0,780px)";}
+  CH4.forEach(o=>chip(o.e,t,o.a,12.4,o.x,o.y,o.r));
+
+  // saída do capítulo: tudo sobe ~220 px em 5 quadros com rastro em eco
+  const fim=prox?prox.a:99, ks=span(t,fim-5*F,5*F), sobe=220*eIO(ks);
+  $("palco").style.transform=`translateY(${(-sobe).toFixed(1)}px)`;$("palco").style.opacity=ks>0?(1-ks*.6).toFixed(3):1;
+  ecos.forEach(e=>e.remove());ecos=[];
+  if(ks>0&&ks<1){[1,2].forEach(n=>{const e=$("palco").cloneNode(true);e.removeAttribute("id");e.querySelectorAll("[id]").forEach(x=>x.removeAttribute("id"));
+    e.style.transform=`translateY(${(-220*eIO(span(t-n*F,fim-5*F,5*F))).toFixed(1)}px)`;e.style.opacity=(.42/n).toFixed(2);$("cena").insertBefore(e,$("palco"));ecos.push(e)})}
+
+  // personagem: pose da vez, boca a cada 2–3 quadros, troca com 2 quadros de fusão; pula de lugar no corte de capítulo
+  const pi=poseDe(t),P=PS[pi][0],nome=PS[pi][1],ant=pi>0?PS[pi-1][1]:nome;
+  const fusao=cl(span(t,P,2*F)), fl=falando(t)&&nome!=="p2-surpreso";
+  const pisc=PISCA.some(a=>t>=a&&t<a+3*F);
+  const bob=Math.sin(t*2*Math.PI/2.6)*5+(falando(t)?-4:0);
+  const x=C.px,esc=1+.012*Math.sin(t*2*Math.PI/2.6);
+  for(const k in IM){let o=0;if(k===nome+(fl?"-falando":""))o=fusao;else if(k===ant&&fusao<1)o=1-fusao;
+    IM[k].style.opacity=o.toFixed(3);IM[k].style.transform=`translate(${x}px,${bob.toFixed(1)}px) scale(${esc.toFixed(4)}) scaleY(${pisc?0.995:1})`;IM[k].style.transformOrigin="50% 100%"}
+  // fantasma de 1 quadro no salto de posição
+  const pc=c>0?CAP[c-1]:null, salto=pc&&t>=C.a&&t<C.a+F&&pc.px!==C.px;
+  for(const k in FA){FA[k].style.opacity=(salto&&k===ant)?.38:0;FA[k].style.transform=`translate(${pc?pc.px:0}px,0)`}
+}
+
+const tl=gsap.timeline({paused:true});const proxy={t:0};
+tl.to(proxy,{t:12.4,duration:12.4,ease:"none",onUpdate:()=>frame(proxy.t)},0);
+frame(0);
+window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;
+</script>
+</body></html>

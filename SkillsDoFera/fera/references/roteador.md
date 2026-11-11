@@ -21,6 +21,7 @@ Na dúvida: mentora. Empurrar fluxo sem ele pedir é o erro mais caro do sistema
 | página de agendamento, reunião de 20 minutos, funil de reunião, reunião fantasma | Páginas & Quiz | `/funil-reuniao-fantasma` |
 | agente que atende o lead, qualifica, lembrete da reunião | CRM de Leads | `/agente-de-leads` |
 | proposta em página pro lead depois da reunião, mensagem do link, follow-up da proposta | Propostas | `/proposta-pagina` |
+| anúncio em vídeo com a tela real, remarketing com escassez, HQ de IA, animar print do painel, gancho dos 3 segundos, formato do vídeo, borrar dado sensível | Conteúdo & Anúncios | skills `eva-*`, `prova-na-tela`, `gancho-dos-tres-segundos`, `formatos-criativos-por-perfil`, `video-redaction-seguranca` |
 | testar uma ideia em todos os formatos, "qual formato combina comigo", galeria de artes ou de anúncios | Conteúdo & Anúncios | `/galeria-de-artes` |
 | lead, CRM, disparo de WhatsApp, comentário pra DM, follow-up, lista | CRM de Leads | `/crm-de-leads` |
 | meta, painel, o que fazer hoje, como estou, relatório, semana | Copiloto de Gestão | `/copiloto-de-gestao` |
