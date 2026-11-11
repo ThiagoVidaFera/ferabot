@@ -9,7 +9,7 @@ description: "Catálogo de efeitos de motion (ids, durações, props) para pedir
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -250,7 +250,7 @@ Passo 5 do pipeline de aprendizado de estilo. Entraram **31 efeitos novos** (`or
 - **TV retrô** → skill `abertura-tv-retro`; doc `docs/estudos/2026-10-18-estilo-tv-retro-e-influenciadores/GRAMATICA-TV-RETRO.md`: `recuo-tela-cheia-revela-tv-crt` · `grade-crt-aperture-que-some-no-recuo` · `barril-crt-displacement` · `legenda-corre-durante-recuo-de-camera` · `titulo-duas-faces-sans-serifa-sobre-tv` · `palavra-brilho-de-fosforo-escurece-entorno` · `clipe-arrastado-com-cursor-encaixa-no-vidro` · `layout-tv-em-cima-rosto-embaixo`
 - **Colagem rápida com apresentadores sintéticos** (só a forma, sem promessa de renda); doc `.../GRAMATICA-INFLUENCIADORES-IA.md`: `scan-de-luz-revela-rosto-gerado` · `galeria-mesma-pose-troca-rapida` · `colagem-de-topo-cadencia-rapida` · `logo-citado-com-glitch-rgb` · `calendario-vira-faixa-de-contagem` · `pilulas-numeradas-em-cascata` · `cartao-comentario-cai-no-bolso` · `cartela-textura-trocando` · `cta-fundo-preto-palavra-entre-aspas-parada`
 - **Variantes anexadas (7):** `REF-EDICAO-IA-EF-08` (tira de céu rasgada) · `titulo-atras-da-pessoa` (letra serifa gigante revelada por corte) · `LETED-EF-08` (disco de cor que cresce) · `janela-sobre-fundo-desfocado` (pulso de desfoque na troca) · `LETED-EF-16` (carimbo e rabiscos desenhados) · `marca-texto-no-numero` (etiqueta amarela que digita) · `cta-final-em-loop` (bookend do quadro inicial).
-- Marca: trocar o amarelo/azul/verde-oliva das referências pelos tokens da IDV (FCA: #05060A #12141F #F4F1E8 #FFC21A #00F0FF #FF2E4D). Os efeitos com promessa de valor (calendário, cartão no bolso) só valem para prazo de TESTE e para a PALAVRA do CTA, nunca para dinheiro.
+- Marca: trocar o amarelo/azul/verde-oliva das referências pelos tokens da IDV (FERA: #05060A #12141F #F4F1E8 #FFC21A #00F0FF #FF2E4D). Os efeitos com promessa de valor (calendário, cartão no bolso) só valem para prazo de TESTE e para a PALAVRA do CTA, nunca para dinheiro.
 
 ## Efeitos do estudo "arquivo editorial" (18/10/2026, rodada c)
 Entraram **27 efeitos novos** (`origem: estudo-arquivo-editorial`, campo `dialeto`: ARQUIVO / CINEMA-GLOW / CHOQUE) e **13 variantes** (`variantes_estudo`) em efeitos existentes (total 291 → 318; depois earn edits → 354). Skill: `estilo-arquivo-editorial`; doc: `docs/estudos/2026-10-18-estilo-arquivo-editorial/GRAMATICA-ARQUIVO-EDITORIAL.md`. Estado de todos: ESTUDADO, receita pronta, sem amostra nossa. Alvo do autor = dialeto ARQUIVO (ex.: `tarja-marca-texto-que-cresce`, `figura-tingida-de-amarelo`, `gravura-push-in-continuo`, `aberracao-cromatica-no-grao`, `foco-que-assenta-na-troca`, `interludio-de-papel-com-texto`, `fecho-em-preto-com-frase-final`). Não misturar dois dialetos na mesma peça.

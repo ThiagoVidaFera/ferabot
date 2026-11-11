@@ -15,7 +15,7 @@ description: "Pipeline de imagem e vídeo com IA para peças sem rosto real (HQ 
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -131,7 +131,7 @@ Registrar cada geração em `04-assets/CUSTOS.json` (modelo, preço conferido no
 - Zero avatar e zero rosto do autor; voz clonada nunca sobre o autor falando; 1 take de voz.
 - Um rosto por peça (conferir md5 da âncora no `public`); objeto-assinatura sempre visível (nada de mão na frente).
 - Rosto em Kling 2.5 turbo **standard**; Kling 3 só depois de 2 falhas; nunca Veo 3 Quality.
-- Não animar com fal/Kling/Hailuo em robôs de imagem em lote (ex.: robô FCA): movimento só local no Remotion.
+- Não animar com fal/Kling/Hailuo em robôs de imagem em lote (ex.: robô FERA): movimento só local no Remotion.
 - 1 clipe de 5–6 s serve 2–3 batidas; motion sem personagem no Remotion/HyperFrames a custo zero.
 - Gerar `9:16` primeiro; b-roll sóbrio; sem cor fora da paleta da ficha.
 

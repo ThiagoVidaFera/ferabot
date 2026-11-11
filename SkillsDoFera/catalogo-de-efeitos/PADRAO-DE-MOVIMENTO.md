@@ -89,7 +89,7 @@ Regra do autor (Meta): o essencial no **quadrado central 1:1**; apoio até o 4:5
 Tokens: `fundo · superficie · regua · texto · texto_suave · acento · tinta_acento · ok · alerta · erro`.
 Override só de token conhecido; contraste conferido depois de trocar.
 
-| Token | Lead Certo / IDV o autor | MCT | FCA |
+| Token | Lead Certo / IDV o autor | MCT | FERA |
 |---|---|---|---|
 | fundo | `#020408` + grade 40 px a 2–6% | `#070F1A` | `#05060A` + grade 40 px `#12141F` |
 | superficie | `#050812` | `#0F1F2E` | `#12141F` |
@@ -105,8 +105,8 @@ Override só de token conhecido; contraste conferido depois de trocar.
 | números/HUD | Sora 700 tabular | JetBrains Mono | VT323 (até 4 palavras) |
 | assinatura | — | mascote Claw Comandante (nunca o logo de pétalas) | esteira dourada/preta de 14 px no rodapé |
 
-- Fonte dos tokens: `kit/src/brand/colors.ts` (o autor/Lead Certo), memória IDV MCT, `projetos/exemplo/idv/IDV-FCA-v2.md`.
-- Laranja MCT `#F94E03` só em traço; dourado FCA até 15% da área; ciano FCA até 5%.
+- Fonte dos tokens: `kit/src/brand/colors.ts` (o autor/Lead Certo), memória IDV MCT, `projetos/exemplo/idv/IDV-FERA-v2.md`.
+- Laranja MCT `#F94E03` só em traço; dourado FERA até 15% da área; ciano FERA até 5%.
 - Texto sobre vídeo fica branco neutro em qualquer paleta e passa à cor da paleta quando o plano vira fundo chapado.
 - Para comparar paletas sem confundir com ritmo: renderizar o mesmo efeito, mesmo conteúdo, só trocando a paleta.
 - Variante P&B para teste: séries em cinzas distintos e excesso de meta com hachura (não só cor).

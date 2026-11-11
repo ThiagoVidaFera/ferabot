@@ -9,7 +9,7 @@ description: "Anúncio de remarketing HONESTO: nomeia a objeção do adiamento e
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -26,7 +26,7 @@ a urgência é declarada e falsa ("o nosso pixel rastreia cada visualização…
 ## Quando usar
 - Público quente: viu a página/VSL/série, iniciou checkout, assistiu ≥ 50 % do anúncio frio.
 - Existe um **motivo novo real**: bônus com data, lote que vira, turma que fecha, preço que sobe em data marcada, prova nova.
-- MCT, MLC, FCA (pré-venda com preço especial — **sem falar data de liberação** na FCA, regra 09/10).
+- MCT, MLC, FERA (pré-venda com preço especial — **sem falar data de liberação** na FERA, regra 09/10).
 
 ## Quando NÃO usar
 - Não existe prazo/lote real → faça RMK de **prova** (`painel-do-comprador-na-cena`) sem escassez.
@@ -118,7 +118,7 @@ Sem "pixel rastreia", sem relógio falso. Só 9:16. Amostra de 15 s do bloco pre
 - [ ] Preço da tela = checkout; âncora é um preço que existiu
 - [ ] 2 silêncios dramáticos; coda de música depois do CTA
 - [ ] Degradê suave na faixa de legenda; acento ciano; zero magenta
-- [ ] FCA: nenhuma data de liberação falada ou escrita
+- [ ] FERA: nenhuma data de liberação falada ou escrita
 
 ## Armadilhas
 - "Esse preço nunca mais volta" com link fixo que mostra o preço sempre: o público quente percebe e a Meta pode reprovar.

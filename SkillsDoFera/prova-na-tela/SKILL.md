@@ -9,7 +9,7 @@ description: "Anima print ou gravação REAL de painel (Ads Manager, CRM, WhatsA
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -104,9 +104,9 @@ do número de conversas para a coluna de qualificados, com os valores **exatamen
 Paleta Lead Certo (fundo `#020408`, acento `#00f0ff`). Em anúncio por profissão, a profissão grande abre o
 gancho antes da prova.
 
-**FCA (Fábrica de Criativos Automáticos)** — gravação de tela real da fábrica gerando um anúncio a partir de uma URL:
+**FERA (Fábrica de Criativos Automáticos)** — gravação de tela real da fábrica gerando um anúncio a partir de uma URL:
 `checklist-sincronizado-com-tela` com "colar a URL · escolher o produto · gerar · anúncio pronto", cada check no
-segundo medido da gravação. Depois `regiao-com-nota` no anúncio gerado ("pronto para subir"). Paleta FCA
+segundo medido da gravação. Depois `regiao-com-nota` no anúncio gerado ("pronto para subir"). Paleta FERA
 (dourado `#FFC21A` como acento único, ciano só no selo "IA ligada"). Número de criativos/tempo só se vier da
 própria gravação.
 

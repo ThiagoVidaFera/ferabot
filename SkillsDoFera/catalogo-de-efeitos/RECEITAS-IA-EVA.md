@@ -6,7 +6,7 @@
 
 ⚠️ **O que não se replica:** os exemplos da fonte usam voz e imagem de político real, vídeo de criança real (exemplo 1) e um
 produto fictício de saúde com garantia (exemplo 2). Aqui ficou só a estrutura, com personagens fictícios ou próprios. Clone de
-voz só da própria voz ou de personagem gerado; o ElevenLabs exige confirmar direitos e consentimento. Regras da casa: FCA nunca
+voz só da própria voz ou de personagem gerado; o ElevenLabs exige confirmar direitos e consentimento. Regras da casa: FERA nunca
 com o autor em criativo de cliente; voz clonada nunca sobre o take do autor; imagem de IA nunca é prova.
 
 ## 1. Copy com ChatGPT

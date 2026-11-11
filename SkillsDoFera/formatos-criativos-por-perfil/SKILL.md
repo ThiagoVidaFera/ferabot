@@ -9,7 +9,7 @@ description: "Monta o perfil do criador/cliente (nicho, público, formatos fixos
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -27,7 +27,7 @@ retrabalho, menos limite gasto. O perfil é feito **uma vez** por criador/client
 - Projeto novo (criador próprio, mentorado, cliente de edição): antes do primeiro roteiro ou edição.
 - Uma skill de roteiro/edição não achou `perfil-do-criador.md` na raiz do projeto.
 - Escolher o formato de um vídeo ("isso vira lista rápida ou tela dividida?").
-- **Produtos do autor** (MCT, FCA, Lead Certo, TFA): a IDV já existe (`kit/src/brand/`, IDVs por produto) — aqui só o perfil e os formatos; a identidade visual NÃO é recriada.
+- **Produtos do autor** (MCT, FERA, Lead Certo, TFA): a IDV já existe (`kit/src/brand/`, IDVs por produto) — aqui só o perfil e os formatos; a identidade visual NÃO é recriada.
 
 ## 1. Perfil do criador (`perfil-do-criador.md` na raiz do projeto)
 **Um projeto/pasta por identidade visual ou cliente** — nunca dois clientes no mesmo projeto. Mesmo criador com identidades diferentes

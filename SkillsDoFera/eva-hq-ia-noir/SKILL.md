@@ -9,7 +9,7 @@ description: "Anúncio em vídeo 'HQ-IA noir narrado': graphic novel gerada por 
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -30,8 +30,8 @@ A pasta de estudo separa "ficção de mundo" (15, 16, 20) como estilo próprio. 
 Manter separado duplicaria prompts, paleta e checklist. Receitas originais continuam em `estilos/ficcao-de-mundo/`.
 
 ## Quando usar
-- Anúncio **frio** que defende uma **tese** (por que o jeito comum falha) para produto próprio: FCA, MCT, MLC.
-- **FCA**: escala sem rosto — o autor NUNCA aparece em criativo de cliente nem precisa aparecer aqui (personagem-guia próprio).
+- Anúncio **frio** que defende uma **tese** (por que o jeito comum falha) para produto próprio: FERA, MCT, MLC.
+- **FERA**: escala sem rosto — o autor NUNCA aparece em criativo de cliente nem precisa aparecer aqui (personagem-guia próprio).
 - Quando a página de destino / VSL / série vai usar o **mesmo universo visual** (anúncio = pedaço da página) [inferido, ME2 do `dna-2026-10.md`].
 - Variante B (trailer): atenção fria **sem promessa**, público cético e saturado.
 
@@ -66,7 +66,7 @@ Manter separado duplicaria prompts, paleta e checklist. Receitas originais conti
 O produto não é citado antes do payoff (15 tem 0 "você" na transcrição) [observado].
 
 ## Direção
-- **Um personagem-guia nosso** em todo o vídeo e na página (ficha em `ficha-de-personagem`; na FCA, os assistentes aprovados). Nunca mascote de terceiro, nunca cabeça de câmera [observado que eles usam em 18 criativos; proibido para nós].
+- **Um personagem-guia nosso** em todo o vídeo e na página (ficha em `ficha-de-personagem`; na FERA, os assistentes aprovados). Nunca mascote de terceiro, nunca cabeça de câmera [observado que eles usam em 18 criativos; proibido para nós].
 - **1 frase falada = 1 cena literal**: a imagem ilustra exatamente o que é dito (dinheiro "pago por ele" = mão entregando; "sobe o anúncio" = pessoa no painel) [observado, 17 @ 36–56].
 - Telas de software aparecem **dentro** do traço HQ (eles: Google Ads/Notion desenhados, 17 @ 52–56) [observado]. Nós: tela virada para a câmera NUNCA vazia/branca — ou **print real** composto no Remotion (mapeado em perspectiva, legível), ou painel escuro abstrato gerado (gráfico/linhas, sem letras). Luz: só a face da tela emite luz; tampa/costas do aparelho escuras (regra do autor 15/10).
 - Personagem-guia em poses repetíveis: sentado em poltrona, de costas para a janela, escrevendo, diante de um tabuleiro [observado, 12 @ 20/69,7/89,9/95,3] — crie as 4 poses na ficha.
@@ -136,7 +136,7 @@ Dissolve é permitido (regra "nunca dissolve" caiu) [observado, comparativo #24]
 |---|---|
 | teal #2E8B83 + laranja #E8873A | navy `colors.cardBg`/`colors.border` + luz ciano `colors.brandCyan` |
 | vermelho/amarelo de ênfase | 1 palavra `colors.brandCyan`; número positivo `colors.brandGreen` |
-| mascote cabeça-de-câmera | personagem-guia da nossa ficha (FCA: assistentes aprovados) |
+| mascote cabeça-de-câmera | personagem-guia da nossa ficha (FERA: assistentes aprovados) |
 | cards de amostra sem número | cartões com tela/criativo real + rótulo de fonte e período |
 | CTA amarelo | "SAIBA MAIS" ciano |
 | trechos de série/filme | cena IA nossa ou motion próprio |

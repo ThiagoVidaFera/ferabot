@@ -10261,7 +10261,7 @@
    {
     "id_variante": "legenda-palavra-ativa-em-pilula",
     "nome": "Legenda caixa alta com palavra ativa em pílula",
-    "receita_remotion": "frase inteira visível em sans black caixa alta branca com contorno/sombra escura (~3 % da largura em 16:9); a palavra falada ganha pílula do acento (amarelo) com texto escuro, troca a cada 0,3–0,4 s por corte seco, escala 1,06; sem fade entre palavras. FCA: Chakra Petch 700, pílula #FFC21A, texto #05060A.",
+    "receita_remotion": "frase inteira visível em sans black caixa alta branca com contorno/sombra escura (~3 % da largura em 16:9); a palavra falada ganha pílula do acento (amarelo) com texto escuro, troca a cada 0,3–0,4 s por corte seco, escala 1,06; sem fade entre palavras. FERA: Chakra Petch 700, pílula #FFC21A, texto #05060A.",
     "dificuldade": "baixa",
     "origem": "estudo-referencia-o autor-1810",
     "ref_ficha": "docs/estudos/2026-10-18-efeito-video-1828/FICHA-MURO-DE-TEXTO-FRASE-MARCADA.md"
@@ -14664,7 +14664,7 @@
   "ref_ficha": "artefatos/estudo-efeitos-nomeados/medidas/DeGSnoWzZTi (20–24 s)",
   "origem": "ref-edicao-ia",
   "traducao": {
-   "remotion": "<RequisitosRiscados itens={[{t:'Ser técnico',ok:false},{t:'Saber editar',ok:false},{t:'Ter o FCA',ok:true}]} temposQ={srt}/>",
+   "remotion": "<RequisitosRiscados itens={[{t:'Ser técnico',ok:false},{t:'Saber editar',ok:false},{t:'Ter o FERA',ok:true}]} temposQ={srt}/>",
    "hyperframes": "lista com GSAP por item"
   }
  },
@@ -14805,7 +14805,7 @@
   "limites_9x16": {
    "tarjas": "3 a 4",
    "palavra_max_car": 10,
-   "cor": "acento FCA #FFC21A",
+   "cor": "acento FERA #FFC21A",
    "atraso_q": 2
   },
   "assinatura": "cada palavra do gancho entra em uma tarja de papel rasgado que cresce da esquerda, levemente girada",

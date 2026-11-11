@@ -9,7 +9,7 @@ description: "Anúncio 'dentro do anúncio': moldura nomeia uma profissão/nicho
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -19,11 +19,11 @@ description: "Anúncio 'dentro do anúncio': moldura nomeia uma profissão/nicho
 
 
 **De onde vem:** 6 criativos, 6 anúncios (C3 livro: 08–11; C5 agência: 24, 25), 115–154 s [observado, `classificacao.md` §2.4].
-Na leitura inversa é a peça **superior** para nós: mostra o resultado aplicado a uma profissão nomeada — para a FCA é o argumento
+Na leitura inversa é a peça **superior** para nós: mostra o resultado aplicado a uma profissão nomeada — para a FERA é o argumento
 inteiro [inferido, `dna-2026-10.md` (c)]. Aposta nº 1 do estudo (`05-ANALISE/leitura.md`).
 
 ## Quando usar
-- **FCA**: "Um [DENTISTA] pediu; a fábrica entregou isto" — o exemplo é o criativo gerado, exibido inteiro.
+- **FERA**: "Um [DENTISTA] pediu; a fábrica entregou isto" — o exemplo é o criativo gerado, exibido inteiro.
 - **MCT**: "Vou montar a campanha de [nicho] na sua frente" — o exemplo é a montagem na tela do Gerenciador, fechando no número.
 - **MLC/Lead Certo**: "uma [clínica] ligou o Lead Certo; olha o que chegou" — exemplo = conversa/lead real mascarado.
 - Ampliar público para profissionais liberais que não se veem no anúncio genérico.
@@ -53,7 +53,7 @@ decidir — 1 vídeo por anúncio, texto do anúncio fixo [inferido do método d
 
 ## Direção
 - **Duas camadas visíveis**: moldura (nossa IDV, ciano) × exemplo (outra cor/linguagem). O espectador tem de sentir a troca [observado: 08 azul, 09 verde-neon, 10 amarelo, 25 azul × vermelho].
-  - FCA: o exemplo é o criativo gerado **como saiu** (cores do cliente) dentro de moldura de celular; a troca de camada é natural.
+  - FERA: o exemplo é o criativo gerado **como saiu** (cores do cliente) dentro de moldura de celular; a troca de camada é natural.
   - MCT/MLC (exemplo montado por nós): destaque do exemplo = `colors.brandGreen`; moldura = `colors.brandCyan`.
 - Moldura: POV de celular/tela (`eva-pov-produto`) ou cena noir (`eva-ensaio-noir-empresario`) [observado: livro = POV; agência = noir].
 - Exemplo: b-roll IA cinematográfico + cartões `colors.cardBg` borda `colors.border` com texto Sora 800 caixa alta 2 linhas [observado: cartões brancos com vinheta, 08 @ 20,8/42/57 → trocado para a nossa IDV].
@@ -133,7 +133,7 @@ Moldura em ciano, exemplo em verde (ou cores do criativo real). Duas versões: c
 - Moldura longa (> 15 s): o espectador não chega ao exemplo.
 - Exemplo bonito e oferta sem prova: eles fecham no checkout; nós fechamos no número.
 - Duas cores na moldura e duas no exemplo: a troca de camada some.
-- Criativo de cliente da FCA com o autor dentro: proibido (regra 11/10).
+- Criativo de cliente da FERA com o autor dentro: proibido (regra 11/10).
 
 
 ## ⛔ Arquivo final sem rótulo interno de produção (regra do autor, 14/10/2026)

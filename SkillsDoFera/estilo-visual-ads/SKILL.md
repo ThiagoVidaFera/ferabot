@@ -32,7 +32,7 @@ description: "Roteador 'qual estilo EVA para qual objetivo' de anúncio/VSL (HQ-
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -128,7 +128,7 @@ Detalhe e evidência regra a regra: `fontes/ESTILO-VISUAL-DE-ANUNCIO-EVA/ADS-202
 | N6 | **CTA repetido**: interno/meio + final, com seta dupla. | observado · 08–11 (interno); 23, 25, 26, 28, 29 (2–3×) |
 | N7 | **Cama musical sob a locução**; música sobe sozinha só depois do CTA (coda 4–10 s). Nós: voz 12–15 dB acima no gancho, 8–10 no corpo; POV quase seco. | observado (stems 23/27; codas 01, 15, 18, 19, 29) · nossa dosagem inferida |
 | N8 | **A cor marca a camada** quando o vídeo tem duas vozes (moldura × exemplo). | observado · 08 azul, 09 verde-neon, 10 amarelo, 25 azul × vermelho |
-| N9 | **Personagem-guia no lugar do apresentador** (deles: mascote cabeça-de-câmera). Nós: personagem da nossa ficha; FCA nunca com o autor. | observado · 18 criativos; regra da casa 11/10 |
+| N9 | **Personagem-guia no lugar do apresentador** (deles: mascote cabeça-de-câmera). Nós: personagem da nossa ficha; FERA nunca com o autor. | observado · 18 criativos; regra da casa 11/10 |
 | N10 | **Texto fixo, vídeo variável**: teste = 1 anúncio por vídeo; escala = vários IDs por vídeo vencedor. | observado · mapa.md |
 | N11 | **Funil por episódios/capítulos** com cliffhanger, nome-recompensa, mensagem de pausa e checkout no pitch. | observado · `SERIE-RESUMO.md`; `player-config.json` → `serie-de-vendas` |
 | N12 | **Um link de checkout por formato** (atribuição sem UTM) e checkout que repete a metáfora do vídeo. | observado · `ssl_id`/`vsl_id`; checkout "interrogatório" |
@@ -156,13 +156,13 @@ talking-head v2 é OUTRA linguagem, não misturar) · CTA verboso · mais de 1 c
 ## Roteador — qual estilo para qual objetivo
 | Objetivo / situação | Estilo | Skill | Produto típico |
 |---|---|---|---|
-| Frio, defender uma tese, sem rosto, universo único com a página | HQ-IA noir (A manifesto) | `eva-hq-ia-noir` | FCA, MCT |
-| Frio cético, atenção sem promessa | Trailer de mundo (B) | `eva-hq-ia-noir` | MCT, FCA |
-| Mostrar o output do produto para uma profissão | Anúncio-dentro-do-anúncio | `eva-anuncio-dentro-do-anuncio` | **FCA**, MLC, MCT |
-| Prova barata e crível, "gravado agora" | POV do produto (tela) | `eva-pov-produto` + `painel-do-comprador-na-cena` | **MCT**, MLC, FCA |
+| Frio, defender uma tese, sem rosto, universo único com a página | HQ-IA noir (A manifesto) | `eva-hq-ia-noir` | FERA, MCT |
+| Frio cético, atenção sem promessa | Trailer de mundo (B) | `eva-hq-ia-noir` | MCT, FERA |
+| Mostrar o output do produto para uma profissão | Anúncio-dentro-do-anúncio | `eva-anuncio-dentro-do-anuncio` | **FERA**, MLC, MCT |
+| Prova barata e crível, "gravado agora" | POV do produto (tela) | `eva-pov-produto` + `painel-do-comprador-na-cena` | **MCT**, MLC, FERA |
 | Dono de negócio → conversa/diagnóstico | Ensaio noir para empresário | `eva-ensaio-noir-empresario` | MCT (tracking), Diagnóstico da Escala |
-| Quente, recuperar quem não comprou | Remarketing honesto | `eva-remarketing-escassez` | MCT, MLC, FCA |
-| VSL longa, público cético, testar formato de página | Série de vendas / player de capítulos | `serie-de-vendas` | MCT, FCA |
+| Quente, recuperar quem não comprou | Remarketing honesto | `eva-remarketing-escassez` | MCT, MLC, FERA |
+| VSL longa, público cético, testar formato de página | Série de vendas / player de capítulos | `serie-de-vendas` | MCT, FERA |
 | Só o gancho / os 3 primeiros segundos | — | `gancho-dos-tres-segundos` | todos |
 | Analisar outro vídeo de referência | — | `estilo-por-referencia` (1 vídeo) / `map-editing-style` (lote, rota gratuita 2026-10) | — |
 Encadeamento: `motor-de-video` → skill do estilo → `direcao-de-edicao-ia` (briefing e amostra) → `gancho-dos-tres-segundos` +
@@ -173,9 +173,9 @@ Encadeamento: `motor-de-video` → skill do estilo → `direcao-de-edicao-ia` (b
 - **Processo de escrita** (ideia → pesquisa de dor → oferta antes → rascunho → voz alta → contagem → enxugar → 5 perguntas → teste de lead/hook) → use `copy-do-zero-backstage`.
 - Esta skill cuida do visual e da escolha de estilo; as duas acima cuidam do texto.
 
-**5 apostas para testar primeiro** (`05-ANALISE/leitura.md`): (1) FCA "um [profissional] pediu; a fábrica entregou isto";
+**5 apostas para testar primeiro** (`05-ANALISE/leitura.md`): (1) FERA "um [profissional] pediu; a fábrica entregou isto";
 (2) MCT POV da tela com o número; (3) MCT analogia do rastreio → Events Manager; (4) VSL em capítulos com nome-recompensa;
-(5) personagem-guia em HQ-IA para a série de anúncios da FCA.
+(5) personagem-guia em HQ-IA para a série de anúncios da FERA.
 
 ## Números de VSL medidos (v4.1 — 15/10/2026)
 Fonte: `projetos/vsl-mct/00-estudo/BIBLIA-EVA-VSL.md` (medições 2026 das VSLs Estilo Visual de Anúncio (EVA); chaves em `receita-medida.json`). Substituem as estimativas antigas do curso (110–120 ppm; revelação ≈ 58 %; garantia só ≥ 30 dias) nas VSLs longas.
@@ -195,7 +195,7 @@ Texto da VSL e uso dos números: `vsl-kishotenketsu`. Efeitos, som e grade medid
 - 9:16 primeiro; 4:5 só se pedir. Transcrição só local (`bin/transcrever.py`). Nunca API paga sem autorização.
 - Criativo em PAR (pago "Saiba mais" + orgânico "Digite X", 3 capas, legenda .txt) — exceto anúncio por profissão/avatar (só pago).
 - Anúncio por profissão: profissão GRANDE como 1ª palavra + símbolo da classe; só em campanha aberta, nunca em públicos personalizados.
-- FCA: o autor nunca aparece em criativo de cliente; criativo nunca fala data de liberação.
+- FERA: o autor nunca aparece em criativo de cliente; criativo nunca fala data de liberação.
 - Voz clonada nunca sobre vídeo do autor falando. B-roll sóbrio. Faixa de topo com degradê, nunca borda dura.
 - Depois do lote de renders: `python3 bin/economia-disco.py --limpar`.
 

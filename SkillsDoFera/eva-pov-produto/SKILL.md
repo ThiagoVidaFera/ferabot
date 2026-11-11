@@ -9,7 +9,7 @@ description: "Anúncio 'POV do produto': plano-sequência de celular na mão, se
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
 >   (HyperFrames ou Remotion, se estiver instalado).
-> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FCA, ciano #00f0ff, Sora) são do autor original: aqui valem
+> - Cores, fontes e marcas dos exemplos (MCT, MLC/Lead Certo, FERA, ciano #00f0ff, Sora) são do autor original: aqui valem
 >   as do seu `perfil.json`.
 > - Prova e número: número sem origem fica fora da peça. Nunca inventar print, depoimento ou resultado. Selo SIMULAÇÃO
 >   não libera peça pública.
@@ -25,13 +25,13 @@ description: "Anúncio 'POV do produto': plano-sequência de celular na mão, se
 ## Quando usar
 - **MCT**: celular filmando o Gerenciador de Eventos / Ads Manager, dedo no número comparável.
 - **MLC/Lead Certo**: painel do Lead Certo, conversa de lead chegando (mascarada).
-- **FCA**: celular do "cliente" tocando o criativo gerado; tela do `/gerar-criativo/` do pedido à entrega.
+- **FERA**: celular do "cliente" tocando o criativo gerado; tela do `/gerar-criativo/` do pedido à entrega.
 - Precisa de peça rápida (1 tomada), crível ("gravado agora") e sem rosto.
 
 ## Quando NÃO usar
 - Sem tela real para mostrar → outro estilo (POV de tela inventada não existe).
 - Mensagem que depende de tese/analogia longa → `eva-ensaio-noir-empresario` ou `eva-hq-ia-noir`.
-- Criativo de cliente FCA: o autor não aparece — mão neutra (sem anel/relógio/tatuagem reconhecível) e voz que não seja a dele.
+- Criativo de cliente FERA: o autor não aparece — mão neutra (sem anel/relógio/tatuagem reconhecível) e voz que não seja a dele.
 
 ## Estrutura de roteiro (espinha CRIATIVO-04, 75,3 s)
 | Tempo | Bloco | Regra | Evidência |
@@ -100,7 +100,7 @@ Cama a −26/−30 dB ou nenhuma. Só 9:16. Amostra dos primeiros 15 s + still d
 - [ ] Tela legível no celular; sem moiré forte; número confere com a fonte (still)
 - [ ] Dedo aponta o que a voz diz
 - [ ] Dados mascarados com tarja sólida; fonte e período ditos ou legendados
-- [ ] Sem rosto; na FCA mão neutra e voz que não é do autor
+- [ ] Sem rosto; na FERA mão neutra e voz que não é do autor
 - [ ] Cortes ≤ 0,12/s no corpo
 - [ ] Voz ≥ 10 dB acima de qualquer cama
 - [ ] CTA escuro com seta dupla; preço igual ao do checkout
