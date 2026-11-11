@@ -1,6 +1,6 @@
-# estilo-visual-ads — skill do Pacote Sistema de Criativos FCA
+# estilo-visual-ads — skill do Pacote Sistema de Criativos FERA
 
-Skill do Pacote de Skills + Templates do Sistema de Criativos FCA.
+Skill do Pacote de Skills + Templates do Sistema de Criativos FERA.
 
 ## Instalar
 1. Tenha o **Claude Code** instalado.
@@ -11,4 +11,4 @@ Skill do Pacote de Skills + Templates do Sistema de Criativos FCA.
 > Caminhos, pixel, e-mail e telefone vêm como **placeholders** (`~`, `SEU_PIXEL_ID`,
 > `SEU_NUMERO`, `voce@...`). Troque pelos seus antes de usar.
 
-— Sistema de Criativos FCA
+— Sistema de Criativos FERA

@@ -4,7 +4,7 @@ description: "Catálogo de efeitos de motion (ids, durações, props) para pedir
 ---
 
 > **Origem e adaptação (FeraBot).**
-> - Skill do pacote "Sistema de Criativos FCA" (créditos no LEIA-ME desta pasta). No FeraBot ela entra como **direção
+> - Skill do pacote "Sistema de Criativos FERA" (créditos no LEIA-ME desta pasta). No FeraBot ela entra como **direção
 >   criativa**: roteiro, cena, regras e checklists.
 > - Onde citar `bin/motor-video.py`, `motor-de-video`, `remotion-marca`, `kit/` ou `acervo/`: esses caminhos não existem
 >   aqui. Use o que você tem: `ScriptsFera/render.py`, `ScriptsFera/narrar.py` e FFmpeg, ou o motor de vídeo que preferir
@@ -262,7 +262,7 @@ Entraram **36 efeitos novos** (`origem: estudo-earn-edits`, campo `dialeto`: DOC
 Entrou **1 efeito novo**, `muro-de-texto-com-frase-marcada` (família tipografia, `origem: estudo-referencia-o autor-1810`), com **componente pronto** em `kit/src/efeitos/MuroDeTextoFraseMarcada.tsx` e demo em `src/portfolio/` (amostra na lista de estilos). Muro de linhas serifadas em profundidades de foco diferentes que reembaralha a cada ~0,3 s com pulso de desfoque; só a frase da narração fica parada, nítida, em sans sobre marca-texto. Variantes: `legenda-palavra-ativa-em-pilula` (em LETED-EF-04) e `personagem-de-traco-fervendo` (em REF-EDICAO-IA-EF-09). Ficha: `docs/estudos/2026-10-18-efeito-video-1828/FICHA-MURO-DE-TEXTO-FRASE-MARCADA.md`. Backup do catálogo: `catalogo.json.bak-2026-10-18e`.
 
 ## Efeito da skill anatomy (25/10/2026)
-`maquina-isometrica-explica-mecanismo` (família diagrama, `origem: skill-anatomy (MIT, wheresryan22)`; total 390 → 391). Use quando a fala diz "como funciona", "por dentro", "o mecanismo", "o que acontece quando" e o mecanismo cabe como máquina física. Figura gerada pela skill `anatomy` (`.claude/skills/anatomy/SKILL.md`); regras de marca e os 6 mecanismos nossos em `anatomy/NOTA-Sistema FCA.md`. Estado: INSTALADO, sem amostra nossa; captura em vídeo PENDENTE DE PROVA (ver `motor-de-video`, rota 6).
+`maquina-isometrica-explica-mecanismo` (família diagrama, `origem: skill-anatomy (MIT, wheresryan22)`; total 390 → 391). Use quando a fala diz "como funciona", "por dentro", "o mecanismo", "o que acontece quando" e o mecanismo cabe como máquina física. Figura gerada pela skill `anatomy` (`.claude/skills/anatomy/SKILL.md`); regras de marca e os 6 mecanismos nossos em `anatomy/NOTA-Sistema FERA.md`. Estado: INSTALADO, sem amostra nossa; captura em vídeo PENDENTE DE PROVA (ver `motor-de-video`, rota 6).
 
 ## Efeitos do estudo "Dossiê documental" (25/10/2026)
 Entraram **8 efeitos novos** (`origem: estudo-dossie-documental`, `dialeto: DOSSIE-DOCUMENTAL`) e **15 variantes** (`variantes_estudo` com essa origem) em efeitos existentes (total 380 → 388). Em 25/10 (revisão a pedido do autor) +2: `cor-seletiva-em-camadas` (P&B + cor no mesmo quadro, medido) e `close-extremo-de-detalhe` (close de olho/mão/objeto — adição nossa, o Reel não tem close de olho) → 390. Receita: `projetos/exemplo/2510-referencia-externa/RECEITA.md`; fichas: `.../EFEITOS.md`. Estado: ESTUDADO, receita pronta, sem amostra nossa. Gramática: mistério → data/etiqueta → manchete → TV/arquivo → mural → virada vertical → contradição em P&B → revelação → CTA com produto como objeto; cena em cor, documento em P&B, vermelho `#FF2E4D` como fio condutor; letras só com sombra suave.

@@ -1,4 +1,4 @@
-# Padrão de movimento — Sistema FCA (o autor)
+# Padrão de movimento — Sistema FERA (o autor)
 
 Este é o nosso padrão para todo efeito do `catalogo.json`, em qualquer motor. Números de tempo valem em
 segundos e em quadros a 30 fps (Remotion trabalha em quadros; HyperFrames em segundos). Os componentes
