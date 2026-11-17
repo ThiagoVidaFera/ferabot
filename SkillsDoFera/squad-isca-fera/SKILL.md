@@ -128,7 +128,7 @@ Salvar em: `output/iscas/YYYY-MM-DD/captura.html`
 
 1. "Fera, isca pronta! PDF + página de captura em `output/iscas/YYYY-MM-DD/`"
 2. Instrução de publicação da página: "Sobe o `captura.html` no Netlify ou no seu servidor."
-3. Instrução de DM automation: "Configure a keyword `[keyword]` no /zernio-fera pra enviar o link da página automaticamente."
+3. Instrução de DM: "Configure a keyword `[keyword]` na automação comentário → DM do /crm-de-leads pra mandar o link da página pra quem comentar."
 4. Instrução de stories: "Use o /squad-stories-fera pra criar stories divulgando a isca."
 
 ## QA antes de entregar
@@ -142,4 +142,4 @@ Salvar em: `output/iscas/YYYY-MM-DD/captura.html`
 
 ## Comunicação após entrega
 
-> "Fera, isca digital completa! PDF + página de captura prontos. Agora é configurar a automação no /zernio-fera pra distribuir automaticamente. Quer que eu faça isso agora?"
+> "Fera, isca digital completa! PDF + página de captura prontos. Agora é configurar a automação comentário → DM no /crm-de-leads pra cada comentário com a palavra receber o link. Quer que eu faça isso agora?"

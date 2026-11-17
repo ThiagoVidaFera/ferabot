@@ -1,0 +1,393 @@
+@import "tailwindcss";
+
+:root {
+  /* Visual "Central de Conteudo": conteudo claro e quente, lateral azul-marinho,
+     azul unico como acento. Todo o CRM le estes tokens. */
+  --fundo: #efede7;
+  --painel: #ffffff;
+  --linha: #e4e1d8;
+  --texto: #0f1a4a;
+  --texto-fraco: #6b7090;
+  --acento: #1a2f8f;
+  --marinho: #0f1f5e;
+  --marinho-2: #13286c;
+  --marinho-ativo: #1d3490;
+  --azul-claro: #dfe8fb;
+  --raio-card: 18px;
+  --sombra-card: 0 1px 2px rgba(15, 26, 74, 0.04), 0 8px 24px rgba(15, 26, 74, 0.05);
+}
+
+@theme inline {
+  --color-fundo: var(--fundo);
+  --color-painel: var(--painel);
+  --color-linha: var(--linha);
+  --color-texto: var(--texto);
+  --color-texto-fraco: var(--texto-fraco);
+  --color-acento: var(--acento);
+  --color-marinho: var(--marinho);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+/* Titulo de pagina grande e firme, como na referencia. Os h1 das telas trazem
+   fontSize inline; o !important fica restrito ao conteudo principal. */
+.app-main h1 {
+  font-size: clamp(32px, 4.2vw, 52px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--marinho-2);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 9px 12px;
+  width: 100%;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--acento);
+}
+
+::placeholder {
+  color: var(--texto-fraco);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--acento);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.btn-sec {
+  background: transparent;
+  border: 1px solid var(--linha);
+  color: var(--texto);
+}
+
+.btn-sec:hover {
+  border-color: var(--texto-fraco);
+  filter: none;
+}
+
+.card {
+  background: var(--painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-card);
+  box-shadow: var(--sombra-card);
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Inbox: 3 colunas no desktop; a ficha do lead sai antes da conversa quando
+   a tela aperta — responder importa mais que consultar. */
+@media (max-width: 1180px) {
+  .ficha-lead {
+    display: none !important;
+  }
+  .inbox-grade {
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .inbox-grade {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  /* Sem conversa selecionada: mostra só a lista. Com conversa selecionada
+     (classe tem-selecao): mostra só a conversa, cheia a tela. Nunca as duas
+     empilhadas — é isso que cortava os dados na notificação de lead quente. */
+  .inbox-grade > *:nth-child(2) {
+    display: none;
+  }
+  .inbox-grade.tem-selecao > *:nth-child(1) {
+    display: none;
+  }
+  .inbox-grade.tem-selecao > *:nth-child(2) {
+    display: flex;
+  }
+  .inbox-voltar-mobile {
+    display: inline-flex !important;
+  }
+  /* A ficha do lead vira painel dobrável no topo da conversa. Ate 28/08/2026
+     ela era `display:none` no celular: quem abria o aviso de lead quente pelo
+     WhatsApp caia numa tela so de baloes, sem score, tag, origem nem resumo. */
+  .ficha-mobile {
+    display: block !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Chegando pelo aviso, o cabecalho + abas + seletor de numero comiam a
+     primeira dobra inteira antes do lead aparecer. Com conversa aberta no
+     celular, some tudo — a lista continua a um toque no "Voltar". */
+  .inbox-pagina.tem-selecao .inbox-chrome {
+    display: none !important;
+  }
+  .inbox-pagina.tem-selecao .inbox-grade {
+    height: calc(100dvh - 96px) !important;
+  }
+}
+
+
+/* ── Celular: a lateral vira gaveta ────────────────────────────────────────
+   A barra de 216px ocupava 58% de uma tela de 375px. Todo conteudo do CRM
+   nascia espremido numa coluna de ~150px — inclusive a conversa que o aviso
+   de lead quente abre. Some no celular e volta como menu de topo. */
+.topo-mobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .nav-lateral {
+    display: none !important;
+  }
+  .topo-mobile {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 14px;
+    height: 52px;
+    flex-shrink: 0;
+    background: var(--marinho);
+    color: #fff;
+    position: relative;
+    z-index: 20;
+  }
+  .app-main {
+    padding: 12px 14px !important;
+  }
+  .menu-gaveta > summary {
+    cursor: pointer;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+  }
+  .menu-gaveta > summary::-webkit-details-marker {
+    display: none;
+  }
+  /* A gaveta flutua sobre o conteudo: empurrar a tela pra baixo faria a
+     conversa saltar toda vez que o menu abre. */
+  .menu-gaveta > nav {
+    position: absolute;
+    right: 10px;
+    top: 52px;
+    width: min(240px, calc(100vw - 20px));
+    max-height: calc(100dvh - 70px);
+    overflow-y: auto;
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 12px 32px rgba(15, 26, 74, 0.35);
+  }
+  /* Com o topo de 52px + 24px de padding do main, sobra isto pra conversa. */
+  .inbox-pagina.tem-selecao .inbox-grade {
+    height: calc(100dvh - 76px) !important;
+  }
+
+  /* O cabecalho da conversa repetia nome e telefone que a ficha logo acima ja
+     mostra. Sobra a unica linha que ela NAO tem: por qual numero a resposta
+     sai — errar isso manda a mensagem pelo aparelho errado. */
+  .conversa-cabecalho {
+    padding: 6px 14px !important;
+  }
+  .conversa-nome,
+  .conversa-abrir {
+    display: none !important;
+  }
+
+  /* Em 375px sobravam ~130px pra caixa de texto entre os 3 botoes, e o
+     placeholder ficava cortado. A caixa passa a ocupar a linha inteira. */
+  .composer-linha {
+    flex-wrap: wrap;
+  }
+  .composer-caixa {
+    order: -1;
+    flex-basis: 100%;
+    width: 100%;
+  }
+}
+
+/* Painel de Leads: 4 colunas lado a lado no desktop; no celular empilham.
+   Kanban com rolagem lateral num celular esconde 3 das 4 colunas. */
+.leads-kanban {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .leads-kanban {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  .leads-kanban {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+/* ── Lateral azul-marinho ─────────────────────────────────────────────────── */
+.nav-lateral,
+.menu-gaveta > nav {
+  background: linear-gradient(180deg, var(--marinho-2), var(--marinho)) !important;
+  color: #fff;
+  border-right: 0 !important;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+.nav-link[aria-current="page"] {
+  background: var(--marinho-ativo);
+  color: #fff;
+  font-weight: 600;
+}
+.nav-link svg {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+.nav-lateral .btn-sec,
+.menu-gaveta > nav .btn-sec {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.nav-marca {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+/* Cartao de destaque (KPI principal): azul-marinho com texto claro. */
+.card-marinho {
+  background: linear-gradient(160deg, var(--marinho-2), var(--marinho));
+  color: #fff;
+  border: 0;
+  border-radius: var(--raio-card);
+}
+.card-azul {
+  background: linear-gradient(180deg, #f1f5ff, #bfd2f6);
+  border: 0;
+  border-radius: var(--raio-card);
+}
+.pilula {
+  display: inline-flex;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(15, 26, 74, 0.06);
+  color: var(--texto);
+}
+.pilula[aria-pressed="true"] {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(15, 26, 74, 0.15);
+}
+.sobretitulo {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--marinho-2);
+}
+
+@keyframes gaveta-entra {
+  from {
+    transform: translateX(32px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@media (max-width: 720px) {
+  /* No celular a gaveta ocupa a tela toda. */
+  .card[style*="gaveta-entra"] {
+    border-radius: 0 !important;
+  }
+}
+
+/* Telas de trabalho (Inbox): o título divide a linha com busca e abas, então
+   fica no tamanho de cabeçalho em vez do tamanho de capa do Painel. */
+.app-main .inbox-pagina h1 {
+  font-size: 30px !important;
+  letter-spacing: -0.03em;
+}

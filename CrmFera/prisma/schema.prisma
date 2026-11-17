@@ -1,0 +1,449 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  // Corte de validade das sessoes. A sessao no dispositivo nunca expira sozinha;
+  // mexer aqui (trocar senha, "sair de todos") invalida TODAS de uma vez — e o
+  // que torna a sessao perpetua segura: da pra revogar mesmo sem lista de tokens.
+  sessionEpoch DateTime @default(now())
+  createdAt    DateTime @default(now())
+}
+
+model Contact {
+  id             String    @id @default(cuid())
+  name           String
+  email          String?
+  phone          String?   // formato 55DDDNUMERO, so digitos
+  company        String?
+  lifecycleStage String    @default("novo") // novo | frio | conversando | call_marcada | proposta | cliente | perdido | futuro
+  origem         String    @default("outro") // base | indicacao | anuncio | organico | funil:<slug> | outro
+  tags           Json      @default("[]")
+  customFields   Json      @default("{}")
+  totalRevenue   Int       @default(0) // CENTAVOS
+  purchaseCount  Int       @default(0)
+  lastPurchaseAt DateTime?
+  lastActivityAt DateTime? // atualizar SO quando nasce TimelineEvent real
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  timelineEvents   TimelineEvent[]
+  messages         WhatsappMessage[]
+  purchases        Purchase[]
+  listMembers      ContactListMember[]
+  emailSends       EmailSend[]
+  broadcastTargets BroadcastTarget[]
+  agentActions     AgentAction[]
+  deals            Deal[]
+  identities       ContactIdentity[]
+  conversa         ConversationState?
+
+  @@index([email])
+  @@index([phone])
+  @@index([lifecycleStage])
+}
+
+model TimelineEvent {
+  id        String   @id @default(cuid())
+  contactId String
+  contact   Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  eventType String   // whatsapp_message | email_sent | email_open | purchase | refund | stage_change | note | form_submit | broadcast | acao_agente | call
+  channel   String?  // whatsapp | email | sistema | agente
+  metadata  Json     @default("{}")
+  timestamp DateTime @default(now())
+
+  @@index([contactId, timestamp])
+  @@index([eventType])
+}
+
+model Purchase {
+  id         String   @id @default(cuid())
+  contactId  String
+  contact    Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  product    String
+  valueCents Int
+  origem     String?
+  externalId String?  @unique // id do checkout, evita duplicar
+  createdAt  DateTime @default(now())
+}
+
+model ContactList {
+  id        String   @id @default(cuid())
+  name      String
+  source    String?  // funil:<slug> | importacao | manual
+  createdAt DateTime @default(now())
+
+  members ContactListMember[]
+}
+
+model ContactListMember {
+  id        String      @id @default(cuid())
+  listId    String
+  list      ContactList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  contactId String
+  contact   Contact     @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  addedAt   DateTime    @default(now())
+
+  @@unique([listId, contactId])
+}
+
+model WhatsappInstance {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  provider        String   @default("waha") // waha | cloud_api | evolution
+  phoneNumber     String?
+  evolutionApiUrl String?  // reaproveitado como baseUrl do provider ativo
+  evolutionApiKey String?  // reaproveitado como apiKey do provider ativo
+  instanceName    String?  // nome da sessao no WAHA
+  status          String   @default("desconectado") // desconectado | conectando | conectado
+  isDefault       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model WhatsappMessage {
+  id         String   @id @default(cuid())
+  contactId  String?
+  contact    Contact? @relation(fields: [contactId], references: [id])
+  instanceId String?
+  fromNumber String
+  toNumber   String
+  body       String
+  type       String   @default("text") // text | image | audio | video | document
+  direction  String   // inbound | outbound
+  status     String   @default("sent") // sent | delivered | read | failed
+  externalId String?  @unique
+  metadata   Json     @default("{}")
+  timestamp  DateTime @default(now())
+
+  @@index([contactId, timestamp])
+  @@index([fromNumber])
+}
+
+model QuickReply {
+  id       String  @id @default(cuid())
+  title    String
+  body     String
+  shortcut String? @unique // ex.: /oi
+}
+
+model Group {
+  id         String   @id @default(cuid())
+  name       String
+  externalId String   @unique // id do grupo no provider (@g.us)
+  ativo      Boolean  @default(true)
+  // fonte do grupo: waha (sincronizado pela tela) | wagm (Avisos do FERA)
+  fonte      String   @default("waha")
+  tamanho    Int      @default(0)
+  ehAdmin    Boolean  @default(false)
+  fotoUrl    String?
+  syncAt     DateTime?
+  createdAt  DateTime @default(now())
+
+  entregas EntregaGrupo[]
+}
+
+// Campanha de grupo do WAGM (/opt/wagm/app/app.db). O WAGM continua sendo o
+// DONO do disparo — regras anti-ban, jitter, rotação de variantes. O CRM só
+// espelha pra você enxergar tudo num lugar só, sem abrir SSH.
+model CampanhaGrupo {
+  id         String   @id @default(cuid())
+  jobId      Int      @unique // scheduled_jobs.id no WAGM
+  campanha   String?
+  tipo       String   @default("send_text")
+  alvo       String   @default("all") // all | lista de jids
+  texto      String
+  agendadoPara DateTime?
+  status     String   @default("pending") // pending | done | error | canceled
+  tentativas Int      @default(0)
+  ultimoErro String?
+  criadoEm   DateTime @default(now())
+  syncAt     DateTime @default(now())
+
+  entregas EntregaGrupo[]
+
+  @@index([status])
+  @@index([agendadoPara])
+}
+
+model EntregaGrupo {
+  id          String        @id @default(cuid())
+  externoId   Int           @unique // job_group_result.id no WAGM
+  campanhaId  String
+  campanha    CampanhaGrupo @relation(fields: [campanhaId], references: [id], onDelete: Cascade)
+  groupId     String?
+  grupo       Group?        @relation(fields: [groupId], references: [id])
+  jid         String
+  status      String // delivered | skipped | error
+  detalhe     String?
+  concluidoEm DateTime?
+
+  @@index([campanhaId])
+  @@index([status])
+}
+
+// Volume enviado por dia (cap anti-ban do WAGM).
+model EnvioDiario {
+  dia      String @id // AAAA-MM-DD
+  enviados Int    @default(0)
+}
+
+model Broadcast {
+  id           String    @id @default(cuid())
+  titulo       String
+  canal        String    // whatsapp_1x1 | whatsapp_grupo | email
+  conteudo     String    // texto; se email, HTML
+  mediaUrl     String?
+  listId       String?   // alvo para 1x1/email
+  groupIds     Json      @default("[]") // alvo para grupos
+  agendadoPara DateTime?
+  status       String    @default("rascunho") // rascunho | agendado | enviando | concluido | erro
+  enviados     Int       @default(0)
+  falhas       Int       @default(0)
+  createdAt    DateTime  @default(now())
+
+  targets BroadcastTarget[]
+}
+
+model BroadcastTarget {
+  id          String    @id @default(cuid())
+  broadcastId String
+  broadcast   Broadcast @relation(fields: [broadcastId], references: [id], onDelete: Cascade)
+  contactId   String
+  contact     Contact   @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  status      String    @default("pendente") // pendente | enviado | falha
+  sentAt      DateTime?
+  error       String?
+
+  @@unique([broadcastId, contactId])
+}
+
+model EmailTemplate {
+  id        String   @id @default(cuid())
+  name      String
+  subject   String
+  html      String
+  createdAt DateTime @default(now())
+}
+
+model EmailSend {
+  id        String   @id @default(cuid())
+  contactId String
+  contact   Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  subject   String
+  status    String   @default("enviado") // enviado | falha
+  createdAt DateTime @default(now())
+}
+
+model Pipeline {
+  id     String          @id @default(cuid())
+  name   String
+  stages PipelineStage[]
+}
+
+model PipelineStage {
+  id         String   @id @default(cuid())
+  pipelineId String
+  pipeline   Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  name       String
+  ordem      Int
+  deals      Deal[]
+}
+
+model Deal {
+  id         String        @id @default(cuid())
+  stageId    String
+  stage      PipelineStage @relation(fields: [stageId], references: [id])
+  contactId  String
+  contact    Contact       @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  titulo     String
+  valueCents Int           @default(0)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model Agent {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  canal           String   @default("whatsapp") // whatsapp | email | sistema
+  prompt          String   // espelho da versao ativa (leitura); a fonte e AgentPromptVersion
+  model           String   @default("gemini-2.5-flash") // gemini-2.5-flash | claude-sonnet-5
+  modo            String   @default("sugere") // sugere | autonomo
+  ativo           Boolean  @default(false)
+  apiToken        String   @unique @default(cuid())
+  activeVersionId String?
+  // Agenda do agente: "diaria:HH:MM" ou vazio (so roda quando chamam a API).
+  // E o que transforma o agente de endpoint parado em funcionario que trabalha.
+  agenda          String?
+  // Que fila ele varre quando a agenda dispara: followup | novos | sem_resposta
+  alvo            String?
+  ultimaRodada    DateTime?
+  // GATILHO (playbook dos agentes, 2026-08-22): quem este agente atende quando
+  // chega mensagem 1:1. Casa por tag (prefixo: "inscrito-evento-" pega qualquer
+  // ciclo), estagio ou origem do contato. Vazio = nao e escolhido pelo seletor
+  // (so o `recepcao` roda sem gatilho, como porta do anuncio).
+  gatilhoTag      String?
+  gatilhoEstagio  String?
+  gatilhoOrigem   String?
+  // Quando dois agentes casam, vence a maior prioridade; empate = tag mais recente.
+  prioridade      Int      @default(0)
+  // Intervalo entre as partes de uma resposta dividida por [QUEBRA].
+  delayQuebraMs   Int      @default(2500)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  actions        AgentAction[]
+  promptVersions AgentPromptVersion[]
+}
+
+// DESVIO AUTORIZADO (Lei 4): o prompt e editavel pela tela, mas cada save vira uma versao
+// IMUTAVEL. O hash de cache de geracao usa o id da versao, entao o determinismo do crm-leads
+// (PROMPT_VERSION no hash) fica preservado.
+model AgentPromptVersion {
+  id        String   @id @default(cuid())
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  versao    Int
+  prompt    String
+  autor     String   // email do humano que salvou
+  createdAt DateTime @default(now())
+
+  @@unique([agentId, versao])
+}
+
+model AgentAction {
+  id          String    @id @default(cuid())
+  agentId     String
+  agent       Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  contactId   String?
+  contact     Contact?  @relation(fields: [contactId], references: [id])
+  acao        String    // enviar_mensagem | mover_estagio | adicionar_tag | registrar_nota
+  payload     Json      @default("{}")
+  status      String    @default("proposta") // proposta | aprovada | recusada | executada | erro
+  aprovadoPor String?
+  createdAt   DateTime  @default(now())
+  resolvedAt  DateTime?
+
+  @@index([status])
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+model AuditEvent {
+  id        String   @id @default(cuid())
+  actor     String   // email do humano ou slug do agente
+  action    String
+  detail    String?
+  createdAt DateTime @default(now())
+}
+
+// DESVIO AUTORIZADO: identidade de contato. O crm-leads agrega 6 fontes externas e a mesma
+// pessoa aparece em varias. A chave canonica e o telefone normalizado (fallback e-mail);
+// cada linha de origem vira uma identidade apontando pro mesmo Contact.
+model ContactIdentity {
+  id         String   @id @default(cuid())
+  contactId  String
+  contact    Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  fonte      String   // facebook_leads | zernio | netlify_forms | livro | diagnostico | manual | csv
+  externalId String
+  payload    Json     @default("{}")
+  createdAt  DateTime @default(now())
+
+  @@unique([fonte, externalId])
+  @@index([contactId])
+}
+
+// Estado da conversa no Inbox (kanban de atendimento). Fica FORA de Contact
+// porque e estado de ATENDIMENTO, nao atributo da pessoa — e porque excluir
+// uma conversa nunca pode significar apagar o contato.
+model ConversationState {
+  id        String   @id @default(cuid())
+  contactId String   @unique
+  contact   Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  estado    String   @default("andamento") // andamento | destacada | arquivada | excluida
+  ator      String?
+  updatedAt DateTime @updatedAt
+
+  @@index([estado])
+}
+
+// Custo de anuncio por origem/dia. Sem isso o CRM sabe a receita mas nao sabe
+// o preco dela — e CPA no olho faz desligar campanha boa e escalar campanha ruim.
+model CustoAds {
+  id         String   @id @default(cuid())
+  data       DateTime // dia do gasto (00:00 local)
+  origem     String   // casa com Contact.origem / Purchase.origem
+  campanha   String?
+  custoCents Int
+  impressoes Int      @default(0)
+  cliques    Int      @default(0)
+  fonte      String   @default("manual") // manual | meta | windsor | csv
+  externalId String?  @unique // dedup de importacao
+
+  @@unique([data, origem, campanha])
+  @@index([data])
+  @@index([origem])
+}
+
+// Notificacao enviada (pra nao repetir a mesma no mesmo dia).
+model Notificacao {
+  id        String   @id @default(cuid())
+  tipo      String   // lead_quente | resposta | venda | erro
+  chave     String   // contactId ou id do fato
+  detalhe   String?
+  enviadaEm DateTime @default(now())
+
+  @@unique([tipo, chave])
+  @@index([enviadaEm])
+}
+
+// Ficha do lead aberta por link curto — o que o dono recebe no WhatsApp
+// quando o numero dele fala com um lead novo. Guarda um SNAPSHOT do que o lead
+// respondeu no momento do aviso: a fonte original (blob da Netlify, quiz,
+// formulario) pode mudar ou sumir, e a ficha precisa continuar contando o que
+// ele disse naquele dia. Expira em 30 dias — link de WhatsApp fica no historico
+// pra sempre, e ficha de lead e dado pessoal.
+model Ficha {
+  code      String   @id // codigo curto do link (/f/<code>)
+  contactId String?
+  dados     Json // snapshot do lead como chegou de quem criou a ficha
+  criadaEm  DateTime @default(now())
+  expiraEm  DateTime
+  aberturas Int      @default(0)
+
+  @@index([expiraEm])
+}
+
+// Aba Roteiros (13/11/2026): roteiros de vídeo/Reel que o dono precisa gravar, por conta.
+// `beats` é JSON em texto (lista de {tempo, tela, fala}) — texto evita o gotcha 13 do default Json.
+model Roteiro {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  conta     String   // id da conta (src/lib/roteiros.ts CONTAS)
+  ordem     Int      @default(0)
+  titulo    String
+  headline  String?
+  palavra   String?
+  mecanica  String?
+  origem    String?
+  beats     String   @default("[]")
+  pendencias String?
+  status    String   @default("a_gravar") // a_gravar | gravado | publicado
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([conta, status])
+}

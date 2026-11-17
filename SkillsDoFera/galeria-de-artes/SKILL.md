@@ -17,7 +17,9 @@ Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de 
    dor, prova/bastidor, educativo, opinião/oferta). Sem tema dado, use temas variados.
 3. **Anúncio:** a oferta: produto, para quem, promessa, prazo, link de destino. Dado que faltar vira pergunta ou
    `[FONTE OMISSA: ...]`. Nunca inventado.
-4. **Formatos:** por padrão todos os do modo (`references/modelos.md` ou `references/modelos-anuncio.md`). Aceita subconjunto.
+4. **Fotos do dono:** se existir `output/ensaio-ia/*/`, usar as fotos aprovadas do ensaio mais recente. Se não
+   existir e algum formato precisar de rosto, oferecer o `/ensaio-ia` ANTES (fotos dele com IA, a partir de fotos reais).
+5. **Formatos:** por padrão todos os do modo (`references/modelos.md` ou `references/modelos-anuncio.md`). Aceita subconjunto.
 
 ## Como rodar
 

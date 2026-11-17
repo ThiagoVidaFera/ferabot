@@ -179,8 +179,19 @@ Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skil
 | `/squad-anuncios-estaticos` | lote de anúncios estáticos de feed |
 | `/mix-estaticos` | variações de estáticos a partir de uma ideia |
 | `/anuncios-de-ouro` | kit de anúncio multiformato com fotos reais |
+| `/editar-reel` | edita o reel que ele gravou: corta silêncio e erro, legenda grande no centro, capa 1080x1920, MP4 1080x1920. Nunca inventa fala |
+| `/webinar-pdf` | webinar digital em PDF, 20 a 30 slides 1280x720 lidos no celular, termina convidando para a reunião de 20 minutos |
+| `/crm-fera` | o CRM completo com WhatsApp (WAHA): inbox, contatos, funil, reuniões, robôs que qualificam, confirmam e lembram, follow-up, disparos, vendas. Roda no computador (Docker) ou numa VPS |
+| `/ensaio-ia` | ensaio de fotos do PRÓPRIO dono com IA, a partir de 3 a 6 fotos reais, para post, anúncio e página. Alimenta a `/galeria-de-artes` |
+| `/agenda-google` | conecta o Google Agenda, cria as agendas do negócio, marca reunião com Meet e mostra horário livre |
+| `/canal-youtube` | arruma o canal: @, nome, descrição, palavras-chave, banner 2560x1440, foto, playlists, trailer de 60s e vídeos antigos com o link de agendamento |
 
 Os quatro de anúncio são chamados pelo `/conteudo-e-anuncios`; o cliente também pode digitar direto.
+Os três últimos (`/editar-reel`, `/webinar-pdf`, `/canal-youtube`) são chamados pelo `/roteiros-e-oratoria`.
+
+**Agendar post orgânico:** com `POSTFORME_API_KEY` no `.env`, carrossel, story, feed e reel são
+agendados por `python ScriptsFera/publicar.py` (plano primeiro, OK do dono, depois `--enviar`).
+Sem a chave, a entrega continua manual.
 
 **WhatsApp e DM em massa são captação.** O disparo vai só para quem já interagiu, com ritmo seguro.
 **Exceção única, por decisão do Thiago:** o `/agente-de-leads` conversa com o lead que agendou

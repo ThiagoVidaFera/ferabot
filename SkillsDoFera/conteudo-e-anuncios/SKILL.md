@@ -26,6 +26,7 @@ Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de 
 | Kit de anúncio simples, sem as skills acima | esta skill, seção Kit abaixo |
 | Imagem com IA | seção Imagens abaixo |
 | Subir campanha no Meta | skill `meta-ads-fera` (BYOK) |
+| Agendar post orgânico (feed, carrossel, story, reel) | seção Agendar abaixo (BYOK Post for Me) |
 
 A voz da conversa é sempre a do FERA. Copy aprovada ANTES de renderizar qualquer arte.
 
@@ -81,10 +82,37 @@ Regras invioláveis:
   existe anúncio, existe imagem órfã.
 - Sem chave: entregar o kit pronto + passo a passo de subir manual no Gerenciador de Anúncios.
 
+## Agendar post orgânico (BYOK, Post for Me do CLIENTE)
+
+Vale para peça orgânica: feed, carrossel, story e reel. Anúncio pago não passa por aqui, vai pelo
+`meta-ads-fera`.
+
+Conferir se `POSTFORME_API_KEY` existe no `.env` da raiz.
+
+**Sem a chave:** entrega manual como hoje. Arquivos na ordem, legenda em `legenda.txt` na pasta, e
+data e hora de publicar cobradas na mesma resposta. Para agendar daqui pra frente:
+`python SetupFera/setup_chaves.py` (guia no `API_SETUP.md`, seção 6).
+
+**Com a chave:**
+
+1. Perguntar data e hora de cada peça (horário de Brasília). Sem data, não agenda.
+2. Rodar o plano de cada peça, que não envia nada:
+   ```bash
+   python ScriptsFera/publicar.py agendar <pasta-ou-arquivo> --formato feed|carrossel|story|reel --quando "AAAA-MM-DD HH:MM" [--legenda legenda.txt]
+   ```
+3. Mostrar ao dono UMA lista com todas as peças: data e hora, formato, conta (@), arquivos e legenda.
+4. Pedir OK explícito na lista inteira. Sem OK, nada sobe.
+5. Com OK, rodar cada comando com `--enviar` e guardar os ids.
+6. Conferir com `python ScriptsFera/publicar.py listar`. Errou: `python ScriptsFera/publicar.py cancelar <id>`.
+
+Regras: reel só com capa dedicada definida antes. Mais de uma conta de Instagram conectada:
+`python ScriptsFera/publicar.py contas` e `--conta <id>`. O status `connected` não prova que a
+conexão com a Meta está viva: no primeiro agendamento, conferir no painel do Post for Me se saiu.
+
 ## Entrega
 
 1. Registrar em silêncio:
    `python ScriptsFera/metas-api.py entrega add "conteudo-e-anuncios" "<o que foi>" --link "output/conteudo-e-anuncios/<pasta>/"`
 2. Caminho absoluto completo da pasta.
 3. Próximo passo DELE: arte pronta que não foi publicada não existe. Data e hora de publicar, na
-   mesma resposta.
+   mesma resposta. Com a chave do Post for Me, essa data já vira agendamento (seção Agendar).

@@ -18,6 +18,13 @@ Na dúvida: mentora. Empurrar fluxo sem ele pedir é o erro mais caro do sistema
 | anúncio, criativo, story ad, anúncio estático, carrossel, story, post do feed, subir campanha, arte | Conteúdo & Anúncios | `/conteudo-e-anuncios` |
 | monta meu sistema de captação inteiro, prévia do perfil, kit de feed, onboarding de um cliente meu | Squad Onboarding | `/squad-onboarding` |
 | roteiro, vídeo, reel, YouTube, thumbnail, título, slides, apresentação, aula | Roteiros & Oratória | `/roteiros-e-oratoria` |
+| gravei o reel, edita meu vídeo, corta e legenda | Roteiros & Oratória | `/editar-reel` |
+| arrumar o canal do YouTube, banner, descrição do canal, playlists, trailer, vídeos antigos | Roteiros & Oratória | `/canal-youtube` |
+| webinar em PDF, aula em PDF, material que vende a reunião | Roteiros & Oratória | `/webinar-pdf` |
+| CRM, instalar ou abrir o CRM, conectar WhatsApp no CRM, robôs, inbox, lembrete de reunião | CRM FERA | `/crm-fera` |
+| ensaio de fotos, fotos minhas com IA, foto profissional pro post | Conteúdo & Anúncios | `/ensaio-ia` |
+| agenda, Google Agenda, marcar reunião, organizar a semana, horário livre | Copiloto de Gestão | `/agenda-google` |
+| agendar post, programar carrossel, story ou reel pra sair sozinho no horário | Conteúdo & Anúncios | `/conteudo-e-anuncios` (seção Agendar) |
 | página de agendamento, reunião de 20 minutos, funil de reunião, reunião fantasma | Páginas & Quiz | `/funil-reuniao-fantasma` |
 | agente que atende o lead, qualifica, lembrete da reunião | CRM de Leads | `/agente-de-leads` |
 | proposta em página pro lead depois da reunião, mensagem do link, follow-up da proposta | Propostas | `/proposta-pagina` |

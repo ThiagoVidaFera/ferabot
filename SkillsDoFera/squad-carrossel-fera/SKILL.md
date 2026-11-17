@@ -1,6 +1,6 @@
 ---
 name: squad-carrossel-fera
-description: Gera carrosseis de feed para Instagram personalizados com o nicho, produto e paleta do mentor. 10 slides por leva, copy aprovada antes de renderizar. Publicação manual pelo mentor via Meta app.
+description: Gera carrosseis de feed para Instagram personalizados com o nicho, produto e paleta do mentor. 10 slides por leva, copy aprovada antes de renderizar. Agenda pelo Post for Me quando a chave existe, senão entrega para publicar à mão.
 ---
 
 # Squad Carrossel Fera
@@ -66,7 +66,7 @@ Gerar a estrutura completa dos slides com base no `perfil.json`:
 ### Slide 10 — CTA
 - Frase conversacional com keyword de identificação
 - Formato: "[verbo imperativo] [ação concreta] [benefício imediato]"
-- Se capturar lead: incluir keyword pra DM automation (ver /zernio-fera)
+- Se capturar lead: incluir keyword para a automação comentário → DM do `/crm-de-leads`
 
 ### Apresentar ao fera para aprovação antes de continuar.
 
@@ -140,7 +140,35 @@ Após renderizar:
 2. Abrir a pasta automaticamente se possível
 3. Instrução de publicação:
    > "Para publicar: abra o Meta Business Suite ou o app do Instagram. Crie um novo post, selecione os 10 PNGs na ordem (slide-01 → slide-10) e publique como carrossel. A legenda vai abaixo."
-4. Gerar legenda pra copiar e colar (3-5 linhas + emojis + hashtags do nicho)
+4. Gerar legenda pra copiar e colar (3-5 linhas + emojis + hashtags do nicho) e salvar em
+   `output/carrossel/YYYY-MM-DD/legenda.txt` (o agendador lê esse arquivo)
+5. Seguir para a seção Agendar abaixo
+
+## Agendar
+
+Conferir se `POSTFORME_API_KEY` existe no `.env` da raiz.
+
+**Sem a chave:** entrega manual como no passo [05]. Os 10 PNGs na ordem, legenda pronta, e a
+cobrança de data e hora de publicar na mesma resposta. Quem quiser agendar daqui pra frente roda
+`python SetupFera/setup_chaves.py` (guia no `API_SETUP.md`, seção 6).
+
+**Com a chave:**
+
+1. Perguntar data e hora de publicar (horário de Brasília). Sem data, não agenda.
+2. Rodar o plano, que não envia nada:
+   ```bash
+   python ScriptsFera/publicar.py agendar output/carrossel/YYYY-MM-DD/ --formato carrossel --quando "AAAA-MM-DD HH:MM"
+   ```
+   Os slides entram na ordem do nome (slide-01, slide-02 ... slide-10) e a legenda vem do
+   `legenda.txt` da pasta.
+3. Mostrar ao dono, em lista: data e hora, formato, conta (@), ordem dos slides e a legenda inteira.
+4. Pedir OK explícito. Sem OK, nada sobe.
+5. Com OK, rodar o mesmo comando com `--enviar`. Guardar o id que voltar.
+6. Conferir com `python ScriptsFera/publicar.py listar`. Errou: `python ScriptsFera/publicar.py cancelar <id>`.
+
+Mais de uma conta de Instagram conectada: listar com `python ScriptsFera/publicar.py contas` e
+passar `--conta <id>`. O status `connected` não prova que a conexão com a Meta está viva: no
+primeiro agendamento, conferir no painel do Post for Me se o post saiu.
 
 ## Regras de qualidade (QA antes de entregar)
 
@@ -155,4 +183,4 @@ Após renderizar:
 ## Exemplo de comunicação
 
 Após entregar:
-> "Fera, carrossel pronto! 10 slides na pasta. Copia os arquivos pro celular e sobe pelo app. Quer que eu gere os stories de divulgação desse carrossel também?"
+> "Fera, carrossel pronto! 10 slides na pasta. Me diz o dia e a hora que ele sai e eu deixo agendado (ou, sem a chave do Post for Me, copia pro celular e sobe pelo app). Quer que eu gere os stories de divulgação desse carrossel também?"

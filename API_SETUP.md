@@ -109,6 +109,22 @@ Vídeos sobem como **não listado** por padrão: você revisa no YouTube Studio 
 
 ---
 
+## 4b. Google Agenda (marcar reunião e organizar a semana) — 10 minutos
+
+Usa o MESMO projeto do Google Cloud do YouTube (seção 4). Se ainda não fez a seção 4, faça os passos 1, 3 e 4 dela.
+
+1. No projeto, **APIs e serviços → Biblioteca** → ative **Google Calendar API**.
+2. Se você não usa o YouTube, grave o Client ID e o Secret como `GCAL_CLIENT_ID` e `GCAL_CLIENT_SECRET`
+   (com o YouTube configurado, a agenda reaproveita `YT_CLIENT_ID` e `YT_CLIENT_SECRET`).
+3. Peça no Claude Code: *"gera o link de autorização da agenda"*. Ele roda `python ScriptsFera/agenda.py link`.
+4. Abra o link, entre com a conta Google da sua agenda, autorize e copie o `code=...` da página que abrir
+   (ela dá erro de "não foi possível acessar", é normal: o code está na barra de endereço).
+5. Cole o code no chat. O Claude roda `agenda.py token <code>` e grava `GCAL_REFRESH_TOKEN` no `.env`.
+
+Teste: *"lista minhas agendas"*. Nada é criado sem você aprovar o plano antes.
+
+---
+
 ## 5. Instagram comentário → DM (captação) — 20 minutos
 
 Pré-requisito: Instagram **profissional** conectado a uma **Página do Facebook**.
@@ -143,6 +159,10 @@ As cinco de cima resolvem 80% do dia. As de baixo entram quando você bater num 
 3. Conecte suas contas (Instagram, TikTok).
 
 Publica feed, carrossel, story e TikTok num comando só.
+
+No Ferabot, quem usa a chave é o `ScriptsFera/publicar.py`. Para conferir se ela entrou:
+`python ScriptsFera/publicar.py contas` (lista as contas conectadas). Agendar sempre mostra o plano
+primeiro e só envia com `--enviar`, depois do seu OK.
 
 **Três armadilhas que já derrubaram entrega:**
 - O status `connected` **não prova** que a conexão com a Meta está viva. Testar antes de agendar.

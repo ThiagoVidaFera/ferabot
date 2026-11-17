@@ -1,0 +1,71 @@
+# CRM FERA + WhatsApp (WAHA) + relógio dos robôs.
+# Sobe com: docker compose up -d --build   (o FERABOT faz isso por você: python ScriptsFera/crm.py subir)
+# Variáveis em .env (gerado por ScriptsFera/crm.py a partir do .env.exemplo).
+
+services:
+  crm:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: "file:/opt/crm/data/crm.db"
+      NEGOCIO_JSON: "/opt/crm/negocio.json"
+      MIDIA_DIR: "/opt/crm/data/midia"
+      WAHA_URL: "http://waha:3000"
+      TZ: "America/Sao_Paulo"
+    volumes:
+      - crm-dados:/opt/crm/data
+      - ./negocio.json:/opt/crm/negocio.json:ro
+    ports:
+      - "${CRM_PORTA:-3900}:3900"
+    depends_on:
+      - waha
+    networks:
+      rede:
+        # o WAHA só aceita webhook com hostname que tem ponto: por isso o apelido
+        aliases:
+          - crm.fera.local
+
+  waha:
+    image: devlikeapro/waha:latest
+    restart: unless-stopped
+    environment:
+      WHATSAPP_DEFAULT_ENGINE: "NOWEB"
+      WHATSAPP_API_KEY: "${WAHA_APIKEY}"
+      WAHA_PRINT_QR: "False"
+      TZ: "America/Sao_Paulo"
+    volumes:
+      - waha-sessoes:/app/.sessions
+    networks:
+      - rede
+
+  # O "relógio": chama as filas dos robôs (follow-up, lembretes, disparos, agentes).
+  relogio:
+    image: curlimages/curl:8.10.1
+    restart: unless-stopped
+    depends_on:
+      - crm
+    environment:
+      CRON_FILA_TOKEN: "${CRON_FILA_TOKEN:-}"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        n=0
+        while true; do
+          curl -s -m 280 -H "x-cron-token: $$CRON_FILA_TOKEN" -X POST http://crm.fera.local:3900/api/cron/followup > /dev/null
+          curl -s -m 280 -H "x-cron-token: $$CRON_FILA_TOKEN" -X POST http://crm.fera.local:3900/api/cron/disparos > /dev/null
+          if [ $$((n % 5)) -eq 0 ]; then curl -s -m 280 -H "x-cron-token: $$CRON_FILA_TOKEN" -X POST http://crm.fera.local:3900/api/cron/agentes > /dev/null; fi
+          # 10:30 UTC = 07:30 em Brasília (a imagem do curl não tem fuso)
+          if [ "$$(date -u +%H:%M)" = "10:30" ]; then curl -s -m 300 -H "x-cron-token: $$CRON_FILA_TOKEN" http://crm.fera.local:3900/api/cron/fila-sem-resposta > /dev/null; fi
+          n=$$((n + 1))
+          sleep 60
+        done
+    networks:
+      - rede
+
+volumes:
+  crm-dados:
+  waha-sessoes:
+
+networks:
+  rede:

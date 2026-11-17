@@ -1,0 +1,3 @@
+# scripts que rodam dentro do container Linux: sempre LF, senão "/bin/sh^M: not found"
+*.sh text eol=lf
+Dockerfile text eol=lf

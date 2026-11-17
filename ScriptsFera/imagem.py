@@ -5,6 +5,10 @@ Chave: GEMINI_API_KEY no .env da raiz (grátis em aistudio.google.com — ver AP
 
 Uso:
   python ScriptsFera/imagem.py "cinematic photo of ..." --out saida.png --ratio 4:5
+  python ScriptsFera/imagem.py "same person, ..." --ref foto1.jpg --ref foto2.jpg --out ensaio-01.png --ratio 4:5
+
+Com --ref (até 3 fotos REAIS do dono), o modelo mantém o rosto da pessoa: é assim que sai o ensaio.
+Foto de outra pessoa sem autorização dela: proibido.
 """
 from __future__ import annotations
 
@@ -30,7 +34,25 @@ RATIOS = ("1:1", "4:5", "9:16", "16:9", "3:4", "4:3")
 MODELO_PADRAO = "gemini-2.5-flash-image"
 
 
-def gerar(prompt: str, destino: Path, ratio: str) -> None:
+MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp"}
+MAX_REFS = 3
+
+
+def partes_de_referencia(refs: list[str]) -> list[dict]:
+    """Fotos de referência viram inlineData (antes do texto, como pede a API)."""
+    partes = []
+    for ref in refs[:MAX_REFS]:
+        caminho = Path(ref)
+        mime = MIME.get(caminho.suffix.lower())
+        if not caminho.is_file() or not mime:
+            print(f"[ERRO] Foto de referência inválida: {ref} (use .jpg, .png ou .webp)", file=sys.stderr)
+            sys.exit(1)
+        dados = base64.b64encode(caminho.read_bytes()).decode("ascii")
+        partes.append({"inlineData": {"mimeType": mime, "data": dados}})
+    return partes
+
+
+def gerar(prompt: str, destino: Path, ratio: str, refs: list[str] | None = None) -> None:
     carregar_env()
     chave = os.environ.get("GEMINI_API_KEY", "")
     if not chave:
@@ -43,7 +65,7 @@ def gerar(prompt: str, destino: Path, ratio: str) -> None:
     url = (f"https://generativelanguage.googleapis.com/v1beta/models/"
            f"{modelo}:generateContent?key={chave}")
     corpo = {
-        "contents": [{"parts": [{"text": prompt}]}],
+        "contents": [{"parts": [*partes_de_referencia(refs or []), {"text": prompt}]}],
         "generationConfig": {
             "responseModalities": ["IMAGE"],
             "imageConfig": {"aspectRatio": ratio},
@@ -95,8 +117,10 @@ def main() -> None:
     parser.add_argument("prompt", help="descrição da imagem, em inglês, detalhada")
     parser.add_argument("--out", default="imagem.png")
     parser.add_argument("--ratio", default="1:1", choices=RATIOS)
+    parser.add_argument("--ref", action="append", default=[],
+                        help=f"foto real de referência (repita até {MAX_REFS} vezes) para manter o rosto")
     args = parser.parse_args()
-    gerar(args.prompt, Path(args.out), args.ratio)
+    gerar(args.prompt, Path(args.out), args.ratio, args.ref)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+# nunca vai pra imagem: dependências locais, banco, segredos e a identidade (o compose monta)
+node_modules
+.next
+data
+.env
+.env.*
+negocio.json
+*.db
+*.db-*
+*.log
+scripts/testes/*.db

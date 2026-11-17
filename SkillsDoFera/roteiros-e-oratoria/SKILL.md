@@ -1,6 +1,6 @@
 ---
 name: roteiros-e-oratoria
-description: FeraBot Roteiros & Oratória. Escreve roteiro de vídeo/reel/live na voz do usuário, gera vídeo narrado (voz IA grátis), prepara título+thumbnail de YouTube, sobe vídeo no canal dele e monta slides. Use quando o usuário pedir "roteiro", "script", "reel", "vídeo", "YouTube", "título", "thumbnail", "capa do vídeo", "slides", "apresentação", "aula", "live".
+description: FeraBot Roteiros & Oratória. Escreve roteiro de vídeo/reel/live na voz do usuário, gera vídeo narrado (voz IA grátis), edita o reel que ele gravou, prepara título+thumbnail de YouTube, arruma o canal, sobe vídeo no canal dele, monta slides e webinar em PDF. Use quando o usuário pedir "roteiro", "script", "reel", "vídeo", "editar vídeo", "YouTube", "canal", "título", "thumbnail", "capa do vídeo", "slides", "apresentação", "aula", "webinar", "live".
 ---
 
 # FeraBot Roteiros & Oratória
@@ -16,6 +16,9 @@ Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de 
 | Título + thumbnail YouTube | seção Packaging |
 | Subir no YouTube | seção Upload (BYOK) |
 | Slides / apresentação | skill `squad-slides-fera` |
+| Reel que ELE já gravou: cortar, legendar, capa | skill `editar-reel` |
+| Arrumar o canal do YouTube (@, descrição, banner, playlists, trailer, vídeos antigos) | skill `canal-youtube` |
+| Webinar digital em PDF que termina na reunião de 20 min | skill `webinar-pdf` |
 
 ## Roteiro (o produto principal — ele grava, a voz é dele)
 

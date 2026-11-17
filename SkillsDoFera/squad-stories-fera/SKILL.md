@@ -56,7 +56,7 @@ Gerar copy personalizada com base no `perfil.json`:
 ### Camada 5 — CTA (1 linha com keyword)
 - Ação específica com keyword pra DM automation
 - Formato: "[verbo] [keyword] no Direct"
-- Keyword deve ser alinhada com /zernio-fera
+- Keyword deve ser a mesma configurada na automação de DM por palavra-chave do `/crm-de-leads`
 
 **Apresentar ao fera para aprovação antes de continuar.**
 
@@ -141,8 +141,34 @@ with sync_playwright() as p:
 ## [05] Entrega
 
 1. "Fera, o story está pronto em `output/stories/YYYY-MM-DD/`"
-2. Instrução: "Salva o PNG no celular e publica direto do app do Instagram."
-3. Se tiver keyword de DM: "Lembra de ativar a automação no /zernio-fera antes de publicar."
+2. Seguir para a seção Agendar abaixo.
+3. Se tiver keyword de DM: "Lembra de ativar a automação de DM do /crm-de-leads com a palavra
+   [keyword] antes de o story sair." Sem as chaves do Instagram, o `/crm-de-leads` entrega a
+   rotina manual de responder o Direct.
+
+## Agendar
+
+Conferir se `POSTFORME_API_KEY` existe no `.env` da raiz.
+
+**Sem a chave:** entrega manual. "Salva o PNG no celular e publica direto do app do Instagram",
+com data e hora cobradas na mesma resposta. Para agendar daqui pra frente:
+`python SetupFera/setup_chaves.py` (guia no `API_SETUP.md`, seção 6).
+
+**Com a chave:**
+
+1. Perguntar data e hora (horário de Brasília). Sem data, não agenda.
+2. Rodar o plano, que não envia nada:
+   ```bash
+   python ScriptsFera/publicar.py agendar output/stories/YYYY-MM-DD/story-01.png --formato story --quando "AAAA-MM-DD HH:MM"
+   ```
+   Vários stories no mesmo horário: passar a pasta. Cada arquivo vira um story, na ordem do nome.
+   Story não mostra legenda, então `--legenda` é opcional.
+3. Mostrar ao dono, em lista: data e hora, formato, conta (@) e quais arquivos sobem.
+4. Pedir OK explícito. Sem OK, nada sobe.
+5. Com OK, rodar o mesmo comando com `--enviar`. Guardar o id que voltar.
+6. Conferir com `python ScriptsFera/publicar.py listar`. Errou: `python ScriptsFera/publicar.py cancelar <id>`.
+
+Mais de uma conta de Instagram: `python ScriptsFera/publicar.py contas` e `--conta <id>`.
 
 ## QA antes de entregar
 
