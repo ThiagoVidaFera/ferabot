@@ -29,7 +29,7 @@ const INSTALACAO = (painel: string, codigo: string) => `Quero instalar o FERABOT
    - Netlify: serve para publicar as minhas páginas.
    Para cada uma: abra o site certo, me diga onde clicar para criar a chave, espere eu colar no painel e apertar Salvar e testar. Só siga quando o painel mostrar a chave funcionando.
 7. Rode python ScriptsFera/painel.py sincronizar para trazer as chaves para o computador, e python ScriptsFera/painel.py estado para me mostrar o que já está pronto e o que falta.
-8. Me ensine a abrir o FERABOT nas próximas vezes (Claude Code na pasta Documentos/ferabot e o comando /fera) e qual modelo usar: Sonnet para executar (quase sempre), Opus para planejar e criar coisa nova, Fable só se os outros não resolverem.
+8. Me ensine a abrir o FERABOT nas próximas vezes (VS Code com a pasta Documentos/ferabot aberta, o Claude Code e o comando /fera) e qual modelo usar: Sonnet para executar (quase sempre), Opus para planejar e criar coisa nova, Fable só se os outros não resolverem.
 9. Me convide para o /teste-geral, que cria um exemplo de cada formato no meu caso.
 
 ${REGRAS}`;

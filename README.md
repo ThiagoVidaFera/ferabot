@@ -9,6 +9,9 @@ Um comando: **`/fera`**. Ele mentora, e chama o FeraBot certo quando você pede 
 
 ### Caminho rápido (recomendado)
 
+Use o Claude pelo **VS Code** (code.visualstudio.com) com a extensão **Claude Code** (aba Extensões >
+Claude Code > Instalar > entrar com a conta do Claude, plano Pro ou maior). Abra a pasta Documentos.
+
 No Claude Code, digite:
 
 ```
