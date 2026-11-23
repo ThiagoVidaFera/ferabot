@@ -109,6 +109,15 @@ export default async function Chaves() {
             <h2 style={{ fontSize: 16, margin: "0 0 2px" }}>{grupo.titulo}</h2>
             <p style={{ margin: "0 0 12px", fontSize: 13, color: "var(--texto-fraco)" }}>{grupo.quando}</p>
             <div style={{ display: "grid", gap: 12 }}>
+      <section className="card" style={{ padding: 16, marginBottom: 22, background: "var(--azul-claro)" }}>
+        <h2 style={{ fontSize: 15, margin: "0 0 6px" }}>Deixe o FERABOT fazer os cliques por você</h2>
+        <p style={{ fontSize: 14, lineHeight: 1.55, margin: 0 }}>
+          Pegar chave dá muitos cliques em sites diferentes, principalmente as do Google e do YouTube e o token da Meta.
+          Instale a extensão do Claude no Chrome (procure Claude na Chrome Web Store e entre com a sua conta do Claude) e
+          peça no chat: <em>/fera pega a minha chave do [serviço] usando a extensão do Claude no Chrome</em>. Ele assume a
+          tela e faz os cliques. Você só entra nas suas contas e confirma. A chave você mesmo cola aqui.
+        </p>
+      </section>
               {itens.map((item) => {
                 const chave = naTela.get(item.env);
                 return chave ? <CartaoChave key={item.env} item={item} chave={chave} /> : null;

@@ -33,7 +33,7 @@ const MENU = [
 /** Painel do cliente da consultoria: só o que ele usa, na ordem em que usa. */
 const MENU_CLIENTE = [
   { href: "/comece", label: "Comece aqui", icone: "jornada" },
-  { href: "/", label: "Início", icone: "painel" },
+  { href: "/", label: "Painel", icone: "painel" },
   { href: "/configuracoes#plano", label: "Meu plano", icone: "roteiros" },
   { href: "/jornada", label: "Jornada", icone: "jornada" },
   { href: "/prompts", label: "Guia de prompts", icone: "roteiros" },

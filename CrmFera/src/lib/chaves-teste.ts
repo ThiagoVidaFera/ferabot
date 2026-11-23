@@ -92,3 +92,32 @@ export async function testarChave(
     return { ok: null, msg: "Não consegui falar com o serviço agora. A chave ficou salva; teste de novo." };
   }
 }
+
+export type ContaInstagram = { pagina: string; id: string; usuario: string };
+
+/**
+ * As contas do Instagram ligadas às Páginas que o token do Meta enxerga. É assim que o painel
+ * acha sozinho o id do Instagram: o mesmo token do usuário do sistema serve para anúncio,
+ * publicação e Direct. Erro de rede ou permissão = lista vazia (o dono cola o id à mão).
+ */
+export async function contasInstagramDoToken(token: string, buscar: Buscar = fetch): Promise<ContaInstagram[]> {
+  try {
+    const url = "https://graph.facebook.com/v21.0/me/accounts?fields=name,instagram_business_account%7Bid,username%7D&limit=50";
+    const resposta = await buscar(url, {
+      headers: { Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(TEMPO_LIMITE_MS),
+      cache: "no-store",
+    });
+    if (!resposta.ok) return [];
+    const corpo = (await resposta.json()) as { data?: { name?: string; instagram_business_account?: { id?: string; username?: string } }[] };
+    return (corpo.data ?? [])
+      .filter((p) => p.instagram_business_account?.id && /^\d+$/.test(p.instagram_business_account.id))
+      .map((p) => ({
+        pagina: String(p.name ?? "").slice(0, 120),
+        id: String(p.instagram_business_account?.id),
+        usuario: String(p.instagram_business_account?.username ?? "").slice(0, 60),
+      }));
+  } catch {
+    return [];
+  }
+}

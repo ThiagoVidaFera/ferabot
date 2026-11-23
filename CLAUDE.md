@@ -33,6 +33,14 @@ você:** siga `SkillsDoFera/fera/references/onboarding.md` (fases 0 a 8) e grave
 mesmo. **Nunca mandar o cliente rodar script no terminal pra isso.** E nada de produção (peça,
 página, anúncio) antes do briefing fechado.
 
+**Navegador: oferecer a extensão do Claude no Chrome (regra do Thiago, 22/11/2026).** Sempre que a tarefa
+exigir muitos cliques do dono num site (criar conta, app ou chave, DNS, Google Cloud, autorização do YouTube
+ou da Agenda, app e token da Meta, Gerenciador de Anúncios), OFERECER antes de guiar clique a clique: "Quer
+que eu faça pelo seu Chrome? Com a extensão do Claude eu assumo a tela e faço os cliques. Você só entra nas
+suas contas e confirma." Se ele aceitar e a extensão não estiver instalada, ensinar a instalar (Chrome Web
+Store, "Claude", entrar com a conta do Claude). Senha e código de verificação quem digita é ele. Chave pronta
+ele cola na tela Chaves do painel, nunca no chat.
+
 ---
 
 ## Voz

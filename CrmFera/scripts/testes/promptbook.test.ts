@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { existsSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import {
   AVISO_TELAS_MUDAM,
   COMO_ABRIR,
@@ -77,6 +79,45 @@ test("todo tutorial de chave usa nomes do catálogo e termina na tela Chaves", (
     if (t.envs.length) {
       assert.ok(t.passos.some((p) => p.includes("Salvar e testar")), `${t.id} não manda testar`);
     }
+  }
+});
+
+test("todo prompt das seções começa por um comando que existe no FERABOT", () => {
+  const pasta = join(__dirname, "..", "..", "..", "SkillsDoFera");
+  if (!existsSync(pasta)) return; // fora do monorepo (imagem do painel) não há como conferir
+  const existentes = new Set(readdirSync(pasta));
+  for (const item of SECOES.flatMap((s) => s.itens)) {
+    const comando = /^\/([a-z0-9-]+)/.exec(item.prompt)?.[1];
+    assert.ok(comando, `prompt sem comando: ${item.titulo}`);
+    assert.ok(existentes.has(comando), `/${comando} não existe em SkillsDoFera (${item.titulo})`);
+  }
+});
+
+test("o guia cobre o caminho do cliente: captura, prova, oferta, YouTube e conferência do anúncio", () => {
+  const titulos = SECOES.flatMap((s) => s.itens.map((i) => i.titulo));
+  for (const t of [
+    "Página de captura",
+    "Conferir o anúncio antes de subir",
+    "Carrossel de autoridade",
+    "Carrossel de estudo de caso",
+    "Anúncio estático de oferta",
+    "Sequência de stories",
+    "Legenda do post",
+    "Vídeo de intenção para o YouTube",
+    "Thumbnail do vídeo",
+  ]) {
+    assert.ok(titulos.includes(t), `falta o prompt ${t}`);
+  }
+});
+
+test("toda arte de carrossel e story respeita a zona de 250px e mostra o texto antes", () => {
+  const artes = SECOES.find((s) => s.id === "artes");
+  assert.ok(artes);
+  for (const item of artes.itens.filter((i) => /carrossel|stor/i.test(i.titulo) && !/comparar/i.test(i.titulo))) {
+    assert.ok(item.prompt.includes("250px"), `sem zona de 250px: ${item.titulo}`);
+  }
+  for (const item of artes.itens.filter((i) => /carrossel|anúncio/i.test(i.titulo) && !/variações/i.test(i.titulo))) {
+    assert.ok(/texto|ângulos em texto/i.test(item.prompt) && /antes/i.test(item.prompt), `sem texto antes da arte: ${item.titulo}`);
   }
 });
 

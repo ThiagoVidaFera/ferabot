@@ -132,3 +132,30 @@ test("marco, entrega e código de ligação do FERABOT ficam guardados", async (
   await assert.rejects(() => estado.registrarMarco("faturamento", {}));
   await assert.rejects(() => estado.registrarEntrega({ oque: "" }));
 });
+
+test("o token único do Meta acha a conta do Instagram ligada à Página", async () => {
+  const { contasInstagramDoToken } = await import("../../src/lib/chaves-teste");
+  const corpo = {
+    data: [
+      { name: "Página A", instagram_business_account: { id: "17841400000000001", username: "conta_a" } },
+      { name: "Página sem Instagram" },
+    ],
+  };
+  const buscar = async () => new Response(JSON.stringify(corpo), { status: 200 });
+
+  const contas = await contasInstagramDoToken("tok", buscar);
+
+  assert.deepEqual(contas, [{ pagina: "Página A", id: "17841400000000001", usuario: "conta_a" }]);
+  assert.deepEqual(await contasInstagramDoToken("tok", respondeCom(400)), []);
+});
+
+test("o FERABOT recebe o token do Meta também como token do Instagram", async () => {
+  const { gravarConfig } = await import("../../src/lib/config");
+  const chaves = await import("../../src/lib/chaves");
+  await gravarConfig("chave:META_ACCESS_TOKEN", cifrar("EAAtoken"));
+  await gravarConfig("chave_status:META_ACCESS_TOKEN", JSON.stringify({ ok: true, msg: "ok", em: "x" }));
+
+  const descem = await chaves.chavesParaOFerabot();
+
+  assert.equal(descem.IG_ACCESS_TOKEN, "EAAtoken");
+});

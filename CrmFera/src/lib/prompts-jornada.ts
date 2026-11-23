@@ -12,6 +12,7 @@ const REGRAS = `Regras para você seguir comigo o tempo todo:
 - Antes de instalar ou mudar qualquer coisa no meu computador, me diga o que vai fazer e espere o meu ok.
 - Nunca me peça senha nem chave aqui no chat. Chave de serviço eu colo na tela Chaves do meu painel.
 - Se der erro, me explique em português simples o que aconteceu e o que fazer, sem colar código técnico.
+- Quando o passo for cheio de cliques no navegador (criar conta, app, chave, DNS, Google Cloud, YouTube, Meta), me ofereça usar a extensão do Claude no Chrome para você assumir a tela e fazer por mim. Se eu não tiver, me ensine a instalar. Eu só entro nas minhas contas e confirmo.
 - No fim, confira se funcionou de verdade e me diga qual é o próximo passo da minha Jornada.`;
 
 const INSTALACAO = (painel: string, codigo: string) => `Quero instalar o FERABOT no meu computador e ligar ele ao meu painel. Faça nesta ordem:

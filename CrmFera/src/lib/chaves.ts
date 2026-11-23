@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { gravarConfig } from "@/lib/config";
 import { CATALOGO, chaveDoCatalogo } from "@/lib/chaves-catalogo";
 import { cifrar, decifrar, mascarar } from "@/lib/cofre";
-import { testarChave, type ResultadoTeste } from "@/lib/chaves-teste";
+import { contasInstagramDoToken, testarChave, type ResultadoTeste } from "@/lib/chaves-teste";
 
 /** Chaves do dono guardadas em `Setting`, cifradas. Estado do teste fica ao lado. */
 const PREFIXO_VALOR = "chave:";
@@ -69,7 +69,13 @@ export async function chavesNaTela(): Promise<ChaveNaTela[]> {
 export async function chavesParaOFerabot(): Promise<Record<string, string>> {
   const [valores, naTela] = await Promise.all([chavesSalvas(), chavesNaTela()]);
   const recusadas = new Set(naTela.filter((c) => c.status?.ok === false).map((c) => c.env));
-  return Object.fromEntries(Object.entries(valores).filter(([env]) => !recusadas.has(env)));
+  const liberadas = Object.fromEntries(Object.entries(valores).filter(([env]) => !recusadas.has(env)));
+  // Um token só do Meta (usuário do sistema) serve também para o Instagram: os scripts do FERABOT
+  // que leem IG_ACCESS_TOKEN (Direct, comentário, publicação) recebem o mesmo token.
+  if (liberadas.META_ACCESS_TOKEN && !liberadas.IG_ACCESS_TOKEN) {
+    return { ...liberadas, IG_ACCESS_TOKEN: liberadas.META_ACCESS_TOKEN };
+  }
+  return liberadas;
 }
 
 /** Nomes das chaves que o serviço confirmou que funcionam. */
@@ -92,7 +98,33 @@ export async function salvarChave(env: string, valorBruto: string): Promise<Stat
   await gravarConfig(`${PREFIXO_STATUS}${env}`, JSON.stringify(status));
   // Os robôs do WhatsApp leem a chave do Gemini pelo nome antigo de configuração.
   if (env === "GEMINI_API_KEY" && teste.ok !== false) await gravarConfig("gemini_api_key", valor);
+  if (env === "META_ACCESS_TOKEN" && teste.ok === true) return ligarInstagram(valor, status, outras);
   return status;
+}
+
+/**
+ * Token do Meta aceito: acha a conta do Instagram ligada à Página e grava o id sozinho.
+ * Uma conta só = ligada. Mais de uma = o dono escolhe e cola o id. Nenhuma = explica o porquê.
+ */
+async function ligarInstagram(token: string, status: StatusChave, outras: Record<string, string>): Promise<StatusChave> {
+  if (outras.IG_USER_ID) return status;
+  const contas = await contasInstagramDoToken(token);
+  let msg = status.msg;
+  if (contas.length === 1) {
+    const [conta] = contas;
+    const statusIg: StatusChave = { ok: true, msg: `Achado pelo token do Meta: @${conta.usuario || conta.id} (Página ${conta.pagina}).`, em: status.em };
+    await gravarConfig(`${PREFIXO_VALOR}IG_USER_ID`, cifrar(conta.id));
+    await gravarConfig(`${PREFIXO_STATUS}IG_USER_ID`, JSON.stringify(statusIg));
+    msg = `${msg} Instagram @${conta.usuario || conta.id} ligado sozinho.`;
+  } else if (contas.length > 1) {
+    const lista = contas.map((c) => `@${c.usuario || "?"} (id ${c.id})`).join(", ");
+    msg = `${msg} Achei ${contas.length} contas do Instagram: ${lista}. Cole o id da sua em Instagram: id da conta.`;
+  } else {
+    msg = `${msg} Não achei Instagram ligado: confira se a conta do Instagram está ligada à Página e atribuída ao usuário do sistema.`;
+  }
+  const final: StatusChave = { ...status, msg };
+  await gravarConfig(`${PREFIXO_STATUS}META_ACCESS_TOKEN`, JSON.stringify(final));
+  return final;
 }
 
 export async function retestarChave(env: string): Promise<StatusChave | null> {
@@ -101,6 +133,7 @@ export async function retestarChave(env: string): Promise<StatusChave | null> {
   if (!valor) return null;
   const status: StatusChave = { ...(await testarChave(env, valor, outras)), em: new Date().toISOString() };
   await gravarConfig(`${PREFIXO_STATUS}${env}`, JSON.stringify(status));
+  if (env === "META_ACCESS_TOKEN" && status.ok === true) return ligarInstagram(valor, status, outras);
   return status;
 }
 

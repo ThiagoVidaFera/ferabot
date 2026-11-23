@@ -61,9 +61,11 @@ Regras anti-ban (invioláveis — proteger o número DELE):
 Automação oficial via Graph API: quem comenta a palavra-chave no post recebe UMA DM com o link.
 Captação de lead, não conversa.
 
-Chaves no `.env`: `IG_USER_ID` e `IG_ACCESS_TOKEN` (guia completo no `API_SETUP.md` — app na conta
-Meta dele, Instagram conectado a uma Página, permissões `instagram_manage_messages` +
-`instagram_manage_comments`).
+Chaves no `.env`: `IG_USER_ID` e `IG_ACCESS_TOKEN`. **Com painel (`painel.json`):** um token só do Meta
+(usuário do sistema, validade Nunca) colado na tela Chaves vale para tudo; o painel acha o `IG_USER_ID` sozinho
+e o `painel.py sincronizar` entrega o mesmo token como `IG_ACCESS_TOKEN`. Nunca pedir token do Instagram à parte.
+Sem painel: guia no `API_SETUP.md` (app na conta Meta dele, Instagram ligado a uma Página, permissões
+`instagram_manage_messages` + `instagram_manage_comments`).
 
 Fluxo: definir palavra-chave + mensagem (com link) → configurar o gatilho → a DM sai com o link e
 instrução de responder ELE. Toda DM enviada vira lead no CRM (`leads-api.py add --origem ig-dm`).

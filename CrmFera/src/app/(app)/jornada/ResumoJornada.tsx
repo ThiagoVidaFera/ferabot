@@ -1,38 +1,25 @@
 import Link from "next/link";
 import { jornadaAtual } from "@/lib/jornada-estado";
 import { NOME_DA_TRILHA, type PassoJornada } from "@/lib/jornada";
-import { BarraDeProgresso, CaixaDePrompt } from "./Passos";
-import { promptDoPasso } from "./ligacao";
+import { BarraDeProgresso } from "./Passos";
 
-async function PassoDaVez({ passo }: { passo: PassoJornada }) {
-  const prompt = await promptDoPasso(passo);
-  const falta = passo.itens.filter((i) => !i.feito);
+function PassoDaVez({ passo }: { passo: PassoJornada }) {
   return (
-    <div style={{ borderTop: "1px solid var(--linha)", paddingTop: 12, marginTop: 12 }}>
-      <div className="sobretitulo">
-        {NOME_DA_TRILHA[passo.trilha]} · passo {passo.numero}
-      </div>
-      <h3 style={{ fontSize: 16, margin: "4px 0 6px" }}>{passo.titulo}</h3>
-      <ul style={{ margin: 0, paddingLeft: 18, fontSize: 14, lineHeight: 1.6 }}>
-        {falta.map((item) => (
-          <li key={item.texto}>Falta: {item.texto}</li>
-        ))}
-      </ul>
-      {prompt ? <CaixaDePrompt prompt={prompt} /> : null}
-      {passo.quemFaz === "equipe" ? (
-        <p style={{ margin: "10px 0 0", fontSize: 13, color: "var(--texto-fraco)" }}>Quem faz: a equipe do Thiago.</p>
-      ) : passo.tela ? (
-        <Link href={passo.tela.href} className="btn btn-sec" style={{ marginTop: 10, padding: "8px 14px", fontSize: 13, textDecoration: "none", display: "inline-block" }}>
-          {passo.tela.rotulo}
-        </Link>
-      ) : null}
+    <div style={{ display: "flex", gap: 10, alignItems: "baseline", marginTop: 10, fontSize: 14 }}>
+      <span className="sobretitulo" style={{ flexShrink: 0 }}>
+        {passo.trilha === "conteudo" ? "Conteúdo" : "Técnica"}
+      </span>
+      <span style={{ minWidth: 0 }}>
+        {passo.numero}. {passo.titulo}
+        {passo.quemFaz === "equipe" ? <span style={{ color: "var(--texto-fraco)" }}> · a equipe faz</span> : null}
+      </span>
     </div>
   );
 }
 
 /**
- * Topo da tela inicial enquanto a Jornada não fecha: o passo da vez em cada trilha e o que
- * colar para andar. Some sozinho quando todos os passos estão feitos.
+ * Topo da tela inicial enquanto a Jornada não fecha: compacto (o passo da vez em cada trilha e um
+ * botão), para o dashboard logo abaixo continuar à vista. Os prompts ficam na tela Jornada.
  */
 export default async function ResumoJornada() {
   const jornada = await jornadaAtual();
@@ -55,6 +42,9 @@ export default async function ResumoJornada() {
       {daVez.map((passo) => (
         <PassoDaVez key={passo.id} passo={passo} />
       ))}
+      <Link href="/jornada" className="btn" style={{ marginTop: 12, display: "inline-block", textDecoration: "none", padding: "8px 14px", fontSize: 13 }}>
+        Continuar de onde parei
+      </Link>
     </section>
   );
 }
