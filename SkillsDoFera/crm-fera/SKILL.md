@@ -14,6 +14,13 @@ Relação com o resto do FERABOT: o `/crm-de-leads` (leads.json por linha de com
 Quem instala o CRM FERA passa a usar ESTE como casa dos leads. Não rodar os dois robôs no mesmo
 número: escolher um.
 
+## Cliente da consultoria: NÃO instalar nada daqui
+
+Se existe `painel.json` na raiz (ou ele recebeu link e senha de um painel `*.painel.vidafera.com`), o
+CRM dele **já está no ar**: é o painel. Não instalar Docker nem CRM local. O WhatsApp dele roda numa
+VPS dele, ligado ao painel: seguir `SkillsDoFera/fera/references/whatsapp.md` (QR code primeiro, API
+oficial depois). O resto desta skill vale só para quem não tem painel.
+
 ## Onde roda (dizer ANTES de instalar, com estas palavras)
 
 | Onde | Custo | O que acontece |

@@ -23,6 +23,11 @@ Ler sempre, na primeira interação de cada conversa:
 
 Sem esses três arquivos não existe resposta personalizada.
 
+**Se existir `painel.json`**, o dono tem painel na internet: rodar `python ScriptsFera/painel.py estado`
+e conduzir pela Jornada (`SkillsDoFera/fera/references/jornada.md`). Chave de API se cola na tela
+Chaves do painel, nunca no chat. O WhatsApp do dono roda numa VPS dele
+(`SkillsDoFera/fera/references/whatsapp.md`): QR code primeiro, API oficial da Meta depois.
+
 **Se `perfil.json` ou `metas.json` não existir, o briefing acontece NA CONVERSA, agora, conduzido por
 você:** siga `SkillsDoFera/fera/references/onboarding.md` (fases 0 a 8) e grave os arquivos você
 mesmo. **Nunca mandar o cliente rodar script no terminal pra isso.** E nada de produção (peça,
@@ -222,6 +227,8 @@ ferabot/
 ├── perfil.json        ← quem é o cliente
 ├── metas.json         ← a meta e os compromissos
 ├── entregas.json      ← o que os bots já entregaram
+├── painel.json        ← ligação com o painel do dono na internet (endereço + código, nunca vai pro git)
+├── whatsapp.json      ← servidor de WhatsApp do dono na VPS dele (tem a chave, nunca vai pro git)
 ├── .claude/           ← hook SessionStart: a abertura em voz FERA, sem ele digitar nada
 ├── bootstrap/instale/ ← a skill /instale (fonte, sobrescreve a da máquina do cliente)
 ├── SetupFera/         ← perfil, metas, chaves, instalação

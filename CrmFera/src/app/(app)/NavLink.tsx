@@ -8,6 +8,13 @@ import type { ReactNode } from "react";
 // no lugar dos emojis coloridos que brigavam com a lateral azul.
 const ICONES: Record<string, ReactNode> = {
   painel: <path d="M4 4h7v7H4zM13 4h7v4h-7zM13 10h7v10h-7zM4 13h7v7H4z" />,
+  jornada: <path d="M5 21V4M5 4h11l-2 4 2 4H5" />,
+  chaves: (
+    <>
+      <circle cx="8" cy="15" r="4" />
+      <path d="M11 12l9-9M16 7l3 3M14 9l2 2" />
+    </>
+  ),
   leads: <path d="M4 6h16M4 12h16M4 18h10" />,
   contatos: (
     <>

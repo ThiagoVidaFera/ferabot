@@ -4,10 +4,13 @@ import { sessaoAtual } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { negocio as negocioDoArquivo } from "@/lib/negocio";
 import { contarSemResposta } from "@/lib/fila-sem-resposta";
+import { nivelDoPainel, painelHospedado } from "@/lib/hospedado";
 
 // As 10 telas na ordem do megaprompt.
 const MENU = [
   { href: "/", label: "Painel", icone: "painel" },
+  { href: "/jornada", label: "Jornada", icone: "jornada" },
+  { href: "/prompts", label: "Guia de prompts", icone: "roteiros" },
   { href: "/leads", label: "Leads", icone: "leads" },
   { href: "/contatos", label: "Contatos", icone: "contatos" },
   { href: "/inbox", label: "Inbox", icone: "inbox" },
@@ -23,8 +26,29 @@ const MENU = [
   { href: "/roteiros", label: "Roteiros", icone: "roteiros" },
   { href: "/agentes", label: "Agentes", icone: "agentes" },
   { href: "/auditoria", label: "Auditoria", icone: "auditoria" },
+  { href: "/chaves", label: "Chaves", icone: "chaves" },
   { href: "/configuracoes", label: "Configurações", icone: "configuracoes" },
 ];
+
+/** Painel do cliente da consultoria: só o que ele usa, na ordem em que usa. */
+const MENU_CLIENTE = [
+  { href: "/comece", label: "Comece aqui", icone: "jornada" },
+  { href: "/", label: "Início", icone: "painel" },
+  { href: "/configuracoes#plano", label: "Meu plano", icone: "roteiros" },
+  { href: "/jornada", label: "Jornada", icone: "jornada" },
+  { href: "/prompts", label: "Guia de prompts", icone: "roteiros" },
+  { href: "/leads", label: "Leads", icone: "leads" },
+  { href: "/inbox", label: "Conversas", icone: "inbox" },
+  { href: "/reunioes", label: "Reuniões", icone: "reunioes" },
+  { href: "/chaves", label: "Chaves", icone: "chaves", soAutoexecutavel: true },
+  { href: "/configuracoes", label: "Meu perfil", icone: "configuracoes" },
+];
+
+function menuDoPainel(): { href: string; label: string; icone: string }[] {
+  if (!painelHospedado()) return MENU;
+  const equipe = nivelDoPainel() === "equipe";
+  return MENU_CLIENTE.filter((m) => !(equipe && m.soAutoexecutavel));
+}
 
 /**
  * Os mesmos links servem a barra lateral do desktop e a gaveta do celular.
@@ -42,7 +66,7 @@ function MenuLinks({
 }) {
   return (
     <>
-      {MENU.map((m) => (
+      {menuDoPainel().map((m) => (
         <NavLink key={m.href} href={m.href} label={m.label} icone={m.icone} compacto={compacto}>
           {m.href === "/followup" && semResposta > 0 ? (
             <span

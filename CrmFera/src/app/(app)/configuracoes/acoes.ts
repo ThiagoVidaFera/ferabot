@@ -23,6 +23,7 @@ import {
   qrCode,
 } from "@/lib/whatsapp";
 import { testarSmtp } from "@/lib/email";
+import { motivoServidorRecusado, painelHospedado } from "@/lib/hospedado";
 
 async function exigirSessao() {
   const s = await sessaoAtual();
@@ -41,6 +42,12 @@ export async function salvarWhatsapp(form: FormData) {
 
   const instanceId = String(form.get("instanceId") ?? "");
   const nome = String(form.get("nome") ?? "").trim();
+
+  // Painel hospedado: o servidor do WhatsApp é do cliente e precisa ser público e HTTPS.
+  if (painelHospedado()) {
+    const motivo = motivoServidorRecusado(url);
+    if (motivo) throw new Error(motivo);
+  }
 
   if (instanceId) {
     await db.whatsappInstance.update({

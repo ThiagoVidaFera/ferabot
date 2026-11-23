@@ -1,14 +1,21 @@
 import { db } from "@/lib/db";
 import { configMuitas } from "@/lib/config";
 import Numeros from "./Numeros";
+import FormSmtp from "./FormSmtp";
+import ConfiguracoesCliente from "./ConfiguracoesCliente";
+import { Campo, h2 } from "./campos";
+import { painelHospedado } from "@/lib/hospedado";
 import FormSenha from "./FormSenha";
-import { salvarWhatsapp, salvarSmtp, salvarIA, salvarNegocio, salvarEvento, salvarRobos } from "./acoes";
+import { salvarWhatsapp, salvarIA, salvarNegocio, salvarEvento, salvarRobos } from "./acoes";
 import { CHAVES_ROBOS } from "@/lib/chaves-robos";
 import { negocio, usandoExemplo } from "@/lib/negocio";
 import { urlDoWebhookPadrao } from "@/lib/url";
 import { lerEvento } from "@/lib/evento";
 
 export default async function Configuracoes() {
+  // painel do cliente da consultoria: tela própria, só com o que é dele
+  if (painelHospedado()) return <ConfiguracoesCliente />;
+
   const [numeros, cfg, evento] = await Promise.all([
     db.whatsappInstance.findMany({ orderBy: [{ isDefault: "desc" }, { createdAt: "asc" }] }),
     configMuitas([
@@ -43,7 +50,7 @@ export default async function Configuracoes() {
         </div>
       ) : null}
 
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 16 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))", gap: 16 }}>
         {/* WhatsApp */}
         <div className="card" style={{ padding: 18 }}>
           <h2 style={h2}>WhatsApp — números conectados</h2>
@@ -113,39 +120,7 @@ export default async function Configuracoes() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {/* SMTP */}
-          <form action={salvarSmtp} className="card" style={{ padding: 18 }}>
-            <h2 style={h2}>SMTP (e-mail)</h2>
-            <Campo rotulo="Host">
-              <input name="host" defaultValue={cfg.smtp_host} placeholder="smtp.gmail.com" />
-            </Campo>
-            <div style={{ display: "flex", gap: 8 }}>
-              <div style={{ flex: 1 }}>
-                <Campo rotulo="Porta">
-                  <input name="porta" defaultValue={cfg.smtp_porta || "587"} />
-                </Campo>
-              </div>
-              <div style={{ flex: 1 }}>
-                <Campo rotulo="SSL/TLS">
-                  <select name="seguro" defaultValue={cfg.smtp_seguro || "0"}>
-                    <option value="0">STARTTLS / nenhum</option>
-                    <option value="1">SSL direto (465)</option>
-                  </select>
-                </Campo>
-              </div>
-            </div>
-            <Campo rotulo="Usuário">
-              <input name="usuario" defaultValue={cfg.smtp_usuario} />
-            </Campo>
-            <Campo rotulo="Senha (em branco mantém a atual)">
-              <input name="senha" type="password" placeholder={cfg.smtp_senha ? "•••" : ""} />
-            </Campo>
-            <Campo rotulo="Remetente">
-              <input name="remetente" defaultValue={cfg.smtp_remetente} placeholder="contato@seudominio.com.br" />
-            </Campo>
-            <button className="btn btn-sec" type="submit">
-              Salvar SMTP
-            </button>
-          </form>
+          <FormSmtp cfg={cfg} />
 
           {/* IA */}
           <form action={salvarIA} className="card" style={{ padding: 18 }}>
@@ -304,16 +279,5 @@ export default async function Configuracoes() {
         </div>
       </div>
     </div>
-  );
-}
-
-const h2: React.CSSProperties = { fontSize: 15, fontWeight: 700, marginBottom: 12 };
-
-function Campo({ rotulo, children }: { rotulo: string; children: React.ReactNode }) {
-  return (
-    <label style={{ display: "block", marginBottom: 12 }}>
-      <span style={{ fontSize: 13, color: "var(--texto-fraco)" }}>{rotulo}</span>
-      <div style={{ marginTop: 5 }}>{children}</div>
-    </label>
   );
 }

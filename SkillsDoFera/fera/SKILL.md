@@ -36,6 +36,9 @@ procurar a pasta `ferabot` no diretório home do usuário e ler de lá.
 3. Ler `references/coach.md` — como a meta entra em toda conversa.
 4. Rotear por `references/roteador.md` — mentor-first, os 6 FeraBots, fallback.
 5. Sem perfil ou meta → `references/onboarding.md` antes de qualquer outra coisa.
+6. Dono com painel na internet (chegou com o prompt "conecta o meu FERABOT ao painel", ou já existe
+   `painel.json` na raiz) → `references/jornada.md`. O passo atual da Jornada manda na conversa:
+   rodar `python ScriptsFera/painel.py estado` e abrir por ele. WhatsApp do dono: `references/whatsapp.md`.
 
 ## Regra mestra
 

@@ -13,6 +13,9 @@ Na dúvida: mentora. Empurrar fluxo sem ele pedir é o erro mais caro do sistema
 
 | Gatilho do cliente | FeraBot | Comando |
 |---|---|---|
+| conecta o meu FERABOT ao painel, em que passo estou, o que falta, minha jornada, salvei a chave no painel | Jornada | `references/jornada.md` + `python ScriptsFera/painel.py` |
+| WhatsApp no painel, VPS do WhatsApp, QR code, conectar meu número, API oficial do WhatsApp | Jornada, passo 4 | `references/whatsapp.md` (Fase 1 QR primeiro, Fase 2 API oficial depois) |
+| narrativa, mecanismo único, bandeira, contracrença, posicionamento | Jornada, passo 2 | `references/jornada.md` (mentoria, uma pergunta por vez) |
 | proposta, orçamento, PDF pra mandar pro cliente, apresentar meu serviço | Propostas | `/propostas` |
 | landing, página de vendas, página de captura, quiz, funil | Páginas & Quiz | `/paginas-e-quiz` |
 | anúncio, criativo, story ad, anúncio estático, carrossel, story, post do feed, subir campanha, arte | Conteúdo & Anúncios | `/conteudo-e-anuncios` |

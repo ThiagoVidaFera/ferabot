@@ -34,6 +34,12 @@ def carregar_env():
     As chaves são do UTILIZADOR do Ferabot — criadas por ele via setup_chaves.py.
     """
     import os
+    # Com o painel conectado, as chaves salvas lá vêm para o .env antes da leitura.
+    try:
+        import painel
+        painel.sincronizar_se_vencido()
+    except ImportError:
+        pass
     if not ENV_PATH.exists():
         return
     for linha in ENV_PATH.read_text(encoding="utf-8").splitlines():

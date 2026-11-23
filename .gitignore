@@ -22,3 +22,10 @@ ScriptsFera/wpp/package-lock.json
 # renders e frames de vídeo/mascote (material de divulgação, não vai pro cliente)
 mascote-3d/saida/
 videos/2026-10-28-leads-alto-ticket/
+
+# ligação com o painel do dono (tem o código de acesso)
+painel.json
+painel.tmp
+
+# servidor de WhatsApp do dono (tem a chave do servidor)
+whatsapp.json

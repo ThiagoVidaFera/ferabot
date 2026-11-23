@@ -6,6 +6,8 @@ import { filaSemResposta } from "@/lib/fila-sem-resposta";
 import { sugestoesGuardadas } from "@/lib/fila-sugestao-servico";
 import PainelSemResposta from "./followup/PainelSemResposta";
 import AtencaoManual from "./AtencaoManual";
+import ResumoJornada from "./jornada/ResumoJornada";
+import LeituraDoMes from "./LeituraDoMes";
 import PainelCustos from "./PainelCustos";
 import PainelPropostas from "./PainelPropostas";
 import { painelPropostas, lerOrdem, ordenarLinhas, type CampoOrdem, type DirecaoOrdem } from "@/lib/painel-propostas";
@@ -119,6 +121,8 @@ export default async function Painel({ searchParams }: { searchParams: Promise<B
 
   return (
     <div>
+      <ResumoJornada />
+      <LeituraDoMes />
       <p className="sobretitulo" style={{ marginBottom: 10 }}>
         Painel · Visão geral
       </p>

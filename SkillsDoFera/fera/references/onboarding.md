@@ -135,6 +135,14 @@ que **faz**.
 **REGRA DURA: não despejar a lista de 23 chaves.** Isso trava o cliente no primeiro dia. Pedir
 **duas** agora e deixar o resto pra quando doer.
 
+### 4.0 — Dono com painel na internet: a chave mora no painel
+
+Se ele tem painel (recebeu link e senha, ou chegou com o prompt "conecta o meu FERABOT ao painel"),
+**esta fase inteira é o Passo 1 de `references/jornada.md`**: conectar com
+`python ScriptsFera/painel.py conectar`, mandar colar Gemini e Netlify na tela **Chaves** do painel
+e rodar `python ScriptsFera/painel.py sincronizar`. Não pedir chave no chat e não usar o
+`setup_chaves.py`. As seções 4.1 e 4.2 abaixo valem só para quem não tem painel.
+
 ### 4.1 — As duas do primeiro dia
 
 > Duas chaves e você já publica sozinho — as duas são grátis e levam uns 8 minutos no total:
@@ -237,7 +245,9 @@ ele marcar lá, reporta aqui ("gravei 2 vídeos") pra eu registrar no índice
 1. Resumo em 5 linhas: quem ele é, a meta, o número da semana, onde está o painel.
 2. Registrar em silêncio:
    `python ScriptsFera/metas-api.py entrega add "fera" "Briefing completo: perfil + meta configurados" --link "DashboardFera/index.html"`
-3. Emendar sem pausa na Fase 7 (carrosséis) e na Fase 8 (a primeira página). A primeira missão do
+3. **Dono com painel:** daqui em diante quem manda é `references/jornada.md`, do passo em que o
+   painel disser que ele está. As Fases 7 e 8 abaixo não se aplicam a ele.
+4. Sem painel: emendar sem pausa na Fase 7 (carrosséis) e na Fase 8 (a primeira página). A primeira missão do
    dia 1 é a Fase 8: sem página de agendamento, nenhum conteúdo tem para onde mandar o lead.
 
 ## Fase 7 — Carrosséis: os formatos e o desafio de testar (logo após o briefing, uma vez)

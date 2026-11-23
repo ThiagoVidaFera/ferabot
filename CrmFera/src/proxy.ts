@@ -5,7 +5,8 @@ import {
   cookieDeSessao,
   lerToken,
 } from "@/lib/sessao-edge";
-import { ehHttps } from "@/lib/url";
+import { ehHttps, publicUrl } from "@/lib/url";
+import { COOKIE_TROCAR_SENHA, liberadoDuranteTroca } from "@/lib/acesso";
 
 /**
  * Janela DESLIZANTE de sessão.
@@ -21,6 +22,11 @@ import { ehHttps } from "@/lib/url";
 const UM_DIA = 24 * 60 * 60;
 
 export async function proxy(req: NextRequest) {
+  // primeiro acesso com a senha de entrada: nada do painel abre antes de trocar a senha
+  if (req.cookies.get(COOKIE_TROCAR_SENHA)?.value === "1" && !liberadoDuranteTroca(req.nextUrl.pathname)) {
+    return NextResponse.redirect(publicUrl(req, "/primeiro-acesso"), { status: 303 });
+  }
+
   const token = req.cookies.get(COOKIE_SESSAO)?.value;
   if (!token) return NextResponse.next();
 

@@ -199,6 +199,20 @@ def cmd_entrega_add(args: argparse.Namespace) -> None:
     estado["entregas"].append(entrega)
     salvar_estado(estado)
     print(f"[+] {entrega['id']} — {args.bot}: {args.descricao}")
+    _avisar_painel(args.bot, args.descricao, args.link or "")
+
+
+def _avisar_painel(bot: str, descricao: str, link: str) -> None:
+    """Espelha a entrega no painel do dono, quando ele está conectado. Falha vira aviso."""
+    try:
+        import painel
+    except ImportError:
+        return
+    try:
+        if painel.conectado():
+            painel.avisar_entrega(bot, descricao, link)
+    except painel.ErroPainel as erro:
+        print(f"[painel] entrega não espelhada agora: {erro}", file=sys.stderr)
 
 
 def cmd_entrega_list(args: argparse.Namespace) -> None:

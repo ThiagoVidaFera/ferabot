@@ -37,9 +37,12 @@ const ROTULO: Record<string, string> = {
 export default function Numeros({
   numeros,
   webhookConfigurado,
+  simples = false,
 }: {
   numeros: NumeroConectado[];
   webhookConfigurado: string;
+  /** painel do cliente: um número só, sem criar telefone novo nem mostrar o endereço técnico */
+  simples?: boolean;
 }) {
   const [estados, setEstados] = useState<Record<string, EstadoConexao>>(() =>
     Object.fromEntries(
@@ -120,7 +123,7 @@ export default function Numeros({
   }, [seguindo, estados, router]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 14 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 14, minWidth: 0 }}>
       {!numeros.length ? (
         <p style={{ fontSize: 13, color: "var(--texto-fraco)" }}>
           Nenhum telefone conectado ainda. Adicione um abaixo.
@@ -226,6 +229,7 @@ export default function Numeros({
 
       {/* Adicionar telefone: a pessoa so da o apelido — o CRM cria a sessao,
           aponta o webhook e mostra o QR. Nada de URL nem chave na mao. */}
+      {simples ? null : (
       <div
         style={{
           border: "1px dashed var(--linha)",
@@ -263,9 +267,13 @@ export default function Numeros({
         ) : null}
       </div>
 
-      <p style={{ fontSize: 12, color: "var(--texto-fraco)" }}>
-        Webhook de entrada: <code>{urlWebhook()}</code>
-      </p>
+      )}
+
+      {simples ? null : (
+        <p style={{ fontSize: 12, color: "var(--texto-fraco)", overflowWrap: "anywhere" }}>
+          Webhook de entrada: <code>{urlWebhook()}</code>
+        </p>
+      )}
     </div>
   );
 }

@@ -38,7 +38,9 @@ export default async function Login({
 
         {erro ? (
           <p style={{ color: "#EF4444", fontSize: 13, marginBottom: 14 }}>
-            E-mail ou senha incorretos.
+            {erro === "bloqueado"
+              ? "Muitas tentativas erradas. Espere 15 minutos e tente de novo."
+              : "E-mail ou senha incorretos."}
           </p>
         ) : null}
 
