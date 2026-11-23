@@ -21,6 +21,8 @@ const MENU = [
   { href: "/funis", label: "Funis", icone: "funis" },
   { href: "/vendas", label: "Vendas", icone: "vendas" },
   { href: "/reunioes", label: "Reuniões", icone: "reunioes" },
+  { href: "/paginas", label: "Páginas", icone: "paginas" },
+  { href: "/calendario", label: "Calendário", icone: "calendario" },
   { href: "/aquisicao", label: "Aquisição", icone: "aquisicao" },
   { href: "/anuncios", label: "Anúncios", icone: "anuncios" },
   { href: "/roteiros", label: "Roteiros", icone: "roteiros" },
@@ -40,6 +42,8 @@ const MENU_CLIENTE = [
   { href: "/leads", label: "Leads", icone: "leads" },
   { href: "/inbox", label: "Conversas", icone: "inbox" },
   { href: "/reunioes", label: "Reuniões", icone: "reunioes" },
+  { href: "/paginas", label: "Páginas", icone: "paginas" },
+  { href: "/calendario", label: "Calendário de posts", icone: "calendario" },
   { href: "/chaves", label: "Chaves", icone: "chaves", soAutoexecutavel: true },
   { href: "/configuracoes", label: "Meu perfil", icone: "configuracoes" },
 ];

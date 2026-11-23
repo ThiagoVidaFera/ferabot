@@ -66,6 +66,13 @@ const ICONES: Record<string, ReactNode> = {
     </>
   ),
   auditoria: <path d="M7 3h10v18l-2-1.5L13 21l-2-1.5L9 21l-2-1.5zM10 8h4M10 12h4" />,
+  paginas: <path d="M4 5h16v14H4zM4 9h16M8 5v4" />,
+  calendario: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
+    </>
+  ),
   configuracoes: (
     <>
       <circle cx="12" cy="12" r="3" />
