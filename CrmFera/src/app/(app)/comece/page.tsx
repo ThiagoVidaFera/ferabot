@@ -111,7 +111,9 @@ export default async function Comece() {
         "Aperte o botão abaixo.",
         "Leia a sua ideia central, o seu método e as frases para repetir.",
         "Está do jeito que você fala? Aperte \"Aprovei a minha narrativa\".",
-        "Quer mudar alguma palavra? Mande a frase no WhatsApp antes de aprovar.",
+        equipe
+          ? "Quer mudar alguma palavra? Mande a frase no WhatsApp antes de aprovar."
+          : "Quer mudar alguma palavra? Peça ao FERABOT com o prompt do passo 2 da Jornada e aprove depois.",
       ],
       acao: temConteudo(plano) ? { href: "/configuracoes#plano", rotulo: "Abrir meu plano" } : undefined,
       nota: temConteudo(plano) ? undefined : "O seu plano ainda está sendo montado. Ele aparece aqui assim que ficar pronto.",
