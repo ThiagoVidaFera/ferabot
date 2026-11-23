@@ -9,12 +9,17 @@
 export type RoteiroYoutube = { titulo: string; gancho?: string; roteiro: string; lote?: string };
 export type PostInstagram = { formato: string; titulo: string; texto: string; lote?: string };
 
+/** As redes e links do dono (o FERABOT puxa daqui para o perfil.json). */
+export type RedesCliente = { instagram?: string; youtube?: string; site?: string; whatsapp?: string; tiktok?: string };
+export const CAMPOS_REDES = ["instagram", "youtube", "site", "whatsapp", "tiktok"] as const;
+
 export type PlanoCliente = {
   bigIdea: string;
   mecanismo: { nome: string; explicacao: string };
   headlines: string[];
   roteirosYoutube: RoteiroYoutube[];
   postsInstagram: PostInstagram[];
+  redes?: RedesCliente;
   atualizadoEm: string;
   /** quando o dono aprovou a big idea e o mecanismo (some se eles mudarem) */
   aprovadoEm?: string;
@@ -77,6 +82,14 @@ function post(valor: unknown): PostInstagram | null {
 }
 
 /** Acrescenta sem repetir título; mais novos primeiro, dentro do teto. */
+function redes(valor: unknown): RedesCliente | undefined {
+  const o = objeto(valor);
+  const limpas = Object.fromEntries(
+    CAMPOS_REDES.map((c) => [c, texto(o[c], 200)] as const).filter(([, v]) => v !== ""),
+  ) as RedesCliente;
+  return Object.keys(limpas).length ? limpas : undefined;
+}
+
 function acrescentar<T extends { titulo: string }>(atuais: T[], novos: T[], teto: number): T[] {
   const titulos = new Set(atuais.map((a) => a.titulo));
   return [...novos.filter((n) => !titulos.has(n.titulo)), ...atuais].slice(0, teto);
@@ -106,8 +119,13 @@ export function mesclarPlano(atual: PlanoCliente, entrada: unknown, agora = new 
         : atual.headlines,
     roteirosYoutube: atual.roteirosYoutube,
     postsInstagram: atual.postsInstagram,
+    ...(atual.redes ? { redes: atual.redes } : {}),
     atualizadoEm: agora.toISOString(),
   };
+  if ("redes" in e) {
+    const novas = redes(e.redes);
+    plano.redes = novas ? { ...(atual.redes ?? {}), ...novas } : atual.redes;
+  }
   if ("roteirosYoutube" in e) {
     const novos = lista(e.roteirosYoutube, LIMITES.roteiros).map(roteiro).filter((r): r is RoteiroYoutube => r !== null);
     plano.roteirosYoutube = somar ? acrescentar(atual.roteirosYoutube, novos, LIMITES.roteiros) : novos;
@@ -130,6 +148,7 @@ export function temConteudo(plano: PlanoCliente): boolean {
     plano.bigIdea ||
       plano.mecanismo.nome ||
       plano.headlines.length ||
+      (plano.redes && Object.keys(plano.redes).length) ||
       plano.roteirosYoutube.length ||
       plano.postsInstagram.length,
   );

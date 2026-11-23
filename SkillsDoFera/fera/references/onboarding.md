@@ -139,7 +139,8 @@ que **faz**.
 
 Se ele tem painel (recebeu link e senha, ou chegou com o prompt "conecta o meu FERABOT ao painel"),
 **esta fase inteira é o Passo 1 de `references/jornada.md`**: conectar com
-`python ScriptsFera/painel.py conectar`, mandar colar Gemini e Netlify na tela **Chaves** do painel
+`python ScriptsFera/painel.py conectar` (ele já puxa do painel as redes, a big idea, o mecanismo e as headlines
+para o `perfil.json`: o briefing só pergunta o que faltar), mandar colar Gemini e Netlify na tela **Chaves** do painel
 e rodar `python ScriptsFera/painel.py sincronizar`. Não pedir chave no chat e não usar o
 `setup_chaves.py`. As seções 4.1 e 4.2 abaixo valem só para quem não tem painel.
 

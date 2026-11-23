@@ -85,7 +85,7 @@ const ZONA =
 const CELULAR = "Abra no tamanho do celular (375px) e me mande o print antes de dizer que está pronto.";
 const RODAPE = "No rodapé, link para a minha política de privacidade e os termos de uso.";
 const DOIS_CAMINHOS =
-  "O botão oferece dois caminhos: marcar uma call de 20 minutos (nome, WhatsApp e e-mail, e a pessoa escolhe o horário) ou conversar direto no WhatsApp (nome e WhatsApp).";
+  "Siga o padrão de página de captura do FERABOT (SkillsDoFera/fera/references/pagina-de-captura.md): dois botões, marcar uma reunião de 20 minutos ou conversar direto no WhatsApp. Os dois abrem o mesmo formulário curto: nome, WhatsApp, e-mail, Instagram e uma pergunta que qualifica, tirada do meu briefing. Botão do formulário: Solicitar orçamento. Ao enviar, o lead vai para o meu painel e dispara o evento Lead para a Meta com eventID, guardando UTM e fbclid. Depois abre a minha agenda ou o meu WhatsApp com uma mensagem personalizada que diz de onde a pessoa veio.";
 const SEM_REPETIR =
   "Nunca dois slides seguidos com a mesma forma de frase: alterne pergunta, contraste, número, fala entre aspas e frase direta.";
 
@@ -185,14 +185,26 @@ export const SECOES: SecaoDePrompts[] = [
       },
       {
         titulo: "Página de captura",
-        para: "A pessoa deixa nome e WhatsApp, cai no seu painel com a origem certa e já abre a conversa com você.",
+        para: "Dois caminhos (reunião de 20 min ou WhatsApp), formulário que qualifica, lead no painel e evento Lead para a Meta.",
         prompt: p(
-          "/paginas-e-quiz Quero uma página de captura para [seu público]. A pessoa recebe [o que ela ganha: aula, checklist, diagnóstico] e o destino depois é [WhatsApp ou reunião de 20 minutos]. " + PLANO,
-          "Mobile-first: desenha em 375px. Primeira dobra com a promessa, uma linha de apoio e um botão só. " + LEAD_FRIO,
-          "Formulário com nome e WhatsApp, nada além disso. O lead entra no meu painel com a origem [nome da página] e, depois do envio, a tela agradece e oferece abrir o meu WhatsApp com uma mensagem já escrita.",
+          "/paginas-e-quiz Quero a minha página de captura para [seu público]. Puxe do painel o meu briefing e o meu plano (python ScriptsFera/painel.py puxar) e escreva com as minhas palavras. " + PLANO,
+          "Mobile-first: desenha em 375px. Primeira dobra com a promessa, uma linha de apoio e os dois botões. " + LEAD_FRIO,
+          DOIS_CAMINHOS,
+          "A pergunta que qualifica: [ex.: em que momento você está?] com 3 ou 4 opções. Link da minha agenda: [link]. Meu WhatsApp: [número com DDD].",
           PROVA + " " + RODAPE,
-          "Me mostra o texto da página antes de montar. Depois, testa o caminho inteiro com um lead de teste e me diz onde ele apareceu no painel.",
+          "Me mostra o texto da página antes de montar. Depois, testa pelos DOIS caminhos com o meu nome e me mostra: o lead no painel com a resposta da qualificação e a origem, a mensagem do WhatsApp e o evento Lead em Testar eventos da Meta.",
           CELULAR,
+        ),
+      },
+      {
+        titulo: "Posts que convidam para a página",
+        para: "Logo depois da página no ar: 3 a 6 posts que levam gente até ela.",
+        prompt: p(
+          "/conteudo-e-anuncios A minha página de captura está no ar em [link]. Crie 6 posts que convidam para ela: 2 carrosséis, 2 reels e 2 sequências de stories com link.",
+          "Cada post parte de uma dor do meu briefing, com as palavras que o meu público usa, e termina chamando para a página (link na bio ou figurinha de link no story). " + PLANO,
+          "Todo link leva UTM: utm_source=instagram, utm_medium=organico, utm_campaign=[nome da página], utm_content=[nome do post].",
+          ZONA,
+          TEXTO_PRIMEIRO,
         ),
       },
       {
@@ -789,11 +801,12 @@ export const SECOES: SecaoDePrompts[] = [
       },
       {
         titulo: "Página de captura da isca",
-        para: "Sem esta página, a isca não vira conversa: o lead cai no painel com a origem certa.",
+        para: "A isca vira conversa: a página de obrigado oferece a reunião rápida de 20 minutos.",
         prompt: p(
-          "/squad-isca-fera Usa a isca [qual isca] e cria a página de captura mobile-first: primeira dobra com a promessa da isca, uma linha de apoio e um botão só.",
-          "Formulário com nome e WhatsApp. Libera a isca logo depois do envio e oferece abrir o meu WhatsApp. O lead vai para o meu painel com a origem [nome da isca]. " + RODAPE,
-          "Publica na minha conta Netlify e testa no tamanho de celular o caminho inteiro, com um lead de teste.",
+          "/squad-isca-fera Depois da minha página de captura, quero a página da isca digital gratuita [qual isca]. O PDF você mesmo cria a partir do meu briefing e do meu plano (python ScriptsFera/painel.py puxar).",
+          "Página mobile-first: primeira dobra com a promessa da isca e um botão. Formulário curto com nome, WhatsApp, e-mail, Instagram e uma pergunta que qualifica. Ao enviar, o lead vai para o meu painel com a origem [nome da isca] e dispara o evento Lead com eventID, guardando UTM e fbclid. " + RODAPE,
+          "Página de obrigado: botão para baixar o PDF e, logo abaixo, o convite para uma reunião rápida de 20 minutos para entender como aplicar o material, com os dois caminhos (agenda ou WhatsApp com mensagem personalizada dizendo que veio da isca). O obrigado não dispara Lead de novo.",
+          "Publica na minha conta Netlify e testa no celular o caminho inteiro, com o meu nome.",
         ),
       },
     ],
@@ -834,6 +847,59 @@ export const SECOES: SecaoDePrompts[] = [
         para: "Ajusta um slide sem refazer a apresentação.",
         prompt:
           "/squad-slides-fera O slide [número] ficou [o que não gostou]. Muda só ele, mantém os outros como estão e me mostra de novo antes de exportar o PDF.",
+      },
+    ],
+  },
+  {
+    id: "personalizar",
+    titulo: "Personalize o seu painel",
+    resumo:
+      "O quadro Meus números, na tela inicial do painel, é seu: o FERABOT calcula os números no seu computador e manda para lá. Peça os que te ajudam a decidir. Número que é conta do FERABOT aparece como estimado.",
+    itens: [
+      {
+        titulo: "Monitorar o meu uso",
+        para: "Quantas peças o FERABOT fez por você e em que você mais usa.",
+        prompt: p(
+          "/fera Monte no meu painel o quadro do meu uso. Conte, nos últimos 30 dias, o que você entregou para mim (entregas.json e a pasta output): páginas, artes, roteiros, posts e anúncios.",
+          "Mande para o painel um número por tipo, com: python ScriptsFera/painel.py numero <id> \"<título>\" \"<valor>\" --detalhe \"últimos 30 dias\"",
+          "Use ids curtos (uso-paginas, uso-artes, uso-roteiros). Atualize os mesmos ids toda segunda-feira, quando eu abrir o FERABOT.",
+        ),
+      },
+      {
+        titulo: "Quantos posts eu fiz",
+        para: "Posts publicados no mês, para ver o ritmo da sua semana.",
+        prompt: p(
+          "/fera Conte quantos posts eu publiquei este mês: os que marquei como Publiquei no painel (Meu plano) e os que você agendou para mim (Calendário de posts, se eu tiver a chave do Post for Me).",
+          "Mande para o painel: python ScriptsFera/painel.py numero posts-mes \"Posts publicados no mês\" \"<quantos>\" --detalhe \"meta: <minha meta por semana> por semana\"",
+          "Se eu estiver abaixo do ritmo, me diga qual post do plano publicar hoje.",
+        ),
+      },
+      {
+        titulo: "Custo das ferramentas de IA",
+        para: "Quanto as ferramentas conectadas estão custando por mês.",
+        prompt: p(
+          "/fera Calcule quanto eu gastei este mês com as ferramentas de IA e serviços conectados (Gemini, ElevenLabs, fal, Post for Me, ScrapeCreators, servidor do WhatsApp e o que mais eu usar).",
+          "Onde o serviço mostra o gasto no painel dele, me guie para olhar e me pergunte o valor (se for muito clique, ofereça a extensão do Claude no Chrome). Onde não mostra, estime pelo que você gerou para mim e pelo preço oficial do site, dizendo a fonte.",
+          "Mande um número por ferramenta e o total: python ScriptsFera/painel.py numero custo-total \"Custo das ferramentas no mês\" \"R$ <valor>\" --estimado (tire o --estimado só do que veio da fatura).",
+        ),
+      },
+      {
+        titulo: "Minhas integrações",
+        para: "O que está ligado e o que falta ligar, e para que serve cada coisa.",
+        prompt: p(
+          "/fera Confira as minhas integrações: rode python ScriptsFera/painel.py sincronizar e python ScriptsFera/painel.py estado e me diga, em português simples, quais chaves estão funcionando, quais estão salvas sem teste e quais faltam, e o que cada uma libera.",
+          "Mande para o painel: python ScriptsFera/painel.py numero integracoes \"Integrações funcionando\" \"<x> de <y>\" --detalhe \"falta: <as que faltam>\"",
+          "Se alguma estiver recusada, me guie para refazer, uma de cada vez (oferecendo a extensão do Claude no Chrome).",
+        ),
+      },
+      {
+        titulo: "Mais ou menos informações dos leads",
+        para: "Escolher o que o formulário pergunta e o que aparece na ficha de cada lead.",
+        prompt: p(
+          "/paginas-e-quiz Quero mudar o que a minha página de captura pergunta. Hoje ela pede nome, WhatsApp, e-mail, Instagram e uma pergunta que qualifica. Quero [acrescentar / tirar]: [ex.: cidade, faixa de investimento, o que já tentou].",
+          "Mantenha o padrão de página de captura (dois caminhos, Solicitar orçamento, evento Lead, UTM). Pergunta nova vai em respostas_texto, para aparecer na ficha do lead no painel. Formulário com no máximo 6 campos: cada campo a mais derruba conversão.",
+          "Publique, teste com o meu nome e me mostre a ficha do lead no painel com a informação nova. Depois mande para o painel um resumo dos leads do mês: python ScriptsFera/painel.py numero leads-qualificados \"Leads qualificados no mês\" \"<quantos>\" --detalhe \"<a resposta mais comum>\"",
+        ),
       },
     ],
   },

@@ -240,3 +240,47 @@ def test_ligar_whatsapp_manda_endereco_chave_e_sessao_ao_painel(pasta: Path, ser
     painel.ligar_whatsapp("https://203-0-113-10.sslip.io", "chave-x")
 
     assert PainelDeMentira.recebidos[0] == {"url": "https://203-0-113-10.sslip.io", "apiKey": "chave-x", "sessao": "principal"}
+
+
+def test_plano_do_painel_completa_o_perfil_sem_apagar_o_que_o_painel_nao_tem():
+    perfil = {"nome": "Ana", "handle_instagram": "@antigo", "oferta": "mentoria"}
+    plano = {
+        "bigIdea": "Big",
+        "mecanismo": {"nome": "Método X", "explicacao": "3 etapas"},
+        "headlines": ["H1"],
+        "redes": {"instagram": "@ana", "site": "https://ana.com"},
+    }
+
+    novo = painel.perfil_com_plano(perfil, plano)
+
+    assert novo["nome"] == "Ana" and novo["oferta"] == "mentoria"
+    assert novo["handle_instagram"] == "@ana"
+    assert novo["landing_page"] == "https://ana.com"
+    assert novo["bandeira"] == "Big" and novo["mecanismo"] == "Método X"
+    assert novo["headlines"] == ["H1"]
+    assert painel.perfil_com_plano({"handle_instagram": "@fica"}, {})["handle_instagram"] == "@fica"
+
+
+def test_puxar_grava_o_plano_e_o_perfil(tmp_path, monkeypatch):
+    plano = {"bigIdea": "Big", "redes": {"site": "https://ana.com"}}
+    monkeypatch.setattr(painel, "ler_ligacao", lambda *a, **k: {"url": "https://x.painel.vidafera.com", "token": "t"})
+    monkeypatch.setattr(painel, "chamar", lambda lig, caminho, corpo=None: {"ok": True, "plano": plano})
+    perfil = tmp_path / "perfil.json"
+
+    painel.puxar_plano(caminho_perfil=perfil, raiz=tmp_path)
+
+    assert json.loads((tmp_path / "output" / "fera" / "plano.json").read_text(encoding="utf-8"))["bigIdea"] == "Big"
+    assert json.loads(perfil.read_text(encoding="utf-8"))["landing_page"] == "https://ana.com"
+
+
+def test_numero_monta_o_cartao_e_recusa_id_ruim(monkeypatch):
+    enviado = {}
+    monkeypatch.setattr(painel, "ler_ligacao", lambda *a, **k: {"url": "https://x.painel.vidafera.com", "token": "t"})
+    monkeypatch.setattr(painel, "chamar", lambda lig, caminho, corpo=None: enviado.update(caminho=caminho, corpo=corpo) or {"ok": True})
+
+    painel.enviar_numero("custo-ia", "Custo de IA no mês", "R$ 12", detalhe="Gemini", estimado=True)
+
+    assert enviado["caminho"] == "/api/ferabot/estado"
+    assert enviado["corpo"]["indicadores"]["tipo"] == "estimado"
+    with pytest.raises(painel.ErroPainel):
+        painel.enviar_numero("Custo IA", "x", "1")

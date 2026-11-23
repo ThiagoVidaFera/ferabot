@@ -75,39 +75,21 @@ está errada.
 
 ## Passo 3 — Página de captura no ar
 
-Disparar `/paginas-e-quiz` (ou `/funil-reuniao-fantasma`, se o destino for reunião). A página deste
-passo tem um contrato fixo:
+Antes: o **briefing do negócio** respondido na tela Briefing do painel (`painel.py puxar` traz para
+`output/fera/briefing.json`). Sem briefing, mandar o dono responder lá primeiro: é com as palavras dele que a
+página nasce.
 
-1. Formulário com **nome e WhatsApp** (e-mail opcional), mais um campo invisível `company`, que é a
-   armadilha de robô.
-2. Ao enviar, a página manda o lead para o painel **antes** de sair dali:
-
-   ```js
-   await fetch("<endereço do painel>/api/leads/entrada", {
-     method: "POST",
-     headers: { "Content-Type": "application/json" },
-     body: JSON.stringify({
-       nome, whatsapp, email, company,
-       funil: "captura-<slug>", origem: "pagina-captura",
-       utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-     }),
-   });
-   ```
-
-   O endereço do painel está em `painel.json` (campo `url`). O código de ligação **nunca** vai para a página.
-3. Em seguida abre o WhatsApp do dono: `https://wa.me/<número com 55>?text=<mensagem pronta>`.
-   Se o envio ao painel falhar, a página abre o WhatsApp do mesmo jeito. Lead não se perde por causa do painel.
-4. Publicar com a chave da Netlify e conferir no celular (375px).
-5. **Teste obrigatório:** preencher a página com o nome dele e conferir, com ele, que o lead apareceu
-   na tela Leads do painel e que o WhatsApp abriu.
-
-Depois do teste:
+Disparar `/paginas-e-quiz` seguindo **`references/pagina-de-captura.md`** (padrão obrigatório): dois caminhos
+(reunião de 20 min e WhatsApp), formulário curto com nome, WhatsApp, e-mail, Instagram e uma pergunta que
+qualifica, botão "Solicitar orçamento", lead no painel + evento Lead com eventID, UTM e fbclid, mensagem do
+WhatsApp personalizada com a origem. Teste pelos dois caminhos e só então:
 
 ```bash
 python ScriptsFera/painel.py marco pagina --link "<endereço da página>" --resumo "<título da página>"
 ```
 
-Neste passo o lead ainda cai no WhatsApp normal do dono, pelo link `wa.me`.
+Em seguida, na mesma semana: **3 a 6 posts que convidam para a página** (Guia de prompts do painel) e a
+**página de isca digital gratuita** (PDF feito pelo FERABOT, página de obrigado oferecendo a reunião de 20 min).
 
 ## Passo 4 — WhatsApp ligado ao painel
 

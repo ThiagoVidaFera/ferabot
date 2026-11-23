@@ -83,6 +83,15 @@ export async function testarChave(
         return peloFormato(valor, /^re_/, "começar com re_");
       case "IG_USER_ID":
         return peloFormato(valor, /^\d{5,}$/, "só números");
+      case "META_PIXEL_ID": {
+        if (!/^\d{10,20}$/.test(valor)) return { ok: false, msg: "Formato estranho. O id do pixel é só número, com 15 ou 16 dígitos." };
+        const token = outras.META_ACCESS_TOKEN;
+        if (!token) return { ok: null, msg: "Formato certo. Salve o token da Meta para eu conferir o pixel." };
+        return pelaResposta(
+          await responde(buscar, `https://graph.facebook.com/v21.0/${valor}?fields=name`, { Authorization: `Bearer ${token}` }),
+          "A Meta",
+        );
+      }
       default:
         return { ok: null, msg: "Chave salva. Essa não tem teste automático." };
     }

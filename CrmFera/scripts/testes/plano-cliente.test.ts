@@ -68,6 +68,7 @@ test("Jornada tem o passo do YouTube depois do WhatsApp e ele fecha com canal e 
     whatsapp: { servidor: true, conectado: true },
     planoAprovado: false,
     leadsReais: 0,
+    briefingRespondido: true,
   };
   const soCanal = montarJornada(estado);
   assert.equal(soCanal.passos[4].id, "youtube");
@@ -108,4 +109,16 @@ test("aprovação some quando a big idea muda e fica quando só chegam roteiros"
   assert.ok(comRoteiro.ok && comRoteiro.plano.aprovadoEm);
   assert.ok(outraIdeia.ok && !outraIdeia.plano.aprovadoEm);
   assert.equal(aprovarPlano(PLANO_VAZIO), null);
+});
+
+test("redes entram, se somam às que já estavam e campo desconhecido fica de fora", () => {
+  const a = mesclarPlano(PLANO_VAZIO, { redes: { site: "https://exemplo.com", orkut: "x" } }, agora);
+  assert.ok(a.ok);
+  if (!a.ok) return;
+  assert.deepEqual(a.plano.redes, { site: "https://exemplo.com" });
+
+  const b = mesclarPlano(a.plano, { redes: { instagram: "@exemplo" } }, agora);
+  assert.ok(b.ok);
+  if (!b.ok) return;
+  assert.deepEqual(b.plano.redes, { site: "https://exemplo.com", instagram: "@exemplo" });
 });

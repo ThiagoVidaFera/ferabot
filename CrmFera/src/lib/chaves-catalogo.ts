@@ -86,6 +86,21 @@ export const CATALOGO: ChaveDoCatalogo[] = [
     passos: ["Crie a conta e conecte o seu Instagram.", "No painel, gere a chave de API e cole aqui."],
   },
   {
+    env: "META_PIXEL_ID",
+    nome: "Meta: id do pixel",
+    grupo: "anuncios",
+    libera:
+      "O evento Lead das suas páginas chega na Meta também pelo servidor (API de Conversões), com o mesmo id do navegador. Anúncio otimiza melhor e nada conta em dobro.",
+    dica: "Só números. Fica em Gerenciador de Eventos > Fontes de dados.",
+    onde: "https://business.facebook.com/events_manager",
+    passos: [
+      "Abra o Gerenciador de Eventos e escolha o seu pixel (se não tiver, Conectar dados > Web > crie um com o nome do seu negócio).",
+      "Copie o número que aparece embaixo do nome do pixel.",
+      "Atribua o pixel ao usuário do sistema FERABOT (Configurações do portfólio > Conjuntos de dados), se ainda não fez.",
+      "Cole aqui e aperte Salvar e testar.",
+    ],
+  },
+  {
     env: "IG_USER_ID",
     nome: "Instagram: id da conta",
     grupo: "anuncios",

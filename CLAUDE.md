@@ -23,8 +23,11 @@ Ler sempre, na primeira interação de cada conversa:
 
 Sem esses três arquivos não existe resposta personalizada.
 
-**Se existir `painel.json`**, o dono tem painel na internet: rodar `python ScriptsFera/painel.py estado`
-e conduzir pela Jornada (`SkillsDoFera/fera/references/jornada.md`). Chave de API se cola na tela
+**Se existir `painel.json`**, o dono tem painel na internet. No começo de toda conversa, rodar
+`python ScriptsFera/painel.py puxar` (traz do painel as redes sociais, a big idea, o mecanismo único, as
+headlines, os roteiros e os posts para `perfil.json` e `output/fera/plano.json`) e depois
+`python ScriptsFera/painel.py estado`. **O plano do painel é o briefing:** não perguntar de novo o que já veio
+de lá, só o que faltar. Conduzir pela Jornada (`SkillsDoFera/fera/references/jornada.md`). Chave de API se cola na tela
 Chaves do painel, nunca no chat. O WhatsApp do dono roda numa VPS dele
 (`SkillsDoFera/fera/references/whatsapp.md`): QR code primeiro, API oficial da Meta depois.
 
@@ -40,6 +43,22 @@ que eu faça pelo seu Chrome? Com a extensão do Claude eu assumo a tela e faço
 suas contas e confirma." Se ele aceitar e a extensão não estiver instalada, ensinar a instalar (Chrome Web
 Store, "Claude", entrar com a conta do Claude). Senha e código de verificação quem digita é ele. Chave pronta
 ele cola na tela Chaves do painel, nunca no chat.
+
+**Página que gera lead (regra do Thiago, 23/11/2026).** Toda página com formulário segue
+`SkillsDoFera/fera/references/pagina-de-captura.md`, sem exceção: dois caminhos (reunião de 20 min e conversa
+no WhatsApp), formulário curto (nome, WhatsApp, e-mail, Instagram e uma pergunta que qualifica), botão
+"Solicitar orçamento", lead salvo no painel nos dois caminhos, evento Lead para a Meta com eventID, UTM e fbclid
+guardados, mensagem do WhatsApp personalizada com a origem. Ordem do começo: briefing no painel, página de
+captura, posts que convidam para ela, página de isca digital (PDF) com obrigado oferecendo a reunião de 20 min.
+
+**Modelo do Claude (regra do Thiago, 22/11/2026).** Orientar o dono, e lembrar quando a tarefa mudar de tipo:
+**Sonnet para executar** (90% do tempo: arte, post, página, roteiro do plano, Teste geral, publicar, conferir),
+**Opus para planejar e criar coisa nova** (big idea, mecanismo, oferta, página de vendas do zero, estratégia de
+campanha), **Fable só em último caso**, quando Sonnet e Opus tentaram e não resolveram. Troca com `/model`.
+
+**Teste geral (`/teste-geral`).** Na primeira semana, convidar o dono a rodar o Teste geral: um exemplo de cada
+formato (slides, vídeo do YouTube, todos os estilos de carrossel, reel e story, anúncio) com o tema do plano dele,
+cada um na pasta `output/teste-geral/<skill>/`, para ele ver como fica no caso dele e escolher os formatos.
 
 ---
 
@@ -197,6 +216,7 @@ Mais `/criar-ferabot` — ele descreve um agente novo e o sistema escreve a skil
 | `/crm-fera` | o CRM completo com WhatsApp (WAHA): inbox, contatos, funil, reuniões, robôs que qualificam, confirmam e lembram, follow-up, disparos, vendas. Roda no computador (Docker) ou numa VPS |
 | `/ensaio-ia` | ensaio de fotos do PRÓPRIO dono com IA, a partir de 3 a 6 fotos reais, para post, anúncio e página. Alimenta a `/galeria-de-artes` |
 | `/agenda-google` | conecta o Google Agenda, cria as agendas do negócio, marca reunião com Meet e mostra horário livre |
+| `/teste-geral` | um exemplo de cada formato no caso do dono (slides, YouTube, carrosséis, reels, stories, anúncio), cada um na pasta da skill, com índice |
 | `/canal-youtube` | arruma o canal: @, nome, descrição, palavras-chave, banner 2560x1440, foto, playlists, trailer de 60s e vídeos antigos com o link de agendamento |
 
 Os quatro de anúncio são chamados pelo `/conteudo-e-anuncios`; o cliente também pode digitar direto.

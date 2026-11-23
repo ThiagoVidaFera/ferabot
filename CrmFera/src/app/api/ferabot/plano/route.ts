@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { tokensIguais } from "@/lib/cofre";
 import { tokenDoFerabotConfere } from "@/lib/jornada-estado";
 import { lerPlano, salvarPlano } from "@/lib/plano-cliente-banco";
+import { lerBriefing } from "@/lib/briefing-cliente";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,8 @@ async function autorizado(req: NextRequest): Promise<boolean> {
 
 export async function GET(req: NextRequest) {
   if (!(await autorizado(req))) return NextResponse.json({ ok: false, erro: "sem permissao" }, { status: 401 });
-  return NextResponse.json({ ok: true, plano: await lerPlano() });
+  const [plano, briefing] = await Promise.all([lerPlano(), lerBriefing()]);
+  return NextResponse.json({ ok: true, plano, briefing });
 }
 
 export async function POST(req: NextRequest) {

@@ -50,9 +50,13 @@ export async function enviarEventoWeb(
 
     // Pixel só da configuração: aceitar o do corpo deixaria qualquer POST público desviar eventos.
     // Sem pixel configurado não envia: nunca existe pixel "padrão" (evento iria pro pixel de outra pessoa).
-    const pixel = await config("capi_pixel_web", "CAPI_PIXEL_WEB");
+    // painel do cliente: pixel e token moram no cofre (tela Chaves)
+    const { chavesSalvas } = await import("@/lib/chaves");
+    const cofre = await chavesSalvas().catch(() => ({}) as Record<string, string>);
+    const pixel = (await config("capi_pixel_web", "CAPI_PIXEL_WEB")) || cofre.META_PIXEL_ID || "";
     if (!pixel) return { enviado: false, motivo: "capi_pixel_web nao configurado" };
-    const token = (await config("capi_token", "CAPI_TOKEN")) || (await config("meta_ads_token", "META_ADS_TOKEN"));
+    const token =
+      (await config("capi_token", "CAPI_TOKEN")) || (await config("meta_ads_token", "META_ADS_TOKEN")) || cofre.META_ACCESS_TOKEN || "";
     if (!token) return { enviado: false, motivo: "capi_token nao configurado" };
 
     const chave = `${contactId}:${evento}:${opcoes.chaveDedup ?? ""}`;

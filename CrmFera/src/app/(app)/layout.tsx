@@ -36,6 +36,7 @@ const MENU = [
 const MENU_CLIENTE = [
   { href: "/comece", label: "Comece aqui", icone: "jornada" },
   { href: "/", label: "Painel", icone: "painel" },
+  { href: "/briefing", label: "Briefing", icone: "roteiros" },
   { href: "/configuracoes#plano", label: "Meu plano", icone: "roteiros" },
   { href: "/jornada", label: "Jornada", icone: "jornada" },
   { href: "/prompts", label: "Guia de prompts", icone: "roteiros" },

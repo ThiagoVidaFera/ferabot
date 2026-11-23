@@ -5,6 +5,7 @@ import { negocio } from "@/lib/negocio";
 import { nivelDoPainel, whatsappDoSuporte } from "@/lib/hospedado";
 import { contarProgresso, lerPlano, lerProgresso } from "@/lib/plano-cliente-banco";
 import { temConteudo } from "@/lib/plano-cliente";
+import { lerBriefing, PERGUNTAS_BRIEFING, respondidas } from "@/lib/briefing-cliente";
 import { ferabotVistoEm, tokenDoFerabot } from "@/lib/jornada-estado";
 import { promptCompleto } from "@/lib/prompts-jornada";
 import { enderecoDoPainel } from "../jornada/ligacao";
@@ -102,8 +103,20 @@ export default async function Comece() {
         },
       ];
 
+  const briefing = await lerBriefing();
+  const feitasBriefing = respondidas(briefing);
   const etapas: Etapa[] = [
     ...instalacao,
+    {
+      titulo: `Responda o briefing do seu negócio (${feitasBriefing} de ${PERGUNTAS_BRIEFING.length})`,
+      feito: feitasBriefing === PERGUNTAS_BRIEFING.length,
+      passos: [
+        "São 7 perguntas: identidade visual, jeito de falar, quem você quer e quem não quer atrair, problemas que resolve, resultados e por que confiar em você.",
+        "Escreva com as suas palavras, como falaria para uma amiga. Pode salvar e voltar depois.",
+        "Terminou? A tela do briefing te dá o prompt que cria a sua primeira página de captura e os posts que convidam para ela.",
+      ],
+      acao: { href: "/briefing", rotulo: "Abrir o briefing" },
+    },
     {
       titulo: "Leia o seu plano e aprove",
       feito: Boolean(plano.aprovadoEm),

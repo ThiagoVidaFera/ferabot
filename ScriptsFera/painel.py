@@ -12,6 +12,8 @@ Uso:
   python ScriptsFera/painel.py sincronizar
   python ScriptsFera/painel.py estado
   python ScriptsFera/painel.py marco <narrativa|pagina|canal_youtube|video_youtube|criativos|posts|campanha> [--link URL] [--resumo TEXTO]
+  python ScriptsFera/painel.py puxar                  (traz do painel: redes, big idea, mecanismo, headlines, roteiros, posts)
+  python ScriptsFera/painel.py numero <id> "<título>" "<valor>" [--detalhe TEXTO] [--estimado] [--remover]
   python ScriptsFera/painel.py plano <arquivo.json>   (big idea, mecanismo, headlines, roteiros do YouTube, posts)
   python ScriptsFera/painel.py entrega <bot> <o que foi> [--link URL]
   python ScriptsFera/painel.py whatsapp-estado
@@ -224,6 +226,72 @@ def enviar_plano(caminho: Path) -> dict[str, Any]:
     return chamar(ler_ligacao(), "/api/ferabot/plano", corpo)
 
 
+PLANO_LOCAL = Path("output") / "fera" / "plano.json"
+
+
+def perfil_com_plano(perfil: dict[str, Any], plano: dict[str, Any]) -> dict[str, Any]:
+    """O painel é a fonte do posicionamento: redes, big idea, mecanismo e headlines vão para o perfil.json.
+    O que o painel não tem fica como estava no perfil."""
+    redes = plano.get("redes") or {}
+    mecanismo = plano.get("mecanismo") or {}
+    do_painel = {
+        "handle_instagram": redes.get("instagram", ""),
+        "youtube": redes.get("youtube", ""),
+        "landing_page": redes.get("site", ""),
+        "whatsapp": redes.get("whatsapp", ""),
+        "tiktok": redes.get("tiktok", ""),
+        "bandeira": plano.get("bigIdea", ""),
+        "big_idea": plano.get("bigIdea", ""),
+        "mecanismo": mecanismo.get("nome", ""),
+        "mecanismo_explicacao": mecanismo.get("explicacao", ""),
+        "headlines": plano.get("headlines") or [],
+    }
+    return {**perfil, **{k: v for k, v in do_painel.items() if v}}
+
+
+def puxar_plano(caminho_perfil: Path | None = None, raiz: Path | None = None) -> dict[str, Any]:
+    """Traz o plano do painel: grava output/fera/plano.json e completa o perfil.json com ele."""
+    resposta = chamar(ler_ligacao(), "/api/ferabot/plano")
+    plano = resposta.get("plano") or {}
+    briefing = resposta.get("briefing") or {}
+    base = raiz or ROOT_DIR
+    destino = base / PLANO_LOCAL
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(json.dumps(plano, ensure_ascii=False, indent=2), encoding="utf-8")
+    # o briefing do negócio, com as palavras do dono: base da página de captura e dos posts
+    (destino.parent / "briefing.json").write_text(json.dumps(briefing, ensure_ascii=False, indent=2), encoding="utf-8")
+    arquivo_perfil = caminho_perfil or PERFIL_PATH
+    perfil = json.loads(arquivo_perfil.read_text(encoding="utf-8")) if arquivo_perfil.exists() else {}
+    arquivo_perfil.write_text(json.dumps(perfil_com_plano(perfil, plano), ensure_ascii=False, indent=2), encoding="utf-8")
+    return plano
+
+
+def resumo_do_plano(plano: dict[str, Any]) -> list[str]:
+    redes = plano.get("redes") or {}
+    linhas = [
+        f"Big idea: {plano.get('bigIdea') or '(vazia)'}",
+        f"Mecanismo: {(plano.get('mecanismo') or {}).get('nome') or '(vazio)'}",
+        f"Headlines: {len(plano.get('headlines') or [])} · Roteiros de YouTube: {len(plano.get('roteirosYoutube') or [])} · Posts: {len(plano.get('postsInstagram') or [])}",
+        "Redes: " + (", ".join(f"{k} {v}" for k, v in redes.items()) or "nenhuma no painel (perguntar ao dono)"),
+        f"Aprovado pelo dono: {'sim' if plano.get('aprovadoEm') else 'ainda não'}",
+        "Briefing do negócio: em output/fera/briefing.json (respondido na tela Briefing do painel)",
+    ]
+    return linhas
+
+
+def enviar_numero(id_: str, titulo: str = "", valor: str = "", detalhe: str = "", estimado: bool = False, remover: bool = False) -> dict[str, Any]:
+    """Um cartão de "Meus números" no painel (o dono personaliza a tela pedindo ao FERABOT)."""
+    if not re.fullmatch(r"[a-z0-9-]{2,40}", id_):
+        raise ErroPainel("O id do número usa só letras minúsculas, números e hífen (ex.: posts-mes).")
+    if remover:
+        cartao: dict[str, Any] = {"id": id_, "remover": True}
+    else:
+        if not titulo or not valor:
+            raise ErroPainel("Falta o título ou o valor do número.")
+        cartao = {"id": id_, "titulo": titulo, "valor": valor, "detalhe": detalhe, "tipo": "estimado" if estimado else "medido"}
+    return chamar(ler_ligacao(), "/api/ferabot/estado", {"indicadores": cartao})
+
+
 def ligar_whatsapp(url: str, chave: str, sessao: str = "principal") -> dict[str, Any]:
     """Liga o servidor de WhatsApp do dono ao painel. A chave vai só para o painel, por HTTPS."""
     return chamar(ler_ligacao(), "/api/ferabot/whatsapp", {"url": url, "apiKey": chave, "sessao": sessao})
@@ -239,6 +307,10 @@ def conectar(endereco: str, token: str) -> dict[str, Any]:
     resposta = chamar(ligacao, "/api/ferabot/estado", {"perfil": perfil} if perfil else {})
     gravar_ligacao(ligacao)
     sincronizar()
+    try:
+        puxar_plano()
+    except ErroPainel:
+        pass  # painel sem plano ainda: o briefing acontece na conversa
     return resposta
 
 
@@ -282,6 +354,14 @@ def main() -> None:
     p_entrega.add_argument("oque")
     p_entrega.add_argument("--link", default="")
     sub.add_parser("whatsapp-estado")
+    sub.add_parser("puxar")
+    p_numero = sub.add_parser("numero")
+    p_numero.add_argument("id")
+    p_numero.add_argument("titulo", nargs="?", default="")
+    p_numero.add_argument("valor", nargs="?", default="")
+    p_numero.add_argument("--detalhe", default="")
+    p_numero.add_argument("--estimado", action="store_true")
+    p_numero.add_argument("--remover", action="store_true")
     p_plano = sub.add_parser("plano")
     p_plano.add_argument("arquivo")
     args = parser.parse_args()
@@ -289,8 +369,18 @@ def main() -> None:
     try:
         if args.comando == "conectar":
             resposta = conectar(args.endereco, args.codigo)
-            print("FERABOT conectado ao painel.")
+            print("FERABOT conectado ao painel. Chaves e plano trazidos do painel.")
+            plano_local = ROOT_DIR / PLANO_LOCAL
+            if plano_local.exists():
+                print(chr(10).join(resumo_do_plano(json.loads(plano_local.read_text(encoding="utf-8")))))
             imprimir_jornada(resposta)
+        elif args.comando == "numero":
+            enviar_numero(args.id, args.titulo, args.valor, args.detalhe, args.estimado, args.remover)
+            print("Número " + ("removido do" if args.remover else "atualizado no") + " painel (Meus números, na tela inicial).")
+        elif args.comando == "puxar":
+            plano = puxar_plano()
+            print("Plano trazido do painel para output/fera/plano.json e perfil.json:")
+            print(chr(10).join(resumo_do_plano(plano)))
         elif args.comando == "sincronizar":
             nomes = sincronizar()
             print(f"Chaves vindas do painel: {', '.join(nomes) if nomes else 'nenhuma salva ainda'}.")

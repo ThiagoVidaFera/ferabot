@@ -3,6 +3,7 @@ import { config, gravarConfig } from "@/lib/config";
 import { chavesFuncionando } from "@/lib/chaves";
 import { nivelDoPainel, painelHospedado } from "@/lib/hospedado";
 import { temConteudo } from "@/lib/plano-cliente";
+import { briefingCompleto, lerBriefing } from "@/lib/briefing-cliente";
 import { novoToken, tokensIguais } from "@/lib/cofre";
 import { lerPlano, lerProgresso } from "@/lib/plano-cliente-banco";
 import { ehMarco, montarJornada, type EstadoJornada, type Jornada, type Marco, type RegistroMarco } from "@/lib/jornada";
@@ -84,7 +85,7 @@ export async function ultimaAtividade(): Promise<string | null> {
 }
 
 export async function estadoDaJornada(): Promise<EstadoJornada> {
-  const [visto, funcionando, marcos, totalLeads, whatsapp, plano, leadsReais] = await Promise.all([
+  const [visto, funcionando, marcos, totalLeads, whatsapp, plano, leadsReais, briefing] = await Promise.all([
     config(K_VISTO),
     chavesFuncionando(),
     lerMarcos(),
@@ -92,6 +93,7 @@ export async function estadoDaJornada(): Promise<EstadoJornada> {
     estadoDoWhatsapp(),
     lerPlano(),
     contarLeadsReais(),
+    lerBriefing(),
   ]);
   return {
     ferabotConectado: Boolean(visto),
@@ -103,6 +105,7 @@ export async function estadoDaJornada(): Promise<EstadoJornada> {
     leadsReais,
     equipeFazTecnica: painelHospedado() && nivelDoPainel() === "equipe",
     planoEntregue: temConteudo(plano),
+    briefingRespondido: briefingCompleto(briefing),
   };
 }
 

@@ -13,6 +13,7 @@ Na dúvida: mentora. Empurrar fluxo sem ele pedir é o erro mais caro do sistema
 
 | Gatilho do cliente | FeraBot | Comando |
 |---|---|---|
+| teste geral, quero ver todos os formatos, mostra tudo o que você faz, exemplo de cada estilo | Teste geral | `/teste-geral` (rodar no Sonnet) |
 | conecta o meu FERABOT ao painel, em que passo estou, o que falta, minha jornada, salvei a chave no painel | Jornada | `references/jornada.md` + `python ScriptsFera/painel.py` |
 | WhatsApp no painel, VPS do WhatsApp, QR code, conectar meu número, API oficial do WhatsApp | Jornada, passo 4 | `references/whatsapp.md` (Fase 1 QR primeiro, Fase 2 API oficial depois) |
 | narrativa, mecanismo único, bandeira, contracrença, posicionamento | Jornada, passo 2 | `references/jornada.md` (mentoria, uma pergunta por vez) |

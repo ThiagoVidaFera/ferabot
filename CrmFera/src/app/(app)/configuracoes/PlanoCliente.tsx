@@ -11,6 +11,7 @@ const bloco = { fontSize: 14, lineHeight: 1.5, margin: "0 0 12px", whiteSpace: "
 const rotulo = { fontSize: 12, fontWeight: 700, letterSpacing: 0.4, textTransform: "uppercase" as const, color: "var(--texto-fraco)", margin: "14px 0 6px" };
 const item = { borderTop: "1px solid var(--linha, #e5e7eb)", padding: "10px 0" };
 const VERDE = "#16a34a";
+const NOME_REDE: Record<string, string> = { instagram: "Instagram", youtube: "YouTube", site: "Site", whatsapp: "WhatsApp", tiktok: "TikTok" };
 
 function dataCurta(iso?: string): string {
   return iso ? new Date(iso).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" }) : "";
@@ -152,6 +153,18 @@ export default function PlanoCliente({ plano, progresso }: { plano: Plano; progr
                 </li>
               ))}
             </ol>
+          </>
+        ) : null}
+        {plano.redes && Object.keys(plano.redes).length ? (
+          <>
+            <div style={rotulo}>Suas redes</div>
+            <ul style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 1.6 }}>
+              {Object.entries(plano.redes).map(([rede, valor]) => (
+                <li key={rede} style={{ overflowWrap: "anywhere" }}>
+                  {NOME_REDE[rede] ?? rede}: {valor}
+                </li>
+              ))}
+            </ul>
           </>
         ) : null}
         {temNarrativa ? <Aprovacao aprovadoEm={plano.aprovadoEm} /> : null}

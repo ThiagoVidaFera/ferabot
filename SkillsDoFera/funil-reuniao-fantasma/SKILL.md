@@ -6,6 +6,11 @@ description: FeraBot Funil Reunião Fantasma. Cria a página de agendamento de r
 # FeraBot Funil Reunião Fantasma
 
 Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de tudo.
+
+> **Padrão obrigatório de página que gera lead:** `SkillsDoFera/fera/references/pagina-de-captura.md`
+> (dois caminhos: reunião de 20 min e WhatsApp; formulário curto com nome, WhatsApp, e-mail, Instagram e uma
+> pergunta que qualifica; botão "Solicitar orçamento"; lead no painel + evento Lead com eventID; UTM e fbclid;
+> mensagem do WhatsApp personalizada com a origem). Ler antes de montar qualquer página com formulário.
 Deploy e QA: skill `paginas-e-quiz`. Esta é a PRIMEIRA página que o cliente cria.
 
 ## O mecanismo

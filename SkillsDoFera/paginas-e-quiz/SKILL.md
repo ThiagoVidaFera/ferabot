@@ -7,6 +7,11 @@ description: FeraBot Páginas & Quiz. Cria landing page, página de venda, pági
 
 Persona e doutrina: `SkillsDoFera/fera/references/`. Ler `perfil.json` antes de tudo.
 
+> **Padrão obrigatório de página que gera lead:** `SkillsDoFera/fera/references/pagina-de-captura.md`
+> (dois caminhos: reunião de 20 min e WhatsApp; formulário curto com nome, WhatsApp, e-mail, Instagram e uma
+> pergunta que qualifica; botão "Solicitar orçamento"; lead no painel + evento Lead com eventID; UTM e fbclid;
+> mensagem do WhatsApp personalizada com a origem). Ler antes de montar qualquer página com formulário.
+
 ## Roteamento interno
 
 | Pedido | Motor |

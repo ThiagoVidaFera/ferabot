@@ -38,6 +38,8 @@ export type EstadoJornada = {
   equipeFazTecnica?: boolean;
   /** o plano (big idea, roteiros, posts) já está no painel */
   planoEntregue?: boolean;
+  /** o dono respondeu as 7 perguntas do briefing do negócio, com as palavras dele */
+  briefingRespondido?: boolean;
 };
 
 export type Trilha = "tecnica" | "conteudo";
@@ -178,11 +180,15 @@ export function montarJornada(estado: EstadoJornada): Jornada {
     {
       id: "narrativa",
       trilha: "conteudo",
-      titulo: "Narrativa e mecanismo único",
-      porque: "É o que faz o lead entender em 5 segundos por que você e não o concorrente. Toda peça parte daqui.",
-      itens: [itemNarrativa(estado)],
+      titulo: "Briefing do negócio e narrativa",
+      porque:
+        "Você conta o seu negócio com as suas palavras e aprova a sua narrativa. É disso que nascem a primeira página e os primeiros posts.",
+      itens: [
+        { texto: "Briefing do negócio respondido com as suas palavras (7 perguntas)", feito: Boolean(estado.briefingRespondido) },
+        itemNarrativa(estado),
+      ],
       prompt: "/fera vamos refinar a minha narrativa e o meu mecanismo único",
-      tela: { href: "/configuracoes#plano", rotulo: "Ver meu plano" },
+      tela: { href: "/briefing", rotulo: "Responder o briefing" },
     },
     {
       id: "pagina",

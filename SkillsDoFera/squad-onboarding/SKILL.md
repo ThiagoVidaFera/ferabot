@@ -3,6 +3,11 @@ name: squad-onboarding
 description: Monta o sistema de captação pronto — prévia do perfil com feed, 4 páginas, kit de feed (~55 artes + PDF da isca), 3 campanhas de R$20/dia e fluxo WhatsApp E0–E7 — pro seu negócio ou de um cliente. Triggers "onboarding", "monta meu sistema", "prévia do perfil", "kit de feed", "sistema de captação". NÃO é o briefing de primeiro uso do FERABOT (fera/references/onboarding.md).
 ---
 
+> **Padrão obrigatório de página que gera lead:** `SkillsDoFera/fera/references/pagina-de-captura.md`
+> (dois caminhos: reunião de 20 min e WhatsApp; formulário curto com nome, WhatsApp, e-mail, Instagram e uma
+> pergunta que qualifica; botão "Solicitar orçamento"; lead no painel + evento Lead com eventID; UTM e fbclid;
+> mensagem do WhatsApp personalizada com a origem). Ler antes de montar qualquer página com formulário.
+
 # Squad Onboarding v5 — o sistema de captação pronto
 
 Você entrega (pra você mesmo ou pra um cliente seu) o sistema inteiro já ligado: perfil do

@@ -15,21 +15,22 @@ const REGRAS = `Regras para você seguir comigo o tempo todo:
 - Quando o passo for cheio de cliques no navegador (criar conta, app, chave, DNS, Google Cloud, YouTube, Meta), me ofereça usar a extensão do Claude no Chrome para você assumir a tela e fazer por mim. Se eu não tiver, me ensine a instalar. Eu só entro nas minhas contas e confirmo.
 - No fim, confira se funcionou de verdade e me diga qual é o próximo passo da minha Jornada.`;
 
-const INSTALACAO = (painel: string, codigo: string) => `Quero instalar o FERABOT no meu computador e ligar ele ao meu painel. Faça nesta ordem:
+const INSTALACAO = (painel: string, codigo: string) => `Quero instalar o FERABOT no meu computador, ligado ao meu painel. Faça nesta ordem:
 
 1. Descubra se o meu computador é Windows ou Mac e me diga.
 2. Confira se já tenho Python 3.10 ou mais novo e o Git. O que faltar, instale (no Windows pelo winget, no Mac pelo Homebrew), me avisando antes.
 3. Baixe o FERABOT de https://github.com/ThiagoVidaFera/ferabot para a pasta Documentos/ferabot. Se a pasta já existir, só atualize.
-4. Entre na pasta e rode o instalador (python instalar.py). Quando ele pedir dados do meu negócio, me faça as perguntas aqui na conversa, uma por vez, e preencha você mesmo.
-5. Ligue o FERABOT ao meu painel com este comando, dentro da pasta ferabot:
+4. PRIMEIRO de tudo, ligue o FERABOT ao meu painel, dentro da pasta ferabot:
    python ScriptsFera/painel.py conectar ${painel} ${codigo}
-6. Rode python ScriptsFera/painel.py estado e me mostre, em português simples, o que já está pronto e o que falta.
-7. Me ensine a abrir o FERABOT nas próximas vezes (qual pasta abrir no Claude Code) e a usar o comando /fera.
-8. Depois me guie para criar as duas chaves grátis, uma de cada vez, e colar na tela Chaves do painel (${painel}/chaves):
+   Isso já traz do painel as minhas redes sociais, a minha big idea, o meu mecanismo único e as minhas headlines (python ScriptsFera/painel.py puxar). Me mostre em 5 linhas o que veio.
+5. Rode o instalador (python instalar.py). O meu perfil já veio do painel: me pergunte aqui na conversa só o que faltar, uma pergunta por vez, e preencha você mesmo.
+6. Me guie para criar as duas chaves grátis, uma de cada vez, e colar na tela Chaves do painel (${painel}/chaves):
    - Gemini (Google AI Studio): serve para criar imagens.
    - Netlify: serve para publicar as minhas páginas.
-   Para cada uma: abra o site certo, me diga onde clicar para criar a chave, espere eu colar no painel e apertar Testar. Só siga quando o painel mostrar a chave funcionando.
-9. Rode python ScriptsFera/painel.py sincronizar para trazer as chaves para o computador.
+   Para cada uma: abra o site certo, me diga onde clicar para criar a chave, espere eu colar no painel e apertar Salvar e testar. Só siga quando o painel mostrar a chave funcionando.
+7. Rode python ScriptsFera/painel.py sincronizar para trazer as chaves para o computador, e python ScriptsFera/painel.py estado para me mostrar o que já está pronto e o que falta.
+8. Me ensine a abrir o FERABOT nas próximas vezes (Claude Code na pasta Documentos/ferabot e o comando /fera) e qual modelo usar: Sonnet para executar (quase sempre), Opus para planejar e criar coisa nova, Fable só se os outros não resolverem.
+9. Me convide para o /teste-geral, que cria um exemplo de cada formato no meu caso.
 
 ${REGRAS}`;
 

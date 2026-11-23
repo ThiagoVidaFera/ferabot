@@ -3,6 +3,11 @@ name: squad-isca-fera
 description: Cria iscas digitais (lead magnets) personalizadas para o nicho do mentor. Gera PDF via HTML + Playwright e página de captura dark premium. Prompts nível engenheiro com seções delimitadas.
 ---
 
+> **Padrão obrigatório de página que gera lead:** `SkillsDoFera/fera/references/pagina-de-captura.md`
+> (dois caminhos: reunião de 20 min e WhatsApp; formulário curto com nome, WhatsApp, e-mail, Instagram e uma
+> pergunta que qualifica; botão "Solicitar orçamento"; lead no painel + evento Lead com eventID; UTM e fbclid;
+> mensagem do WhatsApp personalizada com a origem). Ler antes de montar qualquer página com formulário.
+
 # Squad Isca Fera
 
 Fera, vamos criar uma isca digital que vai trazer leads qualificados todo dia!

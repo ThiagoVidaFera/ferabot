@@ -81,6 +81,59 @@ function ComoPedir() {
 }
 
 /** Guia de prompts: o promptbook do FERABOT dentro do painel, para o dono usar sozinho. */
+const PROMPT_TESTE_GERAL =
+  "/teste-geral Quero ver como fica cada formato no meu caso. Puxe o meu plano do painel, me pergunte só o que faltar, escolha um tema do meu plano e crie um exemplo de cada formato (slides, vídeo do YouTube, todos os estilos de carrossel, de reel e de story, e anúncio), salvando cada um numa pasta com o nome da skill. Antes de gastar qualquer crédito pago, me mostre o plano e espere o meu ok. No fim, abra o índice com tudo.";
+
+/** O convite para testar todos os formatos de uma vez, no caso do dono. */
+function TesteGeral() {
+  return (
+    <section className="card" style={{ padding: 18, borderColor: "var(--acento)" }}>
+      <div className="sobretitulo">Comece por aqui</div>
+      <h2 style={{ fontSize: 18, margin: "4px 0 6px" }}>Teste geral: veja todos os formatos no seu caso</h2>
+      <p style={{ fontSize: 14, lineHeight: 1.55, margin: "0 0 8px" }}>
+        O FERABOT tem vários estilos de carrossel, de reel e de story, além de slides, vídeo do YouTube e anúncio. O
+        Teste geral entende o seu perfil, pergunta o que faltar e cria um exemplo de cada um, com o mesmo tema do seu
+        plano. Cada resultado fica numa pasta com o nome da skill que o fez, em <code>output/teste-geral/</code>, com
+        um índice para você comparar tudo e escolher os seus 3 formatos.
+      </p>
+      <p style={{ fontSize: 13, color: "var(--texto-fraco)", margin: "0 0 4px" }}>
+        Leva um tempo e usa a sua chave do Gemini. O que pedir chave paga, ele mostra antes e espera o seu ok.
+      </p>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginTop: 10 }}>
+        <code style={{ flex: "1 1 100%", padding: "10px 12px", borderRadius: 10, background: "var(--azul-claro)", fontSize: 13, overflowWrap: "anywhere" }}>
+          {PROMPT_TESTE_GERAL}
+        </code>
+        <BotaoCopiar texto={PROMPT_TESTE_GERAL} rotulo="Copiar o Teste geral" />
+      </div>
+    </section>
+  );
+}
+
+/** Qual modelo do Claude usar em cada tipo de tarefa (custo e limite de uso). */
+function QualModelo() {
+  return (
+    <section className="card" style={{ padding: 18 }}>
+      <h2 style={{ fontSize: 17, margin: "0 0 6px" }}>Qual modelo usar</h2>
+      <p style={{ fontSize: 14, lineHeight: 1.55, margin: "0 0 8px" }}>
+        No Claude Code, troque o modelo digitando <code>/model</code>. A regra que economiza o seu limite:
+      </p>
+      <ul style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 1.65 }}>
+        <li>
+          <strong>Sonnet: 90% do tempo.</strong> Tudo que é executar: arte, post, página, roteiro do plano, Teste geral,
+          publicar, conferir.
+        </li>
+        <li>
+          <strong>Opus: planejar e criar coisa nova.</strong> Big idea, mecanismo, oferta, página de vendas do zero,
+          estratégia de campanha.
+        </li>
+        <li>
+          <strong>Fable: só em último caso.</strong> Quando o Sonnet e o Opus tentaram e não resolveram.
+        </li>
+      </ul>
+    </section>
+  );
+}
+
 export default function GuiaDePrompts() {
   return (
     <div style={{ maxWidth: 680, display: "grid", gap: 16 }}>
@@ -93,6 +146,8 @@ export default function GuiaDePrompts() {
         </p>
       </div>
 
+      <TesteGeral />
+      <QualModelo />
       <ComoPedir />
 
       <section className="card" style={{ padding: 18 }}>

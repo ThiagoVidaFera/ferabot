@@ -9,6 +9,7 @@ import {
 } from "@/lib/jornada-estado";
 import type { Jornada } from "@/lib/jornada";
 import { tokensIguais } from "@/lib/cofre";
+import { gravarIndicadores } from "@/lib/indicadores";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,8 @@ type Corpo = {
   perfil?: unknown;
   marco?: { passo?: unknown; link?: unknown; resumo?: unknown; desfazer?: unknown };
   entrega?: { bot?: unknown; oque?: unknown; link?: unknown };
+  /** cartões de "Meus números" (um ou uma lista; `remover: true` apaga pelo id) */
+  indicadores?: unknown;
 };
 
 function resumo(jornada: Jornada) {
@@ -82,6 +85,7 @@ export async function POST(req: NextRequest) {
     if (corpo.perfil) await registrarPerfil(corpo.perfil);
     if (corpo.marco) await registrarMarco(corpo.marco.passo, corpo.marco);
     if (corpo.entrega) await registrarEntrega(corpo.entrega);
+    if (corpo.indicadores) await gravarIndicadores(corpo.indicadores);
   } catch (erro) {
     const motivo = erro instanceof Error ? erro.message : "dado invalido";
     return NextResponse.json({ ok: false, erro: motivo }, { status: 422 });

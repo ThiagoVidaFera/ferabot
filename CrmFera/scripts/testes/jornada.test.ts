@@ -42,14 +42,17 @@ test("WhatsApp travado não segura o YouTube: a trilha de conteúdo anda sozinha
     chavesFuncionando: chavesGratis,
     marcos: { narrativa: ok, pagina: ok },
     totalLeads: 1,
+    briefingRespondido: true,
   });
 
   assert.equal(jornada.atuais.tecnica?.id, "whatsapp");
   assert.equal(jornada.atuais.conteudo?.id, "youtube");
 });
 
-test("plano aprovado no painel fecha a narrativa sem esperar o FERABOT", () => {
-  const jornada = montarJornada({ ...vazio, planoAprovado: true });
+test("plano aprovado no painel fecha a narrativa sem esperar o FERABOT, depois do briefing", () => {
+  const soPlano = montarJornada({ ...vazio, planoAprovado: true });
+  assert.equal(soPlano.atuais.conteudo?.id, "narrativa");
+  const jornada = montarJornada({ ...vazio, planoAprovado: true, briefingRespondido: true });
 
   assert.equal(jornada.passos[1].feito, true);
   assert.equal(jornada.atuais.conteudo?.id, "youtube");
@@ -107,6 +110,7 @@ test("anúncios exigem Meta funcionando, campanha criada e o primeiro lead REAL 
     whatsapp: whatsOk,
     planoAprovado: false,
     leadsReais: 0,
+    briefingRespondido: true,
   };
 
   const soTeste = montarJornada(quase);
